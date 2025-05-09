@@ -112,8 +112,6 @@ pnpm storybook
 pnpm build
 ```
 
-For more detailed development instructions, see [SETUP.md](./SETUP.md).
-
 ### Directory Structure
 
 ```
