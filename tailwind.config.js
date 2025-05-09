@@ -1,7 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
-    "./packages/**/*.{js,ts,jsx,tsx,vue,svelte}",
+    "./packages/**/*.{js,ts,jsx,tsx}",
     "./.storybook/**/*.{js,ts,jsx,tsx}",
   ],
   darkMode: ["class", '[data-theme="dark"]'],

@@ -18,11 +18,9 @@
       "paths": {
         "@mild-ui/core": ["./packages/core/src"],
         "@mild-ui/react": ["./packages/react/src"],
-        "@mild-ui/vue": ["./packages/vue/src"],
-        "@mild-ui/svelte": ["./packages/svelte/src"],
         "@mild-ui/tailwind-preset": ["./packages/tailwind-preset/src"]
       }
     },
-    "include": ["packages/**/*.ts", "packages/**/*.tsx", "packages/**/*.vue", "packages/**/*.svelte"],
+    "include": ["packages/**/*.ts", "packages/**/*.tsx"],
     "exclude": ["node_modules", "**/*.spec.ts", "**/*.test.ts", "**/*.spec.tsx", "**/*.test.tsx", "dist"]
   }

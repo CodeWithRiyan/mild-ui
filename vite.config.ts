@@ -14,7 +14,6 @@ export default defineConfig({
     alias: {
       '@mild-ui/core': resolve(__dirname, 'packages/core/src'),
       '@mild-ui/react': resolve(__dirname, 'packages/react/src'),
-      '@mild-ui/vue': resolve(__dirname, 'packages/vue/src'),
       '@mild-ui/tailwind-preset': resolve(__dirname, 'packages/tailwind-preset/src'),
     },
   },
