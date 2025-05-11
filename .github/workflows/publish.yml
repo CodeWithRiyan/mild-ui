@@ -1,0 +1,90 @@
+# .github/workflows/publish.yml
+name: Publish to npm
+
+on:
+  push:
+    tags:
+      - 'v*' # Run when tag is pushed matching pattern v*, e.g., v1.0.0
+
+jobs:
+  build-and-publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: '8'
+
+      - name: Get version from tag
+        id: get_version
+        run: echo "VERSION=${GITHUB_REF#refs/tags/v}" >> $GITHUB_ENV
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build packages
+        run: pnpm build
+
+      - name: Update workspace dependencies for publishing
+        run: |
+          # Replace workspace dependencies with actual versions
+          cd packages/react
+          sed -i 's/"@mild-ui\/core": "workspace:\*"/"@mild-ui\/core": "^${{ env.VERSION }}"/' package.json
+          
+          cd ../cli
+          sed -i 's/"@mild-ui\/core": "workspace:\*"/"@mild-ui\/core": "^${{ env.VERSION }}"/' package.json
+
+      # Core package
+      - name: Publish @mild-ui/core
+        working-directory: packages/core
+        run: npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      # Wait to ensure core package is available
+      - name: Wait for core package to be available
+        run: sleep 30
+
+      # React package
+      - name: Publish @mild-ui/react
+        working-directory: packages/react
+        run: npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      # Wait to ensure react package is available
+      - name: Wait for react package to be available
+        run: sleep 30
+
+      # CLI package
+      - name: Publish mild-ui CLI
+        working-directory: packages/cli
+        run: npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v1
+        with:
+          name: Release v${{ env.VERSION }}
+          body: |
+            # mild-ui v${{ env.VERSION }}
+            
+            ## What's Changed
+            
+            <!-- Add release notes here -->
+            
+            ## Packages
+            
+            - @mild-ui/core@${{ env.VERSION }}
+            - @mild-ui/react@${{ env.VERSION }}
+            - mild-ui@${{ env.VERSION }} (CLI)

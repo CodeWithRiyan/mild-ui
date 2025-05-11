@@ -1,0 +1,74 @@
+# .github/workflows/version-bump.yml
+name: Bump Version and Create Tag
+
+on:
+  workflow_dispatch:
+    inputs:
+      version_type:
+        description: 'Version type (patch, minor, major)'
+        required: true
+        default: 'patch'
+        type: choice
+        options:
+          - patch
+          - minor
+          - major
+
+jobs:
+  bump-version:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: '8'
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Configure Git
+        run: |
+          git config --global user.name 'GitHub Actions'
+          git config --global user.email 'github-actions@github.com'
+
+      - name: Get current version
+        id: current_version
+        run: echo "CURRENT_VERSION=$(node -p "require('./packages/core/package.json').version")" >> $GITHUB_ENV
+
+      - name: Bump version
+        id: bump_version
+        run: |
+          # Calculate new version
+          if [ "${{ github.event.inputs.version_type }}" == "patch" ]; then
+            NEW_VERSION=$(node -p "require('semver').inc('${{ env.CURRENT_VERSION }}', 'patch')")
+          elif [ "${{ github.event.inputs.version_type }}" == "minor" ]; then
+            NEW_VERSION=$(node -p "require('semver').inc('${{ env.CURRENT_VERSION }}', 'minor')")
+          else
+            NEW_VERSION=$(node -p "require('semver').inc('${{ env.CURRENT_VERSION }}', 'major')")
+          fi
+          echo "NEW_VERSION=$NEW_VERSION" >> $GITHUB_ENV
+          
+          # Update versions in all packages
+          pnpm -r exec -- npm version $NEW_VERSION --no-git-tag-version
+
+      - name: Commit version changes
+        run: |
+          git add .
+          git commit -m "chore: bump version to v${{ env.NEW_VERSION }}"
+          git push origin HEAD:main
+
+      - name: Create and push tag
+        run: |
+          git tag v${{ env.NEW_VERSION }}
+          git push origin v${{ env.NEW_VERSION }}

@@ -1,0 +1,27 @@
+{
+    "name": "@mild-ui/core",
+    "version": "0.1.0",
+    "main": "dist/index.js",
+    "module": "dist/index.mjs",
+    "types": "dist/index.d.ts",
+    "sideEffects": false,
+    "files": [
+      "dist"
+    ],
+    "scripts": {
+      "build": "tsup src/index.ts --format esm,cjs --dts --external react",
+      "dev": "tsup src/index.ts --format esm,cjs --watch --dts --external react",
+      "clean": "rm -rf dist"
+    },
+    "peerDependencies": {
+      "tailwindcss": "^3.3.0"
+    },
+    "dependencies": {
+      "clsx": "^2.0.0",
+      "tailwind-merge": "^1.14.0"
+    },
+    "devDependencies": {
+      "tsup": "^7.2.0",
+      "typescript": "^5.2.2"
+    }
+  }
