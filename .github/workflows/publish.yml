@@ -2,11 +2,24 @@
 name: Publish to npm
 
 on:
+  # Trigger on tag push
   push:
     tags:
       - 'v*' # Run when tag is pushed matching pattern v*, e.g., v1.0.0
+  
+  # Alternative trigger from repository dispatch
+  repository_dispatch:
+    types: [manual-publish]
+  
+  # Add manual trigger option
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version to publish (without v prefix)'
+        required: true
+        default: ''
 
-# Add permissions block to give the workflow necessary access
+# Permissions needed for publishing and creating releases
 permissions:
   contents: write  # For creating GitHub Release
   packages: write  # If you're also publishing to GitHub Packages
@@ -17,6 +30,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
+        with:
+          ref: ${{ github.event.client_payload.ref || github.ref }}
 
       - name: Setup Node.js
         uses: actions/setup-node@v3
@@ -29,9 +44,19 @@ jobs:
         with:
           version: '8'
 
-      - name: Get version from tag
+      - name: Get version from input or tag
         id: get_version
-        run: echo "VERSION=${GITHUB_REF#refs/tags/v}" >> $GITHUB_ENV
+        run: |
+          if [ "${{ github.event_name }}" == "repository_dispatch" ]; then
+            echo "VERSION=${{ github.event.client_payload.version }}" >> $GITHUB_ENV
+          elif [ "${{ github.event_name }}" == "workflow_dispatch" ]; then
+            echo "VERSION=${{ github.event.inputs.version }}" >> $GITHUB_ENV
+          else
+            # Extract version from tag (remove 'v' prefix)
+            echo "VERSION=${GITHUB_REF#refs/tags/v}" >> $GITHUB_ENV
+          fi
+          
+          echo "Using version: $VERSION"
 
       - name: Install dependencies
         run: pnpm install --no-frozen-lockfile
@@ -47,6 +72,13 @@ jobs:
           
           cd ../cli
           sed -i 's/"@mild-ui\/core": "workspace:\*"/"@mild-ui\/core": "^${{ env.VERSION }}"/' package.json
+
+      # Log for debug purposes
+      - name: Debug info
+        run: |
+          echo "Publishing version: ${{ env.VERSION }}"
+          echo "Event name: ${{ github.event_name }}"
+          echo "Ref: ${{ github.ref }}"
 
       # Core package
       - name: Publish @mild-ui/core
@@ -80,6 +112,7 @@ jobs:
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v1
         with:
+          tag_name: v${{ env.VERSION }}
           name: Release v${{ env.VERSION }}
           body: |
             # mild-ui v${{ env.VERSION }}
