@@ -1,45 +1,45 @@
 {
     "name": "mild-ui",
-    "version": "0.1.0",
+    "version": "0.2.0",
     "description": "UI component library with a focus on simplicity and customizability",
     "bin": {
-      "mild-ui": "./dist/index.js"
+        "mild-ui": "./dist/index.js"
     },
     "files": [
-      "dist",
-      "templates"
+        "dist",
+        "templates"
     ],
     "scripts": {
-      "build": "tsup src/index.ts --format cjs --dts --clean",
-      "dev": "tsup src/index.ts --format cjs --watch --dts",
-      "clean": "rm -rf dist",
-      "prepublishOnly": "npm run build"
+        "build": "tsup src/index.ts --format cjs --dts --clean",
+        "dev": "tsup src/index.ts --format cjs --watch --dts",
+        "clean": "rm -rf dist",
+        "prepublishOnly": "npm run build"
     },
     "keywords": [
-      "ui",
-      "components",
-      "react",
-      "vue",
-      "svelte",
-      "tailwindcss"
+        "ui",
+        "components",
+        "react",
+        "vue",
+        "svelte",
+        "tailwindcss"
     ],
     "author": "mild-ui Team",
     "license": "MIT",
     "dependencies": {
-      "chalk": "^4.1.2",
-      "commander": "^11.0.0",
-      "fs-extra": "^11.1.1",
-      "ora": "^5.4.1",
-      "prompts": "^2.4.2"
+        "chalk": "^4.1.2",
+        "commander": "^11.0.0",
+        "fs-extra": "^11.1.1",
+        "ora": "^5.4.1",
+        "prompts": "^2.4.2"
     },
     "devDependencies": {
-      "@types/fs-extra": "^11.0.3",
-      "@types/node": "^20.8.9",
-      "@types/prompts": "^2.4.7",
-      "tsup": "^7.2.0",
-      "typescript": "^5.2.2"
+        "@types/fs-extra": "^11.0.3",
+        "@types/node": "^20.8.9",
+        "@types/prompts": "^2.4.7",
+        "tsup": "^7.2.0",
+        "typescript": "^5.2.2"
     },
     "engines": {
-      "node": ">=14.0.0"
+        "node": ">=14.0.0"
     }
-  }
+}
