@@ -1,7 +1,7 @@
 {
   "name": "mild-ui-monorepo",
   "version": "0.1.0",
-  "private": true,
+  "private": false,
   "scripts": {
     "dev": "storybook dev -p 6006",
     "build": "pnpm -r build",
