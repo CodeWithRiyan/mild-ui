@@ -35,7 +35,11 @@ jobs:
           version: '8'
 
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+        # Remove --frozen-lockfile to allow pnpm to create or update the lock file
+        run: pnpm install --no-frozen-lockfile
+
+      - name: Install semver
+        run: npm install -g semver
 
       - name: Configure Git
         run: |
@@ -51,18 +55,18 @@ jobs:
         run: |
           # Calculate new version
           if [ "${{ github.event.inputs.version_type }}" == "patch" ]; then
-            NEW_VERSION=$(node -p "require('semver').inc('${{ env.CURRENT_VERSION }}', 'patch')")
+            NEW_VERSION=$(semver -i patch ${{ env.CURRENT_VERSION }})
           elif [ "${{ github.event.inputs.version_type }}" == "minor" ]; then
-            NEW_VERSION=$(node -p "require('semver').inc('${{ env.CURRENT_VERSION }}', 'minor')")
+            NEW_VERSION=$(semver -i minor ${{ env.CURRENT_VERSION }})
           else
-            NEW_VERSION=$(node -p "require('semver').inc('${{ env.CURRENT_VERSION }}', 'major')")
+            NEW_VERSION=$(semver -i major ${{ env.CURRENT_VERSION }})
           fi
           echo "NEW_VERSION=$NEW_VERSION" >> $GITHUB_ENV
           
           # Update versions in all packages
           pnpm -r exec -- npm version $NEW_VERSION --no-git-tag-version
 
-      - name: Commit version changes
+      - name: Commit version changes and lock file
         run: |
           git add .
           git commit -m "chore: bump version to v${{ env.NEW_VERSION }}"

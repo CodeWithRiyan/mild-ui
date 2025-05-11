@@ -29,7 +29,8 @@ jobs:
         run: echo "VERSION=${GITHUB_REF#refs/tags/v}" >> $GITHUB_ENV
 
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+        # Remove --frozen-lockfile to allow pnpm to create or update the lock file
+        run: pnpm install --no-frozen-lockfile
 
       - name: Build packages
         run: pnpm build
@@ -88,3 +89,5 @@ jobs:
             - @mild-ui/core@${{ env.VERSION }}
             - @mild-ui/react@${{ env.VERSION }}
             - mild-ui@${{ env.VERSION }} (CLI)
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
