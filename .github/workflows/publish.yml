@@ -6,6 +6,11 @@ on:
     tags:
       - 'v*' # Run when tag is pushed matching pattern v*, e.g., v1.0.0
 
+# Add permissions block to give the workflow necessary access
+permissions:
+  contents: write  # For creating GitHub Release
+  packages: write  # If you're also publishing to GitHub Packages
+
 jobs:
   build-and-publish:
     runs-on: ubuntu-latest
@@ -29,7 +34,6 @@ jobs:
         run: echo "VERSION=${GITHUB_REF#refs/tags/v}" >> $GITHUB_ENV
 
       - name: Install dependencies
-        # Remove --frozen-lockfile to allow pnpm to create or update the lock file
         run: pnpm install --no-frozen-lockfile
 
       - name: Build packages
