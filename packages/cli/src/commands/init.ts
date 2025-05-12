@@ -1,3 +1,4 @@
+// packages/cli/src/commands/init.ts
 import inquirer from 'inquirer';
 import fs from 'fs-extra';
 import path from 'path';
@@ -24,7 +25,7 @@ export async function initProject(): Promise<void> {
       type: 'input',
       name: 'componentsDir',
       message: 'Where would you like to store your components?',
-      default: (answers: { framework: string }) => {
+      default: (answers: { framework: any; }) => {
         switch (answers.framework) {
           case 'react': return 'src/components';
           case 'vue': return 'src/components';
@@ -32,6 +33,12 @@ export async function initProject(): Promise<void> {
           default: return 'src/components';
         }
       }
+    },
+    {
+      type: 'input',
+      name: 'stylesDir',
+      message: 'Where would you like to store your styles?',
+      default: 'src/styles'
     }
   ]);
   
@@ -42,7 +49,7 @@ export async function initProject(): Promise<void> {
     await fs.ensureDir(answers.componentsDir);
     
     // Create styles directory
-    const stylesDir = path.join(process.cwd(), 'src/styles');
+    const stylesDir = path.join(process.cwd(), answers.stylesDir);
     await fs.ensureDir(stylesDir);
     
     // Create base CSS file with variables
@@ -58,6 +65,7 @@ export async function initProject(): Promise<void> {
       framework: answers.framework,
       typescript: answers.typescript,
       componentsDir: answers.componentsDir,
+      stylesDir: answers.stylesDir,
       theme: 'default'
     };
     
@@ -71,8 +79,8 @@ export async function initProject(): Promise<void> {
     console.log();
     console.log(chalk.bold('Next steps:'));
     console.log(`1. Import the styles in your main CSS file:`);
-    console.log(chalk.cyan(`   @import './styles/mild-ui-variables.css';`));
-    console.log(chalk.cyan(`   @import './styles/mild-ui-button.css';`));
+    console.log(chalk.cyan(`   @import '${path.relative('src', answers.stylesDir)}/mild-ui-variables.css';`));
+    console.log(chalk.cyan(`   @import '${path.relative('src', answers.stylesDir)}/mild-ui-button.css';`));
     console.log(`2. Start adding components with: ${chalk.cyan(`mild-ui add button`)}`);
   } catch (error) {
     spinner.fail('Initialization failed');

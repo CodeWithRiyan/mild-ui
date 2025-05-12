@@ -1,11 +1,14 @@
 {
     "name": "@mild-ui/cli",
-    "version": "0.1.1",
+    "version": "1.0.0",
     "type": "module",
     "bin": {
       "mild-ui": "./dist/index.js"
     },
-    "files": ["dist"],
+    "files": [
+      "dist",
+      "README.md"
+    ],
     "scripts": {
       "dev": "tsup --watch",
       "build": "tsup",
@@ -25,5 +28,8 @@
       "tsup": "^7.2.0",
       "typescript": "^5.1.6",
       "vitest": "^0.34.1"
+    },
+    "publishConfig": {
+      "access": "public"
     }
   }

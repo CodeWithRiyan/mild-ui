@@ -1,3 +1,4 @@
+// packages/cli/src/commands/add.ts
 import fs from 'fs-extra';
 import path from 'path';
 import chalk from 'chalk';
@@ -6,10 +7,11 @@ import { generateComponent } from '../generators';
 
 interface AddComponentOptions {
   component: string;
-  framework: string;
+  framework?: string;
   directory?: string;
   theme?: string;
-  typescript: boolean;
+  typescript?: boolean;
+  stylesDir?: string;
 }
 
 export async function addComponent(options: AddComponentOptions): Promise<void> {
@@ -21,32 +23,58 @@ export async function addComponent(options: AddComponentOptions): Promise<void> 
     throw new Error(`Component '${options.component}' is not available. Run 'mild-ui list' to see available components.`);
   }
   
+  // Get project info
+  const projectInfo = await getProjectInfo();
+  
   // Validate framework is supported
   const supportedFrameworks = ['react', 'vue', 'svelte'];
-  if (!supportedFrameworks.includes(options.framework.toLowerCase())) {
-    throw new Error(`Framework '${options.framework}' is not supported. Supported frameworks: ${supportedFrameworks.join(', ')}`);
+  const framework = options.framework?.toLowerCase() || projectInfo.framework;
+  
+  if (!supportedFrameworks.includes(framework)) {
+    throw new Error(`Framework '${framework}' is not supported. Supported frameworks: ${supportedFrameworks.join(', ')}`);
   }
   
-  // Detect project structure if no directory specified
+  // Determine output directory
   let outputDir = options.directory;
   if (!outputDir) {
-    const projectInfo = await getProjectInfo();
     outputDir = projectInfo.componentsDir;
   }
   
+  // Determine styles directory
+  const stylesDir = options.stylesDir || projectInfo.stylesDir;
+  
   // Create output directory if it doesn't exist
-  if (outputDir) {
-    await fs.ensureDir(outputDir);
-  } else {
-    throw new Error('Output directory is required but was not specified');
+  await fs.ensureDir(outputDir);
+  
+  // Ensure styles directory exists
+  await fs.ensureDir(stylesDir);
+  
+  // Check if the component's styles exist, if not create them
+  const componentStylePath = path.join(stylesDir, `mild-ui-${componentLower}.css`);
+  if (!(await fs.pathExists(componentStylePath))) {
+    console.log(chalk.yellow(`Component style file not found. Creating ${componentStylePath}...`));
+    
+    // Import the style template
+    const { generateButtonStyles } = await import('../templates/styles');
+    
+    // Create component styles based on the component type
+    if (componentLower === 'button') {
+      await fs.writeFile(componentStylePath, generateButtonStyles());
+    }
+    
+    console.log(chalk.green(`✓ Created styles for ${componentLower} component.`));
+    console.log(chalk.blue(`📝 Remember to import these styles in your CSS file:`));
+    console.log(chalk.cyan(`   @import '${path.relative('src', stylesDir)}/mild-ui-${componentLower}.css';`));
   }
   
   // Generate the component
   await generateComponent({
     component: componentLower,
-    framework: options.framework.toLowerCase(),
+    framework,
     outputDir,
     theme: options.theme,
-    typescript: options.typescript
+    typescript: options.typescript ?? projectInfo.typescript
   });
+  
+  console.log(chalk.green(`✓ Successfully added ${componentLower} component to ${outputDir}!`));
 }

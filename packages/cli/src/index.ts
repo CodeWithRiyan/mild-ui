@@ -9,7 +9,7 @@ const program = new Command();
 program
   .name('mild-ui')
   .description('CLI tool for mild-ui component library')
-  .version('0.1.0');
+  .version('1.0.0'); // Updated to 1.0.0
 
 program
   .command('add <component>')

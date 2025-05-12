@@ -25,6 +25,7 @@ mild-ui init
 This command will:
 - Detect your project's framework (React, Vue, or Svelte)
 - Ask you where to store your components
+- Ask you where to store your styles
 - Set up the necessary files and styles
 
 ### Add components to your project
@@ -38,6 +39,12 @@ mild-ui add button --framework=vue
 
 # Add a button component for Svelte
 mild-ui add button --framework=svelte
+
+# Specify a custom components directory
+mild-ui add button --directory=src/ui/components
+
+# Specify a custom styles directory
+mild-ui add button --stylesDir=src/assets/styles
 ```
 
 ### List available components
@@ -50,13 +57,30 @@ mild-ui list
 
 - `add <component>`: Add a component to your project
   - `--framework=<framework>`: Specify the target framework (react, vue, svelte)
-  - `--directory=<dir>`: Specify the output directory
+  - `--directory=<dir>`: Specify the output directory for components
+  - `--stylesDir=<dir>`: Specify the directory for styles
   - `--theme=<theme>`: Specify a theme to use
   - `--typescript`: Generate TypeScript files (default: true)
 
 - `init`: Initialize mild-ui in your project
 - `list`: List available components
 - `help`: Display help information
+
+## Configuration
+
+When you initialize mild-ui, a `mild-ui.json` configuration file is created in your project root. This file stores your preferences:
+
+```json
+{
+  "framework": "react",
+  "typescript": true,
+  "componentsDir": "src/components",
+  "stylesDir": "src/styles",
+  "theme": "default"
+}
+```
+
+You can edit this file manually to change your configuration.
 
 ## Available Components
 
