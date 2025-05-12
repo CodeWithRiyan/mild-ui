@@ -1,5 +1,6 @@
 <script lang="ts">
-    import { getButtonAttributes, type ButtonVariant, type ButtonSize } from '@mild-ui/core';
+    import { getButtonAttributes } from '@mild-ui/core';
+    import type { ButtonVariant, ButtonSize } from '@mild-ui/core';
     
     export let variant: ButtonVariant = 'primary';
     export let size: ButtonSize = 'medium';
@@ -8,7 +9,7 @@
     
     $: buttonAttrs = getButtonAttributes({ variant, size, disabled });
     $: classes = `${buttonAttrs.className} ${customClass}`;
-  </script>
+</script>
   
   <button
     class={classes}

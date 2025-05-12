@@ -128,21 +128,24 @@ importers:
         specifier: workspace:*
         version: link:../core
       lucide-svelte:
-        specifier: ^0.230.0
-        version: 0.230.0(svelte@4.2.19)
+        specifier: ^0.284.0
+        version: 0.284.0(svelte@4.2.19)
     devDependencies:
       '@sveltejs/package':
         specifier: ^2.2.1
         version: 2.3.11(svelte@4.2.19)(typescript@5.8.3)
       '@sveltejs/vite-plugin-svelte':
-        specifier: ^2.4.2
-        version: 2.5.3(svelte@4.2.19)(vite@4.5.14(@types/node@22.15.17))
+        specifier: ^3.0.0
+        version: 3.1.2(svelte@4.2.19)(vite@4.5.14(@types/node@22.15.17))
       svelte:
-        specifier: ^4.0.0
+        specifier: ^4.2.0
         version: 4.2.19
       svelte-check:
         specifier: ^3.4.6
         version: 3.8.6(@babel/core@7.27.1)(postcss-load-config@4.0.2(postcss@8.5.3))(postcss@8.5.3)(svelte@4.2.19)
+      svelte-preprocess:
+        specifier: ^5.0.0
+        version: 5.1.4(@babel/core@7.27.1)(postcss-load-config@4.0.2(postcss@8.5.3))(postcss@8.5.3)(svelte@4.2.19)(typescript@5.8.3)
       tslib:
         specifier: ^2.6.0
         version: 2.8.1
@@ -163,29 +166,29 @@ importers:
         version: link:../core
       lucide-vue-next:
         specifier: ^0.230.0
-        version: 0.230.0(vue@3.5.13(typescript@5.8.3))
+        version: 0.230.0(vue@3.5.13(typescript@5.0.4))
     devDependencies:
       '@vitejs/plugin-vue':
         specifier: ^4.2.3
-        version: 4.6.2(vite@4.5.14(@types/node@22.15.17))(vue@3.5.13(typescript@5.8.3))
+        version: 4.6.2(vite@4.5.14(@types/node@22.15.17))(vue@3.5.13(typescript@5.0.4))
       typescript:
-        specifier: ^5.1.6
-        version: 5.8.3
+        specifier: ~5.0.4
+        version: 5.0.4
       vite:
         specifier: ^4.4.6
         version: 4.5.14(@types/node@22.15.17)
       vite-plugin-dts:
         specifier: ^3.3.1
-        version: 3.9.1(@types/node@22.15.17)(rollup@4.40.2)(typescript@5.8.3)(vite@4.5.14(@types/node@22.15.17))
+        version: 3.9.1(@types/node@22.15.17)(rollup@4.40.2)(typescript@5.0.4)(vite@4.5.14(@types/node@22.15.17))
       vitest:
         specifier: ^0.34.1
         version: 0.34.6
       vue:
         specifier: ^3.3.4
-        version: 3.5.13(typescript@5.8.3)
+        version: 3.5.13(typescript@5.0.4)
       vue-tsc:
         specifier: ^1.8.5
-        version: 1.8.27(typescript@5.8.3)
+        version: 1.8.27(typescript@5.0.4)
 
   storybook/react:
     dependencies:
@@ -1042,20 +1045,20 @@ packages:
     peerDependencies:
       svelte: ^3.44.0 || ^4.0.0 || ^5.0.0-next.1
 
-  '@sveltejs/vite-plugin-svelte-inspector@1.0.4':
-    resolution: {integrity: sha512-zjiuZ3yydBtwpF3bj0kQNV0YXe+iKE545QGZVTaylW3eAzFr+pJ/cwK8lZEaRp4JtaJXhD5DyWAV4AxLh6DgaQ==}
-    engines: {node: ^14.18.0 || >= 16}
+  '@sveltejs/vite-plugin-svelte-inspector@2.1.0':
+    resolution: {integrity: sha512-9QX28IymvBlSCqsCll5t0kQVxipsfhFFL+L2t3nTWfXnddYwxBuAEtTtlaVQpRz9c37BhJjltSeY4AJSC03SSg==}
+    engines: {node: ^18.0.0 || >=20}
     peerDependencies:
-      '@sveltejs/vite-plugin-svelte': ^2.2.0
-      svelte: ^3.54.0 || ^4.0.0
-      vite: ^4.0.0
+      '@sveltejs/vite-plugin-svelte': ^3.0.0
+      svelte: ^4.0.0 || ^5.0.0-next.0
+      vite: ^5.0.0
 
-  '@sveltejs/vite-plugin-svelte@2.5.3':
-    resolution: {integrity: sha512-erhNtXxE5/6xGZz/M9eXsmI7Pxa6MS7jyTy06zN3Ck++ldrppOnOlJwHHTsMC7DHDQdgUp4NAc4cDNQ9eGdB/w==}
-    engines: {node: ^14.18.0 || >= 16}
+  '@sveltejs/vite-plugin-svelte@3.1.2':
+    resolution: {integrity: sha512-Txsm1tJvtiYeLUVRNqxZGKR/mI+CzuIQuc2gn+YCs9rMTowpNZ2Nqt53JdL8KF9bLhAf2ruR/dr9eZCwdTriRA==}
+    engines: {node: ^18.0.0 || >=20}
     peerDependencies:
-      svelte: ^3.54.0 || ^4.0.0 || ^5.0.0-next.0
-      vite: ^4.0.0
+      svelte: ^4.0.0 || ^5.0.0-next.0
+      vite: ^5.0.0
 
   '@testing-library/dom@10.4.0':
     resolution: {integrity: sha512-pemlzrSESWbdAloYml3bAJMEfNh1Z7EduzqPKprCH5S341frlpYnUEW0H72dLxa6IsYr+mPno20GiSm+h9dEdQ==}
@@ -2247,10 +2250,10 @@ packages:
     peerDependencies:
       react: ^16.5.1 || ^17.0.0 || ^18.0.0
 
-  lucide-svelte@0.230.0:
-    resolution: {integrity: sha512-GjgFzSJxQ9BT0jsod9FcgnPIW6e/CuSbCbIQMbJzYOgCWdJwz0+YSwVo0MSjuxCMzfr7unLlFYVh/idsEA/iXg==}
+  lucide-svelte@0.284.0:
+    resolution: {integrity: sha512-T/ob9yPwN5lzI4x4KYJiv5QAHeNIorTmvQeKUXJSUlbRxBd14uNDp0KLyre+VbuPD6RfJfycsDIxEJ1dDYzw1w==}
     peerDependencies:
-      svelte: ^3.49.0
+      svelte: '>=3 <5'
 
   lucide-svelte@0.509.0:
     resolution: {integrity: sha512-6U83jZ0RKvLYLGdx/hTqZyWcquwApQ2Q1E5bKFELXtOw7g8dk1P0qwbAQqs1fqWAtpNevtXTpgShHv/yWAcbjQ==}
@@ -2875,8 +2878,8 @@ packages:
     peerDependencies:
       svelte: ^3.55.0 || ^4.0.0-next.0 || ^4.0.0 || ^5.0.0-next.0
 
-  svelte-hmr@0.15.3:
-    resolution: {integrity: sha512-41snaPswvSf8TJUhlkoJBekRrABDXDMdpNpT2tfHIv4JuhgvHqLMhEPGtaQn0BmbNSTkuz2Ed20DF2eHw0SmBQ==}
+  svelte-hmr@0.16.0:
+    resolution: {integrity: sha512-Gyc7cOS3VJzLlfj7wKS0ZnzDVdv3Pn2IuVeJPk9m2skfhcu5bq3wtIZyQGggr7/Iim5rH5cncyQft/kRLupcnA==}
     engines: {node: ^12.20 || ^14.13.1 || >= 16}
     peerDependencies:
       svelte: ^3.19.0 || ^4.0.0
@@ -3030,6 +3033,11 @@ packages:
   type-fest@0.21.3:
     resolution: {integrity: sha512-t0rzBq87m3fVcduHDUFhKmyyX+9eo6WQjZvf51Ea/M0Q7+T374Jp1aUiyUl0GKxp8M/OETVHSDvmkyPgvX+X2w==}
     engines: {node: '>=10'}
+
+  typescript@5.0.4:
+    resolution: {integrity: sha512-cW9T5W9xY37cc+jfEnaUvX91foxtHkza3Nw3wkoF4sSlKn0MONdkdEndig/qPBWXNkmplh3NzayQzCiHM4/hqw==}
+    engines: {node: '>=12.20'}
+    hasBin: true
 
   typescript@5.4.2:
     resolution: {integrity: sha512-+2/g0Fds1ERlP6JsakQQDXjZdZMM+rqpamFZJEKh4kwTIn3iDkgKtby0CeNd5ATNZ4Ry1ax15TMx0W2V+miizQ==}
@@ -4016,24 +4024,24 @@ snapshots:
     transitivePeerDependencies:
       - typescript
 
-  '@sveltejs/vite-plugin-svelte-inspector@1.0.4(@sveltejs/vite-plugin-svelte@2.5.3(svelte@4.2.19)(vite@4.5.14(@types/node@22.15.17)))(svelte@4.2.19)(vite@4.5.14(@types/node@22.15.17))':
+  '@sveltejs/vite-plugin-svelte-inspector@2.1.0(@sveltejs/vite-plugin-svelte@3.1.2(svelte@4.2.19)(vite@4.5.14(@types/node@22.15.17)))(svelte@4.2.19)(vite@4.5.14(@types/node@22.15.17))':
     dependencies:
-      '@sveltejs/vite-plugin-svelte': 2.5.3(svelte@4.2.19)(vite@4.5.14(@types/node@22.15.17))
+      '@sveltejs/vite-plugin-svelte': 3.1.2(svelte@4.2.19)(vite@4.5.14(@types/node@22.15.17))
       debug: 4.4.0
       svelte: 4.2.19
       vite: 4.5.14(@types/node@22.15.17)
     transitivePeerDependencies:
       - supports-color
 
-  '@sveltejs/vite-plugin-svelte@2.5.3(svelte@4.2.19)(vite@4.5.14(@types/node@22.15.17))':
+  '@sveltejs/vite-plugin-svelte@3.1.2(svelte@4.2.19)(vite@4.5.14(@types/node@22.15.17))':
     dependencies:
-      '@sveltejs/vite-plugin-svelte-inspector': 1.0.4(@sveltejs/vite-plugin-svelte@2.5.3(svelte@4.2.19)(vite@4.5.14(@types/node@22.15.17)))(svelte@4.2.19)(vite@4.5.14(@types/node@22.15.17))
+      '@sveltejs/vite-plugin-svelte-inspector': 2.1.0(@sveltejs/vite-plugin-svelte@3.1.2(svelte@4.2.19)(vite@4.5.14(@types/node@22.15.17)))(svelte@4.2.19)(vite@4.5.14(@types/node@22.15.17))
       debug: 4.4.0
       deepmerge: 4.3.1
       kleur: 4.1.5
       magic-string: 0.30.17
       svelte: 4.2.19
-      svelte-hmr: 0.15.3(svelte@4.2.19)
+      svelte-hmr: 0.16.0(svelte@4.2.19)
       vite: 4.5.14(@types/node@22.15.17)
       vitefu: 0.2.5(vite@4.5.14(@types/node@22.15.17))
     transitivePeerDependencies:
@@ -4247,10 +4255,10 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@vitejs/plugin-vue@4.6.2(vite@4.5.14(@types/node@22.15.17))(vue@3.5.13(typescript@5.8.3))':
+  '@vitejs/plugin-vue@4.6.2(vite@4.5.14(@types/node@22.15.17))(vue@3.5.13(typescript@5.0.4))':
     dependencies:
       vite: 4.5.14(@types/node@22.15.17)
-      vue: 3.5.13(typescript@5.8.3)
+      vue: 3.5.13(typescript@5.0.4)
 
   '@vitest/expect@0.34.6':
     dependencies:
@@ -4355,6 +4363,20 @@ snapshots:
       '@vue/compiler-dom': 3.5.13
       '@vue/shared': 3.5.13
 
+  '@vue/language-core@1.8.27(typescript@5.0.4)':
+    dependencies:
+      '@volar/language-core': 1.11.1
+      '@volar/source-map': 1.11.1
+      '@vue/compiler-dom': 3.5.13
+      '@vue/shared': 3.5.13
+      computeds: 0.0.1
+      minimatch: 9.0.5
+      muggle-string: 0.3.1
+      path-browserify: 1.0.1
+      vue-template-compiler: 2.7.16
+    optionalDependencies:
+      typescript: 5.0.4
+
   '@vue/language-core@1.8.27(typescript@5.8.3)':
     dependencies:
       '@volar/language-core': 1.11.1
@@ -4385,11 +4407,11 @@ snapshots:
       '@vue/shared': 3.5.13
       csstype: 3.1.3
 
-  '@vue/server-renderer@3.5.13(vue@3.5.13(typescript@5.8.3))':
+  '@vue/server-renderer@3.5.13(vue@3.5.13(typescript@5.0.4))':
     dependencies:
       '@vue/compiler-ssr': 3.5.13
       '@vue/shared': 3.5.13
-      vue: 3.5.13(typescript@5.8.3)
+      vue: 3.5.13(typescript@5.0.4)
 
   '@vue/shared@3.5.13': {}
 
@@ -5357,7 +5379,7 @@ snapshots:
     dependencies:
       react: 18.3.1
 
-  lucide-svelte@0.230.0(svelte@4.2.19):
+  lucide-svelte@0.284.0(svelte@4.2.19):
     dependencies:
       svelte: 4.2.19
 
@@ -5365,9 +5387,9 @@ snapshots:
     dependencies:
       svelte: 4.2.19
 
-  lucide-vue-next@0.230.0(vue@3.5.13(typescript@5.8.3)):
+  lucide-vue-next@0.230.0(vue@3.5.13(typescript@5.0.4)):
     dependencies:
-      vue: 3.5.13(typescript@5.8.3)
+      vue: 3.5.13(typescript@5.0.4)
 
   lz-string@1.5.0: {}
 
@@ -6005,7 +6027,7 @@ snapshots:
       - stylus
       - sugarss
 
-  svelte-hmr@0.15.3(svelte@4.2.19):
+  svelte-hmr@0.16.0(svelte@4.2.19):
     dependencies:
       svelte: 4.2.19
 
@@ -6134,6 +6156,8 @@ snapshots:
 
   type-fest@0.21.3: {}
 
+  typescript@5.0.4: {}
+
   typescript@5.4.2: {}
 
   typescript@5.8.3: {}
@@ -6194,6 +6218,23 @@ snapshots:
       - sugarss
       - supports-color
       - terser
+
+  vite-plugin-dts@3.9.1(@types/node@22.15.17)(rollup@4.40.2)(typescript@5.0.4)(vite@4.5.14(@types/node@22.15.17)):
+    dependencies:
+      '@microsoft/api-extractor': 7.43.0(@types/node@22.15.17)
+      '@rollup/pluginutils': 5.1.4(rollup@4.40.2)
+      '@vue/language-core': 1.8.27(typescript@5.0.4)
+      debug: 4.4.0
+      kolorist: 1.8.0
+      magic-string: 0.30.17
+      typescript: 5.0.4
+      vue-tsc: 1.8.27(typescript@5.0.4)
+    optionalDependencies:
+      vite: 4.5.14(@types/node@22.15.17)
+    transitivePeerDependencies:
+      - '@types/node'
+      - rollup
+      - supports-color
 
   vite-plugin-dts@3.9.1(@types/node@22.15.17)(rollup@4.40.2)(typescript@5.8.3)(vite@4.5.14(@types/node@22.15.17)):
     dependencies:
@@ -6265,6 +6306,13 @@ snapshots:
       de-indent: 1.0.2
       he: 1.2.0
 
+  vue-tsc@1.8.27(typescript@5.0.4):
+    dependencies:
+      '@volar/typescript': 1.11.1
+      '@vue/language-core': 1.8.27(typescript@5.0.4)
+      semver: 7.7.1
+      typescript: 5.0.4
+
   vue-tsc@1.8.27(typescript@5.8.3):
     dependencies:
       '@volar/typescript': 1.11.1
@@ -6272,15 +6320,15 @@ snapshots:
       semver: 7.7.1
       typescript: 5.8.3
 
-  vue@3.5.13(typescript@5.8.3):
+  vue@3.5.13(typescript@5.0.4):
     dependencies:
       '@vue/compiler-dom': 3.5.13
       '@vue/compiler-sfc': 3.5.13
       '@vue/runtime-dom': 3.5.13
-      '@vue/server-renderer': 3.5.13(vue@3.5.13(typescript@5.8.3))
+      '@vue/server-renderer': 3.5.13(vue@3.5.13(typescript@5.0.4))
       '@vue/shared': 3.5.13
     optionalDependencies:
-      typescript: 5.8.3
+      typescript: 5.0.4
 
   wcwidth@1.0.1:
     dependencies:
