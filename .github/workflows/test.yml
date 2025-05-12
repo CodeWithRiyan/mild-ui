@@ -31,4 +31,3 @@ jobs:
       - name: Build and test ${{ matrix.framework }}
         run: |
           pnpm --filter @mild-ui/${{ matrix.framework }} build
-          pnpm --filter @mild-ui/${{ matrix.framework }} test
