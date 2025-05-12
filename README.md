@@ -1,52 +1,154 @@
 # mild-ui
 
-A UI component library inspired by shadcn/ui that offers high-quality, accessible components with a focus on simplicity, customizability, and developer experience. Unlike traditional component libraries installed as npm packages, mild-ui follows the "copy and paste" approach, allowing developers to bring components directly into their projects and customize them as needed.
+mild-ui is a cross-framework UI component library inspired by the copy-paste approach of shadcn/ui but extended to work across React, Vue, and Svelte. The library employs a framework-agnostic core with specific adapters for each supported framework, allowing developers to use consistent components regardless of their frontend framework choice.
 
 ## Features
 
-- **React Components**: High-quality React UI components
-- **Customizable**: Easily adapt components to your project's design system
-- **Copy and Paste**: No complex dependencies, just copy the components you need
-- **Accessible**: Built with accessibility in mind
-- **TypeScript**: Full TypeScript support for better developer experience
-- **Tailwind CSS**: Beautiful styling with Tailwind CSS
+- ✅ Cross-framework compatibility: Works with React, Vue, and Svelte
+- 🧩 Framework-agnostic core: Components designed with a framework-agnostic approach
+- 🌈 Unified developer experience: Consistent API and styling across all frameworks
+- 🎨 Extensible styling: Built with CSS variables for easy theming
+- 📦 Copy-paste approach: No package dependencies, just add what you need
+- 🔧 CLI tool: Easily add components to your project
+- 📚 TypeScript-first: Built with TypeScript for improved type safety
 
-## Philosophy
+## Getting Started
 
-- **Mild, not wild**: Components have a clean, minimal aesthetic that's easy to customize
-- **Developer-first**: Prioritizing developer experience with clear documentation and easy implementation
-- **Copy, not install**: Components are copied directly into projects rather than installed as dependencies
-- **Customizable**: All components can be easily customized with minimal effort
-- **Accessible**: Built with accessibility in mind from the start
-
-## Usage
-
-### CLI Installation
+### Installation
 
 ```bash
-# Install the CLI
-npm install -g mild-ui
+# Install the CLI globally
+npm install -g @mild-ui/cli
 
-# Add components to your project
-npx mild-ui add button
-
-# Add multiple components
-npx mild-ui add button card input
+# Initialize mild-ui in your project
+mild-ui init
 ```
 
-### Manual Installation
+The `init` command will prompt you to select your framework (React, Vue, or Svelte), whether to use TypeScript, and where to store your components.
 
-You can also install components manually by copying the code from the [documentation site](https://mild-ui.example.com) (coming soon).
+### Adding Components
+
+To add a component to your project, use the CLI:
+
+```bash
+# Add a button component for React (default)
+mild-ui add button
+
+# Add a button component for Vue
+mild-ui add button --framework=vue
+
+# Add a button component for Svelte
+mild-ui add button --framework=svelte
+```
+
+This will create the component files in your project's components directory.
+
+### Using Components
+
+#### React
+
+```jsx
+import { Button } from './components';
+import { Plus, ArrowRight } from 'lucide-react';
+
+function App() {
+  return (
+    <div>
+      <Button>Default Button</Button>
+      <Button variant="secondary">Secondary Button</Button>
+      <Button 
+        variant="outline" 
+        size="large"
+        leadingIcon={<Plus size={16} />}
+        trailingIcon={<ArrowRight size={16} />}
+      >
+        Button with Icons
+      </Button>
+    </div>
+  );
+}
+```
+
+#### Vue
+
+```vue
+<template>
+  <div>
+    <Button>Default Button</Button>
+    <Button variant="secondary">Secondary Button</Button>
+    <Button variant="outline" size="large">
+      <template #leading-icon>
+        <PlusIcon size="16" />
+      </template>
+      Button with Icons
+      <template #trailing-icon>
+        <ArrowRightIcon size="16" />
+      </template>
+    </Button>
+  </div>
+</template>
+
+<script setup>
+import { Button } from './components';
+import { PlusIcon, ArrowRightIcon } from 'lucide-vue-next';
+</script>
+```
+
+#### Svelte
+
+```svelte
+<script>
+  import { Button } from './components';
+  import { Plus, ArrowRight } from 'lucide-svelte';
+</script>
+
+<div>
+  <Button>Default Button</Button>
+  <Button variant="secondary">Secondary Button</Button>
+  <Button variant="outline" size="large">
+    <svelte:fragment slot="leading-icon">
+      <Plus size={16} />
+    </svelte:fragment>
+    Button with Icons
+    <svelte:fragment slot="trailing-icon">
+      <ArrowRight size={16} />
+    </svelte:fragment>
+  </Button>
+</div>
+```
 
 ## Available Components
 
-- **Button**: A versatile button component with multiple variants and sizes
-- More components coming soon!
+Currently, the following components are available:
+
+- Button
+
+More components will be added in future releases.
+
+## Customization
+
+You can customize the theme by modifying the CSS variables in your project. When you initialize mild-ui, a CSS file with variables is created in your project.
+
+```css
+:root {
+  /* Colors */
+  --mild-primary: #3b82f6;
+  --mild-primary-hover: #2563eb;
+  --mild-primary-active: #1d4ed8;
+  /* ... more variables */
+}
+
+/* Add dark mode support */
+[data-theme="dark"] {
+  --mild-primary: #60a5fa;
+  /* ... dark theme variables */
+}
+```
 
 ## Contributing
 
-Contributions are welcome! Please see our [Contributing Guide](CONTRIBUTING.md) for more details.
+We welcome contributions! Please see our [CONTRIBUTING.md](CONTRIBUTING.md) file for details on how to get started.
 
 ## License
 
-MIT
+mild-ui is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.

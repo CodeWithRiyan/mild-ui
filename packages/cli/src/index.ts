@@ -1,46 +1,64 @@
-#!/usr/bin/env node
-// packages/cli/src/index.ts
+import { Command } from 'commander';
+import chalk from 'chalk';
+import { addComponent } from './commands/add';
+import { listComponents } from './commands/list';
+import { initProject } from './commands/init';
 
-import { program } from 'commander';
-import { addCommand } from './commands/add';
-import { initCommand } from './commands/init';
-import { listCommand } from './commands/list';
-import { logger } from './utils/logger';
+const program = new Command();
 
-// Show mild-ui ASCII art banner
-const showBanner = () => {
-  console.log(`
-  ┌─────────────────────────────────────┐
-  │                                     │
-  │    ┌┬┐┬┬  ┌┬┐   ┬ ┬┬               │
-  │    │││││   ││   │ ││               │
-  │    ┴ ┴┴┴─┘─┴┘   └─┘┴─┘             │
-  │                                     │
-  │    UI Components, mild not wild     │
-  │                                     │
-  └─────────────────────────────────────┘
-  `);
-};
+program
+  .name('mild-ui')
+  .description('CLI tool for mild-ui component library')
+  .version('0.1.0');
 
-const run = async () => {
-  try {
-    showBanner();
+program
+  .command('add <component>')
+  .description('Add a component to your project')
+  .option('-f, --framework <framework>', 'Target framework', 'react')
+  .option('-d, --directory <directory>', 'Output directory')
+  .option('-t, --theme <theme>', 'Theme to use')
+  .option('--typescript', 'Generate TypeScript files', true)
+  .action(async (component, options) => {
+    try {
+      console.log(chalk.blue(`Adding ${component} component for ${options.framework}...`));
+      
+      await addComponent({
+        component,
+        framework: options.framework,
+        directory: options.directory,
+        theme: options.theme,
+        typescript: options.typescript
+      });
+      
+      console.log(chalk.green(`✓ Successfully added ${component} component!`));
+    } catch (error) {
+      console.error(chalk.red(`Error adding component: ${error}`));
+      process.exit(1);
+    }
+  });
 
-    program
-      .name('mild-ui')
-      .description('UI component library with a focus on simplicity and customizability')
-      .version('0.1.0');
+program
+  .command('list')
+  .description('List available components')
+  .action(() => {
+    try {
+      listComponents();
+    } catch (error) {
+      console.error(chalk.red(`Error listing components: ${error}`));
+      process.exit(1);
+    }
+  });
 
-    // Register commands
-    addCommand(program);
-    initCommand(program);
-    listCommand(program);
+program
+  .command('init')
+  .description('Initialize mild-ui in your project')
+  .action(async () => {
+    try {
+      await initProject();
+    } catch (error) {
+      console.error(chalk.red(`Error initializing mild-ui: ${error}`));
+      process.exit(1);
+    }
+  });
 
-    program.parse();
-  } catch (error) {
-    logger.error('An unexpected error occurred:', error);
-    process.exit(1);
-  }
-};
-
-run();
+program.parse(process.argv);

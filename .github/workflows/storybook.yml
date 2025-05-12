@@ -1,0 +1,40 @@
+name: Deploy Storybook
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'packages/**'
+      - 'storybook/**'
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 8
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+          cache: 'pnpm'
+      
+      - name: Install dependencies
+        run: pnpm install
+      
+      - name: Build packages
+        run: |
+          pnpm --filter @mild-ui/core build
+          pnpm --filter @mild-ui/react build
+          pnpm --filter @mild-ui/vue build
+          pnpm --filter @mild-ui/svelte build
+      
+      - name: Build Storybook
+        run: |
+          pnpm --filter @mild-ui/storybook-react build
+      
+      - name: Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: storybook/react/storybook-static
+          branch: gh-pages

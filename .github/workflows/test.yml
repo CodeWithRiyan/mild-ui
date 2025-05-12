@@ -1,0 +1,34 @@
+name: Test
+on:
+  push:
+    branches: [ main, dev ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        framework: [react, vue, svelte]
+    
+    steps:
+      - uses: actions/checkout@v3
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 8
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+          cache: 'pnpm'
+      
+      - name: Install dependencies
+        run: pnpm install
+      
+      - name: Build core package
+        run: pnpm --filter @mild-ui/core build
+      
+      - name: Build and test ${{ matrix.framework }}
+        run: |
+          pnpm --filter @mild-ui/${{ matrix.framework }} build
+          pnpm --filter @mild-ui/${{ matrix.framework }} test

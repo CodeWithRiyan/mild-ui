@@ -1,60 +1,81 @@
-// packages/cli/src/commands/init.ts
-import { Command } from 'commander';
-import { setupCSS } from '../utils/setup-css';
-import { installDependencies } from '../utils/install';
-import { logger } from '../utils/logger';
-import path from 'path';
+import inquirer from 'inquirer';
 import fs from 'fs-extra';
+import path from 'path';
+import chalk from 'chalk';
+import { generateCssVariables, generateButtonStyles } from '../templates/styles';
+import ora from 'ora';
 
-export function initCommand(program: Command): void {
-  program
-    .command('init')
-    .description('Initialize a project with mild-ui')
-    .option('--no-typescript', 'Disable TypeScript')
-    .option('--directory <path>', 'Custom component directory', 'components')
-    .option('--force', 'Overwrite existing files')
-    .option('--skip-install', 'Skip dependency installation')
-    .action(async (options) => {
-      try {
-        // Detect TypeScript if not specified
-        const typescript = options.typescript || false;
-        
-        // Log the operation details
-        logger.info('Initializing mild-ui for React');
-        logger.info(`Using ${typescript ? 'TypeScript' : 'JavaScript'}`);
-        logger.info(`Components will be added to: ${options.directory}`);
-        
-        // Create component directory
-        const componentDir = path.join(process.cwd(), options.directory);
-        await fs.ensureDir(componentDir);
-        logger.success(`Created component directory: ${componentDir}`);
-        
-        // Setup CSS and Tailwind
-        await setupCSS({ force: options.force });
-        
-        // Install core dependencies
-        await installDependencies([], { 
-          skipInstall: options.skipInstall 
-        });
-        
-        // Create lib directory and utils file
-        const libDir = path.join(process.cwd(), 'lib');
-        await fs.ensureDir(libDir);
-        
-        // Copy utils file if it doesn't exist
-        const targetUtilsFile = path.join(libDir, 'utils.ts');
-        if (!fs.existsSync(targetUtilsFile) || options.force) {
-          const sourceUtilsFile = path.resolve(__dirname, '../../../core/src/utils.ts');
-          await fs.copy(sourceUtilsFile, targetUtilsFile);
-          logger.success(`Created utilities file: ${targetUtilsFile}`);
+export async function initProject(): Promise<void> {
+  const answers = await inquirer.prompt([
+    {
+      type: 'list',
+      name: 'framework',
+      message: 'Select your framework:',
+      choices: ['react', 'vue', 'svelte'],
+      default: 'react'
+    },
+    {
+      type: 'confirm',
+      name: 'typescript',
+      message: 'Use TypeScript?',
+      default: true
+    },
+    {
+      type: 'input',
+      name: 'componentsDir',
+      message: 'Where would you like to store your components?',
+      default: (answers: { framework: string }) => {
+        switch (answers.framework) {
+          case 'react': return 'src/components';
+          case 'vue': return 'src/components';
+          case 'svelte': return 'src/lib/components';
+          default: return 'src/components';
         }
-        
-        logger.success('mild-ui initialized successfully!');
-        logger.info('You can now add components using:');
-        logger.info('  mild-ui add Button Card Alert ...');
-      } catch (error) {
-        logger.error('Failed to initialize project:', error);
-        process.exit(1);
       }
-    });
+    }
+  ]);
+  
+  const spinner = ora('Initializing mild-ui...').start();
+  
+  try {
+    // Create components directory
+    await fs.ensureDir(answers.componentsDir);
+    
+    // Create styles directory
+    const stylesDir = path.join(process.cwd(), 'src/styles');
+    await fs.ensureDir(stylesDir);
+    
+    // Create base CSS file with variables
+    const cssVariablesContent = generateCssVariables();
+    await fs.writeFile(path.join(stylesDir, 'mild-ui-variables.css'), cssVariablesContent);
+    
+    // Create component styles
+    const buttonStylesContent = generateButtonStyles();
+    await fs.writeFile(path.join(stylesDir, 'mild-ui-button.css'), buttonStylesContent);
+    
+    // Create config file
+    const configContent = {
+      framework: answers.framework,
+      typescript: answers.typescript,
+      componentsDir: answers.componentsDir,
+      theme: 'default'
+    };
+    
+    await fs.writeFile(
+      path.join(process.cwd(), 'mild-ui.json'), 
+      JSON.stringify(configContent, null, 2)
+    );
+    
+    spinner.succeed('mild-ui initialized successfully!');
+    
+    console.log();
+    console.log(chalk.bold('Next steps:'));
+    console.log(`1. Import the styles in your main CSS file:`);
+    console.log(chalk.cyan(`   @import './styles/mild-ui-variables.css';`));
+    console.log(chalk.cyan(`   @import './styles/mild-ui-button.css';`));
+    console.log(`2. Start adding components with: ${chalk.cyan(`mild-ui add button`)}`);
+  } catch (error) {
+    spinner.fail('Initialization failed');
+    throw error;
+  }
 }

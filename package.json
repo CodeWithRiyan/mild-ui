@@ -1,32 +1,26 @@
 {
-  "name": "mild-ui-monorepo",
-  "version": "0.1.0",
-  "private": false,
+  "name": "@mild-ui/monorepo",
+  "private": true,
   "scripts": {
-    "dev": "storybook dev -p 6006",
     "build": "pnpm -r build",
-    "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build",
+    "dev": "pnpm -r dev",
+    "test": "pnpm -r test",
     "lint": "eslint .",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "storybook": "pnpm storybook:react",
+    "storybook:react": "pnpm --filter ./storybook/react dev",
+    "storybook:vue": "pnpm --filter ./storybook/vue dev",
+    "storybook:svelte": "pnpm --filter ./storybook/svelte dev",
+    "prepare": "husky install"
   },
   "devDependencies": {
-    "@storybook/addon-a11y": "^8.6.12",
-    "@storybook/addon-essentials": "^8.6.12",
-    "@storybook/addon-interactions": "^8.6.12",
-    "@storybook/addon-links": "^8.6.12",
-    "@storybook/addon-onboarding": "^8.6.12",
-    "@storybook/addon-themes": "^8.6.12",
-    "@storybook/blocks": "^8.6.12",
-    "@storybook/react": "^8.6.12",
-    "@storybook/react-vite": "^8.6.12",
-    "@storybook/testing-library": "^0.2.2",
-    "autoprefixer": "^10.4.16",
-    "eslint": "^8.53.0",
-    "postcss": "^8.4.31",
-    "prettier": "^3.0.3",
-    "storybook": "^8.6.12",
-    "tailwindcss": "^3.3.5",
-    "typescript": "^5.2.2"
+    "@typescript-eslint/eslint-plugin": "^6.0.0",
+    "@typescript-eslint/parser": "^6.0.0",
+    "eslint": "^8.45.0",
+    "eslint-config-prettier": "^9.0.0",
+    "husky": "^8.0.3",
+    "lint-staged": "^15.0.0",
+    "prettier": "^3.0.0",
+    "typescript": "^5.1.6"
   }
 }

@@ -1,74 +1,52 @@
-// packages/cli/src/commands/add.ts
-import { Command } from 'commander';
-import { getAvailableComponents } from '../utils/detect';
-import { installDependencies } from '../utils/install';
-import { copyComponent } from '../utils/copy';
-import { setupCSS } from '../utils/setup-css';
-import { logger } from '../utils/logger';
+import fs from 'fs-extra';
+import path from 'path';
+import chalk from 'chalk';
+import { getProjectInfo } from '../utils/project';
+import { generateComponent } from '../generators';
 
-export function addCommand(program: Command): void {
-  program
-    .command('add')
-    .description('Add components to your project')
-    .argument('<components...>', 'Component names to add (e.g., Button, Card, Alert)')
-    .option('--no-typescript', 'Disable TypeScript')
-    .option('--directory <path>', 'Custom component directory', 'components')
-    .option('--force', 'Overwrite existing components')
-    .option('--skip-install', 'Skip dependency installation')
-    .option('--skip-css', 'Skip CSS and Tailwind setup')
-    .action(async (components, options) => {
-      try {
-        // Convert component names to PascalCase
-        const formattedComponents = components.map(
-          (          component: string) => component.charAt(0).toUpperCase() + component.slice(1)
-        );
-        
-        // Detect TypeScript if not specified
-        const typescript = options.typescript || false;
-        
-        // Log the operation details
-        logger.info(`Adding components:`, formattedComponents.join(', '));
-        logger.info(`Using ${typescript ? 'TypeScript' : 'JavaScript'}`);
-        logger.info(`Components will be added to: ${options.directory}`);
-        
-        // Check if components exist
-        const availableComponents = getAvailableComponents();
-        const invalidComponents = formattedComponents.filter(
-          (          component: string) => !availableComponents.includes(component)
-        );
-        
-        if (invalidComponents.length > 0) {
-          logger.error(`The following components are not available:`, invalidComponents.join(', '));
-          logger.info('Available components:', availableComponents.join(', '));
-          return;
-        }
-        
-        // Setup CSS and Tailwind if not skipped
-        if (!options.skipCss) {
-          await setupCSS({ force: options.force });
-        }
-        
-        // Install dependencies if not skipped
-        await installDependencies(formattedComponents, { 
-          skipInstall: options.skipInstall 
-        });
-        
-        // Copy components
-        for (const component of formattedComponents) {
-          await copyComponent(component, {
-            typescript,
-            directory: options.directory,
-            force: options.force
-          });
-        }
-        
-        logger.success('All components added successfully!');
-        logger.info('Import the components in your code:');
-        logger.info(`import { ${formattedComponents.join(', ')} } from './${options.directory}';`);
-        
-      } catch (error) {
-        logger.error('Failed to add components:', error);
-        process.exit(1);
-      }
-    });
+interface AddComponentOptions {
+  component: string;
+  framework: string;
+  directory?: string;
+  theme?: string;
+  typescript: boolean;
+}
+
+export async function addComponent(options: AddComponentOptions): Promise<void> {
+  // Validate component exists in our library
+  const availableComponents = ['button']; // Start with just the button for Phase 1
+  const componentLower = options.component.toLowerCase();
+  
+  if (!availableComponents.includes(componentLower)) {
+    throw new Error(`Component '${options.component}' is not available. Run 'mild-ui list' to see available components.`);
+  }
+  
+  // Validate framework is supported
+  const supportedFrameworks = ['react', 'vue', 'svelte'];
+  if (!supportedFrameworks.includes(options.framework.toLowerCase())) {
+    throw new Error(`Framework '${options.framework}' is not supported. Supported frameworks: ${supportedFrameworks.join(', ')}`);
+  }
+  
+  // Detect project structure if no directory specified
+  let outputDir = options.directory;
+  if (!outputDir) {
+    const projectInfo = await getProjectInfo();
+    outputDir = projectInfo.componentsDir;
+  }
+  
+  // Create output directory if it doesn't exist
+  if (outputDir) {
+    await fs.ensureDir(outputDir);
+  } else {
+    throw new Error('Output directory is required but was not specified');
+  }
+  
+  // Generate the component
+  await generateComponent({
+    component: componentLower,
+    framework: options.framework.toLowerCase(),
+    outputDir,
+    theme: options.theme,
+    typescript: options.typescript
+  });
 }

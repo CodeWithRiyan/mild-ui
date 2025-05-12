@@ -1,137 +1,34 @@
-# .github/workflows/publish.yml
-name: Publish to npm
-
+name: Publish
 on:
-  # Trigger on tag push
-  push:
-    tags:
-      - 'v*' # Run when tag is pushed matching pattern v*, e.g., v1.0.0
-  
-  # Alternative trigger from repository dispatch
-  repository_dispatch:
-    types: [manual-publish]
-  
-  # Add manual trigger option
-  workflow_dispatch:
-    inputs:
-      version:
-        description: 'Version to publish (without v prefix)'
-        required: true
-        default: ''
-
-# Permissions needed for publishing and creating releases
-permissions:
-  contents: write  # For creating GitHub Release
-  packages: write  # If you're also publishing to GitHub Packages
+  release:
+    types: [created]
 
 jobs:
-  build-and-publish:
+  publish:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v3
+      - uses: pnpm/action-setup@v2
         with:
-          ref: ${{ github.event.client_payload.ref || github.ref }}
-
-      # Set up Node.js with explicit npmAuthToken
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
+          version: 8
+      - uses: actions/setup-node@v3
         with:
           node-version: '18'
-          registry-url: 'https://registry.npmjs.org/'
-          # Ensure npmAuthToken is explicitly added in settings
-          scope: '@mild-ui'
-
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v2
-        with:
-          version: '8'
-
-      - name: Get version from input or tag
-        id: get_version
-        run: |
-          if [ "${{ github.event_name }}" == "repository_dispatch" ]; then
-            echo "VERSION=${{ github.event.client_payload.version }}" >> $GITHUB_ENV
-          elif [ "${{ github.event_name }}" == "workflow_dispatch" ]; then
-            echo "VERSION=${{ github.event.inputs.version }}" >> $GITHUB_ENV
-          else
-            # Extract version from tag (remove 'v' prefix)
-            echo "VERSION=${GITHUB_REF#refs/tags/v}" >> $GITHUB_ENV
-          fi
-          
-          echo "Using version: $VERSION"
-
+          registry-url: 'https://registry.npmjs.org'
+          cache: 'pnpm'
+      
       - name: Install dependencies
-        run: pnpm install --no-frozen-lockfile
-
+        run: pnpm install
+      
       - name: Build packages
         run: pnpm build
-
-      - name: Update workspace dependencies for publishing
+      
+      - name: Publish to npm
         run: |
-          # Replace workspace dependencies with actual versions
-          cd packages/react
-          sed -i 's/"@mild-ui\/core": "workspace:\*"/"@mild-ui\/core": "^${{ env.VERSION }}"/' package.json
-          
-          cd ../cli
-          sed -i 's/"@mild-ui\/core": "workspace:\*"/"@mild-ui\/core": "^${{ env.VERSION }}"/' package.json
-
-      # Debug authentication setup
-      - name: Debug npm authentication
-        run: |
-          echo "NPM_CONFIG_USERCONFIG: $NPM_CONFIG_USERCONFIG"
-          echo "Is NPM_TOKEN set: ${{ secrets.NPM_TOKEN != '' }}"
-          echo "Registry URL: $(npm config get registry)"
-
-      # Core package
-      - name: Publish @mild-ui/core
-        working-directory: packages/core
-        # Explicitly use npm publish with auth token
-        run: npm publish --access public
+          cd packages/core && npm publish --access public
+          cd ../react && npm publish --access public
+          cd ../vue && npm publish --access public
+          cd ../svelte && npm publish --access public
+          cd ../cli && npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-
-      # Wait to ensure core package is available
-      - name: Wait for core package to be available
-        run: sleep 30
-
-      # React package
-      - name: Publish @mild-ui/react
-        working-directory: packages/react
-        run: npm publish --access public
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-
-      # Wait to ensure react package is available
-      - name: Wait for react package to be available
-        run: sleep 30
-
-      # CLI package
-      - name: Publish mild-ui CLI
-        working-directory: packages/cli
-        run: npm publish --access public
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-
-      - name: Create GitHub Release
-        uses: softprops/action-gh-release@v1
-        with:
-          tag_name: v${{ env.VERSION }}
-          name: Release v${{ env.VERSION }}
-          body: |
-            # mild-ui v${{ env.VERSION }}
-            
-            ## What's Changed
-            
-            <!-- Add release notes here -->
-            
-            ## Packages
-            
-            - @mild-ui/core@${{ env.VERSION }}
-            - @mild-ui/react@${{ env.VERSION }}
-            - mild-ui@${{ env.VERSION }} (CLI)
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
