@@ -1,15 +1,22 @@
-import { ButtonBaseProps } from './Button.types';
-import { getButtonClasses } from './Button.styles';
+// packages/core/src/components/Button/Button.core.ts
+import { ButtonCoreProps, ButtonStyleProps } from './Button.types';
+import { buttonVariants } from './Button.styles';
+import { cn } from '../../utils/cn';
 
-export const getButtonAttributes = (props: ButtonBaseProps) => {
-  const variant = props.variant || 'primary';
-  const size = props.size || 'medium';
-  const disabled = props.disabled || false;
+export function getButtonProps(props: ButtonCoreProps & ButtonStyleProps) {
+  const {
+    variant = 'primary',
+    size = 'md',
+    className,
+    disabled = false,
+    ...restProps
+  } = props;
   
   return {
-    className: getButtonClasses(variant, size),
+    className: cn(buttonVariants({ variant, size }), className),
     disabled,
     variant,
-    size
+    size,
+    ...restProps
   };
-};
+}
