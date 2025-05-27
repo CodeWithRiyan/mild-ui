@@ -1,30 +1,44 @@
-import React from 'react';
-import { getButtonAttributes } from '@mild-ui/core';
-import { ButtonProps } from './Button.types';
+// packages/react/src/components/Button/Button.tsx
+import * as React from 'react';
+import { Slot } from '@radix-ui/react-slot';
+import { getButtonProps } from '@mild-ui/core';
+import type { ButtonProps } from './Button.types';
 
-const Button = ({
+const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(({
   variant = 'primary',
-  size = 'medium',
+  size = 'md',
+  asChild = false,
+  className,
   disabled = false,
   onClick,
   leadingIcon,
   trailingIcon,
   children,
-  className = ''
-}: ButtonProps) => {
-  const baseAttributes = getButtonAttributes({ variant, size, disabled });
+  ...props
+}, ref) => {
+  const Comp = asChild ? Slot : "button";
+  const { className: buttonClassName, ...buttonProps } = getButtonProps({ 
+    variant, 
+    size, 
+    disabled, 
+    className 
+  });
   
   return (
-    <button
-      className={`${baseAttributes.className} ${className}`}
-      disabled={disabled}
+    <Comp
+      className={buttonClassName}
+      ref={ref}
       onClick={onClick}
+      {...props}
+      {...buttonProps}
     >
-      {leadingIcon && <span className="mild-button-icon mild-button-leading-icon">{leadingIcon}</span>}
-      <span className="mild-button-content">{children}</span>
-      {trailingIcon && <span className="mild-button-icon mild-button-trailing-icon">{trailingIcon}</span>}
-    </button>
+      {leadingIcon && <span className="mr-2">{leadingIcon}</span>}
+      {children}
+      {trailingIcon && <span className="ml-2">{trailingIcon}</span>}
+    </Comp>
   );
-};
+});
 
-export default Button;
+Button.displayName = "Button";
+
+export { Button };
