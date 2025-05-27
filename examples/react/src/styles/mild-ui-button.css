@@ -6,7 +6,10 @@
   font-weight: var(--mild-font-weight-medium);
   border-radius: var(--mild-border-radius-md);
   cursor: pointer;
-  transition: background-color 0.2s, border-color 0.2s, color 0.2s;
+  transition:
+    background-color 0.2s,
+    border-color 0.2s,
+    color 0.2s;
 }
 
 .mild-button:disabled {

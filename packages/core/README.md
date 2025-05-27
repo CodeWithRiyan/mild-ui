@@ -27,7 +27,7 @@ npm install @mild-ui/core
 If you're developing components for the mild-ui library, you can import types and utilities from this package:
 
 ```typescript
-import { ButtonVariant, ButtonSize, getButtonAttributes } from '@mild-ui/core';
+import { ButtonVariant, ButtonSize, getButtonAttributes } from "@mild-ui/core";
 ```
 
 ## Documentation

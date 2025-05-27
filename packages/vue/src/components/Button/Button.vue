@@ -9,9 +9,9 @@
     <span v-if="$slots['leading-icon']" class="mr-2">
       <slot name="leading-icon"></slot>
     </span>
-    
+
     <slot></slot>
-    
+
     <span v-if="$slots['trailing-icon']" class="ml-2">
       <slot name="trailing-icon"></slot>
     </span>
@@ -19,9 +19,9 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue';
-import { getButtonProps } from '@mild-ui/core';
-import type { ButtonVariant, ButtonSize } from '@mild-ui/core';
+import { computed } from "vue";
+import { getButtonProps } from "@mild-ui/core";
+import type { ButtonVariant, ButtonSize } from "@mild-ui/core";
 
 interface Props {
   variant?: ButtonVariant;
@@ -31,14 +31,14 @@ interface Props {
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  variant: 'primary',
-  size: 'md', // Updated from 'medium' to 'md'
+  variant: "primary",
+  size: "md", // Updated from 'medium' to 'md'
   disabled: false,
-  class: ''
+  class: "",
 });
 
 const emit = defineEmits<{
-  (e: 'click', event: MouseEvent): void;
+  (e: "click", event: MouseEvent): void;
 }>();
 
 const buttonProps = computed(() => {
@@ -46,11 +46,11 @@ const buttonProps = computed(() => {
     variant: props.variant,
     size: props.size,
     disabled: props.disabled,
-    className: props.class
+    className: props.class,
   });
 });
 
 const onClick = (event: MouseEvent) => {
-  emit('click', event);
+  emit("click", event);
 };
 </script>

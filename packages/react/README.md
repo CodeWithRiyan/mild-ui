@@ -26,16 +26,16 @@ mild-ui add button
 If you've added components using the CLI, you can import them directly from your components folder:
 
 ```jsx
-import { Button } from './components/Button';
-import { Plus, ArrowRight } from 'lucide-react';
+import { Button } from "./components/Button";
+import { Plus, ArrowRight } from "lucide-react";
 
 function App() {
   return (
     <div>
       <Button>Default Button</Button>
       <Button variant="secondary">Secondary Button</Button>
-      <Button 
-        variant="outline" 
+      <Button
+        variant="outline"
         size="large"
         leadingIcon={<Plus size={16} />}
         trailingIcon={<ArrowRight size={16} />}

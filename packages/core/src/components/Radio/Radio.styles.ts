@@ -1,5 +1,5 @@
 // packages/core/src/components/Radio/Radio.styles.ts
-import { cva } from 'class-variance-authority';
+import { cva } from "class-variance-authority";
 
 export const radioStyles = cva(
   "peer h-4 w-4 shrink-0 rounded-full border border-input ring-offset-background focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:border-primary data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground",
@@ -14,7 +14,7 @@ export const radioStyles = cva(
     defaultVariants: {
       size: "md",
     },
-  }
+  },
 );
 
 export const radioLabelStyles = cva(
@@ -30,5 +30,5 @@ export const radioLabelStyles = cva(
     defaultVariants: {
       size: "md",
     },
-  }
+  },
 );

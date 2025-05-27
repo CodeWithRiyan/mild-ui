@@ -1,18 +1,22 @@
-export function getVueTemplates(component: string, typescript: boolean): Record<string, string> {
-    if (component !== 'button') {
-      throw new Error(`Component '${component}' is not available for Vue.`);
-    }
-  
-    const extension = 'vue';
-    const indexExtension = typescript ? 'ts' : 'js';
-    
-    const templates: Record<string, string> = {};
-    
-    // Index file
-    templates[`index.${indexExtension}`] = `export { default } from './Button.vue';\n`;
-    
-    // Button component
-    templates[`Button.${extension}`] = `<template>
+export function getVueTemplates(
+  component: string,
+  typescript: boolean,
+): Record<string, string> {
+  if (component !== "button") {
+    throw new Error(`Component '${component}' is not available for Vue.`);
+  }
+
+  const extension = "vue";
+  const indexExtension = typescript ? "ts" : "js";
+
+  const templates: Record<string, string> = {};
+
+  // Index file
+  templates[`index.${indexExtension}`] =
+    `export { default } from './Button.vue';\n`;
+
+  // Button component
+  templates[`Button.${extension}`] = `<template>
     <button
       :class="[baseClasses, customClass]"
       :disabled="disabled"
@@ -30,10 +34,12 @@ export function getVueTemplates(component: string, typescript: boolean): Record<
     </button>
   </template>
   
-  <script ${typescript ? 'setup lang="ts"' : 'setup'}>
+  <script ${typescript ? 'setup lang="ts"' : "setup"}>
   ${typescript ? "// Optional: import { PlusIcon, ArrowRightIcon } from 'lucide-vue-next';" : "// Optional: import { PlusIcon, ArrowRightIcon } from 'lucide-vue-next';"}
   
-  ${typescript ? `
+  ${
+    typescript
+      ? `
   type ButtonVariant = 'primary' | 'secondary' | 'outline' | 'ghost';
   type ButtonSize = 'small' | 'medium' | 'large';
   
@@ -43,16 +49,18 @@ export function getVueTemplates(component: string, typescript: boolean): Record<
     disabled?: boolean;
     customClass?: string;
   }
-  ` : ''}
+  `
+      : ""
+  }
   
-  ${typescript ? 'const props = withDefaults(defineProps<Props>(), {' : 'const props = defineProps({'}
+  ${typescript ? "const props = withDefaults(defineProps<Props>(), {" : "const props = defineProps({"}
     variant: ${typescript ? "'primary'" : "{ type: String, default: 'primary' }"},
     size: ${typescript ? "'medium'" : "{ type: String, default: 'medium' }"},
-    disabled: ${typescript ? 'false' : '{ type: Boolean, default: false }'},
+    disabled: ${typescript ? "false" : "{ type: Boolean, default: false }"},
     customClass: ${typescript ? "''" : "{ type: String, default: '' }"}
   });
   
-  ${typescript ? 'const emit = defineEmits<{\n  (e: \'click\', event: MouseEvent): void;\n}>();' : 'const emit = defineEmits(["click"]);'}
+  ${typescript ? "const emit = defineEmits<{\n  (e: 'click', event: MouseEvent): void;\n}>();" : 'const emit = defineEmits(["click"]);'}
   
   import { computed } from 'vue';
   
@@ -64,10 +72,10 @@ export function getVueTemplates(component: string, typescript: boolean): Record<
     ].join(' ');
   });
   
-  const onClick = (event${typescript ? ': MouseEvent' : ''}) => {
+  const onClick = (event${typescript ? ": MouseEvent" : ""}) => {
     emit('click', event);
   };
   </script>`;
-  
-    return templates;
-  }
+
+  return templates;
+}
