@@ -1,22 +1,28 @@
-export function getReactTemplates(component: string, typescript: boolean): Record<string, string> {
-    if (component !== 'button') {
-      throw new Error(`Component '${component}' is not available for React.`);
-    }
-  
-    const extension = typescript ? 'tsx' : 'jsx';
-    const indexExtension = typescript ? 'ts' : 'js';
-    
-    const templates: Record<string, string> = {};
-    
-    // Index file
-    templates[`index.${indexExtension}`] = `export { default } from './Button';\n`;
-    
-    // Button component
-    templates[`Button.${extension}`] = `
+export function getReactTemplates(
+  component: string,
+  typescript: boolean,
+): Record<string, string> {
+  if (component !== "button") {
+    throw new Error(`Component '${component}' is not available for React.`);
+  }
+
+  const extension = typescript ? "tsx" : "jsx";
+  const indexExtension = typescript ? "ts" : "js";
+
+  const templates: Record<string, string> = {};
+
+  // Index file
+  templates[`index.${indexExtension}`] =
+    `export { default } from './Button';\n`;
+
+  // Button component
+  templates[`Button.${extension}`] = `
   import React from 'react';
   ${typescript ? "import { Plus, ArrowRight } from 'lucide-react';" : "// Optional: import { Plus, ArrowRight } from 'lucide-react';"}
   
-  ${typescript ? `
+  ${
+    typescript
+      ? `
   interface ButtonProps {
     variant?: 'primary' | 'secondary' | 'outline' | 'ghost';
     size?: 'small' | 'medium' | 'large';
@@ -27,7 +33,9 @@ export function getReactTemplates(component: string, typescript: boolean): Recor
     children: React.ReactNode;
     className?: string;
   }
-  ` : ''}
+  `
+      : ""
+  }
   
   const Button = ({
     variant = 'primary',
@@ -38,7 +46,7 @@ export function getReactTemplates(component: string, typescript: boolean): Recor
     trailingIcon,
     children,
     className = ''
-  }${typescript ? ': ButtonProps' : ''}) => {
+  }${typescript ? ": ButtonProps" : ""}) => {
     const baseClasses = [
       'mild-button',
       \`mild-button-\${variant}\`,
@@ -60,6 +68,6 @@ export function getReactTemplates(component: string, typescript: boolean): Recor
   
   export default Button;
   `;
-  
-    return templates;
-  }
+
+  return templates;
+}

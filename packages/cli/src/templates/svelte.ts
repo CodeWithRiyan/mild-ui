@@ -1,31 +1,39 @@
-export function getSvelteTemplates(component: string, typescript: boolean): Record<string, string> {
-    if (component !== 'button') {
-      throw new Error(`Component '${component}' is not available for Svelte.`);
-    }
-  
-    const extension = 'svelte';
-    const indexExtension = typescript ? 'ts' : 'js';
-    
-    const templates: Record<string, string> = {};
-    
-    // Index file
-    templates[`index.${indexExtension}`] = `export { default } from './Button.svelte';\n`;
-    
-    // Button component
-    templates[`Button.${extension}`] = `<script${typescript ? ' lang="ts"' : ''}>
+export function getSvelteTemplates(
+  component: string,
+  typescript: boolean,
+): Record<string, string> {
+  if (component !== "button") {
+    throw new Error(`Component '${component}' is not available for Svelte.`);
+  }
+
+  const extension = "svelte";
+  const indexExtension = typescript ? "ts" : "js";
+
+  const templates: Record<string, string> = {};
+
+  // Index file
+  templates[`index.${indexExtension}`] =
+    `export { default } from './Button.svelte';\n`;
+
+  // Button component
+  templates[`Button.${extension}`] = `<script${typescript ? ' lang="ts"' : ""}>
     ${typescript ? "// Optional: import { Plus, ArrowRight } from 'lucide-svelte';" : "// Optional: import { Plus, ArrowRight } from 'lucide-svelte';"}
     
-    export let variant${typescript ? ": 'primary' | 'secondary' | 'outline' | 'ghost'" : ''} = 'primary';
-    export let size${typescript ? ": 'small' | 'medium' | 'large'" : ''} = 'medium';
-    export let disabled${typescript ? ': boolean' : ''} = false;
-    export let customClass${typescript ? ': string' : ''} = '';
+    export let variant${typescript ? ": 'primary' | 'secondary' | 'outline' | 'ghost'" : ""} = 'primary';
+    export let size${typescript ? ": 'small' | 'medium' | 'large'" : ""} = 'medium';
+    export let disabled${typescript ? ": boolean" : ""} = false;
+    export let customClass${typescript ? ": string" : ""} = '';
     
-    ${typescript ? `type $$Props = {
+    ${
+      typescript
+        ? `type $$Props = {
       variant?: 'primary' | 'secondary' | 'outline' | 'ghost';
       size?: 'small' | 'medium' | 'large';
       disabled?: boolean;
       customClass?: string;
-    }` : ''}
+    }`
+        : ""
+    }
     
     $: baseClasses = [
       'mild-button',
@@ -55,6 +63,6 @@ export function getSvelteTemplates(component: string, typescript: boolean): Reco
       </span>
     {/if}
   </button>`;
-  
-    return templates;
-  }
+
+  return templates;
+}

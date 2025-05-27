@@ -1,5 +1,5 @@
 // packages/core/src/components/Select/Select.styles.ts
-import { cva } from 'class-variance-authority';
+import { cva } from "class-variance-authority";
 
 export const selectTriggerStyles = cva(
   "flex h-10 w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50",
@@ -24,7 +24,7 @@ export const selectTriggerStyles = cva(
       fullWidth: true,
       error: false,
     },
-  }
+  },
 );
 
 export const selectContentStyles = cva(
@@ -39,7 +39,7 @@ export const selectContentStyles = cva(
     defaultVariants: {
       position: "popper",
     },
-  }
+  },
 );
 
 export const selectItemStyles = cva(
@@ -55,5 +55,5 @@ export const selectItemStyles = cva(
     defaultVariants: {
       size: "md",
     },
-  }
+  },
 );

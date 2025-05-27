@@ -23,6 +23,7 @@ mild-ui init
 ```
 
 This command will:
+
 - Detect your project's framework (React, Vue, or Svelte)
 - Ask you where to store your components
 - Ask you where to store your styles
@@ -56,6 +57,7 @@ mild-ui list
 ## Command Options
 
 - `add <component>`: Add a component to your project
+
   - `--framework=<framework>`: Specify the target framework (react, vue, svelte)
   - `--directory=<dir>`: Specify the output directory for components
   - `--stylesDir=<dir>`: Specify the directory for styles

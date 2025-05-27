@@ -48,16 +48,16 @@ This will create the component files in your project's components directory.
 #### React
 
 ```jsx
-import { Button } from './components';
-import { Plus, ArrowRight } from 'lucide-react';
+import { Button } from "./components";
+import { Plus, ArrowRight } from "lucide-react";
 
 function App() {
   return (
     <div>
       <Button>Default Button</Button>
       <Button variant="secondary">Secondary Button</Button>
-      <Button 
-        variant="outline" 
+      <Button
+        variant="outline"
         size="large"
         leadingIcon={<Plus size={16} />}
         trailingIcon={<ArrowRight size={16} />}
@@ -89,8 +89,8 @@ function App() {
 </template>
 
 <script setup>
-import { Button } from './components';
-import { PlusIcon, ArrowRightIcon } from 'lucide-vue-next';
+import { Button } from "./components";
+import { PlusIcon, ArrowRightIcon } from "lucide-vue-next";
 </script>
 ```
 

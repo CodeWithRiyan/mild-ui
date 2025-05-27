@@ -1,5 +1,10 @@
 // packages/react/src/components/Button/Button.types.ts
-import type { ButtonCoreProps, ButtonStyleProps, ButtonVariant, ButtonSize } from '@mild-ui/core';
+import type {
+  ButtonCoreProps,
+  ButtonStyleProps,
+  ButtonVariant,
+  ButtonSize,
+} from "@mild-ui/core";
 
 export interface ButtonReactProps extends ButtonCoreProps, ButtonStyleProps {
   asChild?: boolean;
@@ -9,7 +14,12 @@ export interface ButtonReactProps extends ButtonCoreProps, ButtonStyleProps {
   onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
-export interface ButtonProps extends ButtonReactProps, Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, keyof ButtonReactProps> {}
+export interface ButtonProps
+  extends ButtonReactProps,
+    Omit<
+      React.ButtonHTMLAttributes<HTMLButtonElement>,
+      keyof ButtonReactProps
+    > {}
 
 // Re-export these for convenience
 export type { ButtonVariant, ButtonSize };

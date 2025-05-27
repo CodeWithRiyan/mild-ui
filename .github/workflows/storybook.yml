@@ -1,10 +1,10 @@
 name: Deploy Storybook
 on:
   push:
-    branches: [ main ]
+    branches: [main]
     paths:
-      - 'packages/**'
-      - 'storybook/**'
+      - "packages/**"
+      - "storybook/**"
 
 jobs:
   build-and-deploy:
@@ -16,23 +16,23 @@ jobs:
           version: 8
       - uses: actions/setup-node@v3
         with:
-          node-version: '18'
-          cache: 'pnpm'
-      
+          node-version: "18"
+          cache: "pnpm"
+
       - name: Install dependencies
         run: pnpm install
-      
+
       - name: Build packages
         run: |
           pnpm --filter @mild-ui/core build
           pnpm --filter @mild-ui/react build
           pnpm --filter @mild-ui/vue build
           pnpm --filter @mild-ui/svelte build
-      
+
       - name: Build Storybook
         run: |
           pnpm --filter @mild-ui/storybook-react build
-      
+
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:

@@ -1,11 +1,14 @@
 // packages/react/src/components/Input/Input.tsx
-import * as React from 'react';
-import { InputCoreProps, inputStyles, InputStyleProps } from '@mild-ui/core';
-import { cn } from '../../utils'
+import * as React from "react";
+import { InputCoreProps, inputStyles, InputStyleProps } from "@mild-ui/core";
+import { cn } from "../../utils";
 
 // Add 'value' to the Omit list
 export interface InputProps
-  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'type' | 'size' | 'value'>,
+  extends Omit<
+      React.InputHTMLAttributes<HTMLInputElement>,
+      "type" | "size" | "value"
+    >,
     InputCoreProps,
     InputStyleProps {}
 
@@ -13,7 +16,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
   (
     {
       className,
-      type = 'text',
+      type = "text",
       size,
       variant,
       fullWidth,
@@ -21,20 +24,23 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
       value,
       ...props
     },
-    ref
+    ref,
   ) => {
     return (
       <input
         type={type}
-        className={cn(inputStyles({ size, variant, fullWidth, error }), className)}
+        className={cn(
+          inputStyles({ size, variant, fullWidth, error }),
+          className,
+        )}
         ref={ref}
         value={value}
         {...props}
       />
     );
-  }
+  },
 );
 
-Input.displayName = 'Input';
+Input.displayName = "Input";
 
 export { Input };

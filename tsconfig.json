@@ -13,6 +13,11 @@
     "isolatedModules": true,
     "lib": ["DOM", "DOM.Iterable", "ESNext"]
   },
-  "include": ["packages/*/src/**/*.ts", "packages/*/src/**/*.tsx", "packages/*/src/**/*.vue", "packages/*/src/**/*.svelte"],
+  "include": [
+    "packages/*/src/**/*.ts",
+    "packages/*/src/**/*.tsx",
+    "packages/*/src/**/*.vue",
+    "packages/*/src/**/*.svelte"
+  ],
   "exclude": ["node_modules", "dist", "**/*.test.ts", "**/*.spec.ts"]
 }

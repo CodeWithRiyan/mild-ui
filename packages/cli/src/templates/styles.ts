@@ -1,5 +1,5 @@
 export function generateCssVariables(): string {
-    return `
+  return `
   :root {
     /* Colors */
     --mild-primary: #3b82f6;
@@ -43,10 +43,10 @@ export function generateCssVariables(): string {
     --mild-border: #374151;
   }
   `;
-  }
-  
-  export function generateButtonStyles(): string {
-    return `
+}
+
+export function generateButtonStyles(): string {
+  return `
   .mild-button {
     display: inline-flex;
     align-items: center;
@@ -159,4 +159,4 @@ export function generateCssVariables(): string {
     background-color: rgba(59, 130, 246, 0.2);
   }
   `;
-  }
+}

@@ -43,8 +43,8 @@ If you've added components using the CLI, you can import them directly from your
 </template>
 
 <script setup>
-import { Button } from './components';
-import { PlusIcon, ArrowRightIcon } from 'lucide-vue-next';
+import { Button } from "./components";
+import { PlusIcon, ArrowRightIcon } from "lucide-vue-next";
 </script>
 ```
 
