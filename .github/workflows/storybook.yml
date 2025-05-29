@@ -61,16 +61,6 @@ jobs:
               <h2>🔵 React Components</h2>
               <a href="./react/">View React Storybook</a>
             </div>
-            
-            <div class="framework">
-              <h2>🟢 Vue Components</h2>
-              <a href="./vue/">View Vue Storybook</a>
-            </div>
-            
-            <div class="framework">
-              <h2>🟠 Svelte Components</h2>
-              <a href="./svelte/">View Svelte Storybook</a>
-            </div>
           </body>
           </html>
           EOF
