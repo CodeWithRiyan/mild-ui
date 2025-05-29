@@ -10,7 +10,12 @@ const preview: Preview = {
         date: /Date$/,
       },
     },
-    docs: { toc: true },
+    docs: { 
+      toc: true,
+      source: {
+        state: 'open',
+      },
+    },
     layout: 'centered',
     backgrounds: {
       default: 'light',
@@ -19,8 +24,18 @@ const preview: Preview = {
         { name: 'dark', value: '#0f172a' },
       ],
     },
+    // Fix for GitHub Pages deployment
+    options: {
+      storySort: {
+        order: ['Introduction', 'Components'],
+      },
+    },
   },
-  globalTypes: { darkMode: { defaultValue: false } },
+  globalTypes: { 
+    darkMode: { 
+      defaultValue: false 
+    } 
+  },
 };
 
 export default preview;

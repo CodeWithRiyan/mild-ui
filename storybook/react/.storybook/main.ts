@@ -28,18 +28,42 @@ const config: StorybookConfig = {
       '@mild-ui/core': resolve(__dirname, '../../../packages/core/src'),
     };
     
-    // Configure for GitHub Pages deployment
+    // Configure for different environments
     if (configType === 'PRODUCTION') {
-      config.base = '/mild-ui/react/';
+      // Check if we're building for GitHub Pages (when GITHUB_ACTIONS is set)
+      const isGitHubPages = process.env.GITHUB_ACTIONS === 'true';
       
-      // Ensure proper asset handling
+      // Set base path based on environment
+      config.base = isGitHubPages ? '/mild-ui/' : './';
+      
+      // Configure build options
       config.build = config.build || {};
       config.build.rollupOptions = config.build.rollupOptions || {};
+      
+      // Ensure proper asset handling
       config.build.rollupOptions.output = {
         ...config.build.rollupOptions.output,
         assetFileNames: 'assets/[name]-[hash][extname]',
         chunkFileNames: 'assets/[name]-[hash].js',
         entryFileNames: 'assets/[name]-[hash].js',
+        // Reduce chunk size to avoid dynamic import issues
+        manualChunks: undefined,
+      };
+      
+      // Optimize for static hosting
+      config.build.target = 'es2015';
+      config.build.minify = 'esbuild';
+      config.build.sourcemap = false;
+      
+      // Handle dynamic imports
+      config.build.rollupOptions.output.format = 'es';
+      
+      // Suppress Radix UI "use client" warnings
+      config.build.rollupOptions.onwarn = (warning, warn) => {
+        if (warning.code === 'MODULE_LEVEL_DIRECTIVE') {
+          return;
+        }
+        warn(warning);
       };
     }
     

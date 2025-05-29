@@ -5,8 +5,9 @@
   "type": "module",
   "scripts": {
     "dev": "storybook dev -p 6006",
-    "build": "storybook build",
-    "preview": "storybook build && npx serve storybook-static",
+    "build": "NODE_ENV=production GITHUB_ACTIONS=true storybook build",
+    "build:local": "storybook build",
+    "preview": "pnpm build:local && npx serve storybook-static",
     "test": "test-storybook"
   },
   "dependencies": {
@@ -43,6 +44,7 @@
     "storybook-dark-mode": "^3.0.3",
     "tailwindcss": "^3.4.17",
     "tailwindcss-animate": "^1.0.7",
+    "terser": "^5.35.0",
     "typescript": "^5.8.3",
     "vite": "^5.4.19"
   }
