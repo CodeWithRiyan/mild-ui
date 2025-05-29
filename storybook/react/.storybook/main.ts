@@ -34,7 +34,8 @@ const config: StorybookConfig = {
       const isGitHubPages = process.env.GITHUB_ACTIONS === 'true';
       
       // Set base path based on environment
-      config.base = isGitHubPages ? '/mild-ui/' : './';
+      // For GitHub Pages, we're now deploying to root, so use './'
+      config.base = isGitHubPages ? './' : './';
       
       // Configure build options
       config.build = config.build || {};

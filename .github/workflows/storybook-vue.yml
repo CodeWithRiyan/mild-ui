@@ -1,10 +1,11 @@
-name: Build and Deploy React Storybook
+name: Build and Deploy Vue Storybook
 on:
   push:
     branches: [ main ]
     paths:
       - 'packages/**'
-      - 'storybook/react/**'
+      - 'storybook/vue/**'
+  workflow_dispatch: # Allow manual trigger
 
 jobs:
   build-and-deploy:
@@ -25,21 +26,22 @@ jobs:
       - name: Build packages
         run: |
           pnpm --filter @mild-ui/core build
-          pnpm --filter @mild-ui/react build
+          pnpm --filter @mild-ui/vue build
       
-      - name: Build React Storybook for GitHub Pages
+      - name: Build Vue Storybook for GitHub Pages
         run: |
-          cd storybook/react
+          cd storybook/vue
           NODE_ENV=production GITHUB_ACTIONS=true pnpm build
         env:
           NODE_ENV: production
           GITHUB_ACTIONS: true
       
       - name: Add .nojekyll file
-        run: touch storybook/react/storybook-static/.nojekyll
+        run: touch storybook/vue/storybook-static/.nojekyll
       
-      - name: Deploy to GitHub Pages
+      - name: Deploy to GitHub Pages (Vue subdirectory)
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          folder: storybook/react/storybook-static
+          folder: storybook/vue/storybook-static
+          target-folder: vue
           branch: gh-pages

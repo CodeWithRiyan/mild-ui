@@ -1,10 +1,11 @@
-name: Build and Deploy React Storybook
+name: Build and Deploy Svelte Storybook
 on:
   push:
     branches: [ main ]
     paths:
       - 'packages/**'
-      - 'storybook/react/**'
+      - 'storybook/svelte/**'
+  workflow_dispatch: # Allow manual trigger
 
 jobs:
   build-and-deploy:
@@ -25,21 +26,22 @@ jobs:
       - name: Build packages
         run: |
           pnpm --filter @mild-ui/core build
-          pnpm --filter @mild-ui/react build
+          pnpm --filter @mild-ui/svelte build
       
-      - name: Build React Storybook for GitHub Pages
+      - name: Build Svelte Storybook for GitHub Pages
         run: |
-          cd storybook/react
+          cd storybook/svelte
           NODE_ENV=production GITHUB_ACTIONS=true pnpm build
         env:
           NODE_ENV: production
           GITHUB_ACTIONS: true
       
       - name: Add .nojekyll file
-        run: touch storybook/react/storybook-static/.nojekyll
+        run: touch storybook/svelte/storybook-static/.nojekyll
       
-      - name: Deploy to GitHub Pages
+      - name: Deploy to GitHub Pages (Svelte subdirectory)
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          folder: storybook/react/storybook-static
+          folder: storybook/svelte/storybook-static
+          target-folder: svelte
           branch: gh-pages
