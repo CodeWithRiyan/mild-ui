@@ -39,8 +39,6 @@ jobs:
         run: |
           mkdir -p public
           cp -r storybook/react/storybook-static public/react
-          cp -r storybook/vue/storybook-static public/vue  
-          cp -r storybook/svelte/storybook-static public/svelte
           
           # Create landing page
           cat > public/index.html << 'EOF'

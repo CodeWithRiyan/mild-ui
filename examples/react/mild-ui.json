@@ -1,7 +1,0 @@
-{
-  "framework": "react",
-  "typescript": true,
-  "componentsDir": "src/components",
-  "stylesDir": "src/styles",
-  "theme": "default"
-}
