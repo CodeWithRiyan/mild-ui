@@ -6,11 +6,6 @@ import {
   Checkbox,
   RadioGroup,
   RadioGroupItem,
-  Select,
-  SelectTrigger,
-  SelectValue,
-  SelectContent,
-  SelectItem,
 } from "../../../packages/react";
 import { Sun, Moon, Github } from "lucide-react";
 import "./App.css";
@@ -129,25 +124,6 @@ function ComponentShowcase() {
                       label="Enterprise"
                     />
                   </RadioGroup>
-                </div>
-
-                <div className="space-y-2">
-                  <label className="text-sm font-medium">Preferences</label>
-                  <Select
-                    value={formData.theme}
-                    onValueChange={(value) =>
-                      setFormData((prev) => ({ ...prev, theme: value }))
-                    }
-                  >
-                    <SelectTrigger>
-                      <SelectValue placeholder="Select theme preference" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="light">Light Theme</SelectItem>
-                      <SelectItem value="dark">Dark Theme</SelectItem>
-                      <SelectItem value="system">System</SelectItem>
-                    </SelectContent>
-                  </Select>
                 </div>
 
                 <Checkbox

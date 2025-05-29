@@ -10,6 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@mild-ui/core": "^0.2.1",
     "@mild-ui/react": "^0.1.1",
     "lucide-react": "^0.230.0",
     "react": "^19.1.0",

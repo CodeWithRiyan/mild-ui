@@ -42,6 +42,9 @@ importers:
 
   examples/react:
     dependencies:
+      '@mild-ui/core':
+        specifier: ^0.2.1
+        version: 0.2.1
       '@mild-ui/react':
         specifier: ^0.1.1
         version: 0.1.1(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
@@ -1897,6 +1900,9 @@ packages:
 
   '@microsoft/tsdoc@0.14.2':
     resolution: {integrity: sha512-9b8mPpKrfeGRuhFH5iO1iwCLeIIsV6+H1sRfxbkoGXIyQE2BTsPd9zqSqQJ+pv5sJ/hT5M1zvOFL02MnEezFug==}
+
+  '@mild-ui/core@0.2.1':
+    resolution: {integrity: sha512-F7aM7w8fzQxl5bmD03hPONIaNd/WCnaqZbTfR9Wtdb592jw/i0eM35Yog3/H8kdUSTDaq3ort+FxZvskJvhRnA==}
 
   '@mild-ui/react@0.1.1':
     resolution: {integrity: sha512-ZLkQ98twhg2CcxRrEOwB+x4SmS9v9IsPC7g0m6sYAnL2eUE7vg9XCtiKmGtz+pXkJ7bnpyfq6B39J2D6JawS1w==}
@@ -9143,6 +9149,12 @@ snapshots:
       resolve: 1.19.0
 
   '@microsoft/tsdoc@0.14.2': {}
+
+  '@mild-ui/core@0.2.1':
+    dependencies:
+      class-variance-authority: 0.7.1
+      clsx: 2.1.1
+      tailwind-merge: 3.3.0
 
   '@mild-ui/react@0.1.1(react-dom@19.1.0(react@19.1.0))(react@19.1.0)':
     dependencies:
