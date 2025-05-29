@@ -1,40 +1,84 @@
-name: Deploy Storybook
+name: Build and Deploy Storybooks
 on:
   push:
-    branches: [main]
+    branches: [ main ]
     paths:
-      - "packages/**"
-      - "storybook/**"
+      - 'packages/**'
+      - 'storybook/**'
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: pnpm/action-setup@v2
         with:
           version: 8
-      - uses: actions/setup-node@v3
+      - uses: actions/setup-node@v4
         with:
-          node-version: "18"
-          cache: "pnpm"
-
+          node-version: '18'
+          cache: 'pnpm'
+      
       - name: Install dependencies
-        run: pnpm install
-
+        run: pnpm install --frozen-lockfile
+      
       - name: Build packages
         run: |
           pnpm --filter @mild-ui/core build
           pnpm --filter @mild-ui/react build
           pnpm --filter @mild-ui/vue build
           pnpm --filter @mild-ui/svelte build
-
-      - name: Build Storybook
+      
+      - name: Build Storybooks
         run: |
           pnpm --filter @mild-ui/storybook-react build
-
+          pnpm --filter @mild-ui/storybook-vue build
+          pnpm --filter @mild-ui/storybook-svelte build
+      
+      - name: Combine builds
+        run: |
+          mkdir -p public
+          cp -r storybook/react/storybook-static public/react
+          cp -r storybook/vue/storybook-static public/vue  
+          cp -r storybook/svelte/storybook-static public/svelte
+          
+          # Create landing page
+          cat > public/index.html << 'EOF'
+          <!DOCTYPE html>
+          <html>
+          <head>
+            <title>mild-ui Component Library</title>
+            <style>
+              body { font-family: system-ui; max-width: 800px; margin: 50px auto; padding: 20px; }
+              .framework { margin: 20px 0; padding: 20px; border: 1px solid #e5e7eb; border-radius: 8px; }
+              .framework h2 { margin-top: 0; }
+              .framework a { display: inline-block; margin-top: 10px; padding: 10px 20px; background: #3b82f6; color: white; text-decoration: none; border-radius: 4px; }
+            </style>
+          </head>
+          <body>
+            <h1>mild-ui Component Library</h1>
+            <p>Cross-framework UI components for React, Vue, and Svelte</p>
+            
+            <div class="framework">
+              <h2>🔵 React Components</h2>
+              <a href="./react/">View React Storybook</a>
+            </div>
+            
+            <div class="framework">
+              <h2>🟢 Vue Components</h2>
+              <a href="./vue/">View Vue Storybook</a>
+            </div>
+            
+            <div class="framework">
+              <h2>🟠 Svelte Components</h2>
+              <a href="./svelte/">View Svelte Storybook</a>
+            </div>
+          </body>
+          </html>
+          EOF
+      
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          folder: storybook/react/storybook-static
+          folder: public
           branch: gh-pages

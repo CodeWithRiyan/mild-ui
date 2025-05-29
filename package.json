@@ -12,10 +12,12 @@
     "type-check": "pnpm -r type-check",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "storybook:react": "pnpm --filter storybook-react dev",
-    "storybook:vue": "pnpm --filter storybook-vue dev",
-    "storybook:svelte": "pnpm --filter storybook-svelte dev",
-    "storybook:build": "pnpm -r --filter 'storybook-*' build-storybook",
+    "storybook:react": "pnpm --filter @mild-ui/storybook-react dev",
+    "storybook:vue": "pnpm --filter @mild-ui/storybook-vue dev",
+    "storybook:svelte": "pnpm --filter @mild-ui/storybook-svelte dev",
+    "build:storybook:react": "pnpm --filter @mild-ui/storybook-react build",
+    "build:storybook:vue": "pnpm --filter @mild-ui/storybook-vue build",
+    "build:storybook:svelte": "pnpm --filter @mild-ui/storybook-svelte build",
     "qa": "tsx scripts/qa-check.ts",
     "pre-commit": "lint-staged",
     "changeset": "changeset",
@@ -32,7 +34,8 @@
     "husky": "^8.0.3",
     "lint-staged": "^15.0.0",
     "prettier": "^3.0.0",
-    "typescript": "^5.1.6"
+    "typescript": "^5.1.6",
+    "tailwindcss-animate": "^1.0.7"
   },
   "dependencies": {
     "chalk": "^5.4.1"

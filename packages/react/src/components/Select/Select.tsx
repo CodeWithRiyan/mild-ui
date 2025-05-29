@@ -12,12 +12,8 @@ import {
 } from "@mild-ui/core";
 import { cn } from "../../utils";
 
-// Re-export the root components from Radix
-const Select = SelectPrimitive.Root;
-const SelectValue = SelectPrimitive.Value;
-
 // Define simple prop interfaces without complex type extending
-interface SelectTriggerProps {
+export interface SelectTriggerProps {
   className?: string;
   size?: "sm" | "md" | "lg";
   fullWidth?: boolean;
@@ -54,7 +50,7 @@ const SelectTrigger = React.forwardRef<HTMLButtonElement, SelectTriggerProps>(
 (SelectTrigger as any).displayName = "SelectTrigger";
 
 // Simple props for content
-interface SelectContentProps {
+export interface SelectContentProps {
   className?: string;
   children?: React.ReactNode;
   position?: "popper" | "item-aligned";
@@ -85,7 +81,7 @@ const SelectContent = React.forwardRef<HTMLDivElement, SelectContentProps>(
 (SelectContent as any).displayName = "SelectContent";
 
 // Simple props for item
-interface SelectItemProps {
+export interface SelectItemProps {
   className?: string;
   size?: "sm" | "md" | "lg";
   children?: React.ReactNode;
@@ -118,12 +114,12 @@ const SelectItem = React.forwardRef<HTMLDivElement, SelectItemProps>(
 (SelectItem as any).displayName = "SelectItem";
 
 // Define a composite component that uses all the pieces
-interface SelectComponentProps extends SelectCoreProps, SelectStyleProps {
+export interface SelectProps extends SelectCoreProps, SelectStyleProps {
   options?: SelectOption[];
   onChange?: (value: string) => void;
 }
 
-const SelectComponent: React.FC<SelectComponentProps> = ({
+const Select: React.FC<SelectProps> = ({
   value,
   defaultValue,
   placeholder,
@@ -139,7 +135,7 @@ const SelectComponent: React.FC<SelectComponentProps> = ({
   ...props
 }) => {
   return (
-    <Select
+    <SelectPrimitive.Root
       value={value}
       defaultValue={defaultValue}
       name={name}
@@ -155,7 +151,7 @@ const SelectComponent: React.FC<SelectComponentProps> = ({
         className={className}
         disabled={disabled}
       >
-        <SelectValue placeholder={placeholder} />
+        <SelectPrimitive.Value placeholder={placeholder} />
       </SelectTrigger>
       <SelectContent>
         {options.map((option) => (
@@ -169,15 +165,13 @@ const SelectComponent: React.FC<SelectComponentProps> = ({
           </SelectItem>
         ))}
       </SelectContent>
-    </Select>
+    </SelectPrimitive.Root>
   );
 };
 
 export {
   Select,
-  SelectValue,
   SelectTrigger,
   SelectContent,
   SelectItem,
-  SelectComponent,
 };

@@ -20,7 +20,6 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     },
     ref,
   ) => {
-    const Comp = asChild ? Slot : "button";
     const { className: buttonClassName, ...buttonProps } = getButtonProps({
       variant,
       size,
@@ -28,8 +27,34 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       className,
     });
 
+    if (asChild) {
+      // When using asChild, we need to ensure only one child element is passed to Slot
+      const child = React.Children.only(children) as React.ReactElement;
+      
+      return (
+        <Slot
+          ref={ref}
+          {...props}
+          {...buttonProps}
+        >
+          {React.cloneElement(child, {
+            ...child.props,
+            className: `${child.props.className || ''} ${buttonClassName}`.trim(),
+            onClick: onClick,
+            children: (
+              <>
+                {leadingIcon && <span className="mr-2">{leadingIcon}</span>}
+                {child.props.children}
+                {trailingIcon && <span className="ml-2">{trailingIcon}</span>}
+              </>
+            ),
+          })}
+        </Slot>
+      );
+    }
+
     return (
-      <Comp
+      <button
         className={buttonClassName}
         ref={ref}
         onClick={onClick}
@@ -39,7 +64,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         {leadingIcon && <span className="mr-2">{leadingIcon}</span>}
         {children}
         {trailingIcon && <span className="ml-2">{trailingIcon}</span>}
-      </Comp>
+      </button>
     );
   },
 );
