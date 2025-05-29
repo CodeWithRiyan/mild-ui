@@ -1,1 +1,0 @@
-const e={parameters:{actions:{argTypesRegex:"^on[A-Z].*"},controls:{matchers:{color:/(background|color)$/i,date:/Date$/}},docs:{toc:!0},layout:"centered",backgrounds:{default:"light",values:[{name:"light",value:"#ffffff"},{name:"dark",value:"#0f172a"}]}},globalTypes:{darkMode:{defaultValue:!1}}};export{e as default};
