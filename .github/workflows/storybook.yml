@@ -29,31 +29,16 @@ jobs:
           pnpm --filter @mild-ui/vue build
           pnpm --filter @mild-ui/svelte build
       
-      - name: Build Storybooks with correct base URL
+      - name: Build React Storybook
         run: |
-          # Build React Storybook with proper base URL
           cd storybook/react
-          BASE_URL="/mild-ui/react/" pnpm --filter @mild-ui/storybook-react build --output-dir ./storybook-static
+          npx storybook build --output-dir ../../public/react
           cd ../..
-          
-          # Build Vue Storybook (if available)
-          # cd storybook/vue
-          # BASE_URL="/mild-ui/vue/" pnpm build-storybook --output-dir ./storybook-static
-          # cd ../..
-          
-          # Build Svelte Storybook (if available)
-          # cd storybook/svelte  
-          # BASE_URL="/mild-ui/svelte/" pnpm build-storybook --output-dir ./storybook-static
-          # cd ../..
+        env:
+          NODE_ENV: production
       
-      - name: Combine builds
+      - name: Create landing page
         run: |
-          mkdir -p public
-          cp -r storybook/react/storybook-static public/react
-          # cp -r storybook/vue/storybook-static public/vue  
-          # cp -r storybook/svelte/storybook-static public/svelte
-          
-          # Create landing page
           cat > public/index.html << 'EOF'
           <!DOCTYPE html>
           <html lang="en">
@@ -167,6 +152,23 @@ jobs:
                 background: #fed7d7;
                 color: #742a2a;
               }
+              
+              .footer {
+                text-align: center;
+                margin-top: 40px;
+                padding-top: 30px;
+                border-top: 1px solid #e2e8f0;
+                color: #718096;
+              }
+              
+              .footer a {
+                color: #3182ce;
+                text-decoration: none;
+              }
+              
+              .footer a:hover {
+                text-decoration: underline;
+              }
             </style>
           </head>
           <body>
@@ -197,6 +199,11 @@ jobs:
                   <span class="status coming-soon">Coming Soon</span>
                 </h2>
                 <p>Svelte implementation of mild-ui components (in development).</p>
+              </div>
+              
+              <div class="footer">
+                <p>Built with ❤️ by the mild-ui team</p>
+                <p><a href="https://github.com/codewithriyan/mild-ui" target="_blank">View on GitHub</a></p>
               </div>
             </div>
           </body>
