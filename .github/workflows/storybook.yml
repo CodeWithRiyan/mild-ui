@@ -33,7 +33,7 @@ jobs:
         run: |
           # Build React Storybook with proper base URL
           cd storybook/react
-          BASE_URL="/mild-ui/react/" pnpm build-storybook --output-dir ./storybook-static
+          BASE_URL="/mild-ui/react/" pnpm --filter @mild-ui/storybook-react build --output-dir ./storybook-static
           cd ../..
           
           # Build Vue Storybook (if available)
