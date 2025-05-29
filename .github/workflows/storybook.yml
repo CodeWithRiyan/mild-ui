@@ -29,13 +29,27 @@ jobs:
           pnpm --filter @mild-ui/vue build
           pnpm --filter @mild-ui/svelte build
       
-      - name: Build React Storybook
+      - name: Build React Storybook with base path
         run: |
           cd storybook/react
-          npx storybook build --output-dir ../../public/react
+          STORYBOOK_BASE_URL="/mild-ui/react/" npx storybook build --output-dir ./storybook-static
           cd ../..
         env:
           NODE_ENV: production
+          PUBLIC_URL: /mild-ui/react/
+          VITE_BASE_URL: /mild-ui/react/
+      
+      - name: Copy Storybook builds
+        run: |
+          mkdir -p public
+          cp -r storybook/react/storybook-static/* public/react/
+      
+      - name: Fix asset paths in built files
+        run: |
+          # Fix any remaining absolute paths in the built files
+          find public/react -name "*.js" -type f -exec sed -i 's|"/assets/|"/mild-ui/react/assets/|g' {} +
+          find public/react -name "*.html" -type f -exec sed -i 's|"/assets/|"/mild-ui/react/assets/|g' {} +
+          find public/react -name "*.css" -type f -exec sed -i 's|url(/assets/|url(/mild-ui/react/assets/|g' {} +
       
       - name: Create landing page
         run: |
@@ -152,23 +166,6 @@ jobs:
                 background: #fed7d7;
                 color: #742a2a;
               }
-              
-              .footer {
-                text-align: center;
-                margin-top: 40px;
-                padding-top: 30px;
-                border-top: 1px solid #e2e8f0;
-                color: #718096;
-              }
-              
-              .footer a {
-                color: #3182ce;
-                text-decoration: none;
-              }
-              
-              .footer a:hover {
-                text-decoration: underline;
-              }
             </style>
           </head>
           <body>
@@ -199,11 +196,6 @@ jobs:
                   <span class="status coming-soon">Coming Soon</span>
                 </h2>
                 <p>Svelte implementation of mild-ui components (in development).</p>
-              </div>
-              
-              <div class="footer">
-                <p>Built with ❤️ by the mild-ui team</p>
-                <p><a href="https://github.com/codewithriyan/mild-ui" target="_blank">View on GitHub</a></p>
               </div>
             </div>
           </body>
