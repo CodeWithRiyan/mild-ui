@@ -27,6 +27,9 @@ const config: StorybookConfig = {
       '@mild-ui/react': resolve(__dirname, '../../../packages/react/src'),
       '@mild-ui/core': resolve(__dirname, '../../../packages/core/src'),
     };
+    
+    config.base = '/mild-ui/react/';
+    
     return config;
   },
   docs: {
@@ -41,6 +44,14 @@ const config: StorybookConfig = {
       propFilter: (prop) => (prop.parent ? !/node_modules/.test(prop.parent.fileName) : true),
     },
   },
+  // Configure static directory for assets
+  staticDirs: ['../public'],
+  
+  // Configure managerHead for GitHub Pages
+  managerHead: (head) => `
+    ${head}
+    ${process.env.NODE_ENV === 'production' ? '<base href="/mild-ui/react/">' : ''}
+  `,
 };
 
 export default config;
