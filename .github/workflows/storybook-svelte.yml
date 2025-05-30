@@ -1,10 +1,10 @@
 name: Build and Deploy Svelte Storybook
 on:
   push:
-    branches: [ main ]
+    branches: [main]
     paths:
-      - 'packages/**'
-      - 'storybook/svelte/**'
+      - "packages/**"
+      - "storybook/svelte/**"
   workflow_dispatch: # Allow manual trigger
 
 jobs:
@@ -17,17 +17,17 @@ jobs:
           version: 10
       - uses: actions/setup-node@v4
         with:
-          node-version: '18'
-          cache: 'pnpm'
-      
+          node-version: "18"
+          cache: "pnpm"
+
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
-      
+
       - name: Build packages
         run: |
           pnpm --filter @mild-ui/core build
           pnpm --filter @mild-ui/svelte build
-      
+
       - name: Build Svelte Storybook for GitHub Pages
         run: |
           cd storybook/svelte
@@ -35,10 +35,10 @@ jobs:
         env:
           NODE_ENV: production
           GITHUB_ACTIONS: true
-      
+
       - name: Add .nojekyll file
         run: touch storybook/svelte/storybook-static/.nojekyll
-      
+
       - name: Deploy to GitHub Pages (Svelte subdirectory)
         uses: JamesIves/github-pages-deploy-action@v4
         with:

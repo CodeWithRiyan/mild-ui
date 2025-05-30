@@ -3,11 +3,11 @@
 module.exports = {
   darkMode: ["class"],
   content: [
-    './src/**/*.{js,ts,jsx,tsx,vue,svelte,mdx}',
-    '../../packages/react/src/**/*.{js,ts,jsx,tsx}', // React version
+    "./src/**/*.{js,ts,jsx,tsx,vue,svelte,mdx}",
+    "../../packages/react/src/**/*.{js,ts,jsx,tsx}", // React version
     // '../../packages/vue/src/**/*.{js,ts,vue}',     // Vue version
     // '../../packages/svelte/src/**/*.{js,ts,svelte}', // Svelte version
-    '../../packages/core/src/**/*.{js,ts}',
+    "../../packages/core/src/**/*.{js,ts}",
   ],
   theme: {
     container: {
@@ -75,4 +75,4 @@ module.exports = {
     },
   },
   plugins: [require("tailwindcss-animate")],
-}
+};

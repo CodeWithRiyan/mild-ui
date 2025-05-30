@@ -22,5 +22,5 @@ export interface InputPasswordStyleProps {
     container?: string;
     input?: string;
     buttonIcon?: string;
-  }
+  };
 }

@@ -1,66 +1,67 @@
-import type { Meta, StoryObj } from '@storybook/react'
-import { useForm, FormProvider } from 'react-hook-form'
-import { 
+import type { Meta, StoryObj } from "@storybook/react";
+import { useForm, FormProvider } from "react-hook-form";
+import {
   FormMessage,
   FormLabel,
   FormDescription,
-  FormField, 
-  FormItem, 
+  FormField,
+  FormItem,
   FormControl,
   Input,
-  Button
-} from '@mild-ui/react'
-import React from 'react'
+  Button,
+} from "@mild-ui/react";
+import React from "react";
 
 const meta: Meta<typeof FormMessage> = {
-  title: 'Components/Form/FormMessage',
+  title: "Components/Form/FormMessage",
   component: FormMessage,
   parameters: {
-    layout: 'centered',
+    layout: "centered",
     docs: {
       description: {
-        component: 'A form message component for displaying validation errors and other messages.',
+        component:
+          "A form message component for displaying validation errors and other messages.",
       },
     },
   },
   argTypes: {
     children: {
-      control: 'text',
-      description: 'Message text content',
+      control: "text",
+      description: "Message text content",
     },
     className: {
-      control: 'text',
-      description: 'Additional CSS classes',
+      control: "text",
+      description: "Additional CSS classes",
     },
   },
-}
+};
 
-export default meta
-type Story = StoryObj<typeof FormMessage>
+export default meta;
+type Story = StoryObj<typeof FormMessage>;
 
-const FormMessageWrapper = ({ 
-  children, 
+const FormMessageWrapper = ({
+  children,
   errorMessage,
-  fieldName = 'testField',
-  labelText = 'Field Label',
-  showDescription = true
-}: { 
-  children?: React.ReactNode
-  errorMessage?: string
-  fieldName?: string
-  labelText?: string
-  showDescription?: boolean
+  fieldName = "testField",
+  labelText = "Field Label",
+  showDescription = true,
+}: {
+  children?: React.ReactNode;
+  errorMessage?: string;
+  fieldName?: string;
+  labelText?: string;
+  showDescription?: boolean;
 }) => {
-  const form = useForm({ defaultValues: { [fieldName]: '' } })
-  
+  const form = useForm({ defaultValues: { [fieldName]: "" } });
+
   React.useEffect(() => {
     if (errorMessage) {
       form.setError(fieldName, {
-        type: 'manual',
+        type: "manual",
         message: errorMessage,
-      })
+      });
     }
-  }, [errorMessage, fieldName, form])
+  }, [errorMessage, fieldName, form]);
 
   return (
     <FormProvider {...form}>
@@ -74,15 +75,17 @@ const FormMessageWrapper = ({
               <Input placeholder="Sample input" />
             </FormControl>
             {showDescription && (
-              <FormDescription>This is a sample field for testing messages</FormDescription>
+              <FormDescription>
+                This is a sample field for testing messages
+              </FormDescription>
             )}
             {children || <FormMessage />}
           </FormItem>
         )}
       />
     </FormProvider>
-  )
-}
+  );
+};
 
 export const ErrorMessage: Story = {
   render: (args) => (
@@ -92,10 +95,11 @@ export const ErrorMessage: Story = {
   ),
   parameters: {
     docs: {
-      storyDescription: 'An error message displayed when field validation fails.',
+      storyDescription:
+        "An error message displayed when field validation fails.",
     },
   },
-}
+};
 
 export const CustomErrorMessage: Story = {
   render: (args) => (
@@ -105,10 +109,11 @@ export const CustomErrorMessage: Story = {
   ),
   parameters: {
     docs: {
-      storyDescription: 'A specific validation error message for password requirements.',
+      storyDescription:
+        "A specific validation error message for password requirements.",
     },
   },
-}
+};
 
 export const LongErrorMessage: Story = {
   render: (args) => (
@@ -118,23 +123,26 @@ export const LongErrorMessage: Story = {
   ),
   parameters: {
     docs: {
-      storyDescription: 'A long error message to test text wrapping and display behavior.',
+      storyDescription:
+        "A long error message to test text wrapping and display behavior.",
     },
   },
-}
+};
 
 export const CustomMessage: Story = {
   render: (args) => (
     <FormMessageWrapper>
-      <FormMessage {...args}>This is a custom message not from validation</FormMessage>
+      <FormMessage {...args}>
+        This is a custom message not from validation
+      </FormMessage>
     </FormMessageWrapper>
   ),
   parameters: {
     docs: {
-      storyDescription: 'A custom message that is not from form validation.',
+      storyDescription: "A custom message that is not from form validation.",
     },
   },
-}
+};
 
 export const NoMessage: Story = {
   render: (args) => (
@@ -144,10 +152,11 @@ export const NoMessage: Story = {
   ),
   parameters: {
     docs: {
-      storyDescription: 'FormMessage with no error - component returns null and renders nothing.',
+      storyDescription:
+        "FormMessage with no error - component returns null and renders nothing.",
     },
   },
-}
+};
 
 export const StyledMessage: Story = {
   render: (args) => (
@@ -159,58 +168,58 @@ export const StyledMessage: Story = {
   ),
   parameters: {
     docs: {
-      storyDescription: 'A form message with custom styling applied.',
+      storyDescription: "A form message with custom styling applied.",
     },
   },
-}
+};
 
 export const ValidationMessages: Story = {
   render: () => {
-    const form = useForm({ 
-      defaultValues: { 
-        email: '',
-        password: '',
-        confirmPassword: ''
+    const form = useForm({
+      defaultValues: {
+        email: "",
+        password: "",
+        confirmPassword: "",
       },
-      mode: 'onChange'
-    })
-    
-    const emailValue = form.watch('email')
-    const password = form.watch('password')
-    const confirmPassword = form.watch('confirmPassword')
-    
+      mode: "onChange",
+    });
+
+    const emailValue = form.watch("email");
+    const password = form.watch("password");
+    const confirmPassword = form.watch("confirmPassword");
+
     React.useEffect(() => {
-      if (emailValue && !emailValue.includes('@')) {
-        form.setError('email', {
-          type: 'manual',
-          message: 'Please enter a valid email address',
-        })
+      if (emailValue && !emailValue.includes("@")) {
+        form.setError("email", {
+          type: "manual",
+          message: "Please enter a valid email address",
+        });
       } else {
-        form.clearErrors('email')
+        form.clearErrors("email");
       }
-    }, [emailValue, form])
-    
+    }, [emailValue, form]);
+
     React.useEffect(() => {
       if (password && password.length < 8) {
-        form.setError('password', {
-          type: 'manual',
-          message: 'Password must be at least 8 characters long',
-        })
+        form.setError("password", {
+          type: "manual",
+          message: "Password must be at least 8 characters long",
+        });
       } else {
-        form.clearErrors('password')
+        form.clearErrors("password");
       }
-    }, [password, form])
-    
+    }, [password, form]);
+
     React.useEffect(() => {
       if (confirmPassword && password !== confirmPassword) {
-        form.setError('confirmPassword', {
-          type: 'manual',
-          message: 'Passwords do not match',
-        })
+        form.setError("confirmPassword", {
+          type: "manual",
+          message: "Passwords do not match",
+        });
       } else {
-        form.clearErrors('confirmPassword')
+        form.clearErrors("confirmPassword");
       }
-    }, [password, confirmPassword, form])
+    }, [password, confirmPassword, form]);
 
     return (
       <FormProvider {...form}>
@@ -222,7 +231,11 @@ export const ValidationMessages: Story = {
               <FormItem>
                 <FormLabel>Email Address</FormLabel>
                 <FormControl>
-                  <Input {...field} type="email" placeholder="john@example.com" />
+                  <Input
+                    {...field}
+                    type="email"
+                    placeholder="john@example.com"
+                  />
                 </FormControl>
                 <FormDescription>Enter a valid email address</FormDescription>
                 <FormMessage />
@@ -237,7 +250,11 @@ export const ValidationMessages: Story = {
               <FormItem>
                 <FormLabel>Password</FormLabel>
                 <FormControl>
-                  <Input {...field} type="password" placeholder="Enter password" />
+                  <Input
+                    {...field}
+                    type="password"
+                    placeholder="Enter password"
+                  />
                 </FormControl>
                 <FormDescription>Must be at least 8 characters</FormDescription>
                 <FormMessage />
@@ -252,7 +269,11 @@ export const ValidationMessages: Story = {
               <FormItem>
                 <FormLabel>Confirm Password</FormLabel>
                 <FormControl>
-                  <Input {...field} type="password" placeholder="Confirm password" />
+                  <Input
+                    {...field}
+                    type="password"
+                    placeholder="Confirm password"
+                  />
                 </FormControl>
                 <FormDescription>Re-enter your password</FormDescription>
                 <FormMessage />
@@ -261,47 +282,47 @@ export const ValidationMessages: Story = {
           />
         </div>
       </FormProvider>
-    )
+    );
   },
   parameters: {
     docs: {
-      storyDescription: 'Multiple fields with real-time validation messages.',
+      storyDescription: "Multiple fields with real-time validation messages.",
     },
   },
-}
+};
 
 export const DifferentErrorTypes: Story = {
   render: () => {
-    const form = useForm({ 
-      defaultValues: { 
-        required: '',
-        email: 'invalid-email',
-        minLength: 'abc',
-        pattern: '123abc'
-      }
-    })
+    const form = useForm({
+      defaultValues: {
+        required: "",
+        email: "invalid-email",
+        minLength: "abc",
+        pattern: "123abc",
+      },
+    });
 
     React.useEffect(() => {
-      form.setError('required', {
-        type: 'required',
-        message: 'This field is required',
-      })
-      
-      form.setError('email', {
-        type: 'pattern',
-        message: 'Please enter a valid email address',
-      })
-      
-      form.setError('minLength', {
-        type: 'minLength',
-        message: 'Must be at least 8 characters long',
-      })
-      
-      form.setError('pattern', {
-        type: 'pattern',
-        message: 'Only letters are allowed',
-      })
-    }, [form])
+      form.setError("required", {
+        type: "required",
+        message: "This field is required",
+      });
+
+      form.setError("email", {
+        type: "pattern",
+        message: "Please enter a valid email address",
+      });
+
+      form.setError("minLength", {
+        type: "minLength",
+        message: "Must be at least 8 characters long",
+      });
+
+      form.setError("pattern", {
+        type: "pattern",
+        message: "Only letters are allowed",
+      });
+    }, [form]);
 
     return (
       <FormProvider {...form}>
@@ -363,55 +384,57 @@ export const DifferentErrorTypes: Story = {
           />
         </div>
       </FormProvider>
-    )
+    );
   },
   parameters: {
     docs: {
-      storyDescription: 'Different types of validation errors displayed with FormMessage.',
+      storyDescription:
+        "Different types of validation errors displayed with FormMessage.",
     },
   },
-}
+};
 
 export const InteractiveValidation: Story = {
   render: () => {
-    const form = useForm({ 
-      defaultValues: { username: '' },
-      mode: 'onChange'
-    })
-    
-    const username = form.watch('username')
-    
+    const form = useForm({
+      defaultValues: { username: "" },
+      mode: "onChange",
+    });
+
+    const username = form.watch("username");
+
     React.useEffect(() => {
       if (username) {
         if (username.length < 3) {
-          form.setError('username', {
-            type: 'minLength',
-            message: 'Username must be at least 3 characters',
-          })
+          form.setError("username", {
+            type: "minLength",
+            message: "Username must be at least 3 characters",
+          });
         } else if (username.length > 20) {
-          form.setError('username', {
-            type: 'maxLength',
-            message: 'Username must be less than 20 characters',
-          })
+          form.setError("username", {
+            type: "maxLength",
+            message: "Username must be less than 20 characters",
+          });
         } else if (!/^[a-zA-Z0-9_]+$/.test(username)) {
-          form.setError('username', {
-            type: 'pattern',
-            message: 'Username can only contain letters, numbers, and underscores',
-          })
+          form.setError("username", {
+            type: "pattern",
+            message:
+              "Username can only contain letters, numbers, and underscores",
+          });
         } else {
-          form.clearErrors('username')
+          form.clearErrors("username");
         }
       } else {
-        form.setError('username', {
-          type: 'required',
-          message: 'Username is required',
-        })
+        form.setError("username", {
+          type: "required",
+          message: "Username is required",
+        });
       }
-    }, [username, form])
+    }, [username, form]);
 
     const onSubmit = (data: any) => {
-      alert(`Username: ${data.username}`)
-    }
+      alert(`Username: ${data.username}`);
+    };
 
     return (
       <FormProvider {...form}>
@@ -432,17 +455,18 @@ export const InteractiveValidation: Story = {
               </FormItem>
             )}
           />
-          
+
           <Button type="submit" className="w-full">
             Submit
           </Button>
         </form>
       </FormProvider>
-    )
+    );
   },
   parameters: {
     docs: {
-      storyDescription: 'Interactive validation that updates messages as the user types.',
+      storyDescription:
+        "Interactive validation that updates messages as the user types.",
     },
   },
-}
+};

@@ -58,7 +58,11 @@ const Checkbox = React.forwardRef<HTMLButtonElement, CheckboxProps>(
           </CheckboxPrimitive.Indicator>
         </CheckboxPrimitive.Root>
         {label && (
-          <Label htmlFor={id} className={cn(checkboxLabelStyles({ size }))} required={required}>
+          <Label
+            htmlFor={id}
+            className={cn(checkboxLabelStyles({ size }))}
+            required={required}
+          >
             {label}
           </Label>
         )}

@@ -12,5 +12,5 @@ export const labelStyles = cva(
     defaultVariants: {
       error: false,
     },
-  }
-)
+  },
+);

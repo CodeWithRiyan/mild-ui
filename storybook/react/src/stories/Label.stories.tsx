@@ -1,24 +1,25 @@
-import type { Meta, StoryObj } from '@storybook/react';
-import { Input, Label } from '@mild-ui/react';
+import type { Meta, StoryObj } from "@storybook/react";
+import { Input, Label } from "@mild-ui/react";
 
 const meta = {
-  title: 'Components/Label',
+  title: "Components/Label",
   component: Label,
-  tags: ['autodocs'],
+  tags: ["autodocs"],
   parameters: {
-    layout: 'centered',
+    layout: "centered",
     docs: {
       description: {
-        component: 'A styled label component based on Radix Label with support for required and error states.',
+        component:
+          "A styled label component based on Radix Label with support for required and error states.",
       },
     },
   },
   argTypes: {
-    children: { control: 'text' },
-    required: { control: 'boolean' },
-    error: { control: 'boolean' },
-    ui: { control: 'object' },
-    className: { control: 'text' },
+    children: { control: "text" },
+    required: { control: "boolean" },
+    error: { control: "boolean" },
+    ui: { control: "object" },
+    className: { control: "text" },
   },
 } satisfies Meta<typeof Label>;
 
@@ -28,37 +29,37 @@ type Story = StoryObj<typeof meta>;
 
 export const Default = {
   args: {
-    children: 'Username',
+    children: "Username",
   },
 } satisfies Story;
 
 export const Required = {
   args: {
-    children: 'Email address',
+    children: "Email address",
     required: true,
   },
 } satisfies Story;
 
 export const WithError = {
   args: {
-    children: 'Password',
+    children: "Password",
     error: true,
   },
 } satisfies Story;
 
 export const CustomClassName = {
   args: {
-    children: 'Phone number',
-    className: 'text-blue-600 font-semibold',
+    children: "Phone number",
+    className: "text-blue-600 font-semibold",
   },
 } satisfies Story;
 
 export const CustomUI = {
   args: {
-    children: 'Email address',
+    children: "Email address",
     ui: {
-      label: 'text-blue-600 font-semibold',
-      asterisk: 'text-blue-500',
+      label: "text-blue-600 font-semibold",
+      asterisk: "text-blue-500",
     },
     required: true,
   },

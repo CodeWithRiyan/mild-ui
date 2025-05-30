@@ -1,38 +1,46 @@
-import { yupResolver } from '@hookform/resolvers/yup';
-import type { Meta, StoryObj } from '@storybook/react';
-import { Button, Checkbox, Field, Form, FormMessage, Label } from '@mild-ui/react';
-import { useState } from 'react';
-import { useForm } from 'react-hook-form';
-import * as yup from 'yup';
+import { yupResolver } from "@hookform/resolvers/yup";
+import type { Meta, StoryObj } from "@storybook/react";
+import {
+  Button,
+  Checkbox,
+  Field,
+  Form,
+  FormMessage,
+  Label,
+} from "@mild-ui/react";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import * as yup from "yup";
 
 const meta = {
-  title: 'Components/Checkbox',
-  tags: ['autodocs'],
+  title: "Components/Checkbox",
+  tags: ["autodocs"],
   component: Checkbox,
   parameters: {
-    layout: 'centered',
+    layout: "centered",
     docs: {
       description: {
-        component: 'A versatile checkbox component with multiple sizes and states.',
+        component:
+          "A versatile checkbox component with multiple sizes and states.",
       },
     },
   },
   argTypes: {
     size: {
-      control: { type: 'radio' },
-      options: ['sm', 'md', 'lg'],
+      control: { type: "radio" },
+      options: ["sm", "md", "lg"],
     },
-    checked: { control: 'boolean' },
-    defaultChecked: { control: 'boolean' },
-    disabled: { control: 'boolean' },
-    required: { control: 'boolean' },
-    indeterminate: { control: 'boolean' },
-    label: { control: 'text' },
-    name: { control: 'text' },
-    value: { control: 'text' },
+    checked: { control: "boolean" },
+    defaultChecked: { control: "boolean" },
+    disabled: { control: "boolean" },
+    required: { control: "boolean" },
+    indeterminate: { control: "boolean" },
+    label: { control: "text" },
+    name: { control: "text" },
+    value: { control: "text" },
     className: { control: false },
-    id: { control: 'text' },
-    onCheckedChange: { control: false, action: 'checked changed' },
+    id: { control: "text" },
+    onCheckedChange: { control: false, action: "checked changed" },
   },
 } satisfies Meta<typeof Checkbox>;
 
@@ -42,20 +50,20 @@ type Story = StoryObj<typeof meta>;
 
 export const Default = {
   args: {
-    label: 'Accept terms and conditions',
+    label: "Accept terms and conditions",
   },
 } satisfies Story;
 
 export const Checked = {
   args: {
-    label: 'Receive newsletter',
+    label: "Receive newsletter",
     checked: true,
   },
 } satisfies Story;
 
 export const Disabled = {
   args: {
-    label: 'Disabled option',
+    label: "Disabled option",
     disabled: true,
     checked: false,
   },
@@ -63,7 +71,7 @@ export const Disabled = {
 
 export const Indeterminate = {
   args: {
-    label: 'Partial selection',
+    label: "Partial selection",
     indeterminate: true,
   },
 } satisfies Story;
@@ -83,7 +91,7 @@ export const ControlledCheckbox = {
     const [checked, setChecked] = useState(false);
     return (
       <Checkbox
-        label={`Controlled checkbox (${checked ? 'checked' : 'unchecked'})`}
+        label={`Controlled checkbox (${checked ? "checked" : "unchecked"})`}
         checked={checked}
         onCheckedChange={(val: any) => setChecked(val === true)}
       />
@@ -96,26 +104,28 @@ export const UncontrolledCheckbox = {
     <Checkbox
       label="Uncontrolled checkbox"
       defaultChecked={true}
-      onCheckedChange={(val: any) => console.log('checked changed:', val)}
+      onCheckedChange={(val: any) => console.log("checked changed:", val)}
     />
   ),
 } satisfies Story;
 
 export const ToggleableIndeterminate = {
   render: () => {
-    const [state, setState] = useState<boolean | 'indeterminate'>('indeterminate');
+    const [state, setState] = useState<boolean | "indeterminate">(
+      "indeterminate",
+    );
 
     const handleToggle = () => {
-      if (state === 'indeterminate') setState(true);
+      if (state === "indeterminate") setState(true);
       else if (state === true) setState(false);
-      else setState('indeterminate');
+      else setState("indeterminate");
     };
 
     return (
       <Checkbox
         label={`State: ${String(state)}`}
-        checked={state === 'indeterminate' ? false : state}
-        indeterminate={state === 'indeterminate'}
+        checked={state === "indeterminate" ? false : state}
+        indeterminate={state === "indeterminate"}
         onCheckedChange={handleToggle}
       />
     );
@@ -128,7 +138,7 @@ export const ReactHookFormWithYup = {
       terms: yup
         .boolean()
         .required()
-        .oneOf([true], 'You must accept the terms and conditions'),
+        .oneOf([true], "You must accept the terms and conditions"),
       newsletter: yup.boolean().required(),
       marketing: yup.boolean().required(),
     });
@@ -147,7 +157,9 @@ export const ReactHookFormWithYup = {
     const { handleSubmit } = form;
 
     const onSubmit = (data: FormData) => {
-      alert(`Submitted:\nTerms: ${data.terms}\nNewsletter: ${data.newsletter}\nMarketing: ${data.marketing}`);
+      alert(
+        `Submitted:\nTerms: ${data.terms}\nNewsletter: ${data.newsletter}\nMarketing: ${data.marketing}`,
+      );
     };
 
     return (
@@ -165,9 +177,7 @@ export const ReactHookFormWithYup = {
             <Checkbox label="Receive marketing emails" />
           </Field>
 
-          <Button type="submit">
-            Submit
-          </Button>
+          <Button type="submit">Submit</Button>
         </form>
       </Form>
     );
@@ -180,7 +190,7 @@ export const CheckboxGroup = {
       selectedItems: yup
         .array(yup.string().required())
         .required()
-        .min(1, 'Please select at least one option'),
+        .min(1, "Please select at least one option"),
     });
 
     type FormData = yup.InferType<typeof schema>;
@@ -192,47 +202,53 @@ export const CheckboxGroup = {
       },
     });
 
-    const { watch, setValue, handleSubmit, formState: { errors } } = form;
-    const selectedItems = watch('selectedItems') ?? [];
+    const {
+      watch,
+      setValue,
+      handleSubmit,
+      formState: { errors },
+    } = form;
+    const selectedItems = watch("selectedItems") ?? [];
 
     const handleCheckboxChange = (value: string, checked: boolean) => {
       if (checked) {
-        setValue('selectedItems', [...selectedItems, value]);
+        setValue("selectedItems", [...selectedItems, value]);
       } else {
-        setValue('selectedItems', selectedItems.filter(item => item !== value));
+        setValue(
+          "selectedItems",
+          selectedItems.filter((item) => item !== value),
+        );
       }
     };
 
     const onSubmit = (data: FormData) => {
-      alert(`Selected: ${data.selectedItems.join(', ')}`);
+      alert(`Selected: ${data.selectedItems.join(", ")}`);
     };
 
     const options = [
-      { value: 'option1', label: 'Option 1' },
-      { value: 'option2', label: 'Option 2' },
-      { value: 'option3', label: 'Option 3' },
-      { value: 'option4', label: 'Option 4' },
+      { value: "option1", label: "Option 1" },
+      { value: "option2", label: "Option 2" },
+      { value: "option3", label: "Option 3" },
+      { value: "option4", label: "Option 4" },
     ];
 
     return (
       <Form {...form}>
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 w-80">
           <div className="space-y-2">
-            <Label id='selectedItems' error={!!errors.selectedItems}>Choose your preferences:</Label>
+            <Label id="selectedItems" error={!!errors.selectedItems}>
+              Choose your preferences:
+            </Label>
             <div className="space-y-2">
-              {options.map(option => (
-                <Field
-                  key={option.value}
-                  name="selectedItems"
-                  hideError
-                >
+              {options.map((option) => (
+                <Field key={option.value} name="selectedItems" hideError>
                   <Checkbox
                     label={option.label}
                     value={option.value}
                     checked={selectedItems.includes(option.value)}
                     onCheckedChange={(checked) => {
-                      checked && form.clearErrors('selectedItems');
-                      handleCheckboxChange(option.value, checked === true)
+                      checked && form.clearErrors("selectedItems");
+                      handleCheckboxChange(option.value, checked === true);
                     }}
                   />
                 </Field>
@@ -243,20 +259,23 @@ export const CheckboxGroup = {
             )}
           </div>
 
-          <Button type="submit">
-            Submit Selection
-          </Button>
+          <Button type="submit">Submit Selection</Button>
         </form>
       </Form>
     );
   },
 } satisfies Story;
 
-
 export const IndeterminateParentChild = {
   render: () => {
-    const [parentChecked, setParentChecked] = useState<boolean | 'indeterminate'>('indeterminate');
-    const [childrenChecked, setChildrenChecked] = useState([false, true, false]);
+    const [parentChecked, setParentChecked] = useState<
+      boolean | "indeterminate"
+    >("indeterminate");
+    const [childrenChecked, setChildrenChecked] = useState([
+      false,
+      true,
+      false,
+    ]);
 
     const handleParentChange = () => {
       if (parentChecked === true) {
@@ -282,7 +301,7 @@ export const IndeterminateParentChild = {
       } else if (checkedCount === newChildren.length) {
         setParentChecked(true);
       } else {
-        setParentChecked('indeterminate');
+        setParentChecked("indeterminate");
       }
     };
 
@@ -291,20 +310,22 @@ export const IndeterminateParentChild = {
         <div>
           <Checkbox
             label="Select All Features"
-            checked={parentChecked === 'indeterminate' ? false : parentChecked}
-            indeterminate={parentChecked === 'indeterminate'}
+            checked={parentChecked === "indeterminate" ? false : parentChecked}
+            indeterminate={parentChecked === "indeterminate"}
             onCheckedChange={handleParentChange}
             size="lg"
           />
         </div>
-        
+
         <div className="ml-6 space-y-2">
-          {['Dark Mode', 'Notifications', 'Auto-save'].map((feature, index) => (
+          {["Dark Mode", "Notifications", "Auto-save"].map((feature, index) => (
             <Checkbox
               key={feature}
               label={feature}
               checked={childrenChecked[index]}
-              onCheckedChange={(checked) => handleChildChange(index, checked === true)}
+              onCheckedChange={(checked) =>
+                handleChildChange(index, checked === true)
+              }
             />
           ))}
         </div>

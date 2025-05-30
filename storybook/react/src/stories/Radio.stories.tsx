@@ -1,19 +1,19 @@
-import { yupResolver } from '@hookform/resolvers/yup';
-import { RadioGroup, RadioGroupItem } from '@mild-ui/react';
-import type { Meta, StoryObj } from '@storybook/react';
-import { useState } from 'react';
-import { useForm } from 'react-hook-form';
-import * as yup from 'yup';
+import { yupResolver } from "@hookform/resolvers/yup";
+import { RadioGroup, RadioGroupItem } from "@mild-ui/react";
+import type { Meta, StoryObj } from "@storybook/react";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import * as yup from "yup";
 
 const meta = {
-    title: 'Components/RadioGroup',
-    tags: ['autodocs'],
+  title: "Components/RadioGroup",
+  tags: ["autodocs"],
   component: RadioGroup,
   argTypes: {
-    defaultValue: { control: 'text' },
-    value: { control: 'text' },
-    name: { control: 'text' },
-    onValueChange: { action: 'value changed' },
+    defaultValue: { control: "text" },
+    value: { control: "text" },
+    name: { control: "text" },
+    onValueChange: { action: "value changed" },
   },
 } satisfies Meta<typeof RadioGroup>;
 
@@ -33,7 +33,7 @@ export const BasicGroup = {
 
 export const ControlledRadioGroup = {
   render: () => {
-    const [value, setValue] = useState('option2');
+    const [value, setValue] = useState("option2");
 
     return (
       <RadioGroup
@@ -53,7 +53,12 @@ export const DisabledOptions = {
   render: () => (
     <RadioGroup defaultValue="active" className="space-y-2">
       <RadioGroupItem id="active" value="active" label="Active" />
-      <RadioGroupItem id="disabled" value="disabled" label="Disabled" disabled />
+      <RadioGroupItem
+        id="disabled"
+        value="disabled"
+        label="Disabled"
+        disabled
+      />
       <RadioGroupItem id="offline" value="offline" label="Offline" />
     </RadioGroup>
   ),
@@ -81,9 +86,7 @@ export const SizesExample = {
 export const ReactHookFormWithYup = {
   render: () => {
     const schema = yup.object({
-      status: yup
-        .string()
-        .required('Please select your availability status'),
+      status: yup.string().required("Please select your availability status"),
     });
 
     const {
@@ -100,11 +103,12 @@ export const ReactHookFormWithYup = {
 
     return (
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-        <RadioGroup
-          {...register('status')}
-          className="space-y-2"
-        >
-          <RadioGroupItem id="status-available" value="available" label="Available" />
+        <RadioGroup {...register("status")} className="space-y-2">
+          <RadioGroupItem
+            id="status-available"
+            value="available"
+            label="Available"
+          />
           <RadioGroupItem id="status-busy" value="busy" label="Busy" />
           <RadioGroupItem id="status-away" value="away" label="Away" />
         </RadioGroup>

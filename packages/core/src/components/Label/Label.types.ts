@@ -6,7 +6,7 @@ export interface LabelCoreProps {
   ui?: {
     label?: string;
     asterisk?: string;
-  }
+  };
 }
 
 export interface LabelStyleProps {

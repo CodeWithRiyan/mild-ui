@@ -1,7 +1,7 @@
-"use client"
+"use client";
 
-import * as React from "react"
-import { Slot } from "@radix-ui/react-slot"
+import * as React from "react";
+import { Slot } from "@radix-ui/react-slot";
 import {
   Control,
   Controller,
@@ -10,24 +10,24 @@ import {
   type ControllerProps,
   type FieldPath,
   type FieldValues,
-} from "react-hook-form"
-import { cn } from "@mild-ui/core"
-import { Label } from "../Label"
+} from "react-hook-form";
+import { cn } from "@mild-ui/core";
+import { Label } from "../Label";
 
 type FormFieldContextValue<
   TFieldValues extends FieldValues = FieldValues,
-  TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>
+  TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>,
 > = {
-  name: TName
-}
+  name: TName;
+};
 
 const FormFieldContext = React.createContext<FormFieldContextValue>(
-  {} as FormFieldContextValue
-)
+  {} as FormFieldContextValue,
+);
 
 const FormField = <
   TFieldValues extends FieldValues = FieldValues,
-  TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>
+  TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>,
 >({
   ...props
 }: ControllerProps<TFieldValues, TName>) => {
@@ -35,21 +35,21 @@ const FormField = <
     <FormFieldContext.Provider value={{ name: props.name }}>
       <Controller {...props} />
     </FormFieldContext.Provider>
-  )
-}
+  );
+};
 
 const useFormField = () => {
-  const fieldContext = React.useContext(FormFieldContext)
-  const itemContext = React.useContext(FormItemContext)
-  const { getFieldState, formState } = useFormContext()
+  const fieldContext = React.useContext(FormFieldContext);
+  const itemContext = React.useContext(FormItemContext);
+  const { getFieldState, formState } = useFormContext();
 
-  const fieldState = getFieldState(fieldContext.name, formState)
+  const fieldState = getFieldState(fieldContext.name, formState);
 
   if (!fieldContext) {
-    throw new Error("useFormField should be used within <FormField>")
+    throw new Error("useFormField should be used within <FormField>");
   }
 
-  const { id } = itemContext
+  const { id } = itemContext;
 
   return {
     id,
@@ -58,36 +58,36 @@ const useFormField = () => {
     formDescriptionId: `${id}-form-item-description`,
     formMessageId: `${id}-form-item-message`,
     ...fieldState,
-  }
-}
+  };
+};
 
 type FormItemContextValue = {
-  id: string
-}
+  id: string;
+};
 
 const FormItemContext = React.createContext<FormItemContextValue>(
-  {} as FormItemContextValue
-)
+  {} as FormItemContextValue,
+);
 
 const FormItem = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
 >(({ className, ...props }, ref) => {
-  const id = React.useId()
+  const id = React.useId();
 
   return (
     <FormItemContext.Provider value={{ id }}>
       <div ref={ref} className={cn("space-y-2", className)} {...props} />
     </FormItemContext.Provider>
-  )
-})
-FormItem.displayName = "FormItem"
+  );
+});
+FormItem.displayName = "FormItem";
 
 const FormLabel = React.forwardRef<
   React.ElementRef<typeof Label>,
   React.ComponentPropsWithoutRef<typeof Label>
 >(({ className, ...props }, ref) => {
-  const { error, formItemId } = useFormField()
+  const { error, formItemId } = useFormField();
 
   return (
     <Label
@@ -96,15 +96,16 @@ const FormLabel = React.forwardRef<
       htmlFor={formItemId}
       {...props}
     />
-  )
-})
-FormLabel.displayName = "FormLabel"
+  );
+});
+FormLabel.displayName = "FormLabel";
 
 const FormControl = React.forwardRef<
   React.ElementRef<typeof Slot>,
   React.ComponentPropsWithoutRef<typeof Slot>
 >(({ ...props }, ref) => {
-  const { error, formItemId, formDescriptionId, formMessageId } = useFormField()
+  const { error, formItemId, formDescriptionId, formMessageId } =
+    useFormField();
 
   return (
     <Slot
@@ -118,15 +119,15 @@ const FormControl = React.forwardRef<
       aria-invalid={!!error}
       {...props}
     />
-  )
-})
-FormControl.displayName = "FormControl"
+  );
+});
+FormControl.displayName = "FormControl";
 
 const FormDescription = React.forwardRef<
   HTMLParagraphElement,
   React.HTMLAttributes<HTMLParagraphElement>
 >(({ className, ...props }, ref) => {
-  const { formDescriptionId } = useFormField()
+  const { formDescriptionId } = useFormField();
 
   return (
     <p
@@ -135,19 +136,19 @@ const FormDescription = React.forwardRef<
       className={cn("text-[0.8rem] text-muted-foreground", className)}
       {...props}
     />
-  )
-})
-FormDescription.displayName = "FormDescription"
+  );
+});
+FormDescription.displayName = "FormDescription";
 
 const FormMessage = React.forwardRef<
   HTMLParagraphElement,
   React.HTMLAttributes<HTMLParagraphElement>
 >(({ className, children, ...props }, ref) => {
-  const { error, formMessageId } = useFormField()
-  const body = error ? String(error?.message ?? "") : children
+  const { error, formMessageId } = useFormField();
+  const body = error ? String(error?.message ?? "") : children;
 
   if (!body) {
-    return null
+    return null;
   }
 
   return (
@@ -159,28 +160,28 @@ const FormMessage = React.forwardRef<
     >
       {body}
     </p>
-  )
-})
-FormMessage.displayName = "FormMessage"
+  );
+});
+FormMessage.displayName = "FormMessage";
 
 export interface FieldProps<
   TFieldValues extends FieldValues = FieldValues,
-  TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>
+  TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>,
 > {
-  name: TName
-  control?: Control<TFieldValues>
-  label?: React.ReactNode
-  description?: React.ReactNode
-  children: React.ReactElement
-  required?: boolean
-  className?: string
-  hideError?: boolean
-  isBoolean?: boolean
+  name: TName;
+  control?: Control<TFieldValues>;
+  label?: React.ReactNode;
+  description?: React.ReactNode;
+  children: React.ReactElement;
+  required?: boolean;
+  className?: string;
+  hideError?: boolean;
+  isBoolean?: boolean;
 }
 
 const Field = <
   TFieldValues extends FieldValues = FieldValues,
-  TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>
+  TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>,
 >({
   name,
   control,
@@ -192,13 +193,13 @@ const Field = <
   isBoolean,
   hideError = false,
 }: FieldProps<TFieldValues, TName>) => {
-  const formContext = useFormContext<TFieldValues>()
-  const finalControl = control || formContext?.control
+  const formContext = useFormContext<TFieldValues>();
+  const finalControl = control || formContext?.control;
 
   if (!finalControl) {
     throw new Error(
-      `Field "${name}" requires either a control prop or to be wrapped in FormProvider`
-    )
+      `Field "${name}" requires either a control prop or to be wrapped in FormProvider`,
+    );
   }
 
   return (
@@ -206,19 +207,18 @@ const Field = <
       control={finalControl}
       name={name}
       render={({ field, fieldState }) => {
-      const injectedProps = isBoolean
-        ? {
-            checked: field.value,
-            onCheckedChange: (val: boolean | 'indeterminate') => {
-              field.onChange(val === true);
-              children.props.onCheckedChange?.(val);
-            },
-          }
-        : {
-            value: field.value,
-            onChange: field.onChange,
-          };
-
+        const injectedProps = isBoolean
+          ? {
+              checked: field.value,
+              onCheckedChange: (val: boolean | "indeterminate") => {
+                field.onChange(val === true);
+                children.props.onCheckedChange?.(val);
+              },
+            }
+          : {
+              value: field.value,
+              onChange: field.onChange,
+            };
 
         return (
           <FormItem className={className}>
@@ -230,7 +230,8 @@ const Field = <
                   ...injectedProps,
                   className: cn(
                     children.props.className,
-                    fieldState.error && 'border-destructive focus:border-destructive'
+                    fieldState.error &&
+                      "border-destructive focus:border-destructive",
                   ),
                 })}
               </Slot>
@@ -238,11 +239,11 @@ const Field = <
             {description && <FormDescription>{description}</FormDescription>}
             {!hideError && <FormMessage />}
           </FormItem>
-        )
+        );
       }}
     />
-  )
-}
+  );
+};
 
 export {
   useFormField,
@@ -254,4 +255,4 @@ export {
   FormMessage,
   FormField,
   Field,
-}
+};

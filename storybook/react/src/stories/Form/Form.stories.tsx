@@ -1,24 +1,32 @@
-import { yupResolver } from '@hookform/resolvers/yup';
-import { Button, Checkbox, Field, Form, Input, InputPassword } from '@mild-ui/react';
-import type { Meta, StoryObj } from '@storybook/react';
-import { SubmitHandler, useForm } from 'react-hook-form';
-import * as yup from 'yup';
+import { yupResolver } from "@hookform/resolvers/yup";
+import {
+  Button,
+  Checkbox,
+  Field,
+  Form,
+  Input,
+  InputPassword,
+} from "@mild-ui/react";
+import type { Meta, StoryObj } from "@storybook/react";
+import { SubmitHandler, useForm } from "react-hook-form";
+import * as yup from "yup";
 
 // Create a wrapper component that doesn't require props
 const Dummy = () => <></>;
 
 const meta = {
   component: Dummy,
-  title: 'Components/Form',
+  title: "Components/Form",
   parameters: {
-    layout: 'centered',
+    layout: "centered",
     docs: {
       description: {
-        component: 'A form component that uses React Hook Form and Yup for validation.',
+        component:
+          "A form component that uses React Hook Form and Yup for validation.",
       },
     },
   },
-  tags: ['autodocs'],
+  tags: ["autodocs"],
 } satisfies Meta<typeof Dummy>;
 
 export default meta;
@@ -30,38 +38,38 @@ export const RegistrationForm: Story = {
     const schema = yup.object({
       name: yup
         .string()
-        .required('Name is required')
-        .min(2, 'Name must be at least 2 characters')
-        .max(50, 'Name must be less than 50 characters'),
+        .required("Name is required")
+        .min(2, "Name must be at least 2 characters")
+        .max(50, "Name must be less than 50 characters"),
       email: yup
         .string()
-        .email('Enter a valid email')
-        .required('Email is required'),
+        .email("Enter a valid email")
+        .required("Email is required"),
       password: yup
         .string()
-        .required('Password is required')
-        .min(8, 'Password must be at least 8 characters')
+        .required("Password is required")
+        .min(8, "Password must be at least 8 characters")
         .matches(
           /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/,
-          'Password must contain at least one uppercase letter, one lowercase letter, and one number'
+          "Password must contain at least one uppercase letter, one lowercase letter, and one number",
         ),
       confirmPassword: yup
         .string()
-        .required('Please confirm your password')
-        .oneOf([yup.ref('password')], 'Passwords must match'),
+        .required("Please confirm your password")
+        .oneOf([yup.ref("password")], "Passwords must match"),
       age: yup
         .string()
-        .required('Age is required')
-        .matches(/^[0-9]+$/, 'Age must be a number')
+        .required("Age is required")
+        .matches(/^[0-9]+$/, "Age must be a number")
         .test(
-          'is-positive',
-          'You must be at least 13 years old',
-          (value) => !!(value && parseInt(value) >= 13)
+          "is-positive",
+          "You must be at least 13 years old",
+          (value) => !!(value && parseInt(value) >= 13),
         ),
       terms: yup
         .boolean()
-        .required('You must accept the terms and conditions')
-        .oneOf([true], 'You must accept the terms and conditions'),
+        .required("You must accept the terms and conditions")
+        .oneOf([true], "You must accept the terms and conditions"),
     });
 
     // Define the form data type explicitly
@@ -77,14 +85,14 @@ export const RegistrationForm: Story = {
     const form = useForm<FormData>({
       resolver: yupResolver(schema),
       defaultValues: {
-        name: '',
-        email: '',
-        password: '',
-        confirmPassword: '',
-        age: '',
+        name: "",
+        email: "",
+        password: "",
+        confirmPassword: "",
+        age: "",
         terms: false,
       },
-      mode: 'onChange', // Validate on change for better UX
+      mode: "onChange", // Validate on change for better UX
     });
 
     const TermCondition = () => (
@@ -101,18 +109,20 @@ export const RegistrationForm: Story = {
     );
 
     const onSubmit: SubmitHandler<FormData> = (data) => {
-      console.log('Form Data:', data);
-      alert(`Registration Successful!\nName: ${data.name}\nEmail: ${data.email}\nPassword: ${data.password}\nAge: ${data.age}\nTerms: ${data.terms}`);
+      console.log("Form Data:", data);
+      alert(
+        `Registration Successful!\nName: ${data.name}\nEmail: ${data.email}\nPassword: ${data.password}\nAge: ${data.age}\nTerms: ${data.terms}`,
+      );
     };
 
     const onError = (errors: any) => {
-      console.log('Form Errors:', errors);
+      console.log("Form Errors:", errors);
     };
 
     return (
       <Form {...form}>
-        <form 
-          onSubmit={form.handleSubmit(onSubmit, onError)} 
+        <form
+          onSubmit={form.handleSubmit(onSubmit, onError)}
           className="space-y-4"
         >
           {/* Name Field */}
@@ -123,9 +133,9 @@ export const RegistrationForm: Story = {
             required
           >
             <Input
-              placeholder="Enter your full name" 
+              placeholder="Enter your full name"
               autoComplete="name"
-              onChange={(e) => console.log('Name changed:', e.target.value)}
+              onChange={(e) => console.log("Name changed:", e.target.value)}
             />
           </Field>
 
@@ -136,20 +146,16 @@ export const RegistrationForm: Story = {
             description="We'll never share your email with anyone else"
             required
           >
-            <Input 
-              type="email" 
+            <Input
+              type="email"
               placeholder="Enter your email address"
               autoComplete="email"
             />
           </Field>
 
           {/* Age Field */}
-          <Field
-            name="age"
-            label="Age"
-            required
-          >
-            <Input 
+          <Field name="age" label="Age" required>
+            <Input
               type="number"
               placeholder="Enter your age"
               min="13"
@@ -171,12 +177,8 @@ export const RegistrationForm: Story = {
           </Field>
 
           {/* Confirm Password Field */}
-          <Field
-            name="confirmPassword"
-            label="Confirm Password"
-            required
-          >
-            <InputPassword 
+          <Field name="confirmPassword" label="Confirm Password" required>
+            <InputPassword
               placeholder="Confirm your password"
               autoComplete="new-password"
             />
@@ -194,7 +196,9 @@ export const RegistrationForm: Story = {
               disabled={form.formState.isSubmitting}
               className="w-full"
             >
-              {form.formState.isSubmitting ? 'Creating Account...' : 'Create Account'}
+              {form.formState.isSubmitting
+                ? "Creating Account..."
+                : "Create Account"}
             </Button>
           </div>
 

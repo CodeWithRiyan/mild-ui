@@ -1,64 +1,65 @@
-import type { Meta, StoryObj } from '@storybook/react'
-import { useForm, FormProvider } from 'react-hook-form'
-import { 
+import type { Meta, StoryObj } from "@storybook/react";
+import { useForm, FormProvider } from "react-hook-form";
+import {
   FormLabel,
-  FormField, 
-  FormItem, 
+  FormField,
+  FormItem,
   FormControl,
-  Input
-} from '@mild-ui/react'
-import React from 'react'
+  Input,
+} from "@mild-ui/react";
+import React from "react";
 
 const meta: Meta<typeof FormLabel> = {
-  title: 'Components/Form/FormLabel',
+  title: "Components/Form/FormLabel",
   component: FormLabel,
   parameters: {
-    layout: 'centered',
+    layout: "centered",
     docs: {
       description: {
-        component: 'A form label component that automatically handles error states and accessibility attributes.',
+        component:
+          "A form label component that automatically handles error states and accessibility attributes.",
       },
     },
   },
   argTypes: {
     children: {
-      control: 'text',
-      description: 'Label text content',
+      control: "text",
+      description: "Label text content",
     },
     required: {
-      control: 'boolean',
-      description: 'Show required indicator',
+      control: "boolean",
+      description: "Show required indicator",
     },
     className: {
-      control: 'text',
-      description: 'Additional CSS classes',
+      control: "text",
+      description: "Additional CSS classes",
     },
   },
-}
+};
 
-export default meta
-type Story = StoryObj<typeof FormLabel>
+export default meta;
+type Story = StoryObj<typeof FormLabel>;
 
 // FormLabel wrapper to provide form context
-const FormLabelWrapper = ({ 
-  children, 
-  hasError = false, 
-  fieldName = 'testField' 
-}: { 
-  children: React.ReactNode
-  hasError?: boolean
-  fieldName?: string
+const FormLabelWrapper = ({
+  children,
+  hasError = false,
+  fieldName = "testField",
+}: {
+  children: React.ReactNode;
+  hasError?: boolean;
+  fieldName?: string;
 }) => {
-  const form = useForm({ defaultValues: { [fieldName]: '' } })
-  
+  const form = useForm({ defaultValues: { [fieldName]: "" } });
+
   React.useEffect(() => {
     if (hasError) {
       form.setError(fieldName, {
-        type: 'manual',
-        message: 'This field has an error',
-      })
+        type: "manual",
+        message: "This field has an error",
+      });
     }
-  }, [hasError, fieldName, form])
+  }, [hasError, fieldName, form]);
 
   return (
     <FormProvider {...form}>
@@ -75,8 +76,8 @@ const FormLabelWrapper = ({
         )}
       />
     </FormProvider>
-  )
-}
+  );
+};
 
 export const BasicLabel: Story = {
   render: (args) => (
@@ -86,23 +87,25 @@ export const BasicLabel: Story = {
   ),
   parameters: {
     docs: {
-      storyDescription: 'A basic form label without any special states.',
+      storyDescription: "A basic form label without any special states.",
     },
   },
-}
+};
 
 export const RequiredLabel: Story = {
   render: (args) => (
     <FormLabelWrapper>
-      <FormLabel {...args} required>Email Address</FormLabel>
+      <FormLabel {...args} required>
+        Email Address
+      </FormLabel>
     </FormLabelWrapper>
   ),
   parameters: {
     docs: {
-      storyDescription: 'A form label with a required indicator.',
+      storyDescription: "A form label with a required indicator.",
     },
   },
-}
+};
 
 export const LabelWithError: Story = {
   render: (args) => (
@@ -112,10 +115,10 @@ export const LabelWithError: Story = {
   ),
   parameters: {
     docs: {
-      storyDescription: 'A form label in error state showing error styling.',
+      storyDescription: "A form label in error state showing error styling.",
     },
   },
-}
+};
 
 export const CustomStyledLabel: Story = {
   render: (args) => (
@@ -127,55 +130,59 @@ export const CustomStyledLabel: Story = {
   ),
   parameters: {
     docs: {
-      storyDescription: 'A form label with custom CSS styling applied.',
+      storyDescription: "A form label with custom CSS styling applied.",
     },
   },
-}
+};
 
 export const LongLabel: Story = {
   render: (args) => (
     <FormLabelWrapper>
       <FormLabel {...args}>
-        This is a very long label that demonstrates how the component handles longer text content
+        This is a very long label that demonstrates how the component handles
+        longer text content
       </FormLabel>
     </FormLabelWrapper>
   ),
   parameters: {
     docs: {
-      storyDescription: 'A form label with long text content to test text wrapping behavior.',
+      storyDescription:
+        "A form label with long text content to test text wrapping behavior.",
     },
   },
-}
+};
 
 export const RequiredWithError: Story = {
   render: (args) => (
     <FormLabelWrapper hasError>
-      <FormLabel {...args} required>Required Field with Error</FormLabel>
+      <FormLabel {...args} required>
+        Required Field with Error
+      </FormLabel>
     </FormLabelWrapper>
   ),
   parameters: {
     docs: {
-      storyDescription: 'A required form label that also has an error state.',
+      storyDescription: "A required form label that also has an error state.",
     },
   },
-}
+};
 
 export const MultipleLabels: Story = {
   render: () => {
-    const form = useForm({ 
-      defaultValues: { 
-        field1: '',
-        field2: '',
-        field3: ''
-      }
-    })
+    const form = useForm({
+      defaultValues: {
+        field1: "",
+        field2: "",
+        field3: "",
+      },
+    });
 
     React.useEffect(() => {
-      form.setError('field2', {
-        type: 'manual',
-        message: 'This field has an error',
-      })
-    }, [form])
+      form.setError("field2", {
+        type: "manual",
+        message: "This field has an error",
+      });
+    }, [form]);
 
     return (
       <FormProvider {...form}>
@@ -192,7 +199,7 @@ export const MultipleLabels: Story = {
               </FormItem>
             )}
           />
-          
+
           <FormField
             control={form.control}
             name="field2"
@@ -205,7 +212,7 @@ export const MultipleLabels: Story = {
               </FormItem>
             )}
           />
-          
+
           <FormField
             control={form.control}
             name="field3"
@@ -220,11 +227,12 @@ export const MultipleLabels: Story = {
           />
         </div>
       </FormProvider>
-    )
+    );
   },
   parameters: {
     docs: {
-      storyDescription: 'Multiple form labels showing different states side by side.',
+      storyDescription:
+        "Multiple form labels showing different states side by side.",
     },
   },
-}
+};

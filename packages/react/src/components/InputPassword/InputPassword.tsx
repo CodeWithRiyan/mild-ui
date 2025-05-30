@@ -35,7 +35,7 @@ const InputPassword = React.forwardRef<HTMLInputElement, InputPasswordProps>(
       required,
       ...props
     },
-    ref
+    ref,
   ) => {
     const [typeInput, setTypeInput] = React.useState("password");
 
@@ -46,7 +46,7 @@ const InputPassword = React.forwardRef<HTMLInputElement, InputPasswordProps>(
           className={cn(
             inputPasswordStyles({ size, variant, fullWidth, error }),
             className,
-            ui?.input
+            ui?.input,
           )}
           ref={ref}
           value={value}
@@ -56,7 +56,7 @@ const InputPassword = React.forwardRef<HTMLInputElement, InputPasswordProps>(
           type="button"
           className={cn(
             "absolute top-0 right-0 flex h-full aspect-square items-center justify-center",
-            ui?.buttonIcon
+            ui?.buttonIcon,
           )}
           onClick={() =>
             setTypeInput(typeInput === "password" ? "text" : "password")
@@ -68,7 +68,7 @@ const InputPassword = React.forwardRef<HTMLInputElement, InputPasswordProps>(
         </button>
       </div>
     );
-  }
+  },
 );
 
 InputPassword.displayName = "InputPassword";
