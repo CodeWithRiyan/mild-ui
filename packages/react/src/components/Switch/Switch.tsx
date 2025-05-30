@@ -1,18 +1,19 @@
-// packages/react/src/components/Checkbox/Checkbox.tsx
+// packages/react/src/components/Switch/Switch.tsx
 import * as React from "react";
-import * as CheckboxPrimitive from "@radix-ui/react-checkbox";
+import * as SwitchPrimitive from "@radix-ui/react-switch";
 import { Check } from "lucide-react";
 import {
-  CheckboxCoreProps,
-  checkboxStyles,
-  CheckboxStyleProps,
-  checkboxLabelStyles,
+  SwitchCoreProps,
+  switchStyles,
+  SwitchStyleProps,
+  switchThumbStyles,
+  switchLabelStyles,
 } from "@mild-ui/core";
 import { cn } from "../../utils";
 import { Label } from "../Label";
 
 // Extend from core types but manually handle React-specific props
-export interface CheckboxProps extends CheckboxCoreProps, CheckboxStyleProps {
+export interface SwitchProps extends SwitchCoreProps, SwitchStyleProps {
   // React-specific props
   id?: string;
   onCheckedChange?: (checked: boolean | "indeterminate") => void;
@@ -21,7 +22,7 @@ export interface CheckboxProps extends CheckboxCoreProps, CheckboxStyleProps {
 }
 
 // Use explicit type annotations
-const Checkbox = React.forwardRef<HTMLButtonElement, CheckboxProps>(
+const Switch = React.forwardRef<HTMLButtonElement, SwitchProps>(
   (props, ref) => {
     const {
       className,
@@ -35,13 +36,14 @@ const Checkbox = React.forwardRef<HTMLButtonElement, CheckboxProps>(
       value,
       indeterminate,
       id,
+      ui,
       onCheckedChange,
       ...restProps
     } = props;
 
     return (
-      <div className="flex items-center space-x-2">
-        <CheckboxPrimitive.Root
+      <div className={cn("flex items-center space-x-4", ui?.container)}>
+        <SwitchPrimitive.Root
           ref={ref}
           id={id}
           checked={checked}
@@ -50,17 +52,17 @@ const Checkbox = React.forwardRef<HTMLButtonElement, CheckboxProps>(
           name={name}
           value={value}
           onCheckedChange={onCheckedChange}
-          className={cn(checkboxStyles({ size }), className)}
+          className={cn(switchStyles({ size }), className, ui?.switch)}
           {...restProps}
         >
-          <CheckboxPrimitive.Indicator className="flex items-center justify-center">
-            <Check className="h-4 w-4" />
-          </CheckboxPrimitive.Indicator>
-        </CheckboxPrimitive.Root>
+          <SwitchPrimitive.Thumb
+            className={cn(switchThumbStyles({ size }), ui?.thumb)}
+          />
+        </SwitchPrimitive.Root>
         {label && (
           <Label
             htmlFor={id}
-            className={cn(checkboxLabelStyles({ size }))}
+            className={cn(switchLabelStyles({ size }), ui?.label)}
             required={required}
           >
             {label}
@@ -72,6 +74,6 @@ const Checkbox = React.forwardRef<HTMLButtonElement, CheckboxProps>(
 );
 
 // Set a simple displayName
-Checkbox.displayName = "Checkbox";
+Switch.displayName = "Switch";
 
-export { Checkbox };
+export { Switch };

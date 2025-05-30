@@ -30,16 +30,13 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     if (asChild) {
       // When using asChild, we need to ensure only one child element is passed to Slot
       const child = React.Children.only(children) as React.ReactElement;
-      
+
       return (
-        <Slot
-          ref={ref}
-          {...props}
-          {...buttonProps}
-        >
+        <Slot ref={ref} {...props} {...buttonProps}>
           {React.cloneElement(child, {
             ...child.props,
-            className: `${child.props.className || ''} ${buttonClassName}`.trim(),
+            className:
+              `${child.props.className || ""} ${buttonClassName}`.trim(),
             onClick: onClick,
             children: (
               <>

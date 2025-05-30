@@ -4,6 +4,11 @@
   "scripts": {
     "dev": "pnpm -r dev",
     "build": "pnpm -r build",
+    "build:cli": "pnpm --filter @mild-ui/cli build",
+    "build:core": "pnpm --filter @mild-ui/core build",
+    "build:react": "pnpm --filter @mild-ui/react build",
+    "build:vue": "pnpm --filter @mild-ui/vue build",
+    "build:svelte": "pnpm --filter @mild-ui/svelte build",
     "test": "pnpm -r test",
     "test:watch": "pnpm -r test:watch",
     "test:coverage": "pnpm -r test:coverage",

@@ -22,6 +22,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
       fullWidth,
       error,
       value,
+      required,
       ...props
     },
     ref,

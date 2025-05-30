@@ -169,9 +169,4 @@ const Select: React.FC<SelectProps> = ({
   );
 };
 
-export {
-  Select,
-  SelectTrigger,
-  SelectContent,
-  SelectItem,
-};
+export { Select, SelectTrigger, SelectContent, SelectItem };

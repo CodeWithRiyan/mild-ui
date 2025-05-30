@@ -8,115 +8,32 @@ import {
   InputPassword,
 } from "@mild-ui/react";
 import type { Meta, StoryObj } from "@storybook/react";
-import { useState } from "react";
-import { useForm, SubmitHandler } from "react-hook-form";
+import { SubmitHandler, useForm } from "react-hook-form";
 import * as yup from "yup";
 
+// Create a wrapper component that doesn't require props
+const Dummy = () => <></>;
+
 const meta = {
-  title: "Components/Input",
-  tags: ["autodocs"],
-  component: Input,
-  argTypes: {
-    type: {
-      control: { type: "radio" },
-      options: ["text", "password", "email", "number", "search", "tel", "url"],
+  component: Dummy,
+  title: "Components/Form",
+  parameters: {
+    layout: "centered",
+    docs: {
+      description: {
+        component:
+          "A form component that uses React Hook Form and Yup for validation.",
+      },
     },
-    placeholder: { control: "text" },
-    value: { control: "text" },
-    disabled: { control: "boolean" },
-    readOnly: { control: "boolean" },
-    required: { control: "boolean" },
-    error: { control: "boolean" },
-    autoFocus: { control: "boolean" },
-    size: {
-      control: { type: "radio" },
-      options: ["sm", "md", "lg"],
-    },
-    variant: {
-      control: { type: "radio" },
-      options: ["default", "filled", "outline", "ghost"],
-    },
-    fullWidth: { control: "boolean" },
-    className: { control: false },
   },
-} satisfies Meta<typeof Input>;
+  tags: ["autodocs"],
+} satisfies Meta<typeof Dummy>;
 
 export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Default = {
-  args: {
-    placeholder: "Enter text...",
-  },
-} satisfies Story;
-
-export const Disabled = {
-  args: {
-    placeholder: "Disabled input",
-    disabled: true,
-  },
-} satisfies Story;
-
-export const WithError = {
-  args: {
-    placeholder: "Input with error",
-    error: true,
-  },
-} satisfies Story;
-
-export const FullWidth = {
-  args: {
-    placeholder: "Full width input",
-    fullWidth: true,
-  },
-} satisfies Story;
-
-export const Sizes = {
-  render: () => (
-    <div className="flex flex-col gap-4 w-64">
-      <Input placeholder="Small" size="sm" />
-      <Input placeholder="Medium" size="md" />
-      <Input placeholder="Large" size="lg" />
-    </div>
-  ),
-} satisfies Story;
-
-export const Variants = {
-  render: () => (
-    <div className="flex flex-col gap-4 w-64">
-      <Input placeholder="Default" variant="default" />
-      <Input placeholder="Filled" variant="filled" />
-      <Input placeholder="Outline" variant="outline" />
-      <Input placeholder="Ghost" variant="ghost" />
-    </div>
-  ),
-} satisfies Story;
-
-export const ControlledInput = {
-  render: () => {
-    const [value, setValue] = useState("");
-    return (
-      <Input
-        placeholder="Type here..."
-        value={value}
-        onChange={(e) => setValue(e.target.value)}
-      />
-    );
-  },
-} satisfies Story;
-
-export const UncontrolledInput = {
-  render: () => (
-    <Input
-      placeholder="Uncontrolled input"
-      defaultValue="Initial value"
-      onChange={(e) => console.log("value changed:", e.target.value)}
-    />
-  ),
-} satisfies Story;
-
-export const ReactHookFormWithYup = {
+export const RegistrationForm: Story = {
   render: () => {
     const schema = yup.object({
       name: yup
@@ -186,7 +103,7 @@ export const ReactHookFormWithYup = {
         </a>
         <span> and </span>
         <a href="#" className="text-blue-600 hover:underline">
-          Privacy Pol
+          Privacy Policy
         </a>
       </span>
     );
@@ -298,4 +215,4 @@ export const ReactHookFormWithYup = {
       </Form>
     );
   },
-} satisfies Story;
+};
