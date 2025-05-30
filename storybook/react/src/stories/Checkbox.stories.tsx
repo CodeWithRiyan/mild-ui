@@ -1,8 +1,8 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import type { Meta, StoryObj } from '@storybook/react';
-import { Checkbox } from '@mild-ui/react';
+import { Button, Checkbox, Field, Form, FormMessage, Label } from '@mild-ui/react';
 import { useState } from 'react';
-import { useForm, Controller } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 
 const meta = {
@@ -135,11 +135,7 @@ export const ReactHookFormWithYup = {
 
     type FormData = yup.InferType<typeof schema>;
 
-    const {
-      control,
-      handleSubmit,
-      formState: { errors },
-    } = useForm<FormData>({
+    const form = useForm<FormData>({
       resolver: yupResolver(schema),
       defaultValues: {
         terms: false,
@@ -148,64 +144,32 @@ export const ReactHookFormWithYup = {
       },
     });
 
+    const { handleSubmit } = form;
+
     const onSubmit = (data: FormData) => {
       alert(`Submitted:\nTerms: ${data.terms}\nNewsletter: ${data.newsletter}\nMarketing: ${data.marketing}`);
     };
 
     return (
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 w-80">
-        <div>
-          <Controller
-            name="terms"
-            control={control}
-            render={({ field }) => (
-              <Checkbox
-                label="I accept the terms and conditions *"
-                checked={field.value}
-                onCheckedChange={field.onChange}
-              />
-            )}
-          />
-          {errors.terms && (
-            <p className="text-sm text-red-600 mt-1">{errors.terms.message}</p>
-          )}
-        </div>
-        
-        <div>
-          <Controller
-            name="newsletter"
-            control={control}
-            render={({ field }) => (
-              <Checkbox
-                label="Subscribe to newsletter"
-                checked={field.value}
-                onCheckedChange={field.onChange}
-              />
-            )}
-          />
-        </div>
-        
-        <div>
-          <Controller
-            name="marketing"
-            control={control}
-            render={({ field }) => (
-              <Checkbox
-                label="Receive marketing emails"
-                checked={field.value}
-                onCheckedChange={field.onChange}
-              />
-            )}
-          />
-        </div>
-        
-        <button
-          type="submit"
-          className="px-3 py-1 rounded bg-green-600 text-white text-sm"
-        >
-          Submit
-        </button>
-      </form>
+      <Form {...form}>
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 w-80">
+          <Field name="terms" isBoolean>
+            <Checkbox label="I accept the terms and conditions" required />
+          </Field>
+
+          <Field name="newsletter" isBoolean>
+            <Checkbox label="Subscribe to newsletter" />
+          </Field>
+
+          <Field name="marketing" isBoolean>
+            <Checkbox label="Receive marketing emails" />
+          </Field>
+
+          <Button type="submit">
+            Submit
+          </Button>
+        </form>
+      </Form>
     );
   },
 } satisfies Story;
@@ -221,18 +185,14 @@ export const CheckboxGroup = {
 
     type FormData = yup.InferType<typeof schema>;
 
-    const {
-      watch,
-      setValue,
-      handleSubmit,
-      formState: { errors },
-    } = useForm<FormData>({
+    const form = useForm<FormData>({
       resolver: yupResolver(schema),
       defaultValues: {
         selectedItems: [],
       },
     });
 
+    const { watch, setValue, handleSubmit, formState: { errors } } = form;
     const selectedItems = watch('selectedItems') ?? [];
 
     const handleCheckboxChange = (value: string, checked: boolean) => {
@@ -255,36 +215,43 @@ export const CheckboxGroup = {
     ];
 
     return (
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 w-80">
-        <div>
-          <p className="text-sm font-medium mb-2">Choose your preferences:</p>
+      <Form {...form}>
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 w-80">
           <div className="space-y-2">
-            {options.map((option) => (
-              <Checkbox
-                key={option.value}
-                label={option.label}
-                checked={selectedItems.includes(option.value)}
-                onCheckedChange={(checked) => 
-                  handleCheckboxChange(option.value, checked === true)
-                }
-              />
-            ))}
+            <Label id='selectedItems' error={!!errors.selectedItems}>Choose your preferences:</Label>
+            <div className="space-y-2">
+              {options.map(option => (
+                <Field
+                  key={option.value}
+                  name="selectedItems"
+                  hideError
+                >
+                  <Checkbox
+                    label={option.label}
+                    value={option.value}
+                    checked={selectedItems.includes(option.value)}
+                    onCheckedChange={(checked) => {
+                      checked && form.clearErrors('selectedItems');
+                      handleCheckboxChange(option.value, checked === true)
+                    }}
+                  />
+                </Field>
+              ))}
+            </div>
+            {errors.selectedItems && (
+              <FormMessage>{errors.selectedItems.message}</FormMessage>
+            )}
           </div>
-          {errors.selectedItems && (
-            <p className="text-sm text-red-600 mt-1">{errors.selectedItems.message}</p>
-          )}
-        </div>
-        
-        <button
-          type="submit"
-          className="px-3 py-1 rounded bg-green-600 text-white text-sm"
-        >
-          Submit Selection
-        </button>
-      </form>
+
+          <Button type="submit">
+            Submit Selection
+          </Button>
+        </form>
+      </Form>
     );
   },
 } satisfies Story;
+
 
 export const IndeterminateParentChild = {
   render: () => {

@@ -9,6 +9,7 @@ import {
   checkboxLabelStyles,
 } from "@mild-ui/core";
 import { cn } from "../../utils";
+import { Label } from "../Label";
 
 // Extend from core types but manually handle React-specific props
 export interface CheckboxProps extends CheckboxCoreProps, CheckboxStyleProps {
@@ -16,7 +17,7 @@ export interface CheckboxProps extends CheckboxCoreProps, CheckboxStyleProps {
   id?: string;
   onCheckedChange?: (checked: boolean | "indeterminate") => void;
   className?: string;
-  label?: string;
+  label?: React.ReactNode;
 }
 
 // Use explicit type annotations
@@ -46,7 +47,6 @@ const Checkbox = React.forwardRef<HTMLButtonElement, CheckboxProps>(
           checked={checked}
           defaultChecked={defaultChecked}
           disabled={disabled}
-          required={required}
           name={name}
           value={value}
           onCheckedChange={onCheckedChange}
@@ -58,9 +58,9 @@ const Checkbox = React.forwardRef<HTMLButtonElement, CheckboxProps>(
           </CheckboxPrimitive.Indicator>
         </CheckboxPrimitive.Root>
         {label && (
-          <label htmlFor={id} className={cn(checkboxLabelStyles({ size }))}>
+          <Label htmlFor={id} className={cn(checkboxLabelStyles({ size }))} required={required}>
             {label}
-          </label>
+          </Label>
         )}
       </div>
     );

@@ -32,6 +32,7 @@ const InputPassword = React.forwardRef<HTMLInputElement, InputPasswordProps>(
       ui,
       visibleIcon,
       hiddenIcon,
+      required,
       ...props
     },
     ref
