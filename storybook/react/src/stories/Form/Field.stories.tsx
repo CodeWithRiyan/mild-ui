@@ -9,8 +9,10 @@ import {
   Field,
   Input,
   Select,
-  RadioGroup,
-  RadioGroupItem,
+  Radio,
+  Switch,
+  FormLabel,
+  FormMessage,
 } from "@mild-ui/react";
 import React from "react";
 
@@ -49,7 +51,12 @@ const meta: Meta<typeof Field> = {
     },
     isBoolean: {
       control: "boolean",
-      description: "Mark the field as a boolean field",
+      description:
+        "Mark the field as a boolean field. ex: Checkbox (single not group), Switch.",
+    },
+    isRadio: {
+      control: "boolean",
+      description: "Mark the field as a Radio field",
     },
     className: {
       control: "text",
@@ -206,17 +213,12 @@ export const RadioGroupField: Story = {
             label="Gender"
             description="Select your gender"
             required
+            isRadio
           >
-            <RadioGroup name="gender" className="space-y-2">
-              {options.map((option) => (
-                <RadioGroupItem
-                  key={option.value}
-                  id={option.value}
-                  value={option.value}
-                  label={option.label}
-                />
-              ))}
-            </RadioGroup>
+            <Radio
+              items={options}
+              onValueChange={(value) => console.log(`Gender: ${value}`)}
+            />
           </Field>
         </form>
       </Form>
@@ -242,7 +244,41 @@ export const CheckboxField: Story = {
       <Form {...form}>
         <form className="space-y-4 min-w-[300px]">
           <Field name="acceptTerms" isBoolean>
-            <Checkbox label="I accept the terms and conditions" required />
+            <Checkbox
+              label="I accept the terms and conditions"
+              required
+              onCheckedChange={(val) => console.log(`checked changed: ${val}`)}
+            />
+          </Field>
+        </form>
+      </Form>
+    );
+  },
+};
+
+// Switch field
+export const SwitchField: Story = {
+  render: () => {
+    const schema = yup.object({
+      acceptTerms: yup
+        .boolean()
+        .required("You must accept the terms and conditions"),
+    });
+    const form = useForm({
+      resolver: yupResolver(schema),
+      defaultValues: {
+        acceptTerms: false,
+      },
+    });
+    return (
+      <Form {...form}>
+        <form className="space-y-4 min-w-[300px]">
+          <Field name="acceptTerms" isBoolean>
+            <Switch
+              label="I accept the terms and conditions"
+              required
+              onCheckedChange={(val) => console.log(`checked changed: ${val}`)}
+            />
           </Field>
         </form>
       </Form>
@@ -343,7 +379,10 @@ export const MultipleFields: Story = {
       firstName: yup.string().required(),
       lastName: yup.string().required(),
       email: yup.string().email().required(),
-      newsletter: yup.boolean(),
+      newsletter: yup
+        .array(yup.string().required())
+        .required()
+        .min(1, "Please select at least one option"),
     });
     const form = useForm({
       resolver: yupResolver(schema),
@@ -351,31 +390,94 @@ export const MultipleFields: Story = {
         firstName: "",
         lastName: "",
         email: "",
-        newsletter: false,
+        newsletter: [],
       },
     });
+
+    const {
+      watch,
+      setValue,
+      handleSubmit,
+      formState: { errors },
+    } = form;
+    const newsletter = watch("newsletter") ?? [];
+
+    const newsletterOptions = [
+      { value: "tech", label: "Technology" },
+      { value: "health", label: "Health & Wellness" },
+      { value: "finance", label: "Finance & Investing" },
+      { value: "travel", label: "Travel & Adventure" },
+      { value: "food", label: "Food & Recipes" },
+      { value: "sports", label: "Sports & Fitness" },
+      { value: "entertainment", label: "Movies & TV Shows" },
+      { value: "science", label: "Science & Innovation" },
+    ];
+
+    const handleCheckboxGroupChange = (value: string, checked: boolean) => {
+      if (checked) {
+        setValue("newsletter", [...newsletter, value]);
+      } else {
+        setValue(
+          "newsletter",
+          newsletter.filter((item) => item !== value),
+        );
+      }
+    };
+
+    const onSubmit = (data: any) => {
+      console.log("Form submitted:", data);
+      alert("Form submitted successfully! Check console for data.");
+    };
+
     return (
       <Form {...form}>
-        <Field name="firstName" label="First Name" required>
-          <Input placeholder="John" />
-        </Field>
-
-        <Field name="lastName" label="Last Name" required>
-          <Input placeholder="Doe" />
-        </Field>
-
-        <Field
-          name="email"
-          label="Email"
-          description="We'll use this to contact you"
-          required
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className="space-y-4 min-w-[400px] p-4 border rounded-md"
         >
-          <Input type="email" placeholder="john@example.com" />
-        </Field>
+          <Field name="firstName" label="First Name" required>
+            <Input placeholder="John" />
+          </Field>
 
-        <Field name="newsletter" isBoolean>
-          <Checkbox label="Subscribe to newsletter" />
-        </Field>
+          <Field name="lastName" label="Last Name" required>
+            <Input placeholder="Doe" />
+          </Field>
+
+          <Field
+            name="email"
+            label="Email"
+            description="We'll use this to contact you"
+            required
+          >
+            <Input type="email" placeholder="john@example.com" />
+          </Field>
+
+          <div className="space-y-2">
+            <FormLabel id="newsletter" error={!!errors.newsletter}>
+              Select newsletter topics you're interested in:
+            </FormLabel>
+            <div className="grid grid-cols-2 gap-4">
+              {newsletterOptions.map((option) => (
+                <Field key={option.value} name="newsletter" hideError>
+                  <Checkbox
+                    label={option.label}
+                    value={option.value}
+                    checked={newsletter.includes(option.value)}
+                    onCheckedChange={(checked) => {
+                      checked && form.clearErrors("newsletter");
+                      handleCheckboxGroupChange(option.value, checked === true);
+                    }}
+                  />
+                </Field>
+              ))}
+            </div>
+            {errors.newsletter && (
+              <FormMessage>{errors.newsletter.message}</FormMessage>
+            )}
+          </div>
+
+          <Button type="submit">Submit</Button>
+        </form>
       </Form>
     );
   },
@@ -518,13 +620,8 @@ export const CompleteFormWithYup: Story = {
             <Select placeholder="Select a country" options={countryOptions} />
           </Field>
 
-          <Field
-            name="acceptTerms"
-            label="I accept the terms and conditions"
-            isBoolean
-            required
-          >
-            <Checkbox />
+          <Field name="acceptTerms" isBoolean>
+            <Checkbox label="I accept the terms and conditions" required />
           </Field>
 
           <Button type="submit" className="w-full">

@@ -7,65 +7,81 @@ import {
   radioStyles,
   RadioStyleProps,
   radioLabelStyles,
+  RadioSize,
 } from "@mild-ui/core";
 import { cn } from "../../utils";
 
-// Combine our core props with necessary Radix props
+// Props untuk RadioGroup
+interface RadioGroupProps
+  extends React.ComponentPropsWithoutRef<typeof RadioGroupPrimitive.Root> {
+  children?: React.ReactNode;
+  className?: string;
+  ui?: {
+    contaier?: string;
+    items?: string;
+  };
+}
+
+// Props untuk RadioGroupItem
 interface RadioGroupItemProps extends RadioCoreProps, RadioStyleProps {
-  // Additional React-specific props
   id?: string;
   className?: string;
   label?: string;
-  // Required by Radix
   value: string;
-  // Optional Radix props
-  onValueChange?: (value: string) => void;
   disabled?: boolean;
   required?: boolean;
   name?: string;
 }
 
-const RadioGroupItem = React.forwardRef<HTMLButtonElement, RadioGroupItemProps>(
-  (props, ref) => {
-    const {
-      className,
-      size = "md",
-      label,
-      value,
-      // Extract these so we don't pass them to Radix (avoid prop conflicts)
-      checked, // We remove checked as Radix handles this internally
-      defaultChecked, // Not used by Radix RadioGroupItem
-      // The following are valid for Radix
-      disabled,
-      required,
-      name,
-      id,
-      // Get the rest of the props
-      ...restProps
-    } = props;
+// RadioGroup component
+const RadioGroup = React.forwardRef<
+  React.ElementRef<typeof RadioGroupPrimitive.Root>,
+  RadioGroupProps
+>(({ className, ...props }, ref) => {
+  return (
+    <RadioGroupPrimitive.Root
+      className={cn("grid gap-2", className)}
+      {...props}
+      ref={ref}
+    />
+  );
+});
+RadioGroup.displayName = "RadioGroup";
 
-    // Pass only valid Radix props to the RadioGroupItem
-    const radixProps = {
-      value,
-      disabled,
-      required,
-      id,
-      ...restProps,
-    };
+// RadioGroupItem component
+const RadioGroupItem = React.forwardRef<
+  React.ElementRef<typeof RadioGroupPrimitive.Item>,
+  RadioGroupItemProps
+>(
+  (
+    { className, size = "md", label, value, disabled, required, id, ...props },
+    ref,
+  ) => {
+    const radioId = id || `radio-${value}`;
 
     return (
       <div className="flex items-center space-x-2">
         <RadioGroupPrimitive.Item
           ref={ref}
           className={cn(radioStyles({ size }), className)}
-          {...radixProps}
+          value={value}
+          disabled={disabled}
+          required={required}
+          id={radioId}
+          {...props}
         >
           <RadioGroupPrimitive.Indicator className="flex items-center justify-center">
-            <Circle className="h-2.5 w-2.5 fill-current text-current" />
+            <Circle className={cn("h-2.5 w-2.5 fill-current text-current")} />
           </RadioGroupPrimitive.Indicator>
         </RadioGroupPrimitive.Item>
         {label && (
-          <label htmlFor={id} className={cn(radioLabelStyles({ size }))}>
+          <label
+            htmlFor={radioId}
+            className={cn(
+              radioLabelStyles({ size }),
+              disabled && "opacity-50 cursor-not-allowed",
+            )}
+          >
             {label}
           </label>
         )}
@@ -73,12 +89,37 @@ const RadioGroupItem = React.forwardRef<HTMLButtonElement, RadioGroupItemProps>(
     );
   },
 );
+RadioGroupItem.displayName = "RadioGroupItem";
 
-// Fix displayName assignment
-// Using type assertion to fix TypeScript errors
-(RadioGroupItem as any).displayName = "RadioGroupItem";
+// Komponen Radio yang lebih fleksibel
+interface RadioProps extends RadioGroupProps {
+  items?: RadioGroupItemProps[];
+  size?: RadioSize;
+  defaultValue?: string;
+  value?: string;
+  onValueChange?: (value: string) => void;
+}
 
-// Export the Root component from Radix
-const RadioGroup = RadioGroupPrimitive.Root;
+const Radio = React.forwardRef<
+  React.ElementRef<typeof RadioGroupPrimitive.Root>,
+  RadioProps
+>(({ items, size = "md", children, className, ui, ...props }, ref) => {
+  return (
+    <RadioGroup ref={ref} className={cn(className, ui?.contaier)} {...props}>
+      {items
+        ? items.map((item) => (
+            <RadioGroupItem
+              {...item}
+              key={item.value}
+              size={size}
+              className={cn(item.className, ui?.items)}
+            />
+          ))
+        : children}
+    </RadioGroup>
+  );
+});
+Radio.displayName = "Radio";
 
-export { RadioGroup, RadioGroupItem };
+export { RadioGroup, RadioGroupItem, Radio };
+export type { RadioGroupProps, RadioGroupItemProps, RadioProps };

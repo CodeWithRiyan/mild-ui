@@ -177,6 +177,7 @@ export interface FieldProps<
   className?: string;
   hideError?: boolean;
   isBoolean?: boolean;
+  isRadio?: boolean;
 }
 
 const Field = <
@@ -191,6 +192,7 @@ const Field = <
   children,
   className,
   isBoolean,
+  isRadio,
   hideError = false,
 }: FieldProps<TFieldValues, TName>) => {
   const formContext = useFormContext<TFieldValues>();
@@ -207,18 +209,27 @@ const Field = <
       control={finalControl}
       name={name}
       render={({ field, fieldState }) => {
-        const injectedProps = isBoolean
-          ? {
-              checked: field.value,
-              onCheckedChange: (val: boolean | "indeterminate") => {
-                field.onChange(val === true);
-                children.props.onCheckedChange?.(val);
-              },
-            }
-          : {
-              value: field.value,
-              onChange: field.onChange,
-            };
+        const injectedProps =
+          isBoolean && !isRadio
+            ? {
+                checked: field.value,
+                onCheckedChange: (val: boolean | "indeterminate") => {
+                  field.onChange(val === true);
+                  children.props.onCheckedChange?.(val);
+                },
+              }
+            : isRadio && !isBoolean
+              ? {
+                  value: field.value,
+                  onValueChange: (val: string) => {
+                    field.onChange(val);
+                    children.props.onValueChange?.(val);
+                  },
+                }
+              : {
+                  value: field.value,
+                  onChange: field.onChange,
+                };
 
         return (
           <FormItem className={className}>

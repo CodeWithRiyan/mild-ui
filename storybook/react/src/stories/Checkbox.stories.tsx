@@ -5,8 +5,8 @@ import {
   Checkbox,
   Field,
   Form,
+  FormLabel,
   FormMessage,
-  Label,
 } from "@mild-ui/react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -187,7 +187,7 @@ export const ReactHookFormWithYup = {
 export const CheckboxGroup = {
   render: () => {
     const schema = yup.object({
-      selectedItems: yup
+      newsletter: yup
         .array(yup.string().required())
         .required()
         .min(1, "Please select at least one option"),
@@ -198,7 +198,7 @@ export const CheckboxGroup = {
     const form = useForm<FormData>({
       resolver: yupResolver(schema),
       defaultValues: {
-        selectedItems: [],
+        newsletter: [],
       },
     });
 
@@ -208,54 +208,58 @@ export const CheckboxGroup = {
       handleSubmit,
       formState: { errors },
     } = form;
-    const selectedItems = watch("selectedItems") ?? [];
+    const newsletter = watch("newsletter") ?? [];
 
     const handleCheckboxChange = (value: string, checked: boolean) => {
       if (checked) {
-        setValue("selectedItems", [...selectedItems, value]);
+        setValue("newsletter", [...newsletter, value]);
       } else {
         setValue(
-          "selectedItems",
-          selectedItems.filter((item) => item !== value),
+          "newsletter",
+          newsletter.filter((item) => item !== value),
         );
       }
     };
 
     const onSubmit = (data: FormData) => {
-      alert(`Selected: ${data.selectedItems.join(", ")}`);
+      alert(`Selected: ${data.newsletter.join(", ")}`);
     };
 
     const options = [
-      { value: "option1", label: "Option 1" },
-      { value: "option2", label: "Option 2" },
-      { value: "option3", label: "Option 3" },
-      { value: "option4", label: "Option 4" },
+      { value: "tech", label: "Technology" },
+      { value: "health", label: "Health & Wellness" },
+      { value: "finance", label: "Finance & Investing" },
+      { value: "travel", label: "Travel & Adventure" },
+      { value: "food", label: "Food & Recipes" },
+      { value: "sports", label: "Sports & Fitness" },
+      { value: "entertainment", label: "Movies & TV Shows" },
+      { value: "science", label: "Science & Innovation" },
     ];
 
     return (
       <Form {...form}>
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 w-80">
           <div className="space-y-2">
-            <Label id="selectedItems" error={!!errors.selectedItems}>
-              Choose your preferences:
-            </Label>
+            <FormLabel id="newsletter" error={!!errors.newsletter}>
+              Select newsletter topics you're interested in:
+            </FormLabel>
             <div className="space-y-2">
               {options.map((option) => (
-                <Field key={option.value} name="selectedItems" hideError>
+                <Field key={option.value} name="newsletter" hideError>
                   <Checkbox
                     label={option.label}
                     value={option.value}
-                    checked={selectedItems.includes(option.value)}
+                    checked={newsletter.includes(option.value)}
                     onCheckedChange={(checked) => {
-                      checked && form.clearErrors("selectedItems");
+                      checked && form.clearErrors("newsletter");
                       handleCheckboxChange(option.value, checked === true);
                     }}
                   />
                 </Field>
               ))}
             </div>
-            {errors.selectedItems && (
-              <FormMessage>{errors.selectedItems.message}</FormMessage>
+            {errors.newsletter && (
+              <FormMessage>{errors.newsletter.message}</FormMessage>
             )}
           </div>
 
