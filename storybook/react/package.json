@@ -1,6 +1,6 @@
 {
   "name": "@mild-ui/storybook-react",
-  "version": "0.1.1",
+  "version": "0.1.0",
   "private": true,
   "type": "module",
   "scripts": {
@@ -8,12 +8,13 @@
     "build": "NODE_ENV=production GITHUB_ACTIONS=true storybook build",
     "build:local": "storybook build",
     "preview": "pnpm build:local && npx serve storybook-static",
-    "test": "test-storybook"
+    "test": "test-storybook",
+    "clean": "rm -rf node_modules storybook-static"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.0.1",
-    "@mild-ui/core": "workspace:*",
-    "@mild-ui/react": "workspace:*",
+    "@mild-ui/core": "^0.2.2",
+    "@mild-ui/react": "^0.2.2",
     "lucide-react": "^0.284.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
