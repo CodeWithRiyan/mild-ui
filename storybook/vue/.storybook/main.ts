@@ -1,3 +1,4 @@
+// storybook/vue/.storybook/main.ts - Updated with optimizations
 import type { StorybookConfig } from '@storybook/vue3-vite';
 import { resolve } from 'path';
 import vue from '@vitejs/plugin-vue';
@@ -9,13 +10,14 @@ const config: StorybookConfig = {
   ],
   addons: [
     '@storybook/addon-links',
-    '@storybook/addon-essentials',
+    '@storybook/addon-essentials', // This includes controls, viewport, docs, etc.
     '@storybook/addon-interactions',
     '@storybook/addon-a11y',
-    '@storybook/addon-docs',
     'storybook-dark-mode',
-    '@storybook/addon-controls',
-    '@storybook/addon-viewport'
+    // Remove duplicates - these are included in essentials:
+    // '@storybook/addon-docs',
+    // '@storybook/addon-controls', 
+    // '@storybook/addon-viewport'
   ],
   framework: {
     name: '@storybook/vue3-vite',
@@ -36,34 +38,43 @@ const config: StorybookConfig = {
       '@mild-ui/core': resolve(__dirname, '../../../packages/core/src'),
     };
     
-    // Configure for different environments
     if (configType === 'PRODUCTION') {
-      // Check if we're building for GitHub Pages (when GITHUB_ACTIONS is set)
       const isGitHubPages = process.env.GITHUB_ACTIONS === 'true';
-      
-      // Set base path for GitHub Pages deployment
       config.base = isGitHubPages ? '/mild-ui/vue/' : './';
       
-      // Configure build options
       config.build = config.build || {};
       config.build.rollupOptions = config.build.rollupOptions || {};
       
-      // Ensure proper asset handling
+      // Improved chunking strategy
       config.build.rollupOptions.output = {
         ...config.build.rollupOptions.output,
         assetFileNames: 'assets/[name]-[hash][extname]',
         chunkFileNames: 'assets/[name]-[hash].js',
         entryFileNames: 'assets/[name]-[hash].js',
-        manualChunks: undefined,
+        
       };
       
-      // Optimize for static hosting
-      config.build.target = 'es2015';
+      config.build.target = 'es2020';
       config.build.minify = 'esbuild';
-      config.build.sourcemap = false;
+      config.build.sourcemap = false; // Disable to avoid sourcemap warnings
+      config.build.chunkSizeWarningLimit = 1000; // Reduce warning noise
       
-      // Handle dynamic imports
       config.build.rollupOptions.output.format = 'es';
+      
+      // Suppress warnings
+      config.build.rollupOptions.onwarn = (warning, warn) => {
+        if (warning.code === 'MODULE_LEVEL_DIRECTIVE') {
+          return;
+        }
+        if (warning.message && warning.message.includes('Use of eval')) {
+          return;
+        }
+        warn(warning);
+      };
+    } else {
+      // Development settings
+      config.build = config.build || {};
+      config.build.sourcemap = true;
     }
     
     return config;
