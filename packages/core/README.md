@@ -1,6 +1,6 @@
 # @mild-ui/core
 
-Framework-agnostic core for mild-ui component library that works across React, Vue, and Svelte.
+Framework-agnostic core for mild-ui component library that works across React and Vue.
 
 ## Overview
 

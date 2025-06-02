@@ -3,8 +3,8 @@
 module.exports = {
   darkMode: ["class"],
   content: [
-    "./src/**/*.{js,ts,jsx,tsx,vue,mdx}",
-    "../../packages/react/src/**/*.{js,ts,jsx,tsx}",
+    "./src/**/*.{js,ts,vue,mdx}",
+    "../../packages/vue/src/**/*.{js,ts,vue}",
     "../../packages/core/src/**/*.{js,ts}",
   ],
   theme: {

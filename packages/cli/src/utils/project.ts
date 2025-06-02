@@ -57,15 +57,9 @@ export async function getProjectInfo(): Promise<ProjectInfo> {
       };
 
       if (deps.vue) framework = "vue";
-      else if (deps.svelte) framework = "svelte";
 
       // Check if project uses TypeScript
       typescript = !!deps.typescript;
-
-      // Adjust components directory based on framework
-      if (framework === "svelte") {
-        componentsDir = "src/lib/components";
-      }
     }
   } catch (error) {
     console.warn(

@@ -4,7 +4,7 @@ Command-line interface for the mild-ui component library.
 
 ## Overview
 
-@mild-ui/cli provides a command-line tool to add mild-ui components to your project. It supports React, Vue, and Svelte, making it easy to use mild-ui components regardless of your frontend framework choice.
+@mild-ui/cli provides a command-line tool to add mild-ui components to your project. It supports React and Vue, making it easy to use mild-ui components regardless of your frontend framework choice.
 
 ## Installation
 
@@ -24,7 +24,7 @@ mild-ui init
 
 This command will:
 
-- Detect your project's framework (React, Vue, or Svelte)
+- Detect your project's framework (React or Vue)
 - Ask you where to store your components
 - Ask you where to store your styles
 - Set up the necessary files and styles
@@ -37,9 +37,6 @@ mild-ui add button
 
 # Add a button component for Vue
 mild-ui add button --framework=vue
-
-# Add a button component for Svelte
-mild-ui add button --framework=svelte
 
 # Specify a custom components directory
 mild-ui add button --directory=src/ui/components
@@ -58,7 +55,7 @@ mild-ui list
 
 - `add <component>`: Add a component to your project
 
-  - `--framework=<framework>`: Specify the target framework (react, vue, svelte)
+  - `--framework=<framework>`: Specify the target framework (react or vue)
   - `--directory=<dir>`: Specify the output directory for components
   - `--stylesDir=<dir>`: Specify the directory for styles
   - `--theme=<theme>`: Specify a theme to use

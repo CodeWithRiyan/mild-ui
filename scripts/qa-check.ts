@@ -110,7 +110,7 @@ class QualityAssuranceChecker {
   private async checkComponentConsistency(): Promise<void> {
     // Check that components exist in all frameworks
     // This is a simplified example
-    const frameworks = ["react", "vue", "svelte"];
+    const frameworks = ["react", "vue"];
     const components = ["Button", "Input", "Checkbox", "Radio", "Select"];
 
     let allConsistent = true;

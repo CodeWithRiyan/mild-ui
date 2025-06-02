@@ -1,9 +1,15 @@
 // packages/core/src/components/Tabs/Tabs.core.ts
 import { TabsStyleProps } from "./Tabs.types";
-import { tabsListStyles, tabsTriggerStyles, tabsContentStyles } from "./Tabs.styles";
+import {
+  tabsListStyles,
+  tabsTriggerStyles,
+  tabsContentStyles,
+} from "./Tabs.styles";
 import { cn } from "../../utils/cn";
 
-export function getTabsListProps(props: TabsStyleProps & { className?: string }) {
+export function getTabsListProps(
+  props: TabsStyleProps & { className?: string },
+) {
   const { variant = "default", size = "md", className } = props;
 
   return {
@@ -13,7 +19,9 @@ export function getTabsListProps(props: TabsStyleProps & { className?: string })
   };
 }
 
-export function getTabsTriggerProps(props: TabsStyleProps & { className?: string }) {
+export function getTabsTriggerProps(
+  props: TabsStyleProps & { className?: string },
+) {
   const { variant = "default", size = "md", className } = props;
 
   return {
@@ -23,7 +31,9 @@ export function getTabsTriggerProps(props: TabsStyleProps & { className?: string
   };
 }
 
-export function getTabsContentProps(props: TabsStyleProps & { className?: string }) {
+export function getTabsContentProps(
+  props: TabsStyleProps & { className?: string },
+) {
   const { size = "md", className } = props;
 
   return {
