@@ -5,11 +5,12 @@
   "type": "module",
   "scripts": {
     "dev": "storybook dev -p 6006",
-    "build": "NODE_ENV=production GITHUB_ACTIONS=true storybook build",
-    "build:local": "storybook build",
+    "build": "NODE_ENV=production GITHUB_ACTIONS=true storybook build --quiet",
+    "build:local": "NODE_ENV=production storybook build --quiet",
     "preview": "pnpm build:local && npx serve storybook-static",
     "test": "test-storybook",
-    "chromatic": "chromatic"
+    "chromatic": "chromatic",
+    "clean": "rm -rf storybook-static"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.0.1",

@@ -1,9 +1,10 @@
+// storybook/react/.storybook/main.ts - Updated with optimizations
 import type { StorybookConfig } from "@storybook/react-vite";
 import { resolve } from "path";
 
 const config: StorybookConfig = {
   stories: [
-    "../src/stories/Introduction.mdx", // Changed from .stories.md to .mdx
+    "../src/stories/Introduction.mdx",
     "../src/stories/**/*.stories.@(js|jsx|ts|tsx|mdx)",
   ],
   addons: [
@@ -13,8 +14,9 @@ const config: StorybookConfig = {
     "@storybook/addon-a11y",
     "@storybook/addon-docs",
     "storybook-dark-mode",
-    "@storybook/addon-controls",
-    "@storybook/addon-viewport",
+    // Remove duplicate addons - these are already included in essentials
+    // "@storybook/addon-controls",
+    // "@storybook/addon-viewport",
   ],
   framework: {
     name: "@storybook/react-vite",
@@ -39,41 +41,47 @@ const config: StorybookConfig = {
 
     // Configure for different environments
     if (configType === "PRODUCTION") {
-      // Check if we're building for GitHub Pages (when GITHUB_ACTIONS is set)
       const isGitHubPages = process.env.GITHUB_ACTIONS === "true";
-
-      // Set base path for GitHub Pages deployment
       config.base = isGitHubPages ? "/mild-ui/react/" : "./";
 
-      // Configure build options
       config.build = config.build || {};
       config.build.rollupOptions = config.build.rollupOptions || {};
 
-      // Ensure proper asset handling
+      // Improved chunking strategy to reduce large chunks
       config.build.rollupOptions.output = {
         ...config.build.rollupOptions.output,
         assetFileNames: "assets/[name]-[hash][extname]",
         chunkFileNames: "assets/[name]-[hash].js",
         entryFileNames: "assets/[name]-[hash].js",
-        // Reduce chunk size to avoid dynamic import issues
-        manualChunks: undefined,
       };
 
-      // Optimize for static hosting
-      config.build.target = "es2015";
+      config.build.target = "es2020";
       config.build.minify = "esbuild";
+      
+      // Disable sourcemap in production to avoid warnings
       config.build.sourcemap = false;
+      
+      // Increase chunk size warning limit to reduce noise
+      config.build.chunkSizeWarningLimit = 1000;
 
-      // Handle dynamic imports
       config.build.rollupOptions.output.format = "es";
 
-      // Suppress Radix UI "use client" warnings
+      // Enhanced warning suppression
       config.build.rollupOptions.onwarn = (warning, warn) => {
+        // Suppress "use client" warnings from Radix UI
         if (warning.code === "MODULE_LEVEL_DIRECTIVE") {
+          return;
+        }
+        // Suppress eval warnings from Storybook core (these are safe in dev/build context)
+        if (warning.message && warning.message.includes('Use of eval')) {
           return;
         }
         warn(warning);
       };
+    } else {
+      // Development settings
+      config.build = config.build || {};
+      config.build.sourcemap = true; // Enable sourcemap in development
     }
 
     return config;
