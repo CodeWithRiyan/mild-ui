@@ -2,7 +2,7 @@
 import { cva } from "class-variance-authority";
 
 export const modalOverlayStyles = cva(
-  "fixed inset-0 z-50 bg-background/80 backdrop-blur-sm data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0"
+  "fixed inset-0 z-50 bg-background/80 backdrop-blur-sm data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0",
 );
 
 export const modalContentStyles = cva(
@@ -20,25 +20,23 @@ export const modalContentStyles = cva(
     defaultVariants: {
       size: "md",
     },
-  }
+  },
 );
 
 export const modalHeaderStyles = cva(
-  "flex flex-col space-y-1.5 text-center sm:text-left"
+  "flex flex-col space-y-1.5 text-center sm:text-left",
 );
 
 export const modalFooterStyles = cva(
-  "flex flex-col-reverse sm:flex-row sm:justify-end sm:space-x-2"
+  "flex flex-col-reverse sm:flex-row sm:justify-end sm:space-x-2",
 );
 
 export const modalTitleStyles = cva(
-  "text-lg font-semibold leading-none tracking-tight"
+  "text-lg font-semibold leading-none tracking-tight",
 );
 
-export const modalDescriptionStyles = cva(
-  "text-sm text-muted-foreground"
-);
+export const modalDescriptionStyles = cva("text-sm text-muted-foreground");
 
 export const modalCloseStyles = cva(
-  "absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground"
+  "absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground",
 );

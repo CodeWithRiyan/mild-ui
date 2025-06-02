@@ -1,49 +1,43 @@
 // packages/core/src/components/Accordion/Accordion.styles.ts
 import { cva } from "class-variance-authority";
 
-export const accordionStyles = cva(
-  "w-full",
-  {
-    variants: {
-      variant: {
-        default: "",
-        ghost: "",
-        bordered: "border border-border rounded-lg",
-      },
-      size: {
-        sm: "text-sm",
-        md: "text-base",
-        lg: "text-lg",
-      },
+export const accordionStyles = cva("w-full", {
+  variants: {
+    variant: {
+      default: "",
+      ghost: "",
+      bordered: "border border-border rounded-lg",
     },
-    defaultVariants: {
-      variant: "default",
-      size: "md",
+    size: {
+      sm: "text-sm",
+      md: "text-base",
+      lg: "text-lg",
     },
   },
-);
+  defaultVariants: {
+    variant: "default",
+    size: "md",
+  },
+});
 
-export const accordionItemStyles = cva(
-  "",
-  {
-    variants: {
-      variant: {
-        default: "border-b border-border",
-        ghost: "",
-        bordered: "border-b border-border last:border-b-0",
-      },
-      size: {
-        sm: "",
-        md: "",
-        lg: "",
-      },
+export const accordionItemStyles = cva("", {
+  variants: {
+    variant: {
+      default: "border-b border-border",
+      ghost: "",
+      bordered: "border-b border-border last:border-b-0",
     },
-    defaultVariants: {
-      variant: "default",
-      size: "md",
+    size: {
+      sm: "",
+      md: "",
+      lg: "",
     },
   },
-);
+  defaultVariants: {
+    variant: "default",
+    size: "md",
+  },
+});
 
 export const accordionTriggerStyles = cva(
   "flex flex-1 items-center justify-between py-4 font-medium transition-all hover:underline [&[data-state=open]>svg]:rotate-180",

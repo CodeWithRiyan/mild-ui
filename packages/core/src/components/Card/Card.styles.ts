@@ -29,64 +29,53 @@ export const cardStyles = cva(
       padding: "md",
       shadow: "sm",
     },
-  }
+  },
 );
 
-export const cardHeaderStyles = cva(
-  "flex flex-col space-y-1.5 p-6",
-  {
-    variants: {
-      padding: {
-        none: "p-0",
-        sm: "p-3",
-        md: "p-6", 
-        lg: "p-8",
-      },
+export const cardHeaderStyles = cva("flex flex-col space-y-1.5 p-6", {
+  variants: {
+    padding: {
+      none: "p-0",
+      sm: "p-3",
+      md: "p-6",
+      lg: "p-8",
     },
-    defaultVariants: {
-      padding: "md",
-    },
-  }
-);
+  },
+  defaultVariants: {
+    padding: "md",
+  },
+});
 
-export const cardContentStyles = cva(
-  "p-6 pt-0",
-  {
-    variants: {
-      padding: {
-        none: "p-0",
-        sm: "p-3 pt-0",
-        md: "p-6 pt-0",
-        lg: "p-8 pt-0", 
-      },
+export const cardContentStyles = cva("p-6 pt-0", {
+  variants: {
+    padding: {
+      none: "p-0",
+      sm: "p-3 pt-0",
+      md: "p-6 pt-0",
+      lg: "p-8 pt-0",
     },
-    defaultVariants: {
-      padding: "md",
-    },
-  }
-);
+  },
+  defaultVariants: {
+    padding: "md",
+  },
+});
 
-export const cardFooterStyles = cva(
-  "flex items-center p-6 pt-0",
-  {
-    variants: {
-      padding: {
-        none: "p-0",
-        sm: "p-3 pt-0",
-        md: "p-6 pt-0",
-        lg: "p-8 pt-0",
-      },
+export const cardFooterStyles = cva("flex items-center p-6 pt-0", {
+  variants: {
+    padding: {
+      none: "p-0",
+      sm: "p-3 pt-0",
+      md: "p-6 pt-0",
+      lg: "p-8 pt-0",
     },
-    defaultVariants: {
-      padding: "md",
-    },
-  }
-);
+  },
+  defaultVariants: {
+    padding: "md",
+  },
+});
 
 export const cardTitleStyles = cva(
-  "text-2xl font-semibold leading-none tracking-tight"
+  "text-2xl font-semibold leading-none tracking-tight",
 );
 
-export const cardDescriptionStyles = cva(
-  "text-sm text-muted-foreground"
-);
+export const cardDescriptionStyles = cva("text-sm text-muted-foreground");

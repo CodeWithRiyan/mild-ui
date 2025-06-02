@@ -3,18 +3,34 @@ on:
   push:
     branches: [main]
     paths:
-      - "packages/**"
+      - "packages/core/**"
+      - "packages/vue/**"
       - "storybook/vue/**"
-  workflow_dispatch: # Allow manual trigger
+      - ".github/workflows/storybook-vue.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages-vue"
+  cancel-in-progress: false
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+    environment:
+      name: github-pages-vue
+      url: ${{ steps.deployment.outputs.page_url }}vue/
     steps:
       - uses: actions/checkout@v4
+
       - uses: pnpm/action-setup@v2
         with:
-          version: 10
+          version: 8
+
       - uses: actions/setup-node@v4
         with:
           node-version: "18"
@@ -28,7 +44,7 @@ jobs:
           pnpm --filter @mild-ui/core build
           pnpm --filter @mild-ui/vue build
 
-      - name: Build Vue Storybook for GitHub Pages
+      - name: Build Vue Storybook
         run: |
           cd storybook/vue
           NODE_ENV=production GITHUB_ACTIONS=true pnpm build
@@ -36,12 +52,14 @@ jobs:
           NODE_ENV: production
           GITHUB_ACTIONS: true
 
-      - name: Add .nojekyll file
-        run: touch storybook/vue/storybook-static/.nojekyll
+      - name: Setup Pages
+        uses: actions/configure-pages@v3
 
-      - name: Deploy to GitHub Pages (Vue subdirectory)
-        uses: JamesIves/github-pages-deploy-action@v4
+      - name: Upload Vue Storybook artifact
+        uses: actions/upload-pages-artifact@v2
         with:
-          folder: storybook/vue/storybook-static
-          target-folder: vue
-          branch: gh-pages
+          path: "./storybook/vue/storybook-static"
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v2

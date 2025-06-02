@@ -27,8 +27,8 @@
     ".storybook/**/*.tsx"
   ],
   "exclude": [
-    "node_modules", 
-    "dist", 
+    "node_modules",
+    "dist",
     "storybook-static",
     "**/*.test.ts",
     "**/*.test.tsx"

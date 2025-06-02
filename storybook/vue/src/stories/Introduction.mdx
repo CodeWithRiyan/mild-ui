@@ -1,0 +1,95 @@
+import { Meta } from "@storybook/blocks";
+
+<Meta title="Introduction" />
+
+# Welcome to mild-ui Vue
+
+mild-ui is a cross-framework UI component library inspired by the copy-paste approach of shadcn/ui, extended to work across React, Vue, and Svelte.
+
+## Getting Started
+
+Components are designed to be copied into your project rather than imported as dependencies. Use our CLI tool to add components:
+
+```bash
+# Install the CLI globally
+npm install -g @mild-ui/cli
+
+# Add components to your project
+mild-ui add button --framework=vue
+mild-ui add input --framework=vue
+```
+
+## Features
+
+- **Cross-framework compatibility**: Works with React, Vue, and Svelte
+- **Framework-agnostic core**: Consistent design and behavior
+- **Tailwind CSS**: Modern utility-first styling
+- **Accessibility**: Built with accessibility in mind
+- **TypeScript**: Full TypeScript support
+- **Vue 3 Composition API**: Modern Vue development patterns
+- **Customizable**: Easy theming and customization
+
+## Vue-Specific Features
+
+- **Composition API support**: Built with Vue 3 Composition API
+- **Script setup syntax**: Modern single-file component structure
+- **v-model integration**: Proper two-way data binding
+- **Slot-based architecture**: Flexible content projection
+- **Reactive props**: Full reactivity with Vue's reactive system
+
+## Available Components
+
+- **Button**: Primary, secondary, outline, and ghost variants with icon support
+- **Input**: Text input with validation states and v-model support
+- **Checkbox**: Checkbox with indeterminate state support
+- **Radio**: Radio buttons and radio groups
+- **Select**: Dropdown select with search and multi-select capabilities
+
+## Usage Example
+
+```vue
+<template>
+  <div>
+    <Button @click="handleClick">
+      <template #leading-icon>
+        <PlusIcon />
+      </template>
+      Add Item
+    </Button>
+
+    <Input v-model="inputValue" placeholder="Enter text..." :error="hasError" />
+
+    <Checkbox v-model="isChecked" label="Accept terms" />
+  </div>
+</template>
+
+<script setup lang="ts">
+import { ref } from "vue";
+import { Button, Input, Checkbox } from "./components";
+import { PlusIcon } from "lucide-vue-next";
+
+const inputValue = ref("");
+const isChecked = ref(false);
+const hasError = ref(false);
+
+const handleClick = () => {
+  console.log("Button clicked!");
+};
+</script>
+```
+
+## Explore the Components
+
+Navigate through the sidebar to explore all available Vue components, their variants, and interactive examples.
+
+## Resources
+
+- [GitHub Repository](https://github.com/codewithriyan/mild-ui)
+- [Vue Documentation](https://vuejs.org/)
+- [CLI Usage Guide](https://github.com/codewithriyan/mild-ui/tree/main/packages/cli)
+- [React Storybook](../react/)
+- [Svelte Storybook](../svelte/)
+
+---
+
+Built with ❤️ for the Vue community
