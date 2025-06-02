@@ -1,10 +1,10 @@
 # mild-ui
 
-mild-ui is a cross-framework UI component library inspired by the copy-paste approach of shadcn/ui but extended to work across React, Vue, and Svelte. The library employs a framework-agnostic core with specific adapters for each supported framework, allowing developers to use consistent components regardless of their frontend framework choice.
+mild-ui is a cross-framework UI component library inspired by the copy-paste approach of shadcn/ui but extended to work across React, and Vue. The library employs a framework-agnostic core with specific adapters for each supported framework, allowing developers to use consistent components regardless of their frontend framework choice.
 
 ## Features
 
-- ✅ Cross-framework compatibility: Works with React, Vue, and Svelte
+- ✅ Cross-framework compatibility: Works with React, and Vue
 - 🧩 Framework-agnostic core: Components designed with a framework-agnostic approach
 - 🌈 Unified developer experience: Consistent API and styling across all frameworks
 - 🎨 Extensible styling: Built with CSS variables for easy theming
@@ -24,7 +24,7 @@ npm install -g @mild-ui/cli
 mild-ui init
 ```
 
-The `init` command will prompt you to select your framework (React, Vue, or Svelte), whether to use TypeScript, and where to store your components.
+The `init` command will prompt you to select your framework (React or Vue), whether to use TypeScript, and where to store your components.
 
 ### Adding Components
 
@@ -36,10 +36,6 @@ mild-ui add button
 
 # Add a button component for Vue
 mild-ui add button --framework=vue
-
-# Add a button component for Svelte
-mild-ui add button --framework=svelte
-```
 
 This will create the component files in your project's components directory.
 
@@ -92,29 +88,6 @@ function App() {
 import { Button } from "./components";
 import { PlusIcon, ArrowRightIcon } from "lucide-vue-next";
 </script>
-```
-
-#### Svelte
-
-```svelte
-<script>
-  import { Button } from './components';
-  import { Plus, ArrowRight } from 'lucide-svelte';
-</script>
-
-<div>
-  <Button>Default Button</Button>
-  <Button variant="secondary">Secondary Button</Button>
-  <Button variant="outline" size="large">
-    <svelte:fragment slot="leading-icon">
-      <Plus size={16} />
-    </svelte:fragment>
-    Button with Icons
-    <svelte:fragment slot="trailing-icon">
-      <ArrowRight size={16} />
-    </svelte:fragment>
-  </Button>
-</div>
 ```
 
 ## Available Components

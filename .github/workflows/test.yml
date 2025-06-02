@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        framework: [react, vue, svelte]
+        framework: [react, vue]
 
     steps:
       - uses: actions/checkout@v3

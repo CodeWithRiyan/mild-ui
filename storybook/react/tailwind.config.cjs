@@ -3,10 +3,8 @@
 module.exports = {
   darkMode: ["class"],
   content: [
-    "./src/**/*.{js,ts,jsx,tsx,vue,svelte,mdx}",
-    "../../packages/react/src/**/*.{js,ts,jsx,tsx}", // React version
-    // '../../packages/vue/src/**/*.{js,ts,vue}',     // Vue version
-    // '../../packages/svelte/src/**/*.{js,ts,svelte}', // Svelte version
+    "./src/**/*.{js,ts,jsx,tsx,vue,mdx}",
+    "../../packages/react/src/**/*.{js,ts,jsx,tsx}",
     "../../packages/core/src/**/*.{js,ts}",
   ],
   theme: {

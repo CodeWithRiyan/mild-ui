@@ -5,10 +5,9 @@ export async function listCommand(): Promise<void> {
   try {
     console.log(chalk.blue("Available components:\n"));
 
-    const frameworks: Array<"react" | "vue" | "svelte"> = [
+    const frameworks: Array<"react" | "vue"> = [
       "react",
       "vue",
-      "svelte",
     ];
 
     for (const framework of frameworks) {

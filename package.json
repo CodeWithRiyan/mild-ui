@@ -11,15 +11,12 @@
     "prepare": "husky install",
     "storybook:react": "cd storybook/react && pnpm dev",
     "storybook:vue": "cd storybook/vue && pnpm dev",
-    "storybook:svelte": "cd storybook/svelte && pnpm dev",
     "storybook:build:react": "cd storybook/react && pnpm build",
     "storybook:build:vue": "cd storybook/vue && pnpm build",
-    "storybook:build:svelte": "cd storybook/svelte && pnpm build",
-    "storybook:build:all": "pnpm storybook:build:react && pnpm storybook:build:vue && pnpm storybook:build:svelte",
+    "storybook:build:all": "pnpm storybook:build:react && pnpm storybook:build:vue",
     "storybook:preview:react": "cd storybook/react && pnpm preview",
     "storybook:preview:vue": "cd storybook/vue && pnpm preview",
-    "storybook:preview:svelte": "cd storybook/svelte && pnpm preview",
-    "packages:build": "pnpm --filter @mild-ui/core build && pnpm --filter @mild-ui/react build && pnpm --filter @mild-ui/vue build && pnpm --filter @mild-ui/svelte build"
+    "packages:build": "pnpm --filter @mild-ui/core build && pnpm --filter @mild-ui/react build && pnpm --filter @mild-ui/vue build"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^6.0.0",

@@ -37,7 +37,7 @@ function processFileContent(
 
   // Replace imports between components to use relative paths
   processedContent = processedContent.replace(
-    /from ['"]@mild-ui\/(react|vue|svelte)['"];?/g,
+    /from ['"]@mild-ui\/(react|vue)['"];?/g,
     "from '../$1';",
   );
 
@@ -51,11 +51,6 @@ function processFileContent(
     processedContent = processedContent.replace(
       /from ['"]lucide-vue-next['"];?/g,
       "from 'lucide-vue-next';",
-    );
-  } else if (content.includes("lucide-svelte")) {
-    processedContent = processedContent.replace(
-      /from ['"]lucide-svelte['"];?/g,
-      "from 'lucide-svelte';",
     );
   }
 
@@ -84,7 +79,7 @@ function processFileContent(
  */
 export async function transformComponent(
   sourceComponent: FrameworkComponent,
-  targetFramework: "react" | "vue" | "svelte",
+  targetFramework: "react" | "vue",
 ): Promise<FrameworkComponent> {
   // This is a complex transformation that would require:
   // 1. Parse the source component

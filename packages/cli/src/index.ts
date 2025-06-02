@@ -22,7 +22,7 @@ program
   .description("Add component(s) to your project")
   .option(
     "-f, --framework <framework>",
-    "Target framework (react, vue, svelte)",
+    "Target framework (react, vue)",
     "react",
   )
   .option("-d, --directory <directory>", "Output directory", "components")
@@ -45,7 +45,7 @@ program
 
     addCommand({
       component,
-      framework: options.framework as "react" | "vue" | "svelte",
+      framework: options.framework as "react" | "vue",
       directory: options.directory,
       all: options.all,
       skipExisting: options.skipExisting,
@@ -55,14 +55,14 @@ program
 program
   .command("transform <component>")
   .description("Transform a component from one framework to another")
-  .requiredOption("--from <framework>", "Source framework (react, vue, svelte)")
-  .requiredOption("--to <framework>", "Target framework (react, vue, svelte)")
+  .requiredOption("--from <framework>", "Source framework (react, vue)")
+  .requiredOption("--to <framework>", "Target framework (react, vue)")
   .option("-d, --directory <directory>", "Component directory", "components")
   .action((component, options) => {
     transformCommand({
       component,
-      fromFramework: options.from as "react" | "vue" | "svelte",
-      toFramework: options.to as "react" | "vue" | "svelte",
+      fromFramework: options.from as "react" | "vue",
+      toFramework: options.to as "react" | "vue",
       directory: options.directory,
     });
   });
@@ -79,7 +79,7 @@ program
   .description("Initialize mild-ui in your project")
   .option(
     "-f, --framework <framework>",
-    "Target framework (react, vue, svelte)",
+    "Target framework (react, vue)",
     "react",
   )
   .option("--typescript", "Use TypeScript", true)
@@ -89,7 +89,7 @@ program
 
     if (options.all) {
       addCommand({
-        framework: options.framework as "react" | "vue" | "svelte",
+        framework: options.framework as "react" | "vue",
         directory: "components",
         all: true,
         skipExisting: true,
@@ -119,9 +119,6 @@ if (!process.argv.slice(2).length) {
   );
   console.log(
     "  mild-ui add --all                     # Add all React components",
-  );
-  console.log(
-    "  mild-ui add --all --framework=svelte  # Add all Svelte components",
   );
   console.log(
     "  mild-ui list                          # List all available components",

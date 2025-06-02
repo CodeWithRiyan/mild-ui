@@ -15,7 +15,7 @@ export async function initProject(): Promise<void> {
       type: "list",
       name: "framework",
       message: "Select your framework:",
-      choices: ["react", "vue", "svelte"],
+      choices: ["react", "vue"],
       default: "react",
     },
     {
@@ -34,8 +34,6 @@ export async function initProject(): Promise<void> {
             return "src/components";
           case "vue":
             return "src/components";
-          case "svelte":
-            return "src/lib/components";
           default:
             return "src/components";
         }

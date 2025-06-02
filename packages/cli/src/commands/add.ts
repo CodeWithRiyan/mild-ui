@@ -9,7 +9,7 @@ import { processComponentFiles } from "../utils/component-processor";
 
 interface AddCommandOptions {
   component?: string;
-  framework?: "react" | "vue" | "svelte";
+  framework?: "react" | "vue";
   directory?: string;
   customImportPaths?: Record<string, string>;
   all?: boolean;
@@ -55,7 +55,7 @@ export async function addCommand(options: AddCommandOptions): Promise<void> {
  * Add all available components for a framework
  */
 async function addAllComponents(options: {
-  framework: "react" | "vue" | "svelte";
+  framework: "react" | "vue";
   directory: string;
   customImportPaths: Record<string, string>;
   skipExisting: boolean;
@@ -127,7 +127,7 @@ async function addAllComponents(options: {
  */
 async function addSingleComponent(options: {
   component: string;
-  framework: "react" | "vue" | "svelte";
+  framework: "react" | "vue";
   directory: string;
   customImportPaths: Record<string, string>;
   skipExisting: boolean;
@@ -180,7 +180,7 @@ async function addSingleComponent(options: {
  */
 async function installComponent(
   componentName: string,
-  framework: "react" | "vue" | "svelte",
+  framework: "react" | "vue",
   directory: string,
   customImportPaths: Record<string, string>,
 ): Promise<void> {
@@ -291,14 +291,6 @@ function getCommonDependencies(framework: string): string[] {
         "vue",
         "lucide-vue-next",
         "@vueuse/core",
-        "class-variance-authority",
-        "clsx",
-        "tailwind-merge",
-      ];
-    case "svelte":
-      return [
-        "svelte",
-        "lucide-svelte",
         "class-variance-authority",
         "clsx",
         "tailwind-merge",

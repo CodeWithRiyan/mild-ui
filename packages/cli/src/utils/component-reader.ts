@@ -18,7 +18,7 @@ export interface FrameworkComponent {
  */
 export async function readComponentFromFramework(
   componentName: string,
-  framework: "react" | "vue" | "svelte",
+  framework: "react" | "vue",
 ): Promise<FrameworkComponent> {
   // Get the path to the framework package
   const frameworkPackagePath = path.resolve(
@@ -80,7 +80,7 @@ async function extractDependencies(framework: string): Promise<string[]> {
  * Get list of available components for a framework
  */
 export async function getAvailableComponents(
-  framework: "react" | "vue" | "svelte",
+  framework: "react" | "vue",
 ): Promise<string[]> {
   const componentsPath = path.resolve(
     __dirname,

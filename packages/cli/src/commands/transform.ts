@@ -9,8 +9,8 @@ import {
 
 interface TransformCommandOptions {
   component: string;
-  fromFramework: "react" | "vue" | "svelte";
-  toFramework: "react" | "vue" | "svelte";
+  fromFramework: "react" | "vue";
+  toFramework: "react" | "vue";
   directory?: string;
 }
 
