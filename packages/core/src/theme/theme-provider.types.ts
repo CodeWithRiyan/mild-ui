@@ -10,7 +10,7 @@ export interface ThemeProviderProps {
   /** Initial color mode */
   colorMode?: ColorMode;
   /** Children components */
-  // children?: React.ReactNode;
+   children?: any;
   /** CSS variables prefix */
   cssVarPrefix?: string;
   /** Storage key for persisting color mode */

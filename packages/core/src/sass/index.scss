@@ -14,10 +14,12 @@
 @use 'base/root';
 @use 'mixins/component-base';
 @use 'mixins/layout' as layout-mixins;
+@use 'mixins/component-variants' as variants;
 @use 'utilities/layout' as layout-utils;
 @use 'utilities/spacing' as spacing-utils;
 @use 'utilities/typography' as typography-utils;
 @use 'utilities/colors' as colors-utils;
+@use 'components/index' as components;
 
 // Base root styles with CSS custom properties
 :root {
@@ -33,12 +35,54 @@
   --mild-border-width: 1px;
   --mild-outline-width: 2px;
   --mild-ring-offset-width: 2px;
+  
+  // Semantic color mappings for components
+  --mild-background: var(--mild-color-gray-50);
+  --mild-foreground: var(--mild-color-gray-900);
+  --mild-muted: var(--mild-color-gray-100);
+  --mild-muted-foreground: var(--mild-color-gray-500);
+  --mild-border: var(--mild-color-gray-200);
+  --mild-input: var(--mild-color-gray-200);
+  --mild-ring: var(--mild-color-primary-500);
+  
+  // Component-specific semantic colors
+  --mild-card: var(--mild-color-gray-50);
+  --mild-card-foreground: var(--mild-color-gray-900);
+  --mild-popover: var(--mild-color-gray-50);
+  --mild-popover-foreground: var(--mild-color-gray-900);
+  
+  // State colors
+  --mild-accent: var(--mild-color-gray-100);
+  --mild-accent-foreground: var(--mild-color-gray-900);
+  --mild-destructive: var(--mild-color-red-500);
+  --mild-destructive-foreground: var(--mild-color-gray-50);
 }
 
 // Dark theme override (will be generated as separate file)
 @media (prefers-color-scheme: dark) {
   :root {
     // Dark theme color overrides
+    --mild-background: #0a0a0a;
+    --mild-foreground: #fafafa;
+    --mild-muted: #262626;
+    --mild-muted-foreground: #a3a3a3;
+    --mild-border: #262626;
+    --mild-input: #262626;
+    --mild-ring: var(--mild-color-primary-400);
+    
+    // Component-specific colors
+    --mild-card: #0a0a0a;
+    --mild-card-foreground: #fafafa;
+    --mild-popover: #0a0a0a;
+    --mild-popover-foreground: #fafafa;
+    
+    // State colors
+    --mild-accent: #262626;
+    --mild-accent-foreground: #fafafa;
+    --mild-destructive: var(--mild-color-red-400);
+    --mild-destructive-foreground: var(--mild-color-gray-900);
+    
+    // Update gray color mappings for dark mode
     --mild-color-gray-50: #18181b;
     --mild-color-gray-100: #27272a;
     --mild-color-gray-200: #3f3f46;
@@ -56,6 +100,27 @@
 // Data attribute based theming (preferred method)
 [data-theme="dark"] {
   // Dark theme color overrides
+  --mild-background: #0a0a0a;
+  --mild-foreground: #fafafa;
+  --mild-muted: #262626;
+  --mild-muted-foreground: #a3a3a3;
+  --mild-border: #262626;
+  --mild-input: #262626;
+  --mild-ring: var(--mild-color-primary-400);
+  
+  // Component-specific colors
+  --mild-card: #0a0a0a;
+  --mild-card-foreground: #fafafa;
+  --mild-popover: #0a0a0a;
+  --mild-popover-foreground: #fafafa;
+  
+  // State colors
+  --mild-accent: #262626;
+  --mild-accent-foreground: #fafafa;
+  --mild-destructive: var(--mild-color-red-400);
+  --mild-destructive-foreground: var(--mild-color-gray-900);
+  
+  // Update gray color mappings for dark mode
   --mild-color-gray-50: #18181b;
   --mild-color-gray-100: #27272a;
   --mild-color-gray-200: #3f3f46;

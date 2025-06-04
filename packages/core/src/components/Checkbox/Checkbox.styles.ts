@@ -1,34 +1,49 @@
 // packages/core/src/components/Checkbox/Checkbox.styles.ts
-import { cva } from "class-variance-authority";
+import { cva } from "../../utils/cn";
 
-export const checkboxStyles = cva(
-  "peer h-4 w-4 shrink-0 rounded-sm border border-input ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground",
+export const checkboxVariants = cva(
+  "mild-checkbox",
   {
     variants: {
       size: {
-        sm: "h-3 w-3",
-        md: "h-4 w-4",
-        lg: "h-5 w-5",
+        sm: "mild-checkbox--sm",
+        md: "mild-checkbox--md", 
+        lg: "mild-checkbox--lg",
+      },
+      error: {
+        true: "mild-checkbox--error",
+        false: "",
+      },
+      disabled: {
+        true: "mild-checkbox--disabled",
+        false: "",
       },
     },
     defaultVariants: {
       size: "md",
+      error: false,
+      disabled: false,
     },
   },
 );
 
-export const checkboxLabelStyles = cva(
-  "text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70",
+export const checkboxLabelVariants = cva(
+  "mild-checkbox-label",
   {
     variants: {
       size: {
-        sm: "text-xs",
-        md: "text-sm",
-        lg: "text-base",
+        sm: "mild-checkbox-label--sm",
+        md: "mild-checkbox-label--md",
+        lg: "mild-checkbox-label--lg", 
+      },
+      disabled: {
+        true: "mild-checkbox-label--disabled",
+        false: "",
       },
     },
     defaultVariants: {
       size: "md",
+      disabled: false,
     },
   },
 );

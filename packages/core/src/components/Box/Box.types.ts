@@ -65,9 +65,9 @@ export interface BoxCoreProps extends BaseComponentProps, AriaProps {
   overflowY?: 'visible' | 'hidden' | 'scroll' | 'auto';
 }
 
-// export interface BoxContentProps {
-//   /** Box content */
-//   children?: React.ReactNode | string;
-// }
+export interface BoxContentProps {
+  /** Box content */
+  children?: any
+}
 
 export type BoxProps = BoxCoreProps;

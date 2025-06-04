@@ -37,7 +37,7 @@ export interface TextCoreProps extends BaseComponentProps, AriaProps {
 
 export interface TextContentProps {
   /** Text content */
-  children?: React.ReactNode | string;
+  children?: any
 }
 
 export type TextProps = TextCoreProps & TextContentProps;

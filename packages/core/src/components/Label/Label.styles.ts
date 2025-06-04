@@ -1,16 +1,28 @@
-import { cva } from "class-variance-authority";
+// packages/core/src/components/Label/Label.styles.ts
+import { cva } from "../../utils/cn";
 
-export const labelStyles = cva(
-  "text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70",
+export const labelVariants = cva(
+  "mild-label",
   {
     variants: {
       error: {
-        true: "text-destructive",
+        true: "mild-label--error",
+        false: "",
+      },
+      required: {
+        true: "mild-label--required", 
+        false: "",
+      },
+      disabled: {
+        true: "mild-label--disabled",
         false: "",
       },
     },
     defaultVariants: {
       error: false,
+      required: false,
+      disabled: false,
     },
   },
 );
+

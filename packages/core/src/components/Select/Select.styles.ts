@@ -1,21 +1,25 @@
-// packages/core/src/components/Select/Select.styles.ts
-import { cva } from "class-variance-authority";
+// packages/core/src/components/Select/Select.styles.ts  
+import { cva } from "../../utils/cn";
 
-export const selectTriggerStyles = cva(
-  "flex h-10 w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50",
+export const selectTriggerVariants = cva(
+  "mild-select-trigger",
   {
     variants: {
       size: {
-        sm: "h-8 px-2",
-        md: "h-10 px-3",
-        lg: "h-12 px-4",
+        sm: "mild-select-trigger--sm",
+        md: "mild-select-trigger--md",
+        lg: "mild-select-trigger--lg",
       },
       fullWidth: {
-        true: "w-full",
-        false: "w-auto",
+        true: "mild-select-trigger--full-width",
+        false: "",
       },
       error: {
-        true: "border-destructive focus:ring-destructive/50",
+        true: "mild-select-trigger--error",
+        false: "",
+      },
+      disabled: {
+        true: "mild-select-trigger--disabled",
         false: "",
       },
     },
@@ -23,17 +27,18 @@ export const selectTriggerStyles = cva(
       size: "md",
       fullWidth: true,
       error: false,
+      disabled: false,
     },
   },
 );
 
-export const selectContentStyles = cva(
-  "relative z-50 min-w-[8rem] overflow-hidden rounded-md border border-input bg-popover text-popover-foreground shadow-md animate-in fade-in-80",
+export const selectContentVariants = cva(
+  "mild-select-content",
   {
     variants: {
       position: {
-        popper: "translate-y-1",
-        "item-aligned": "",
+        popper: "mild-select-content--popper",
+        "item-aligned": "mild-select-content--item-aligned",
       },
     },
     defaultVariants: {
@@ -42,18 +47,23 @@ export const selectContentStyles = cva(
   },
 );
 
-export const selectItemStyles = cva(
-  "relative flex cursor-default select-none items-center rounded-sm py-1.5 pl-8 pr-2 text-sm outline-none focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
+export const selectItemVariants = cva(
+  "mild-select-item",
   {
     variants: {
       size: {
-        sm: "py-1 text-xs",
-        md: "py-1.5 text-sm",
-        lg: "py-2 text-base",
+        sm: "mild-select-item--sm",
+        md: "mild-select-item--md",
+        lg: "mild-select-item--lg",
+      },
+      disabled: {
+        true: "mild-select-item--disabled",
+        false: "",
       },
     },
     defaultVariants: {
       size: "md",
+      disabled: false,
     },
   },
 );

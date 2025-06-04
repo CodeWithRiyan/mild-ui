@@ -1,0 +1,230 @@
+// packages/core/src/sass/mixins/_component-variants.scss
+/// Advanced SASS mixins for generating component variants
+/// @group mixins
+
+@use 'sass:map';
+@use 'sass:list';
+@use 'sass:string';
+
+/// Generate component size variants
+/// @param {String} $component - Component name (e.g., 'button', 'input')
+/// @param {Map} $sizes - Size configuration map
+@mixin generate-size-variants($component, $sizes) {
+  @each $size-name, $size-props in $sizes {
+    .mild-#{$component}--#{$size-name} {
+      @each $prop, $value in $size-props {
+        #{$prop}: #{$value};
+      }
+    }
+  }
+}
+
+/// Generate component color scheme variants
+/// @param {String} $component - Component name
+/// @param {String} $variant - Variant name (e.g., 'solid', 'outline')
+/// @param {Map} $color-schemes - Color scheme configuration
+@mixin generate-color-variants($component, $variant, $color-schemes) {
+  @each $color-name, $color-props in $color-schemes {
+    .mild-#{$component}--#{$variant}.mild-#{$component}--#{$color-name} {
+      @each $prop, $value in $color-props {
+        @if $prop == 'hover-bg' or $prop == 'hover-border' or $prop == 'hover-color' {
+          // Skip hover properties - handle separately
+        } @else if $prop == 'active-bg' or $prop == 'active-border' or $prop == 'active-color' {
+          // Skip active properties - handle separately  
+        } @else if $prop == 'hover-text-decoration' {
+          // Skip hover text decoration - handle separately
+        } @else {
+          @if $prop == 'bg' {
+            background-color: #{$value};
+          } @else if $prop == 'border' {
+            border-color: #{$value};
+          } @else if $prop == 'color' {
+            color: #{$value};
+          } @else {
+            #{$prop}: #{$value};
+          }
+        }
+      }
+      
+      // Generate hover states
+      &:hover:not(:disabled):not([aria-disabled="true"]) {
+        @if map.has-key($color-props, 'hover-bg') {
+          background-color: map.get($color-props, 'hover-bg');
+        }
+        @if map.has-key($color-props, 'hover-border') {
+          border-color: map.get($color-props, 'hover-border');
+        }
+        @if map.has-key($color-props, 'hover-color') {
+          color: map.get($color-props, 'hover-color');
+        }
+        @if map.has-key($color-props, 'hover-text-decoration') {
+          text-decoration: map.get($color-props, 'hover-text-decoration');
+        }
+      }
+      
+      // Generate active states
+      &:active:not(:disabled):not([aria-disabled="true"]) {
+        @if map.has-key($color-props, 'active-bg') {
+          background-color: map.get($color-props, 'active-bg');
+        }
+        @if map.has-key($color-props, 'active-border') {
+          border-color: map.get($color-props, 'active-border');
+        }
+        @if map.has-key($color-props, 'active-color') {
+          color: map.get($color-props, 'active-color');
+        }
+      }
+    }
+  }
+}
+
+/// Generate component state variants
+/// @param {String} $component - Component name
+/// @param {Map} $states - State configuration map
+@mixin generate-state-variants($component, $states) {
+  @each $state-name, $state-props in $states {
+    .mild-#{$component}--#{$state-name} {
+      @each $prop, $value in $state-props {
+        #{$prop}: #{$value};
+      }
+    }
+  }
+}
+
+/// Generate utility variants for common properties
+/// @param {String} $component - Component name
+@mixin generate-utility-variants($component) {
+  .mild-#{$component}--full-width {
+    width: 100%;
+  }
+  
+  .mild-#{$component}--disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+  
+  .mild-#{$component}--loading {
+    pointer-events: none;
+    position: relative;
+  }
+  
+  .mild-#{$component}--error {
+    border-color: var(--mild-color-red-500);
+    
+    &:focus,
+    &:focus-visible {
+      border-color: var(--mild-color-red-500);
+      box-shadow: 0 0 0 1px var(--mild-color-red-500);
+    }
+  }
+  
+  .mild-#{$component}--readonly {
+    background-color: var(--mild-color-gray-50);
+    cursor: default;
+    
+    &:focus,
+    &:focus-visible {
+      box-shadow: none;
+    }
+  }
+  
+  .mild-#{$component}--required::after {
+    content: '*';
+    color: var(--mild-color-red-500);
+    margin-left: 0.25rem;
+  }
+}
+
+/// Generate complete component variant system
+/// @param {String} $component - Component name
+/// @param {Map} $config - Complete component configuration
+@mixin generate-component-variants($component, $config) {
+  // Generate base component class
+  .mild-#{$component} {
+    @if map.has-key($config, 'base') {
+      $base-props: map.get($config, 'base');
+      @each $prop, $value in $base-props {
+        #{$prop}: #{$value};
+      }
+    }
+  }
+  
+  // Generate size variants
+  @if map.has-key($config, 'sizes') {
+    @include generate-size-variants($component, map.get($config, 'sizes'));
+  }
+  
+  // Generate variant + color combinations
+  @if map.has-key($config, 'variants') {
+    $variants: map.get($config, 'variants');
+    @each $variant-name, $variant-config in $variants {
+      @if map.has-key($variant-config, 'colors') {
+        @include generate-color-variants($component, $variant-name, map.get($variant-config, 'colors'));
+      }
+    }
+  }
+  
+  // Generate state variants
+  @if map.has-key($config, 'states') {
+    @include generate-state-variants($component, map.get($config, 'states'));
+  }
+  
+  // Generate utility variants
+  @include generate-utility-variants($component);
+}
+
+/// Generate responsive variants for a component
+/// @param {String} $component - Component name  
+/// @param {List} $breakpoints - List of breakpoint names
+/// @param {Map} $variants - Variant configuration
+@mixin generate-responsive-variants($component, $breakpoints, $variants) {
+  @each $breakpoint in $breakpoints {
+    @if $breakpoint == 'xs' {
+      // Base styles for xs
+      @each $variant-name, $variant-props in $variants {
+        .mild-#{$component}--#{$variant-name} {
+          @each $prop, $value in $variant-props {
+            #{$prop}: #{$value};
+          }
+        }
+      }
+    } @else {
+      // Responsive styles for other breakpoints
+      @media (min-width: var(--mild-breakpoint-#{$breakpoint})) {
+        @each $variant-name, $variant-props in $variants {
+          .#{$breakpoint}\:mild-#{$component}--#{$variant-name} {
+            @each $prop, $value in $variant-props {
+              #{$prop}: #{$value};
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+/// Generate dark mode variants
+/// @param {String} $component - Component name
+/// @param {Map} $dark-overrides - Dark mode specific overrides
+@mixin generate-dark-variants($component, $dark-overrides) {
+  [data-theme="dark"] {
+    @each $variant-name, $variant-props in $dark-overrides {
+      .mild-#{$component}--#{$variant-name} {
+        @each $prop, $value in $variant-props {
+          #{$prop}: #{$value};
+        }
+      }
+    }
+  }
+  
+  @media (prefers-color-scheme: dark) {
+    @each $variant-name, $variant-props in $dark-overrides {
+      .mild-#{$component}--#{$variant-name} {
+        @each $prop, $value in $variant-props {
+          #{$prop}: #{$value};
+        }
+      }
+    }
+  }
+}
