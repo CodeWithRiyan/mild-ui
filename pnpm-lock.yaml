@@ -79,11 +79,14 @@ importers:
   packages/core:
     devDependencies:
       '@types/node':
-        specifier: ^20.17.46
+        specifier: ^20.0.0
         version: 20.17.46
       autoprefixer:
         specifier: ^10.4.16
         version: 10.4.21(postcss@8.5.3)
+      chokidar:
+        specifier: ^4.0.3
+        version: 4.0.3
       cssnano:
         specifier: ^6.0.1
         version: 6.1.2(postcss@8.5.3)

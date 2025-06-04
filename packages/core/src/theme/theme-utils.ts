@@ -62,7 +62,7 @@ export function mergeThemes(base: ThemeConfig, override: Partial<ThemeConfig>): 
 export function getThemeColor(
   theme: ThemeConfig,
   colorScheme: ColorScheme,
-  shade: keyof ThemeColors = '500'
+  shade: keyof ThemeColors = 500
 ): string {
   return theme.colors[colorScheme][shade];
 }

@@ -7,10 +7,10 @@ import {
   AccordionContentStyleProps,
 } from "./Accordion.types";
 import {
-  accordionStyles,
-  accordionItemStyles,
-  accordionTriggerStyles,
-  accordionContentStyles,
+  accordionVariants,
+  accordionItemVariants,
+  accordionTriggerVariants,
+  accordionContentVariants,
 } from "./Accordion.styles";
 import { cn } from "../../utils/cn";
 
@@ -20,7 +20,7 @@ export function getAccordionProps(
   const { variant = "default", size = "md", className } = props;
 
   return {
-    className: cn(accordionStyles({ variant, size }), className),
+    className: cn(accordionVariants({ variant, size }), className),
     variant,
     size,
   };
@@ -32,7 +32,7 @@ export function getAccordionItemProps(
   const { variant = "default", size = "md", className } = props;
 
   return {
-    className: cn(accordionItemStyles({ variant, size }), className),
+    className: cn(accordionItemVariants({ variant, size }), className),
     variant,
     size,
   };
@@ -44,7 +44,7 @@ export function getAccordionTriggerProps(
   const { variant = "default", size = "md", className } = props;
 
   return {
-    className: cn(accordionTriggerStyles({ variant, size }), className),
+    className: cn(accordionTriggerVariants({ variant, size }), className),
     variant,
     size,
   };
@@ -56,7 +56,7 @@ export function getAccordionContentProps(
   const { variant = "default", size = "md", className } = props;
 
   return {
-    className: cn(accordionContentStyles({ variant, size }), className),
+    className: cn(accordionContentVariants({ variant, size }), className),
     variant,
     size,
   };
