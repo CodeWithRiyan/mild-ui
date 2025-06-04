@@ -2,6 +2,9 @@
 /// Color system with systematic generation
 /// @group tokens
 
+// Import required SASS modules
+@use 'sass:map';
+
 // Base color palette
 $mild-base-colors: (
   // Primary brand colors
@@ -83,7 +86,7 @@ $mild-semantic-colors: (
 ) !default;
 
 // Complete color system
-$mild-colors: map-merge($mild-base-colors, $mild-semantic-colors) !default;
+$mild-colors: map.merge($mild-base-colors, $mild-semantic-colors) !default;
 
 // Color generation function
 @function mild-color($color, $shade: 500) {

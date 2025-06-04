@@ -2,7 +2,7 @@
 /// Component styles entry point
 /// @group components
 
-@use 'button';
-@use 'input';
-@use 'box';
-@use 'text';
+@use 'button' as button-component;
+@use 'input' as input-component;
+@use 'box' as box-component;
+@use 'text' as text-component;

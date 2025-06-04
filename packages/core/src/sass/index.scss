@@ -13,11 +13,11 @@
 @use 'base/reset';
 @use 'base/root';
 @use 'mixins/component-base';
-@use 'mixins/layout';
-@use 'utilities/layout';
-@use 'utilities/spacing';
-@use 'utilities/typography';
-@use 'utilities/colors';
+@use 'mixins/layout' as layout-mixins;
+@use 'utilities/layout' as layout-utils;
+@use 'utilities/spacing' as spacing-utils;
+@use 'utilities/typography' as typography-utils;
+@use 'utilities/colors' as colors-utils;
 
 // Base root styles with CSS custom properties
 :root {

@@ -2,6 +2,9 @@
 /// Responsive breakpoint system
 /// @group tokens
 
+// Import required SASS modules
+@use 'sass:map';
+
 $mild-breakpoints: (
   xs: 0,
   sm: 640px,

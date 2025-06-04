@@ -2,6 +2,9 @@
 /// Border radius system
 /// @group tokens
 
+// Import required SASS modules
+@use 'sass:map';
+
 $mild-radius: (
   none: 0px,
   sm: 0.125rem,

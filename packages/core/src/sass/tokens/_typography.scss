@@ -2,6 +2,9 @@
 /// Typography system with responsive scaling
 /// @group tokens
 
+// Import required SASS modules
+@use 'sass:map';
+
 // Font families
 $mild-font-families: (
   sans: (

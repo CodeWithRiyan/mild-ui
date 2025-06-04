@@ -2,6 +2,9 @@
 /// Elevation system for shadows and depth
 /// @group tokens
 
+// Import required SASS modules
+@use 'sass:map';
+
 // Box shadow tokens
 $mild-shadows: (
   xs: (

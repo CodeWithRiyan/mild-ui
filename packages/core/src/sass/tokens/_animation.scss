@@ -2,6 +2,9 @@
 /// Animation and transition tokens
 /// @group tokens
 
+// Import required SASS modules
+@use 'sass:map';
+
 $mild-transitions: (
   none: none,
   all: all 150ms cubic-bezier(0.4, 0, 0.2, 1),
