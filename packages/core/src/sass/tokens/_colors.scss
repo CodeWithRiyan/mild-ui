@@ -1,14 +1,14 @@
 // packages/core/src/sass/tokens/_colors.scss
-/// Color system with systematic generation
+/// Color system with systematic generation (FIXED)
 /// @group tokens
 
 // Import required SASS modules
 @use 'sass:map';
 
-// Base color palette
+// Base color palette with QUOTED keys to fix interpolation warnings
 $mild-base-colors: (
-  // Primary brand colors
-  blue: (
+  // Primary brand colors - using quoted strings
+  'blue': (
     50: #f0f9ff,
     100: #e0f2fe,
     200: #bae6fd,
@@ -21,7 +21,7 @@ $mild-base-colors: (
     900: #0c4a6e,
     950: #082f49
   ),
-  gray: (
+  'gray': (
     50: #f9fafb,
     100: #f3f4f6,
     200: #e5e7eb,
@@ -34,7 +34,7 @@ $mild-base-colors: (
     900: #111827,
     950: #030712
   ),
-  red: (
+  'red': (
     50: #fef2f2,
     100: #fee2e2,
     200: #fecaca,
@@ -47,7 +47,7 @@ $mild-base-colors: (
     900: #7f1d1d,
     950: #450a0a
   ),
-  green: (
+  'green': (
     50: #f0fdf4,
     100: #dcfce7,
     200: #bbf7d0,
@@ -60,7 +60,7 @@ $mild-base-colors: (
     900: #14532d,
     950: #052e16
   ),
-  yellow: (
+  'yellow': (
     50: #fefce8,
     100: #fef9c3,
     200: #fef08a,
@@ -75,14 +75,14 @@ $mild-base-colors: (
   )
 ) !default;
 
-// Semantic color mapping
+// Semantic color mapping with QUOTED keys
 $mild-semantic-colors: (
-  primary: map.get($mild-base-colors, blue),
-  secondary: map.get($mild-base-colors, gray),
-  success: map.get($mild-base-colors, green),
-  warning: map.get($mild-base-colors, yellow),
-  danger: map.get($mild-base-colors, red),
-  error: map.get($mild-base-colors, red)
+  'primary': map.get($mild-base-colors, 'blue'),
+  'secondary': map.get($mild-base-colors, 'gray'),
+  'success': map.get($mild-base-colors, 'green'),
+  'warning': map.get($mild-base-colors, 'yellow'),
+  'danger': map.get($mild-base-colors, 'red'),
+  'error': map.get($mild-base-colors, 'red')
 ) !default;
 
 // Complete color system
