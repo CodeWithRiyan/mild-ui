@@ -1,0 +1,109 @@
+// packages/core/src/sass/components/_text.scss
+/// Text component styling
+/// @group components
+
+@use '../tokens/typography' as typography;
+@use '../tokens/colors' as colors;
+
+// Text base styles
+.mild-text {
+  margin: 0;
+  color: inherit;
+  font-family: var(--mild-font-family-sans);
+  
+  // Default styling
+  font-size: var(--mild-font-size-base);
+  font-weight: var(--mild-font-weight-normal);
+  line-height: var(--mild-line-height-normal);
+}
+
+// Font size variants
+.mild-text--xs { font-size: var(--mild-font-size-xs); }
+.mild-text--sm { font-size: var(--mild-font-size-sm); }
+.mild-text--md { font-size: var(--mild-font-size-base); }
+.mild-text--lg { font-size: var(--mild-font-size-lg); }
+.mild-text--xl { font-size: var(--mild-font-size-xl); }
+.mild-text--2xl { font-size: var(--mild-font-size-2xl); }
+.mild-text--3xl { font-size: var(--mild-font-size-3xl); }
+.mild-text--4xl { font-size: var(--mild-font-size-4xl); }
+.mild-text--5xl { font-size: var(--mild-font-size-5xl); }
+.mild-text--6xl { font-size: var(--mild-font-size-6xl); }
+.mild-text--7xl { font-size: var(--mild-font-size-7xl); }
+.mild-text--8xl { font-size: var(--mild-font-size-8xl); }
+.mild-text--9xl { font-size: var(--mild-font-size-9xl); }
+
+// Font weight variants
+.mild-text--thin { font-weight: var(--mild-font-weight-thin); }
+.mild-text--extralight { font-weight: var(--mild-font-weight-extralight); }
+.mild-text--light { font-weight: var(--mild-font-weight-light); }
+.mild-text--normal { font-weight: var(--mild-font-weight-normal); }
+.mild-text--medium { font-weight: var(--mild-font-weight-medium); }
+.mild-text--semibold { font-weight: var(--mild-font-weight-semibold); }
+.mild-text--bold { font-weight: var(--mild-font-weight-bold); }
+.mild-text--extrabold { font-weight: var(--mild-font-weight-extrabold); }
+.mild-text--black { font-weight: var(--mild-font-weight-black); }
+
+// Text alignment
+.mild-text--left { text-align: left; }
+.mild-text--center { text-align: center; }
+.mild-text--right { text-align: right; }
+.mild-text--justify { text-align: justify; }
+
+// Text transform
+.mild-text--uppercase { text-transform: uppercase; }
+.mild-text--lowercase { text-transform: lowercase; }
+.mild-text--capitalize { text-transform: capitalize; }
+.mild-text--normal-case { text-transform: none; }
+
+// Text decoration
+.mild-text--underline { text-decoration: underline; }
+.mild-text--line-through { text-decoration: line-through; }
+.mild-text--no-underline { text-decoration: none; }
+
+// Text truncation
+.mild-text--truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+// Line clamping (with fallback)
+.mild-text--clamp-1 {
+  display: -webkit-box;
+  line-clamp: 1;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.mild-text--clamp-2 {
+  display: -webkit-box;
+  line-clamp: 2;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.mild-text--clamp-3 {
+  display: -webkit-box;
+  line-clamp: 3;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.mild-text--clamp-4 {
+  display: -webkit-box;
+  line-clamp: 4;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+// Color schemes
+.mild-text--primary { color: var(--mild-color-primary-500); }
+.mild-text--secondary { color: var(--mild-color-gray-500); }
+.mild-text--success { color: var(--mild-color-green-500); }
+.mild-text--warning { color: var(--mild-color-yellow-600); }
+.mild-text--danger { color: var(--mild-color-red-500); }
+.mild-text--muted { color: var(--mild-muted-foreground); }

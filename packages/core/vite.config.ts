@@ -1,19 +1,31 @@
-// packages/core/vite.config.ts
-import { defineConfig } from "vite";
-import dts from "vite-plugin-dts";
-import { resolve } from "path";
+import { defineConfig } from 'vite';
+import dts from 'vite-plugin-dts';
+import { resolve } from 'path';
 
 export default defineConfig({
+  plugins: [
+    dts({
+      insertTypesEntry: true,
+      copyDtsFiles: true,
+      outDir: 'dist',
+      exclude: ['**/*.test.ts', '**/*.spec.ts']
+    })
+  ],
   build: {
     lib: {
-      entry: resolve(__dirname, "src/index.ts"),
-      name: "MildUICore",
-      fileName: "index", // This will generate index.js
-      formats: ["es", "cjs"], // Support both ES modules and CommonJS
+      entry: resolve(__dirname, 'src/index.ts'),
+      name: 'MildUICore',
+      formats: ['es', 'cjs'],
+      fileName: (format) => `index.${format === 'es' ? 'esm' : format}.js`
     },
     rollupOptions: {
-      external: ["clsx", "class-variance-authority", "tailwind-merge"],
+      external: [],
+      output: {
+        exports: 'named'
+      }
     },
-  },
-  plugins: [dts()],
+    sourcemap: true,
+    minify: 'esbuild',
+    target: 'ES2020'
+  }
 });

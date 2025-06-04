@@ -1,0 +1,444 @@
+// packages/core/src/sass/components/_button.scss
+/// Button component styling with variant system
+/// @group components
+
+@use '../tokens/colors' as colors;
+@use '../tokens/spacing' as spacing;
+@use '../tokens/typography' as typography;
+@use '../tokens/radius' as radius;
+@use '../tokens/animation' as animation;
+@use '../mixins/component-base' as base;
+
+// Button base styles
+.mild-button {
+  @include base.component-base;
+  @include base.focus-ring;
+  @include base.disabled-state;
+  @include base.interactive-transitions;
+  
+  // Base styling
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  white-space: nowrap;
+  vertical-align: middle;
+  line-height: 1;
+  font-weight: var(--mild-font-weight-medium);
+  border-radius: var(--mild-radius-md);
+  border: 1px solid transparent;
+  text-decoration: none;
+  
+  // Default size
+  height: var(--mild-space-10);
+  min-width: var(--mild-space-10);
+  padding: 0 var(--mild-space-4);
+  font-size: var(--mild-font-size-sm);
+  gap: var(--mild-space-2);
+  
+  // Loading state
+  &[data-loading="true"] {
+    pointer-events: none;
+    
+    .mild-button__content {
+      opacity: 0;
+    }
+    
+    .mild-button__spinner {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+  }
+  
+  // Full width
+  &[data-full-width="true"] {
+    width: 100%;
+  }
+}
+
+// Button content wrapper
+.mild-button__content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: inherit;
+}
+
+// Button icon styling
+.mild-button__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.mild-button__left-icon {
+  @extend .mild-button__icon;
+}
+
+.mild-button__right-icon {
+  @extend .mild-button__icon;
+}
+
+// Button spinner
+.mild-button__spinner {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1em;
+  height: 1em;
+  
+  &::after {
+    content: '';
+    width: 1em;
+    height: 1em;
+    border: 2px solid transparent;
+    border-top-color: currentColor;
+    border-radius: 50%;
+    animation: mild-spin 0.8s linear infinite;
+  }
+}
+
+@keyframes mild-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+// Size variants
+.mild-button--xs {
+  height: var(--mild-space-6);
+  min-width: var(--mild-space-6);
+  padding: 0 var(--mild-space-2);
+  font-size: var(--mild-font-size-xs);
+  gap: var(--mild-space-1);
+}
+
+.mild-button--sm {
+  height: var(--mild-space-8);
+  min-width: var(--mild-space-8);
+  padding: 0 var(--mild-space-3);
+  font-size: var(--mild-font-size-sm);
+  gap: var(--mild-space-1-5);
+}
+
+.mild-button--md {
+  height: var(--mild-space-10);
+  min-width: var(--mild-space-10);
+  padding: 0 var(--mild-space-4);
+  font-size: var(--mild-font-size-sm);
+  gap: var(--mild-space-2);
+}
+
+.mild-button--lg {
+  height: var(--mild-space-12);
+  min-width: var(--mild-space-12);
+  padding: 0 var(--mild-space-6);
+  font-size: var(--mild-font-size-base);
+  gap: var(--mild-space-2);
+}
+
+.mild-button--xl {
+  height: var(--mild-space-14);
+  min-width: var(--mild-space-14);
+  padding: 0 var(--mild-space-8);
+  font-size: var(--mild-font-size-lg);
+  gap: var(--mild-space-2-5);
+}
+
+// Color scheme variants - Solid
+.mild-button--solid {
+  // Primary
+  &.mild-button--primary {
+    background-color: var(--mild-color-primary-500);
+    color: white;
+    border-color: var(--mild-color-primary-500);
+    
+    &:hover:not(:disabled) {
+      background-color: var(--mild-color-primary-600);
+      border-color: var(--mild-color-primary-600);
+    }
+    
+    &:active:not(:disabled) {
+      background-color: var(--mild-color-primary-700);
+      border-color: var(--mild-color-primary-700);
+    }
+  }
+  
+  // Secondary
+  &.mild-button--secondary {
+    background-color: var(--mild-color-gray-500);
+    color: white;
+    border-color: var(--mild-color-gray-500);
+    
+    &:hover:not(:disabled) {
+      background-color: var(--mild-color-gray-600);
+      border-color: var(--mild-color-gray-600);
+    }
+    
+    &:active:not(:disabled) {
+      background-color: var(--mild-color-gray-700);
+      border-color: var(--mild-color-gray-700);
+    }
+  }
+  
+  // Success
+  &.mild-button--success {
+    background-color: var(--mild-color-green-500);
+    color: white;
+    border-color: var(--mild-color-green-500);
+    
+    &:hover:not(:disabled) {
+      background-color: var(--mild-color-green-600);
+      border-color: var(--mild-color-green-600);
+    }
+    
+    &:active:not(:disabled) {
+      background-color: var(--mild-color-green-700);
+      border-color: var(--mild-color-green-700);
+    }
+  }
+  
+  // Warning
+  &.mild-button--warning {
+    background-color: var(--mild-color-yellow-500);
+    color: var(--mild-color-gray-900);
+    border-color: var(--mild-color-yellow-500);
+    
+    &:hover:not(:disabled) {
+      background-color: var(--mild-color-yellow-600);
+      border-color: var(--mild-color-yellow-600);
+    }
+    
+    &:active:not(:disabled) {
+      background-color: var(--mild-color-yellow-700);
+      border-color: var(--mild-color-yellow-700);
+    }
+  }
+  
+  // Danger
+  &.mild-button--danger {
+    background-color: var(--mild-color-red-500);
+    color: white;
+    border-color: var(--mild-color-red-500);
+    
+    &:hover:not(:disabled) {
+      background-color: var(--mild-color-red-600);
+      border-color: var(--mild-color-red-600);
+    }
+    
+    &:active:not(:disabled) {
+      background-color: var(--mild-color-red-700);
+      border-color: var(--mild-color-red-700);
+    }
+  }
+}
+
+// Color scheme variants - Outline
+.mild-button--outline {
+  background-color: transparent;
+  
+  // Primary
+  &.mild-button--primary {
+    color: var(--mild-color-primary-500);
+    border-color: var(--mild-color-primary-500);
+    
+    &:hover:not(:disabled) {
+      background-color: var(--mild-color-primary-50);
+    }
+    
+    &:active:not(:disabled) {
+      background-color: var(--mild-color-primary-100);
+    }
+  }
+  
+  // Secondary
+  &.mild-button--secondary {
+    color: var(--mild-color-gray-500);
+    border-color: var(--mild-color-gray-500);
+    
+    &:hover:not(:disabled) {
+      background-color: var(--mild-color-gray-50);
+    }
+    
+    &:active:not(:disabled) {
+      background-color: var(--mild-color-gray-100);
+    }
+  }
+  
+  // Success
+  &.mild-button--success {
+    color: var(--mild-color-green-500);
+    border-color: var(--mild-color-green-500);
+    
+    &:hover:not(:disabled) {
+      background-color: var(--mild-color-green-50);
+    }
+    
+    &:active:not(:disabled) {
+      background-color: var(--mild-color-green-100);
+    }
+  }
+  
+  // Warning
+  &.mild-button--warning {
+    color: var(--mild-color-yellow-600);
+    border-color: var(--mild-color-yellow-500);
+    
+    &:hover:not(:disabled) {
+      background-color: var(--mild-color-yellow-50);
+    }
+    
+    &:active:not(:disabled) {
+      background-color: var(--mild-color-yellow-100);
+    }
+  }
+  
+  // Danger
+  &.mild-button--danger {
+    color: var(--mild-color-red-500);
+    border-color: var(--mild-color-red-500);
+    
+    &:hover:not(:disabled) {
+      background-color: var(--mild-color-red-50);
+    }
+    
+    &:active:not(:disabled) {
+      background-color: var(--mild-color-red-100);
+    }
+  }
+}
+
+// Color scheme variants - Ghost
+.mild-button--ghost {
+  background-color: transparent;
+  border-color: transparent;
+  
+  // Primary
+  &.mild-button--primary {
+    color: var(--mild-color-primary-500);
+    
+    &:hover:not(:disabled) {
+      background-color: var(--mild-color-primary-50);
+    }
+    
+    &:active:not(:disabled) {
+      background-color: var(--mild-color-primary-100);
+    }
+  }
+  
+  // Secondary
+  &.mild-button--secondary {
+    color: var(--mild-color-gray-500);
+    
+    &:hover:not(:disabled) {
+      background-color: var(--mild-color-gray-50);
+    }
+    
+    &:active:not(:disabled) {
+      background-color: var(--mild-color-gray-100);
+    }
+  }
+  
+  // Success
+  &.mild-button--success {
+    color: var(--mild-color-green-500);
+    
+    &:hover:not(:disabled) {
+      background-color: var(--mild-color-green-50);
+    }
+    
+    &:active:not(:disabled) {
+      background-color: var(--mild-color-green-100);
+    }
+  }
+  
+  // Warning
+  &.mild-button--warning {
+    color: var(--mild-color-yellow-600);
+    
+    &:hover:not(:disabled) {
+      background-color: var(--mild-color-yellow-50);
+    }
+    
+    &:active:not(:disabled) {
+      background-color: var(--mild-color-yellow-100);
+    }
+  }
+  
+  // Danger
+  &.mild-button--danger {
+    color: var(--mild-color-red-500);
+    
+    &:hover:not(:disabled) {
+      background-color: var(--mild-color-red-50);
+    }
+    
+    &:active:not(:disabled) {
+      background-color: var(--mild-color-red-100);
+    }
+  }
+}
+
+// Color scheme variants - Link
+.mild-button--link {
+  background-color: transparent;
+  border-color: transparent;
+  height: auto;
+  min-width: auto;
+  padding: 0;
+  font-weight: var(--mild-font-weight-normal);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  
+  &:hover:not(:disabled) {
+    text-decoration: none;
+  }
+  
+  // Primary
+  &.mild-button--primary {
+    color: var(--mild-color-primary-500);
+    
+    &:hover:not(:disabled) {
+      color: var(--mild-color-primary-600);
+    }
+  }
+  
+  // Secondary
+  &.mild-button--secondary {
+    color: var(--mild-color-gray-500);
+    
+    &:hover:not(:disabled) {
+      color: var(--mild-color-gray-600);
+    }
+  }
+  
+  // Success
+  &.mild-button--success {
+    color: var(--mild-color-green-500);
+    
+    &:hover:not(:disabled) {
+      color: var(--mild-color-green-600);
+    }
+  }
+  
+  // Warning
+  &.mild-button--warning {
+    color: var(--mild-color-yellow-600);
+    
+    &:hover:not(:disabled) {
+      color: var(--mild-color-yellow-700);
+    }
+  }
+  
+  // Danger
+  &.mild-button--danger {
+    color: var(--mild-color-red-500);
+    
+    &:hover:not(:disabled) {
+      color: var(--mild-color-red-600);
+    }
+  }
+}

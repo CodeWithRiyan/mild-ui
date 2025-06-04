@@ -1,0 +1,38 @@
+// packages/core/src/sass/tokens/_breakpoints.scss
+/// Responsive breakpoint system
+/// @group tokens
+
+$mild-breakpoints: (
+  xs: 0,
+  sm: 640px,
+  md: 768px,
+  lg: 1024px,
+  xl: 1280px,
+  '2xl': 1536px
+) !default;
+
+// Breakpoint function
+@function mild-breakpoint($size) {
+  @return map.get($mild-breakpoints, $size);
+}
+
+// Media query mixins
+@mixin mild-screen($size) {
+  $breakpoint: mild-breakpoint($size);
+  @if $breakpoint == 0 {
+    @content;
+  } @else {
+    @media (min-width: #{$breakpoint}) {
+      @content;
+    }
+  }
+}
+
+@mixin mild-screen-max($size) {
+  $breakpoint: mild-breakpoint($size);
+  @if $breakpoint != 0 {
+    @media (max-width: #{$breakpoint - 1px}) {
+      @content;
+    }
+  }
+}

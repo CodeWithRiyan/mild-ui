@@ -1,0 +1,70 @@
+// packages/core/src/sass/index.scss
+/// Main SASS entry point - compiles design system
+/// @group main
+
+// All @use rules must come first
+@use 'tokens/colors' as colors;
+@use 'tokens/typography' as typography;
+@use 'tokens/spacing' as spacing;
+@use 'tokens/elevation' as elevation;
+@use 'tokens/radius' as radius;
+@use 'tokens/breakpoints' as breakpoints;
+@use 'tokens/animation' as animation;
+@use 'base/reset';
+@use 'base/root';
+@use 'mixins/component-base';
+@use 'mixins/layout';
+@use 'utilities/layout';
+@use 'utilities/spacing';
+@use 'utilities/typography';
+@use 'utilities/colors';
+
+// Base root styles with CSS custom properties
+:root {
+  // Generate all design token custom properties
+  @include colors.generate-color-properties();
+  @include typography.generate-typography-properties();
+  @include spacing.generate-spacing-properties();
+  @include elevation.generate-shadow-properties();
+  @include radius.generate-radius-properties();
+  @include animation.generate-animation-properties();
+  
+  // Additional system properties
+  --mild-border-width: 1px;
+  --mild-outline-width: 2px;
+  --mild-ring-offset-width: 2px;
+}
+
+// Dark theme override (will be generated as separate file)
+@media (prefers-color-scheme: dark) {
+  :root {
+    // Dark theme color overrides
+    --mild-color-gray-50: #18181b;
+    --mild-color-gray-100: #27272a;
+    --mild-color-gray-200: #3f3f46;
+    --mild-color-gray-300: #52525b;
+    --mild-color-gray-400: #71717a;
+    --mild-color-gray-500: #a1a1aa;
+    --mild-color-gray-600: #d4d4d8;
+    --mild-color-gray-700: #e4e4e7;
+    --mild-color-gray-800: #f4f4f5;
+    --mild-color-gray-900: #fafafa;
+    --mild-color-gray-950: #ffffff;
+  }
+}
+
+// Data attribute based theming (preferred method)
+[data-theme="dark"] {
+  // Dark theme color overrides
+  --mild-color-gray-50: #18181b;
+  --mild-color-gray-100: #27272a;
+  --mild-color-gray-200: #3f3f46;
+  --mild-color-gray-300: #52525b;
+  --mild-color-gray-400: #71717a;
+  --mild-color-gray-500: #a1a1aa;
+  --mild-color-gray-600: #d4d4d8;
+  --mild-color-gray-700: #e4e4e7;
+  --mild-color-gray-800: #f4f4f5;
+  --mild-color-gray-900: #fafafa;
+  --mild-color-gray-950: #ffffff;
+}
