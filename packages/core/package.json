@@ -15,22 +15,33 @@
     "src/compiled/"
   ],
   "scripts": {
-    "build": "pnpm run build:sass && pnpm run build:ts && pnpm run build:bundle",
+    "build": "pnpm run build:sass && pnpm run build:ts && pnpm run build:bundle && pnpm run docs:build",
     "build:sass": "node scripts/build-sass.js",
     "build:ts": "tsc",
     "build:bundle": "vite build",
-    "dev": "pnpm run build:sass && tsc --watch",
-    "sass:watch": "node scripts/watch-sass.js",
-    "clean": "rimraf dist"
+    "docs:build": "pnpm run docs:api && pnpm run docs:sass && pnpm run docs:tokens && pnpm run docs:components",
+    "docs:api": "typedoc",
+    "docs:sass": "sassdoc src/sass",
+    "docs:tokens": "node scripts/generate-token-docs.js",
+    "docs:components": "node scripts/generate-component-docs.js",
+    "docs:serve": "cd docs && python -m http.server 8080",
+    "docs:watch": "nodemon --watch src --ext ts,scss --exec 'pnpm docs:build'",
+    "dev": "concurrently 'pnpm sass:watch' 'pnpm docs:watch'"
   },
   "devDependencies": {
     "@types/node": "^20.0.0",
     "autoprefixer": "^10.4.16",
     "chokidar": "^4.0.3",
+    "concurrently": "^9.1.2",
     "cssnano": "^6.0.1",
+    "nodemon": "^3.1.10",
     "postcss": "^8.4.32",
     "rimraf": "^5.0.0",
     "sass": "^1.69.5",
+    "sassdoc": "^2.7.4",
+    "sassdoc-theme-herman": "^6.0.2",
+    "typedoc": "^0.28.5",
+    "typedoc-plugin-markdown": "^4.6.4",
     "typescript": "^5.3.0",
     "vite": "^5.0.0",
     "vite-plugin-dts": "^3.6.0"
