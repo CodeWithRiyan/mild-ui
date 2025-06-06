@@ -5,13 +5,6 @@
 import type { Size, ColorScheme } from '../types/common';
 
 /**
- * Utility to combine class names conditionally
- */
-export function cn(...classes: (string | undefined | null | false)[]): string {
-  return classes.filter(Boolean).join(' ');
-}
-
-/**
  * Generate component class names based on props
  */
 export function createComponentClass(

@@ -7,3 +7,5 @@ export * from "./Label";
 export * from "./Radio";
 export * from "./Select";
 export * from "./Switch";
+export * from "./Text";
+export * from "./Box";

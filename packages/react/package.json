@@ -1,49 +1,89 @@
 {
   "name": "@mild-ui/react",
-  "version": "0.2.3",
-  "type": "module",
-  "files": [
-    "dist"
+  "version": "0.3.1",
+  "description": "React components with SASS-powered styling - zero dependencies",
+  "main": "dist/index.js",
+  "module": "dist/index.esm.js",
+  "types": "dist/index.d.ts",
+  "sideEffects": [
+    "*.css",
+    "*.scss"
   ],
-  "main": "./dist/index.js",
-  "module": "./dist/index.js",
-  "types": "./dist/index.d.ts",
-  "sideEffects": false,
+  "files": [
+    "dist/",
+    "src/styles/",
+    "README.md"
+  ],
   "scripts": {
-    "dev": "vite build --watch",
-    "build": "tsc && vite build",
+    "build": "npm run build:sass && npm run build:ts && npm run build:bundle",
+    "build:sass": "sass src/styles/index.scss dist/mild-ui-react.css --style=compressed",
+    "build:ts": "tsc",
+    "build:bundle": "vite build",
+    "dev": "npm run build:sass && tsc --watch",
+    "sass:watch": "sass src/styles/index.scss dist/mild-ui-react.css --watch",
     "test": "vitest run",
-    "clean": "rm -rf dist"
+    "test:watch": "vitest",
+    "lint": "eslint src --ext .ts,.tsx",
+    "type-check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@mild-ui/core": "^0.2.3",
+    "@radix-ui/react-checkbox": "^1.3.2",
+    "@radix-ui/react-radio-group": "^1.3.7",
+    "@radix-ui/react-select": "^2.2.5",
+    "@radix-ui/react-slot": "^1.2.3",
+    "@radix-ui/react-switch": "^1.2.5",
+    "lucide-react": "^0.284.0",
+    "react-hook-form": "^7.56.4"
   },
   "peerDependencies": {
     "react": "^18.0.0",
     "react-dom": "^18.0.0"
   },
-  "dependencies": {
-    "@mild-ui/core": "^0.2.2",
-    "@radix-ui/react-checkbox": "^1.3.1",
-    "@radix-ui/react-primitive": "^2.1.2",
-    "@radix-ui/react-radio-group": "^1.3.6",
-    "@radix-ui/react-select": "^2.2.4",
-    "@radix-ui/react-slot": "^1.2.2",
-    "@radix-ui/react-switch": "^1.2.5",
-    "lucide-react": "^0.230.0",
-    "react-hook-form": "^7.56.4"
-  },
   "devDependencies": {
-    "@testing-library/jest-dom": "^6.6.3",
-    "@testing-library/react": "^16.3.0",
-    "@types/react": "^18.2.15",
-    "@types/react-dom": "^18.2.7",
-    "@vitejs/plugin-react": "^4.4.1",
-    "autoprefixer": "^10.4.21",
-    "postcss": "^8.5.3",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "tailwindcss": "^4.1.7",
-    "typescript": "^5.8.3",
-    "vite": "^5.4.19",
-    "vite-plugin-dts": "^3.9.1",
-    "vitest": "^0.34.6"
-  }
+    "@testing-library/jest-dom": "^6.0.0",
+    "@testing-library/react": "^14.0.0",
+    "@types/react": "^18.2.0",
+    "@types/react-dom": "^18.2.0",
+    "@typescript-eslint/eslint-plugin": "^6.0.0",
+    "@typescript-eslint/parser": "^6.0.0",
+    "@vitejs/plugin-react": "^4.2.0",
+    "eslint": "^8.45.0",
+    "sass": "^1.69.5",
+    "typescript": "^5.3.0",
+    "vite": "^5.0.0",
+    "vite-plugin-dts": "^3.6.0",
+    "vitest": "^1.0.0"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.esm.js",
+      "require": "./dist/index.js"
+    },
+    "./styles": "./dist/mild-ui-react.css",
+    "./package.json": "./package.json"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "keywords": [
+    "react",
+    "ui",
+    "components",
+    "design-system",
+    "sass",
+    "zero-dependencies",
+    "cross-platform",
+    "mild-ui"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/mild-ui",
+    "directory": "packages/react"
+  },
+  "bugs": {
+    "url": "https://github.com/yourusername/mild-ui/issues"
+  },
+  "homepage": "https://yourusername.github.io/mild-ui/react"
 }

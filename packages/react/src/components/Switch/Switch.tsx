@@ -4,12 +4,12 @@ import * as SwitchPrimitive from "@radix-ui/react-switch";
 import { Check } from "lucide-react";
 import {
   SwitchCoreProps,
-  switchStyles,
   SwitchStyleProps,
-  switchThumbStyles,
-  switchLabelStyles,
-} from "@mild-ui/core";
-import { cn } from "../../utils";
+  cn,
+  switchLabelVariants,
+  switchThumbVariants,
+  switchVariants
+} from "../../../../core";
 import { Label } from "../Label";
 
 // Extend from core types but manually handle React-specific props
@@ -52,17 +52,17 @@ const Switch = React.forwardRef<HTMLButtonElement, SwitchProps>(
           name={name}
           value={value}
           onCheckedChange={onCheckedChange}
-          className={cn(switchStyles({ size }), className, ui?.switch)}
+          className={cn(switchVariants({ size }), className, ui?.switch)}
           {...restProps}
         >
           <SwitchPrimitive.Thumb
-            className={cn(switchThumbStyles({ size }), ui?.thumb)}
+            className={cn(switchThumbVariants({ size }), ui?.thumb)}
           />
         </SwitchPrimitive.Root>
         {label && (
           <Label
             htmlFor={id}
-            className={cn(switchLabelStyles({ size }), ui?.label)}
+            className={cn(switchLabelVariants({ size }), ui?.label)}
             required={required}
           >
             {label}

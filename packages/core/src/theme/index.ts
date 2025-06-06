@@ -5,16 +5,6 @@
 export * from './default-theme';
 export * from './theme-utils';
 export type * from './theme-provider.types';
+export type * from '../types/common';
 
-// Re-export theme types
-export type { 
-  ThemeConfig, 
-  ThemeColors, 
-  ColorMode,
-} from '../types/common';
-
-export type {
-  ThemeProviderProps,
-  ThemeContextValue,
-  UseThemeReturn
-} from './theme-provider.types';
+export type * from './theme-provider.types';

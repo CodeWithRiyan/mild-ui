@@ -40,7 +40,7 @@ export interface ButtonStyleProps {
 
 export interface ButtonPlatformProps {
   /** Platform-specific click handler */
-  onClick?: () => void;
+  // onClick?: (e: any) => void;
   onPress?: () => void; // React Native
   onTap?: () => void;   // Flutter equivalent
 }
