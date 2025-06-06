@@ -25,13 +25,13 @@
     "docs:generate": "node scripts/generate-docs.js",
     "docs:build": "pnpm run docs:generate",
     "docs:serve": "pnpm run docs:generate && serve docs -p 3001",
-    "docs:dev": "pnpm run docs:generate && serve docs -p 3001 --live",
     "docs:watch": "nodemon --watch src --ext ts,scss --exec \"pnpm docs:generate\"",
     "debug:components": "node scripts/debug-components.js"
   },
   "devDependencies": {
     "@types/node": "^20.0.0",
     "autoprefixer": "^10.4.16",
+    "chokidar": "^4.0.3",
     "cssnano": "^6.0.1",
     "nodemon": "^3.0.2",
     "postcss": "^8.4.32",
