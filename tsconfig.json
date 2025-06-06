@@ -16,7 +16,7 @@
   "include": [
     "packages/*/src/**/*.ts",
     "packages/*/src/**/*.tsx",
-    "packages/*/src/**/*.vue",
+    "packages/*/src/**/*.vue"
   ],
   "exclude": ["node_modules", "dist", "**/*.test.ts", "**/*.spec.ts"]
 }

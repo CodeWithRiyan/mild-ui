@@ -1,17 +1,17 @@
 // packages/core/src/components/Accordion/Accordion.styles.ts
-import { cva } from "class-variance-authority";
+import { cva } from "../../utils/cn";
 
-export const accordionStyles = cva("w-full", {
+export const accordionVariants = cva("mild-accordion", {
   variants: {
     variant: {
-      default: "",
-      ghost: "",
-      bordered: "border border-border rounded-lg",
+      default: "mild-accordion--default",
+      ghost: "mild-accordion--ghost",
+      bordered: "mild-accordion--bordered",
     },
     size: {
-      sm: "text-sm",
-      md: "text-base",
-      lg: "text-lg",
+      sm: "mild-accordion--sm",
+      md: "mild-accordion--md",
+      lg: "mild-accordion--lg",
     },
   },
   defaultVariants: {
@@ -20,17 +20,17 @@ export const accordionStyles = cva("w-full", {
   },
 });
 
-export const accordionItemStyles = cva("", {
+export const accordionItemVariants = cva("mild-accordion-item", {
   variants: {
     variant: {
-      default: "border-b border-border",
-      ghost: "",
-      bordered: "border-b border-border last:border-b-0",
+      default: "mild-accordion-item--default",
+      ghost: "mild-accordion-item--ghost",
+      bordered: "mild-accordion-item--bordered",
     },
     size: {
-      sm: "",
-      md: "",
-      lg: "",
+      sm: "mild-accordion-item--sm",
+      md: "mild-accordion-item--md",
+      lg: "mild-accordion-item--lg",
     },
   },
   defaultVariants: {
@@ -39,46 +39,40 @@ export const accordionItemStyles = cva("", {
   },
 });
 
-export const accordionTriggerStyles = cva(
-  "flex flex-1 items-center justify-between py-4 font-medium transition-all hover:underline [&[data-state=open]>svg]:rotate-180",
-  {
-    variants: {
-      variant: {
-        default: "",
-        ghost: "hover:bg-accent hover:text-accent-foreground rounded-md px-2",
-        bordered: "px-4",
-      },
-      size: {
-        sm: "py-2 text-sm",
-        md: "py-4 text-base",
-        lg: "py-6 text-lg",
-      },
+export const accordionTriggerVariants = cva("mild-accordion-trigger", {
+  variants: {
+    variant: {
+      default: "mild-accordion-trigger--default",
+      ghost: "mild-accordion-trigger--ghost",
+      bordered: "mild-accordion-trigger--bordered",
     },
-    defaultVariants: {
-      variant: "default",
-      size: "md",
+    size: {
+      sm: "mild-accordion-trigger--sm",
+      md: "mild-accordion-trigger--md",
+      lg: "mild-accordion-trigger--lg",
     },
   },
-);
+  defaultVariants: {
+    variant: "default",
+    size: "md",
+  },
+});
 
-export const accordionContentStyles = cva(
-  "overflow-hidden text-sm transition-all data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down",
-  {
-    variants: {
-      variant: {
-        default: "pb-4 pt-0",
-        ghost: "pb-4 pt-0 px-2",
-        bordered: "pb-4 pt-0 px-4",
-      },
-      size: {
-        sm: "text-xs pb-2",
-        md: "text-sm pb-4",
-        lg: "text-base pb-6",
-      },
+export const accordionContentVariants = cva("mild-accordion-content", {
+  variants: {
+    variant: {
+      default: "mild-accordion-content--default",
+      ghost: "mild-accordion-content--ghost",
+      bordered: "mild-accordion-content--bordered",
     },
-    defaultVariants: {
-      variant: "default",
-      size: "md",
+    size: {
+      sm: "mild-accordion-content--sm",
+      md: "mild-accordion-content--md",
+      lg: "mild-accordion-content--lg",
     },
   },
-);
+  defaultVariants: {
+    variant: "default",
+    size: "md",
+  },
+});

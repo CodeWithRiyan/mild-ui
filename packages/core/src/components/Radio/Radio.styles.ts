@@ -1,34 +1,43 @@
 // packages/core/src/components/Radio/Radio.styles.ts
-import { cva } from "class-variance-authority";
+import { cva } from "../../utils/cn";
 
-export const radioStyles = cva(
-  "peer h-4 w-4 shrink-0 rounded-full border border-input ring-offset-background focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:border-primary data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground",
-  {
-    variants: {
-      size: {
-        sm: "h-3 w-3",
-        md: "h-4 w-4",
-        lg: "h-5 w-5",
-      },
+export const radioVariants = cva("mild-radio", {
+  variants: {
+    size: {
+      sm: "mild-radio--sm",
+      md: "mild-radio--md",
+      lg: "mild-radio--lg",
     },
-    defaultVariants: {
-      size: "md",
+    error: {
+      true: "mild-radio--error",
+      false: "",
+    },
+    disabled: {
+      true: "mild-radio--disabled",
+      false: "",
     },
   },
-);
+  defaultVariants: {
+    size: "md",
+    error: false,
+    disabled: false,
+  },
+});
 
-export const radioLabelStyles = cva(
-  "text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70",
-  {
-    variants: {
-      size: {
-        sm: "text-xs",
-        md: "text-sm",
-        lg: "text-base",
-      },
+export const radioLabelVariants = cva("mild-radio-label", {
+  variants: {
+    size: {
+      sm: "mild-radio-label--sm",
+      md: "mild-radio-label--md",
+      lg: "mild-radio-label--lg",
     },
-    defaultVariants: {
-      size: "md",
+    disabled: {
+      true: "mild-radio-label--disabled",
+      false: "",
     },
   },
-);
+  defaultVariants: {
+    size: "md",
+    disabled: false,
+  },
+});

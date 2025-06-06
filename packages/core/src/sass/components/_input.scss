@@ -1,0 +1,124 @@
+// packages/core/src/sass/components/_input.scss
+/// Input component styling
+/// @group components
+
+@use "../tokens/colors" as colors;
+@use "../tokens/spacing" as spacing;
+@use "../tokens/typography" as typography;
+@use "../tokens/radius" as radius;
+@use "../tokens/animation" as animation;
+@use "../mixins/component-base" as base;
+
+// Input base styles
+.mild-input {
+  @include base.component-base;
+  @include base.focus-ring;
+  @include base.disabled-state;
+  @include base.interactive-transitions;
+
+  // Base styling
+  appearance: none;
+  width: 100%;
+  background-color: var(--mild-background);
+  border-radius: var(--mild-radius-md);
+  border: 1px solid var(--mild-border);
+  color: var(--mild-foreground);
+  font-size: var(--mild-font-size-sm);
+  line-height: var(--mild-line-height-normal);
+
+  // Default size
+  height: var(--mild-space-10);
+  padding: 0 var(--mild-space-3);
+
+  // Placeholder styling
+  &::placeholder {
+    color: var(--mild-muted-foreground);
+    opacity: 1;
+  }
+
+  // Focus state
+  &:focus {
+    outline: none;
+    border-color: var(--mild-color-primary-500);
+    box-shadow: 0 0 0 1px var(--mild-color-primary-500);
+  }
+
+  // Invalid/Error state
+  &[aria-invalid="true"],
+  &[data-invalid="true"] {
+    border-color: var(--mild-color-red-500);
+
+    &:focus {
+      border-color: var(--mild-color-red-500);
+      box-shadow: 0 0 0 1px var(--mild-color-red-500);
+    }
+  }
+
+  // Readonly state
+  &[readonly] {
+    background-color: var(--mild-muted);
+    cursor: default;
+  }
+}
+
+// Size variants
+.mild-input--sm {
+  height: var(--mild-space-8);
+  padding: 0 var(--mild-space-2-5);
+  font-size: var(--mild-font-size-xs);
+}
+
+.mild-input--md {
+  height: var(--mild-space-10);
+  padding: 0 var(--mild-space-3);
+  font-size: var(--mild-font-size-sm);
+}
+
+.mild-input--lg {
+  height: var(--mild-space-12);
+  padding: 0 var(--mild-space-4);
+  font-size: var(--mild-font-size-base);
+}
+
+// Variant styles
+.mild-input--outline {
+  // Default outline style (already defined in base)
+}
+
+.mild-input--filled {
+  background-color: var(--mild-muted);
+  border-color: transparent;
+
+  &:hover:not(:disabled):not(:focus) {
+    background-color: var(--mild-accent);
+  }
+
+  &:focus {
+    background-color: var(--mild-background);
+    border-color: var(--mild-color-primary-500);
+  }
+}
+
+.mild-input--flushed {
+  border: none;
+  border-bottom: 1px solid var(--mild-border);
+  border-radius: 0;
+  padding-left: 0;
+  padding-right: 0;
+
+  &:focus {
+    border-bottom-color: var(--mild-color-primary-500);
+    box-shadow: 0 1px 0 0 var(--mild-color-primary-500);
+  }
+}
+
+.mild-input--unstyled {
+  background: none;
+  border: none;
+  padding: 0;
+  height: auto;
+
+  &:focus {
+    box-shadow: none;
+  }
+}

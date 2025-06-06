@@ -1,0 +1,135 @@
+// packages/core/src/sass/index.scss
+/// Main SASS entry point - compiles design system
+/// @group main
+
+// All @use rules must come first
+@use "tokens/colors" as colors;
+@use "tokens/typography" as typography;
+@use "tokens/spacing" as spacing;
+@use "tokens/elevation" as elevation;
+@use "tokens/radius" as radius;
+@use "tokens/breakpoints" as breakpoints;
+@use "tokens/animation" as animation;
+@use "base/reset";
+@use "base/root";
+@use "mixins/component-base";
+@use "mixins/layout" as layout-mixins;
+@use "mixins/component-variants" as variants;
+@use "utilities/layout" as layout-utils;
+@use "utilities/spacing" as spacing-utils;
+@use "utilities/typography" as typography-utils;
+@use "utilities/colors" as colors-utils;
+@use "components/index" as components;
+
+// Base root styles with CSS custom properties
+:root {
+  // Generate all design token custom properties
+  @include colors.generate-color-properties();
+  @include typography.generate-typography-properties();
+  @include spacing.generate-spacing-properties();
+  @include elevation.generate-shadow-properties();
+  @include radius.generate-radius-properties();
+  @include animation.generate-animation-properties();
+
+  // Additional system properties
+  --mild-border-width: 1px;
+  --mild-outline-width: 2px;
+  --mild-ring-offset-width: 2px;
+
+  // Semantic color mappings for components
+  --mild-background: var(--mild-color-gray-50);
+  --mild-foreground: var(--mild-color-gray-900);
+  --mild-muted: var(--mild-color-gray-100);
+  --mild-muted-foreground: var(--mild-color-gray-500);
+  --mild-border: var(--mild-color-gray-200);
+  --mild-input: var(--mild-color-gray-200);
+  --mild-ring: var(--mild-color-primary-500);
+
+  // Component-specific semantic colors
+  --mild-card: var(--mild-color-gray-50);
+  --mild-card-foreground: var(--mild-color-gray-900);
+  --mild-popover: var(--mild-color-gray-50);
+  --mild-popover-foreground: var(--mild-color-gray-900);
+
+  // State colors
+  --mild-accent: var(--mild-color-gray-100);
+  --mild-accent-foreground: var(--mild-color-gray-900);
+  --mild-destructive: var(--mild-color-red-500);
+  --mild-destructive-foreground: var(--mild-color-gray-50);
+}
+
+// Dark theme override (will be generated as separate file)
+@media (prefers-color-scheme: dark) {
+  :root {
+    // Dark theme color overrides
+    --mild-background: #0a0a0a;
+    --mild-foreground: #fafafa;
+    --mild-muted: #262626;
+    --mild-muted-foreground: #a3a3a3;
+    --mild-border: #262626;
+    --mild-input: #262626;
+    --mild-ring: var(--mild-color-primary-400);
+
+    // Component-specific colors
+    --mild-card: #0a0a0a;
+    --mild-card-foreground: #fafafa;
+    --mild-popover: #0a0a0a;
+    --mild-popover-foreground: #fafafa;
+
+    // State colors
+    --mild-accent: #262626;
+    --mild-accent-foreground: #fafafa;
+    --mild-destructive: var(--mild-color-red-400);
+    --mild-destructive-foreground: var(--mild-color-gray-900);
+
+    // Update gray color mappings for dark mode
+    --mild-color-gray-50: #18181b;
+    --mild-color-gray-100: #27272a;
+    --mild-color-gray-200: #3f3f46;
+    --mild-color-gray-300: #52525b;
+    --mild-color-gray-400: #71717a;
+    --mild-color-gray-500: #a1a1aa;
+    --mild-color-gray-600: #d4d4d8;
+    --mild-color-gray-700: #e4e4e7;
+    --mild-color-gray-800: #f4f4f5;
+    --mild-color-gray-900: #fafafa;
+    --mild-color-gray-950: #ffffff;
+  }
+}
+
+// Data attribute based theming (preferred method)
+[data-theme="dark"] {
+  // Dark theme color overrides
+  --mild-background: #0a0a0a;
+  --mild-foreground: #fafafa;
+  --mild-muted: #262626;
+  --mild-muted-foreground: #a3a3a3;
+  --mild-border: #262626;
+  --mild-input: #262626;
+  --mild-ring: var(--mild-color-primary-400);
+
+  // Component-specific colors
+  --mild-card: #0a0a0a;
+  --mild-card-foreground: #fafafa;
+  --mild-popover: #0a0a0a;
+  --mild-popover-foreground: #fafafa;
+
+  // State colors
+  --mild-accent: #262626;
+  --mild-accent-foreground: #fafafa;
+  --mild-destructive: var(--mild-color-red-400);
+  --mild-destructive-foreground: var(--mild-color-gray-900);
+
+  // Update gray color mappings for dark mode
+  --mild-color-gray-50: #18181b;
+  --mild-color-gray-100: #27272a;
+  --mild-color-gray-200: #3f3f46;
+  --mild-color-gray-300: #52525b;
+  --mild-color-gray-400: #71717a;
+  --mild-color-gray-500: #a1a1aa;
+  --mild-color-gray-600: #d4d4d8;
+  --mild-color-gray-700: #e4e4e7;
+  --mild-color-gray-800: #f4f4f5;
+  --mild-color-gray-900: #fafafa;
+  --mild-color-gray-950: #ffffff;
+}

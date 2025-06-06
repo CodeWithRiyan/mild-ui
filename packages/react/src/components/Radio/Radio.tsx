@@ -4,12 +4,12 @@ import * as RadioGroupPrimitive from "@radix-ui/react-radio-group";
 import { Circle } from "lucide-react";
 import {
   RadioCoreProps,
-  radioStyles,
+  radioVariants,
   RadioStyleProps,
-  radioLabelStyles,
+  radioLabelVariants,
   RadioSize,
-} from "@mild-ui/core";
-import { cn } from "../../utils";
+  cn,
+} from "../../../../core";
 
 // Props untuk RadioGroup
 interface RadioGroupProps
@@ -63,7 +63,7 @@ const RadioGroupItem = React.forwardRef<
       <div className="flex items-center space-x-2">
         <RadioGroupPrimitive.Item
           ref={ref}
-          className={cn(radioStyles({ size }), className)}
+          className={cn(radioVariants({ size }), className)}
           value={value}
           disabled={disabled}
           required={required}
@@ -78,7 +78,7 @@ const RadioGroupItem = React.forwardRef<
           <label
             htmlFor={radioId}
             className={cn(
-              radioLabelStyles({ size }),
+              radioLabelVariants({ size }),
               disabled && "opacity-50 cursor-not-allowed",
             )}
           >

@@ -1,0 +1,29 @@
+// packages/core/src/sass/themes/light.scss
+/// Light theme configuration
+/// @group themes
+
+@use "../tokens/colors" as colors;
+
+:root,
+[data-theme="light"] {
+  // Semantic color mappings for light theme
+  --mild-background: var(--mild-color-gray-50);
+  --mild-foreground: var(--mild-color-gray-900);
+  --mild-muted: var(--mild-color-gray-100);
+  --mild-muted-foreground: var(--mild-color-gray-500);
+  --mild-border: var(--mild-color-gray-200);
+  --mild-input: var(--mild-color-gray-200);
+  --mild-ring: var(--mild-color-primary-500);
+
+  // Component-specific colors
+  --mild-card: var(--mild-color-gray-50);
+  --mild-card-foreground: var(--mild-color-gray-900);
+  --mild-popover: var(--mild-color-gray-50);
+  --mild-popover-foreground: var(--mild-color-gray-900);
+
+  // State colors
+  --mild-accent: var(--mild-color-gray-100);
+  --mild-accent-foreground: var(--mild-color-gray-900);
+  --mild-destructive: var(--mild-color-red-500);
+  --mild-destructive-foreground: var(--mild-color-gray-50);
+}

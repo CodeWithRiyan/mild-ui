@@ -1,0 +1,63 @@
+// packages/react/src/styles/index.scss
+// Import core SASS styles and React-specific adaptations
+@use "../../../core/src/sass" as mild-core;
+
+// React-specific style adaptations
+.mild-react-root {
+  // Ensure proper CSS custom property inheritance
+  color-scheme: var(--mild-color-scheme, light);
+}
+
+// React-specific component adaptations
+.mild-button {
+  // Ensure proper React event handling
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+
+  // React-specific focus handling
+  &:focus-visible {
+    outline: 2px solid var(--mild-color-primary-500);
+    outline-offset: 2px;
+  }
+}
+
+// React form component adaptations
+.mild-input,
+.mild-select-trigger {
+  // React-specific input styling
+  &:focus {
+    outline: none;
+  }
+
+  // React controlled component styling
+  &[data-controlled="true"] {
+    // Styles for controlled inputs
+  }
+}
+
+// React animation classes
+.mild-react-enter {
+  opacity: 0;
+  transform: scale(0.95);
+}
+
+.mild-react-enter-active {
+  opacity: 1;
+  transform: scale(1);
+  transition:
+    opacity 200ms,
+    transform 200ms;
+}
+
+.mild-react-exit {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.mild-react-exit-active {
+  opacity: 0;
+  transform: scale(0.95);
+  transition:
+    opacity 200ms,
+    transform 200ms;
+}

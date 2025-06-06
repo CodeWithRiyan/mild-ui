@@ -4,13 +4,13 @@ import * as SelectPrimitive from "@radix-ui/react-select";
 import { Check, ChevronDown } from "lucide-react";
 import {
   SelectCoreProps,
-  selectTriggerStyles,
+  selectTriggerVariants,
   SelectStyleProps,
-  selectContentStyles,
-  selectItemStyles,
+  selectContentVariants,
+  selectItemVariants,
   SelectOption,
-} from "@mild-ui/core";
-import { cn } from "../../utils";
+  cn,
+} from "../../../../core";
 
 // Define simple prop interfaces without complex type extending
 export interface SelectTriggerProps {
@@ -32,7 +32,7 @@ const SelectTrigger = React.forwardRef<HTMLButtonElement, SelectTriggerProps>(
       <SelectPrimitive.Trigger
         ref={ref}
         className={cn(
-          selectTriggerStyles({ size, fullWidth, error }),
+          selectTriggerVariants({ size, fullWidth, error }),
           className,
         )}
         {...restProps}
@@ -64,7 +64,7 @@ const SelectContent = React.forwardRef<HTMLDivElement, SelectContentProps>(
       <SelectPrimitive.Portal>
         <SelectPrimitive.Content
           ref={ref}
-          className={cn(selectContentStyles({ position }), className)}
+          className={cn(selectContentVariants({ position }), className)}
           position={position}
           {...restProps}
         >
@@ -96,7 +96,7 @@ const SelectItem = React.forwardRef<HTMLDivElement, SelectItemProps>(
     return (
       <SelectPrimitive.Item
         ref={ref}
-        className={cn(selectItemStyles({ size }), className)}
+        className={cn(selectItemVariants({ size }), className)}
         {...restProps}
       >
         <span className="absolute left-2 flex h-3.5 w-3.5 items-center justify-center">
