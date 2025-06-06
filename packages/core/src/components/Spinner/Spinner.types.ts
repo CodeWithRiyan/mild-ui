@@ -1,6 +1,6 @@
 // packages/core/src/components/Spinner/Spinner.types.ts
-export type SpinnerSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
-export type SpinnerVariant = 'border' | 'dots' | 'pulse' | 'bars';
+export type SpinnerSize = "xs" | "sm" | "md" | "lg" | "xl";
+export type SpinnerVariant = "border" | "dots" | "pulse" | "bars";
 
 export interface SpinnerCoreProps {
   /** Spinner size */
@@ -12,7 +12,7 @@ export interface SpinnerCoreProps {
   /** Loading label for accessibility */
   label?: string;
   /** Animation speed */
-  speed?: 'slow' | 'normal' | 'fast';
+  speed?: "slow" | "normal" | "fast";
   /** Custom className */
   className?: string;
   /** Thickness for border variant */

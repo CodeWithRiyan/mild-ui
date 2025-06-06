@@ -2,10 +2,16 @@
 /// Common types used across all components
 /// @fileoverview Universal type definitions for cross-platform components
 
-export type Size = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
-export type ColorScheme = 'primary' | 'secondary' | 'success' | 'warning' | 'danger' | 'gray';
-export type Variant = 'solid' | 'outline' | 'ghost' | 'link';
-export type ColorMode = 'light' | 'dark' | 'system';
+export type Size = "xs" | "sm" | "md" | "lg" | "xl";
+export type ColorScheme =
+  | "primary"
+  | "secondary"
+  | "success"
+  | "warning"
+  | "danger"
+  | "gray";
+export type Variant = "solid" | "outline" | "ghost" | "link";
+export type ColorMode = "light" | "dark" | "system";
 
 // Base component props that all components should support
 export interface BaseComponentProps {
@@ -55,14 +61,14 @@ export interface ThemeConfig {
 
 // Accessibility types
 export interface AriaProps {
-  'aria-label'?: string;
-  'aria-labelledby'?: string;
-  'aria-describedby'?: string;
-  'aria-expanded'?: boolean;
-  'aria-hidden'?: boolean;
-  'aria-disabled'?: boolean;
-  'aria-pressed'?: boolean;
-  'aria-checked'?: boolean | 'mixed';
+  "aria-label"?: string;
+  "aria-labelledby"?: string;
+  "aria-describedby"?: string;
+  "aria-expanded"?: boolean;
+  "aria-hidden"?: boolean;
+  "aria-disabled"?: boolean;
+  "aria-pressed"?: boolean;
+  "aria-checked"?: boolean | "mixed";
   role?: string;
 }
 

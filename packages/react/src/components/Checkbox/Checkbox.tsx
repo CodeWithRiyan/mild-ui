@@ -7,7 +7,7 @@ import {
   checkboxVariants,
   CheckboxStyleProps,
   checkboxLabelVariants,
-  cn
+  cn,
 } from "../../../../core";
 import { Label } from "../Label";
 

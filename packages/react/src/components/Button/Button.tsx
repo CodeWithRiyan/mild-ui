@@ -1,14 +1,18 @@
 // packages/react/src/components/Button/Button.tsx
-import React, { forwardRef } from 'react';
-import { getButtonProps, getButtonState, getButtonA11yProps } from '../../../../core';
-import { ButtonProps } from './Button.types';
+import React, { forwardRef } from "react";
+import {
+  getButtonProps,
+  getButtonState,
+  getButtonA11yProps,
+} from "../../../../core";
+import { ButtonProps } from "./Button.types";
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   (
     {
-      variant = 'solid',
-      size = 'md',
-      colorScheme = 'primary',
+      variant = "solid",
+      size = "md",
+      colorScheme = "primary",
       fullWidth = false,
       loading = false,
       disabled = false,
@@ -17,10 +21,10 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       leftIcon,
       rightIcon,
       className,
-      type = 'button',
+      type = "button",
       ...rest
     },
-    ref
+    ref,
   ) => {
     // Get computed props from core
     const buttonProps = getButtonProps({
@@ -61,15 +65,13 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
             {leftIcon}
           </span>
         )}
-        
+
         {isLoading ? (
           <span className="mild-button__spinner" aria-hidden="true" />
         ) : (
-          <span className="mild-button__content">
-            {children}
-          </span>
+          <span className="mild-button__content">{children}</span>
         )}
-        
+
         {rightIcon && (
           <span className="mild-button__right-icon" aria-hidden="true">
             {rightIcon}
@@ -77,7 +79,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         )}
       </button>
     );
-  }
+  },
 );
 
-Button.displayName = 'Button';
+Button.displayName = "Button";

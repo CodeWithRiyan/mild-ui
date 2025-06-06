@@ -1,6 +1,6 @@
 // packages/react/src/components/Text/Text.tsx
-import React, { forwardRef } from 'react';
-import type { TextProps as CoreTextProps } from '../../../../core';
+import React, { forwardRef } from "react";
+import type { TextProps as CoreTextProps } from "../../../../core";
 
 export interface TextProps extends CoreTextProps {
   /** Text content */
@@ -16,12 +16,12 @@ export interface TextProps extends CoreTextProps {
 export const Text = forwardRef<HTMLElement, TextProps>(
   (
     {
-      as = 'span',
-      fontSize = 'md',
-      fontWeight = 'normal',
-      textAlign = 'left',
-      textTransform = 'none',
-      textDecoration = 'none',
+      as = "span",
+      fontSize = "md",
+      fontWeight = "normal",
+      textAlign = "left",
+      textTransform = "none",
+      textDecoration = "none",
       color,
       lineHeight,
       letterSpacing,
@@ -32,27 +32,36 @@ export const Text = forwardRef<HTMLElement, TextProps>(
       onClick,
       ...rest
     },
-    ref
+    ref,
   ) => {
     const Component = as;
-    
+
     // Build classes
     const classes = [
-      'mild-text',
+      "mild-text",
       `mild-text--${fontSize}`,
       `mild-text--${fontWeight}`,
       `mild-text--${textAlign}`,
-      textTransform !== 'none' && `mild-text--${textTransform}`,
-      textDecoration !== 'none' && `mild-text--${textDecoration}`,
-      truncate && 'mild-text--truncate',
+      textTransform !== "none" && `mild-text--${textTransform}`,
+      textDecoration !== "none" && `mild-text--${textDecoration}`,
+      truncate && "mild-text--truncate",
       noOfLines && `mild-text--clamp-${noOfLines}`,
       color && `mild-text--${color}`,
       className,
-    ].filter(Boolean).join(' ');
+    ]
+      .filter(Boolean)
+      .join(" ");
 
     const style: React.CSSProperties = {
-      ...(lineHeight && { lineHeight: typeof lineHeight === 'number' ? lineHeight : lineHeight }),
-      ...(letterSpacing && { letterSpacing: typeof letterSpacing === 'number' ? `${letterSpacing}em` : letterSpacing }),
+      ...(lineHeight && {
+        lineHeight: typeof lineHeight === "number" ? lineHeight : lineHeight,
+      }),
+      ...(letterSpacing && {
+        letterSpacing:
+          typeof letterSpacing === "number"
+            ? `${letterSpacing}em`
+            : letterSpacing,
+      }),
     };
 
     return (
@@ -66,7 +75,7 @@ export const Text = forwardRef<HTMLElement, TextProps>(
         {children}
       </Component>
     );
-  }
+  },
 );
 
-Text.displayName = 'Text';
+Text.displayName = "Text";

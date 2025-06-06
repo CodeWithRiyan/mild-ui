@@ -8,7 +8,7 @@ import {
   cn,
   switchLabelVariants,
   switchThumbVariants,
-  switchVariants
+  switchVariants,
 } from "../../../../core";
 import { Label } from "../Label";
 

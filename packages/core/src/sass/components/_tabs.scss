@@ -2,12 +2,12 @@
 /// Tabs component styling
 /// @group components
 
-@use '../tokens/colors' as colors;
-@use '../tokens/spacing' as spacing;
-@use '../tokens/typography' as typography;
-@use '../tokens/radius' as radius;
-@use '../tokens/animation' as animation;
-@use '../mixins/component-base' as base;
+@use "../tokens/colors" as colors;
+@use "../tokens/spacing" as spacing;
+@use "../tokens/typography" as typography;
+@use "../tokens/radius" as radius;
+@use "../tokens/animation" as animation;
+@use "../mixins/component-base" as base;
 
 .mild-tabs {
   display: flex;
@@ -21,59 +21,59 @@
   background-color: var(--mild-muted);
   border-radius: var(--mild-radius-md);
   padding: var(--mild-space-1);
-  
+
   &--default {
     background-color: var(--mild-muted);
   }
-  
+
   &--pills {
     background-color: transparent;
     padding: 0;
     gap: var(--mild-space-1);
   }
-  
+
   &--underline {
     background-color: transparent;
     padding: 0;
     border-bottom: 1px solid var(--mild-border);
     border-radius: 0;
   }
-  
+
   &--horizontal {
     flex-direction: row;
   }
-  
+
   &--vertical {
     flex-direction: column;
     width: auto;
     min-width: 12rem;
-    
+
     &.mild-tabs-list--default {
       padding: var(--mild-space-1);
     }
-    
+
     &.mild-tabs-list--pills {
       gap: var(--mild-space-1);
     }
-    
+
     &.mild-tabs-list--underline {
       border-right: 1px solid var(--mild-border);
       border-bottom: none;
     }
   }
-  
+
   &--sm {
     padding: var(--mild-space-0-5);
-    
+
     &.mild-tabs-list--pills,
     &.mild-tabs-list--underline {
       padding: 0;
     }
   }
-  
+
   &--lg {
     padding: var(--mild-space-1-5);
-    
+
     &.mild-tabs-list--pills,
     &.mild-tabs-list--underline {
       padding: 0;
@@ -85,7 +85,7 @@
   @include base.component-base;
   @include base.focus-ring;
   @include base.interactive-transitions;
-  
+
   display: flex;
   align-items: center;
   justify-content: center;
@@ -101,29 +101,29 @@
   white-space: nowrap;
   user-select: none;
   position: relative;
-  
+
   &:hover:not([data-disabled]):not(.mild-tabs-trigger--disabled) {
     color: var(--mild-foreground);
   }
-  
+
   &--active {
     color: var(--mild-foreground);
     background-color: var(--mild-background);
     box-shadow: var(--mild-shadow-sm);
-    
+
     .mild-tabs-list--pills & {
       background-color: var(--mild-color-primary-500);
       color: white;
       box-shadow: none;
     }
-    
+
     .mild-tabs-list--underline & {
       background-color: transparent;
       box-shadow: none;
       color: var(--mild-color-primary-500);
-      
+
       &::after {
-        content: '';
+        content: "";
         position: absolute;
         bottom: -1px;
         left: 0;
@@ -132,7 +132,7 @@
         background-color: var(--mild-color-primary-500);
         border-radius: 1px;
       }
-      
+
       .mild-tabs-list--vertical & {
         &::after {
           bottom: 0;
@@ -145,38 +145,38 @@
       }
     }
   }
-  
+
   &--disabled {
     opacity: 0.5;
     cursor: not-allowed;
     pointer-events: none;
   }
-  
+
   &--sm {
     padding: var(--mild-space-1) var(--mild-space-2);
     font-size: var(--mild-font-size-xs);
   }
-  
+
   &--lg {
     padding: var(--mild-space-3) var(--mild-space-4);
     font-size: var(--mild-font-size-base);
   }
-  
+
   // Icon support
   .mild-icon {
     margin-right: var(--mild-space-1-5);
-    
+
     &:only-child {
       margin-right: 0;
     }
   }
-  
+
   &--sm .mild-icon {
     margin-right: var(--mild-space-1);
     width: var(--mild-space-3);
     height: var(--mild-space-3);
   }
-  
+
   &--lg .mild-icon {
     margin-right: var(--mild-space-2);
     width: var(--mild-space-5);
@@ -187,25 +187,25 @@
 .mild-tabs-content {
   margin-top: var(--mild-space-4);
   outline: none;
-  
+
   &--sm {
     margin-top: var(--mild-space-3);
   }
-  
+
   &--lg {
     margin-top: var(--mild-space-6);
   }
-  
+
   // Vertical tabs layout
   .mild-tabs--vertical & {
     margin-top: 0;
     margin-left: var(--mild-space-4);
     flex: 1;
-    
+
     &--sm {
       margin-left: var(--mild-space-3);
     }
-    
+
     &--lg {
       margin-left: var(--mild-space-6);
     }
@@ -221,7 +221,7 @@
 // Tab panel animation
 .mild-tabs-panel {
   animation: mild-fade-in var(--mild-duration-200) var(--mild-easing-out);
-  
+
   &[hidden] {
     display: none;
   }
@@ -229,7 +229,9 @@
 
 // Keyboard navigation indicator
 .mild-tabs-trigger:focus-visible {
-  box-shadow: 0 0 0 2px var(--mild-background), 0 0 0 4px var(--mild-color-primary-500);
+  box-shadow:
+    0 0 0 2px var(--mild-background),
+    0 0 0 4px var(--mild-color-primary-500);
 }
 
 // Animation keyframes

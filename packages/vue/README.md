@@ -26,6 +26,7 @@ npm install @mild-ui/vue
 ```
 
 ### Peer Dependencies
+
 ```bash
 npm install vue@^3.3.0
 ```
@@ -33,6 +34,7 @@ npm install vue@^3.3.0
 ## Quick Start
 
 ### 1. Set up ThemeProvider
+
 ```vue
 <!-- App.vue -->
 <template>
@@ -42,48 +44,41 @@ npm install vue@^3.3.0
 </template>
 
 <script setup>
-import { ThemeProvider } from '@mild-ui/vue';
+import { ThemeProvider } from "@mild-ui/vue";
 </script>
 ```
 
 ### 2. Import and use components
+
 ```vue
 <template>
   <Card padding="lg" shadow="md">
-    <Alert 
-      status="success" 
-      title="Welcome!"
-      class="mb-4"
-    >
+    <Alert status="success" title="Welcome!" class="mb-4">
       Your Vue app is ready with mild-ui components.
     </Alert>
-    
-    <Input 
+
+    <Input
       v-model="name"
       placeholder="Enter your name"
       variant="outline"
       size="lg"
       class="mb-4"
     />
-    
-    <Button 
-      color-scheme="primary" 
-      size="lg"
-      @click="handleSubmit"
-    >
+
+    <Button color-scheme="primary" size="lg" @click="handleSubmit">
       Get Started
     </Button>
   </Card>
 </template>
 
 <script setup>
-import { ref } from 'vue';
-import { Button, Input, Card, Alert } from '@mild-ui/vue';
+import { ref } from "vue";
+import { Button, Input, Card, Alert } from "@mild-ui/vue";
 
-const name = ref('');
+const name = ref("");
 
 const handleSubmit = () => {
-  console.log('Submitted:', name.value);
+  console.log("Submitted:", name.value);
 };
 </script>
 ```
@@ -91,19 +86,20 @@ const handleSubmit = () => {
 ## Available Components
 
 ### ✅ **Form Components**
+
 ```vue
 <script setup>
-import { 
-  Button, 
-  Input, 
-  Checkbox, 
-  Radio, 
-  Select, 
+import {
+  Button,
+  Input,
+  Checkbox,
+  Radio,
+  Select,
   Switch,
   FormControl,
   FormLabel,
-  FormErrorMessage 
-} from '@mild-ui/vue';
+  FormErrorMessage,
+} from "@mild-ui/vue";
 </script>
 ```
 
@@ -118,15 +114,10 @@ import {
 - **FormErrorMessage** - Error message display
 
 ### ✅ **Layout & Display**
+
 ```vue
 <script setup>
-import { 
-  Box, 
-  Text, 
-  Card, 
-  Alert, 
-  Spinner 
-} from '@mild-ui/vue';
+import { Box, Text, Card, Alert, Spinner } from "@mild-ui/vue";
 </script>
 ```
 
@@ -137,13 +128,10 @@ import {
 - **Spinner** - Loading indicators with multiple variants
 
 ### ✅ **Navigation & Interaction**
+
 ```vue
 <script setup>
-import { 
-  Tabs, 
-  Modal, 
-  Accordion 
-} from '@mild-ui/vue';
+import { Tabs, Modal, Accordion } from "@mild-ui/vue";
 </script>
 ```
 
@@ -154,55 +142,47 @@ import {
 ## Component Examples
 
 ### Button with Icons (Vue 3 Style)
+
 ```vue
 <template>
   <div class="flex gap-4 flex-wrap">
-    <Button 
-      variant="solid" 
-      color-scheme="primary"
-    >
+    <Button variant="solid" color-scheme="primary">
       <template #left-icon>
         <Download :size="16" />
       </template>
       Download
     </Button>
-    
-    <Button 
-      variant="outline"
-    >
+
+    <Button variant="outline">
       Next Step
       <template #right-icon>
         <ChevronRight :size="16" />
       </template>
     </Button>
-    
-    <Button 
-      variant="ghost" 
-      size="sm"
-      :loading="isLoading"
-      @click="handleLoad"
-    >
-      {{ isLoading ? 'Loading...' : 'Load Data' }}
+
+    <Button variant="ghost" size="sm" :loading="isLoading" @click="handleLoad">
+      {{ isLoading ? "Loading..." : "Load Data" }}
     </Button>
   </div>
 </template>
 
 <script setup>
-import { ref } from 'vue';
-import { Button } from '@mild-ui/vue';
-import { Download, ChevronRight } from 'lucide-vue-next';
+import { ref } from "vue";
+import { Button } from "@mild-ui/vue";
+import { Download, ChevronRight } from "lucide-vue-next";
 
 const isLoading = ref(false);
 
 const handleLoad = async () => {
   isLoading.value = true;
-  await new Promise(resolve => setTimeout(resolve, 2000));
+  await new Promise((resolve) => setTimeout(resolve, 2000));
   isLoading.value = false;
 };
 </script>
 ```
 
 ### Reactive Form with Validation
+
 ```vue
 <template>
   <form @submit.prevent="handleSubmit">
@@ -218,7 +198,7 @@ const handleLoad = async () => {
         {{ errors.email }}
       </FormErrorMessage>
     </FormControl>
-    
+
     <FormControl :invalid="!!errors.password" class="mt-4">
       <FormLabel>Password</FormLabel>
       <Input
@@ -231,10 +211,10 @@ const handleLoad = async () => {
         {{ errors.password }}
       </FormErrorMessage>
     </FormControl>
-    
-    <Button 
-      type="submit" 
-      color-scheme="primary" 
+
+    <Button
+      type="submit"
+      color-scheme="primary"
       :disabled="!isFormValid"
       class="mt-6"
       full-width
@@ -245,42 +225,42 @@ const handleLoad = async () => {
 </template>
 
 <script setup>
-import { reactive, computed } from 'vue';
-import { 
-  FormControl, 
-  FormLabel, 
-  Input, 
-  FormErrorMessage, 
-  Button 
-} from '@mild-ui/vue';
+import { reactive, computed } from "vue";
+import {
+  FormControl,
+  FormLabel,
+  Input,
+  FormErrorMessage,
+  Button,
+} from "@mild-ui/vue";
 
 const form = reactive({
-  email: '',
-  password: ''
+  email: "",
+  password: "",
 });
 
 const errors = reactive({
-  email: '',
-  password: ''
+  email: "",
+  password: "",
 });
 
 const validateEmail = () => {
   if (!form.email) {
-    errors.email = 'Email is required';
-  } else if (!form.email.includes('@')) {
-    errors.email = 'Please enter a valid email';
+    errors.email = "Email is required";
+  } else if (!form.email.includes("@")) {
+    errors.email = "Please enter a valid email";
   } else {
-    errors.email = '';
+    errors.email = "";
   }
 };
 
 const validatePassword = () => {
   if (!form.password) {
-    errors.password = 'Password is required';
+    errors.password = "Password is required";
   } else if (form.password.length < 8) {
-    errors.password = 'Password must be at least 8 characters';
+    errors.password = "Password must be at least 8 characters";
   } else {
-    errors.password = '';
+    errors.password = "";
   }
 };
 
@@ -291,15 +271,16 @@ const isFormValid = computed(() => {
 const handleSubmit = () => {
   validateEmail();
   validatePassword();
-  
+
   if (isFormValid.value) {
-    console.log('Form submitted:', form);
+    console.log("Form submitted:", form);
   }
 };
 </script>
 ```
 
 ### Tabs with Dynamic Content
+
 ```vue
 <template>
   <Tabs v-model="activeTab" variant="underline">
@@ -308,60 +289,38 @@ const handleSubmit = () => {
       <Tab value="settings">Settings</Tab>
       <Tab value="notifications">Notifications</Tab>
     </template>
-    
+
     <TabPanel value="profile">
       <Card padding="lg">
         <Text font-size="xl" font-weight="bold" class="mb-4">
           Profile Information
         </Text>
-        <Input 
-          v-model="profile.name"
-          placeholder="Full Name"
-          class="mb-3"
-        />
-        <Input 
-          v-model="profile.bio"
-          placeholder="Bio"
-          type="textarea"
-        />
+        <Input v-model="profile.name" placeholder="Full Name" class="mb-3" />
+        <Input v-model="profile.bio" placeholder="Bio" type="textarea" />
       </Card>
     </TabPanel>
-    
+
     <TabPanel value="settings">
       <Card padding="lg">
-        <Text font-size="xl" font-weight="bold" class="mb-4">
-          Settings
-        </Text>
-        <Switch 
-          v-model="settings.notifications"
-          class="mb-3"
-        >
+        <Text font-size="xl" font-weight="bold" class="mb-4"> Settings </Text>
+        <Switch v-model="settings.notifications" class="mb-3">
           Enable Notifications
         </Switch>
-        <Switch 
-          v-model="settings.darkMode"
-          @change="toggleColorMode"
-        >
+        <Switch v-model="settings.darkMode" @change="toggleColorMode">
           Dark Mode
         </Switch>
       </Card>
     </TabPanel>
-    
+
     <TabPanel value="notifications">
       <Card padding="lg">
         <Text font-size="xl" font-weight="bold" class="mb-4">
           Notification Preferences
         </Text>
-        <Checkbox 
-          v-model="notifications.email"
-          class="mb-2"
-        >
+        <Checkbox v-model="notifications.email" class="mb-2">
           Email notifications
         </Checkbox>
-        <Checkbox 
-          v-model="notifications.push"
-          class="mb-2"
-        >
+        <Checkbox v-model="notifications.push" class="mb-2">
           Push notifications
         </Checkbox>
       </Card>
@@ -370,36 +329,36 @@ const handleSubmit = () => {
 </template>
 
 <script setup>
-import { ref, reactive } from 'vue';
-import { 
-  Tabs, 
-  Tab, 
-  TabPanel, 
-  Card, 
-  Text, 
-  Input, 
-  Switch, 
-  Checkbox 
-} from '@mild-ui/vue';
-import { useColorMode } from '@mild-ui/vue';
+import { ref, reactive } from "vue";
+import {
+  Tabs,
+  Tab,
+  TabPanel,
+  Card,
+  Text,
+  Input,
+  Switch,
+  Checkbox,
+} from "@mild-ui/vue";
+import { useColorMode } from "@mild-ui/vue";
 
 const { toggleColorMode } = useColorMode();
 
-const activeTab = ref('profile');
+const activeTab = ref("profile");
 
 const profile = reactive({
-  name: '',
-  bio: ''
+  name: "",
+  bio: "",
 });
 
 const settings = reactive({
   notifications: true,
-  darkMode: false
+  darkMode: false,
 });
 
 const notifications = reactive({
   email: true,
-  push: false
+  push: false,
 });
 </script>
 ```
@@ -407,6 +366,7 @@ const notifications = reactive({
 ## Theming & Customization
 
 ### Custom Theme with Composition API
+
 ```vue
 <template>
   <ThemeProvider :theme="customTheme">
@@ -415,17 +375,17 @@ const notifications = reactive({
 </template>
 
 <script setup>
-import { ThemeProvider, extendTheme } from '@mild-ui/vue';
+import { ThemeProvider, extendTheme } from "@mild-ui/vue";
 
 const customTheme = extendTheme({
   colors: {
     primary: {
-      500: '#8B5CF6', // Purple
-      600: '#7C3AED',
+      500: "#8B5CF6", // Purple
+      600: "#7C3AED",
     },
     brand: {
-      500: '#FF6B6B', // Custom brand color
-      600: '#FF5252',
+      500: "#FF6B6B", // Custom brand color
+      600: "#FF5252",
     },
   },
   fonts: {
@@ -435,7 +395,7 @@ const customTheme = extendTheme({
   components: {
     Button: {
       defaultProps: {
-        colorScheme: 'brand',
+        colorScheme: "brand",
       },
     },
   },
@@ -444,45 +404,43 @@ const customTheme = extendTheme({
 ```
 
 ### CSS Custom Properties
+
 ```css
 /* style.css */
 :root {
   /* Override default colors */
-  --mild-color-primary-500: #8B5CF6;
-  --mild-color-primary-600: #7C3AED;
-  
+  --mild-color-primary-500: #8b5cf6;
+  --mild-color-primary-600: #7c3aed;
+
   /* Custom spacing */
   --mild-space-18: 4.5rem;
-  
+
   /* Custom fonts */
-  --mild-font-family-heading: 'Inter', sans-serif;
-  
+  --mild-font-family-heading: "Inter", sans-serif;
+
   /* Custom border radius */
   --mild-radius-2xl: 1rem;
 }
 
 /* Dark mode customization */
 [data-theme="dark"] {
-  --mild-color-primary-500: #A78BFA;
-  --mild-background: #1A202C;
-  --mild-foreground: #F7FAFC;
+  --mild-color-primary-500: #a78bfa;
+  --mild-background: #1a202c;
+  --mild-foreground: #f7fafc;
 }
 ```
 
 ### Color Mode Composable
+
 ```vue
 <template>
-  <Button 
-    @click="toggleColorMode"
-    variant="ghost"
-    size="sm"
-  >
-    {{ colorMode === 'light' ? '🌙 Dark' : '☀️ Light' }}
+  <Button @click="toggleColorMode" variant="ghost" size="sm">
+    {{ colorMode === "light" ? "🌙 Dark" : "☀️ Light" }}
   </Button>
 </template>
 
 <script setup>
-import { Button, useColorMode } from '@mild-ui/vue';
+import { Button, useColorMode } from "@mild-ui/vue";
 
 const { colorMode, toggleColorMode, setColorMode } = useColorMode();
 
@@ -492,38 +450,35 @@ const { colorMode, toggleColorMode, setColorMode } = useColorMode();
 ```
 
 ### Custom Composables
+
 ```vue
 <template>
   <div>
-    <Button @click="showNotification">
-      Show Success
-    </Button>
-    
-    <Button @click="showError" variant="outline">
-      Show Error
-    </Button>
+    <Button @click="showNotification"> Show Success </Button>
+
+    <Button @click="showError" variant="outline"> Show Error </Button>
   </div>
 </template>
 
 <script setup>
-import { Button, useToast } from '@mild-ui/vue';
+import { Button, useToast } from "@mild-ui/vue";
 
 const toast = useToast();
 
 const showNotification = () => {
   toast({
-    title: 'Success!',
-    description: 'Your action was completed successfully.',
-    status: 'success',
+    title: "Success!",
+    description: "Your action was completed successfully.",
+    status: "success",
     duration: 3000,
   });
 };
 
 const showError = () => {
   toast({
-    title: 'Error occurred',
-    description: 'Something went wrong. Please try again.',
-    status: 'error',
+    title: "Error occurred",
+    description: "Something went wrong. Please try again.",
+    status: "error",
     duration: 5000,
   });
 };
@@ -536,7 +491,7 @@ Full TypeScript support with comprehensive type definitions:
 
 ```vue
 <template>
-  <CustomButton 
+  <CustomButton
     :custom-prop="myProp"
     color-scheme="primary"
     @click="handleClick"
@@ -546,7 +501,7 @@ Full TypeScript support with comprehensive type definitions:
 </template>
 
 <script setup lang="ts">
-import type { ButtonProps } from '@mild-ui/vue';
+import type { ButtonProps } from "@mild-ui/vue";
 
 interface CustomButtonProps extends ButtonProps {
   customProp?: string;
@@ -563,8 +518,8 @@ const emit = defineEmits<{
 }>();
 
 const handleClick = (event: MouseEvent) => {
-  console.log('Custom prop:', props.customProp);
-  emit('click', event);
+  console.log("Custom prop:", props.customProp);
+  emit("click", event);
 };
 </script>
 ```
@@ -574,6 +529,7 @@ const handleClick = (event: MouseEvent) => {
 mild-ui/vue works seamlessly with Nuxt 3, Vite SSR, and other Vue frameworks:
 
 ### Nuxt 3 Integration
+
 ```vue
 <!-- app.vue -->
 <template>
@@ -585,83 +541,77 @@ mild-ui/vue works seamlessly with Nuxt 3, Vite SSR, and other Vue frameworks:
 </template>
 
 <script setup>
-import { ThemeProvider } from '@mild-ui/vue';
+import { ThemeProvider } from "@mild-ui/vue";
 </script>
 ```
 
 ```typescript
 // nuxt.config.ts
 export default defineNuxtConfig({
-  css: ['@mild-ui/vue/dist/style.css'],
+  css: ["@mild-ui/vue/dist/style.css"],
   build: {
-    transpile: ['@mild-ui/vue']
-  }
+    transpile: ["@mild-ui/vue"],
+  },
 });
 ```
 
 ### Vite SSR Setup
+
 ```typescript
 // vite.config.ts
-import { defineConfig } from 'vite';
-import vue from '@vitejs/plugin-vue';
+import { defineConfig } from "vite";
+import vue from "@vitejs/plugin-vue";
 
 export default defineConfig({
   plugins: [vue()],
   ssr: {
-    noExternal: ['@mild-ui/vue']
-  }
+    noExternal: ["@mild-ui/vue"],
+  },
 });
 ```
 
 ## Vue 3 Specific Features
 
 ### Teleport Support
+
 ```vue
 <template>
   <div>
-    <Button @click="showModal = true">
-      Open Modal
-    </Button>
-    
-    <Modal 
-      v-model="showModal"
-      size="lg"
-    >
+    <Button @click="showModal = true"> Open Modal </Button>
+
+    <Modal v-model="showModal" size="lg">
       <ModalHeader>
-        <Text font-size="xl" font-weight="bold">
-          Modal Title
-        </Text>
+        <Text font-size="xl" font-weight="bold"> Modal Title </Text>
       </ModalHeader>
-      
+
       <ModalBody>
         <Text>This modal uses Vue 3 Teleport for optimal rendering.</Text>
       </ModalBody>
-      
+
       <ModalFooter>
-        <Button @click="showModal = false">
-          Close
-        </Button>
+        <Button @click="showModal = false"> Close </Button>
       </ModalFooter>
     </Modal>
   </div>
 </template>
 
 <script setup>
-import { ref } from 'vue';
-import { 
-  Button, 
-  Modal, 
-  ModalHeader, 
-  ModalBody, 
+import { ref } from "vue";
+import {
+  Button,
+  Modal,
+  ModalHeader,
+  ModalBody,
   ModalFooter,
-  Text 
-} from '@mild-ui/vue';
+  Text,
+} from "@mild-ui/vue";
 
 const showModal = ref(false);
 </script>
 ```
 
 ### Provide/Inject for Theme
+
 ```vue
 <!-- Parent Component -->
 <template>
@@ -671,8 +621,8 @@ const showModal = ref(false);
 </template>
 
 <script setup>
-import { provide } from 'vue';
-import { ThemeProvider } from '@mild-ui/vue';
+import { provide } from "vue";
+import { ThemeProvider } from "@mild-ui/vue";
 
 // Theme is automatically provided by ThemeProvider
 </script>
@@ -681,14 +631,12 @@ import { ThemeProvider } from '@mild-ui/vue';
 ```vue
 <!-- Child Component -->
 <template>
-  <Button :color-scheme="theme.primaryColor">
-    Themed Button
-  </Button>
+  <Button :color-scheme="theme.primaryColor"> Themed Button </Button>
 </template>
 
 <script setup>
-import { inject } from 'vue';
-import { Button, useTheme } from '@mild-ui/vue';
+import { inject } from "vue";
+import { Button, useTheme } from "@mild-ui/vue";
 
 // Access theme anywhere in component tree
 const theme = useTheme();
@@ -723,6 +671,7 @@ const theme = useTheme();
 We welcome contributions! See our [Contributing Guide](../../CONTRIBUTING.md) for details.
 
 ### Development Setup
+
 ```bash
 # Clone the repository
 git clone https://github.com/mild-ui/mild-ui.git

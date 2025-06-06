@@ -1,6 +1,6 @@
 export * from "./Accordion";
 export * from "./Alert";
-export * from "./Box"
+export * from "./Box";
 export * from "./Button";
 export * from "./Card";
 export * from "./Checkbox";
@@ -12,7 +12,7 @@ export * from "./Label";
 export * from "./Modal";
 export * from "./Radio";
 export * from "./Select";
-export * from "./Spinner"
+export * from "./Spinner";
 export * from "./Switch";
 export * from "./Tabs";
 export * from "./Text";

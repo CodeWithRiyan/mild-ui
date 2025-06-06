@@ -3,7 +3,7 @@
 /// @group tokens
 
 // Import required SASS modules
-@use 'sass:map';
+@use "sass:map";
 
 $mild-transitions: (
   none: none,
@@ -12,7 +12,7 @@ $mild-transitions: (
   colors: color 150ms cubic-bezier(0.4, 0, 0.2, 1),
   opacity: opacity 150ms cubic-bezier(0.4, 0, 0.2, 1),
   shadow: box-shadow 150ms cubic-bezier(0.4, 0, 0.2, 1),
-  transform: transform 150ms cubic-bezier(0.4, 0, 0.2, 1)
+  transform: transform 150ms cubic-bezier(0.4, 0, 0.2, 1),
 ) !default;
 
 $mild-durations: (
@@ -23,14 +23,14 @@ $mild-durations: (
   300: 300ms,
   500: 500ms,
   700: 700ms,
-  1000: 1000ms
+  1000: 1000ms,
 ) !default;
 
 $mild-easings: (
   linear: linear,
   in: cubic-bezier(0.4, 0, 1, 1),
   out: cubic-bezier(0, 0, 0.2, 1),
-  'in-out': cubic-bezier(0.4, 0, 0.2, 1)
+  "in-out": cubic-bezier(0.4, 0, 0.2, 1),
 ) !default;
 
 // Animation functions
@@ -51,11 +51,11 @@ $mild-easings: (
   @each $transition-name, $transition-value in $mild-transitions {
     --mild-transition-#{$transition-name}: #{$transition-value};
   }
-  
+
   @each $duration-name, $duration-value in $mild-durations {
     --mild-duration-#{$duration-name}: #{$duration-value};
   }
-  
+
   @each $easing-name, $easing-value in $mild-easings {
     --mild-easing-#{$easing-name}: #{$easing-value};
   }

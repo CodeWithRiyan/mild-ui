@@ -4,7 +4,10 @@ import type { InputProps as CoreInputProps } from "../../../../core";
 import { inputVariants } from "../../../../core";
 
 export interface InputProps
-  extends Omit<CoreInputProps, "onChange" | "onBlur" | "onFocus" | "onInput" | "onChangeText"> {
+  extends Omit<
+    CoreInputProps,
+    "onChange" | "onBlur" | "onFocus" | "onInput" | "onChangeText"
+  > {
   /** Input change handler */
   onChange?: (value: string) => void;
   /** Input blur handler */
@@ -36,7 +39,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
       className,
       ...rest
     },
-    ref
+    ref,
   ) => {
     // Generate classes using core variant system
     const classes = inputVariants({
@@ -68,7 +71,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
         {...rest}
       />
     );
-  }
+  },
 );
 
 Input.displayName = "Input";

@@ -9,7 +9,7 @@ import {
   selectContentVariants,
   selectItemVariants,
   SelectOption,
-  cn
+  cn,
 } from "../../../../core";
 
 // Define simple prop interfaces without complex type extending

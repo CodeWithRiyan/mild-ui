@@ -15,7 +15,7 @@ export const buttonVariants = cva(
     variants: {
       variant: {
         solid: "mild-button--solid",
-        outline: "mild-button--outline", 
+        outline: "mild-button--outline",
         ghost: "mild-button--ghost",
         link: "mild-button--link",
       },
@@ -55,19 +55,19 @@ export const buttonVariants = cva(
         class: "mild-button--link-xs",
       },
       {
-        variant: "link", 
+        variant: "link",
         size: "sm",
         class: "mild-button--link-sm",
       },
       {
         variant: "link",
-        size: "md", 
+        size: "md",
         class: "mild-button--link-md",
       },
       {
         variant: "link",
         size: "lg",
-        class: "mild-button--link-lg", 
+        class: "mild-button--link-lg",
       },
       {
         variant: "link",
@@ -80,8 +80,8 @@ export const buttonVariants = cva(
       size: "md",
       colorScheme: "primary",
       fullWidth: false, // Keep as boolean - the cva function handles conversion
-      loading: false,   // Keep as boolean - the cva function handles conversion
-      disabled: false,  // Keep as boolean - the cva function handles conversion
+      loading: false, // Keep as boolean - the cva function handles conversion
+      disabled: false, // Keep as boolean - the cva function handles conversion
     },
   },
 );
@@ -91,45 +91,39 @@ export type ButtonVariantProps = VariantProps<typeof buttonVariants>;
 /**
  * Button icon variants for consistent icon sizing
  */
-export const buttonIconVariants = cva(
-  "mild-button__icon",
-  {
-    variants: {
-      position: {
-        left: "mild-button__left-icon",
-        right: "mild-button__right-icon",
-      },
-      size: {
-        xs: "mild-button__icon--xs",
-        sm: "mild-button__icon--sm", 
-        md: "mild-button__icon--md",
-        lg: "mild-button__icon--lg",
-        xl: "mild-button__icon--xl",
-      },
+export const buttonIconVariants = cva("mild-button__icon", {
+  variants: {
+    position: {
+      left: "mild-button__left-icon",
+      right: "mild-button__right-icon",
     },
-    defaultVariants: {
-      size: "md",
+    size: {
+      xs: "mild-button__icon--xs",
+      sm: "mild-button__icon--sm",
+      md: "mild-button__icon--md",
+      lg: "mild-button__icon--lg",
+      xl: "mild-button__icon--xl",
     },
   },
-);
+  defaultVariants: {
+    size: "md",
+  },
+});
 
 /**
  * Button spinner variants for loading states
  */
-export const buttonSpinnerVariants = cva(
-  "mild-button__spinner",
-  {
-    variants: {
-      size: {
-        xs: "mild-button__spinner--xs",
-        sm: "mild-button__spinner--sm",
-        md: "mild-button__spinner--md", 
-        lg: "mild-button__spinner--lg",
-        xl: "mild-button__spinner--xl",
-      },
-    },
-    defaultVariants: {
-      size: "md",
+export const buttonSpinnerVariants = cva("mild-button__spinner", {
+  variants: {
+    size: {
+      xs: "mild-button__spinner--xs",
+      sm: "mild-button__spinner--sm",
+      md: "mild-button__spinner--md",
+      lg: "mild-button__spinner--lg",
+      xl: "mild-button__spinner--xl",
     },
   },
-);
+  defaultVariants: {
+    size: "md",
+  },
+});

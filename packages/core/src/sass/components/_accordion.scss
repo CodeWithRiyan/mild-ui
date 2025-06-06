@@ -2,37 +2,37 @@
 /// Accordion component styling
 /// @group components
 
-@use '../tokens/colors' as colors;
-@use '../tokens/spacing' as spacing;
-@use '../tokens/typography' as typography;
-@use '../tokens/radius' as radius;
-@use '../tokens/animation' as animation;
-@use '../mixins/component-base' as base;
+@use "../tokens/colors" as colors;
+@use "../tokens/spacing" as spacing;
+@use "../tokens/typography" as typography;
+@use "../tokens/radius" as radius;
+@use "../tokens/animation" as animation;
+@use "../mixins/component-base" as base;
 
 .mild-accordion {
   display: flex;
   flex-direction: column;
   width: 100%;
-  
+
   &--default {
     border: 1px solid var(--mild-border);
     border-radius: var(--mild-radius-md);
   }
-  
+
   &--ghost {
     border: none;
   }
-  
+
   &--bordered {
     border: 1px solid var(--mild-border);
     border-radius: var(--mild-radius-md);
     background-color: var(--mild-background);
   }
-  
+
   &--sm {
     border-radius: var(--mild-radius-sm);
   }
-  
+
   &--lg {
     border-radius: var(--mild-radius-lg);
   }
@@ -40,53 +40,53 @@
 
 .mild-accordion-item {
   border-bottom: 1px solid var(--mild-border);
-  
+
   &:last-child {
     border-bottom: none;
   }
-  
+
   &:first-child {
     .mild-accordion-trigger {
       border-top-left-radius: var(--mild-radius-md);
       border-top-right-radius: var(--mild-radius-md);
     }
   }
-  
+
   &:last-child {
     .mild-accordion-trigger {
       border-bottom-left-radius: var(--mild-radius-md);
       border-bottom-right-radius: var(--mild-radius-md);
     }
-    
+
     .mild-accordion-content {
       border-bottom-left-radius: var(--mild-radius-md);
       border-bottom-right-radius: var(--mild-radius-md);
     }
   }
-  
+
   // Variant specific styles
   .mild-accordion--ghost & {
     border-bottom: 1px solid var(--mild-border);
     border-radius: 0;
-    
+
     &:last-child {
       border-bottom: none;
     }
-    
+
     .mild-accordion-trigger,
     .mild-accordion-content {
       border-radius: 0;
     }
   }
-  
+
   .mild-accordion--bordered & {
     background-color: var(--mild-background);
-    
+
     &:not(:last-child) {
       border-bottom: 1px solid var(--mild-border);
     }
   }
-  
+
   // Size variants
   .mild-accordion--sm & {
     .mild-accordion-trigger {
@@ -94,21 +94,21 @@
         border-top-left-radius: var(--mild-radius-sm);
         border-top-right-radius: var(--mild-radius-sm);
       }
-      
+
       &:last-child {
         border-bottom-left-radius: var(--mild-radius-sm);
         border-bottom-right-radius: var(--mild-radius-sm);
       }
     }
   }
-  
+
   .mild-accordion--lg & {
     .mild-accordion-trigger {
       &:first-child {
         border-top-left-radius: var(--mild-radius-lg);
         border-top-right-radius: var(--mild-radius-lg);
       }
-      
+
       &:last-child {
         border-bottom-left-radius: var(--mild-radius-lg);
         border-bottom-right-radius: var(--mild-radius-lg);
@@ -121,7 +121,7 @@
   @include base.component-base;
   @include base.focus-ring;
   @include base.interactive-transitions;
-  
+
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -135,41 +135,41 @@
   cursor: pointer;
   text-align: left;
   user-select: none;
-  
+
   &:hover:not([data-disabled]):not(.mild-accordion-trigger--disabled) {
     background-color: var(--mild-accent);
   }
-  
+
   &[data-state="open"] {
     border-bottom: 1px solid var(--mild-border);
   }
-  
+
   &--disabled {
     opacity: 0.5;
     cursor: not-allowed;
     pointer-events: none;
   }
-  
+
   &--sm {
     padding: var(--mild-space-3);
     font-size: var(--mild-font-size-xs);
   }
-  
+
   &--lg {
     padding: var(--mild-space-6);
     font-size: var(--mild-font-size-base);
   }
-  
+
   // Variant specific styles
   .mild-accordion--ghost & {
     &:hover {
       background-color: var(--mild-accent);
     }
   }
-  
+
   .mild-accordion--bordered & {
     background-color: var(--mild-background);
-    
+
     &:hover {
       background-color: var(--mild-accent);
     }
@@ -192,21 +192,21 @@
   color: var(--mild-muted-foreground);
   transition: var(--mild-transition-transform);
   flex-shrink: 0;
-  
+
   &[data-state="open"] {
     transform: rotate(180deg);
   }
-  
+
   .mild-accordion-trigger--sm & {
     width: var(--mild-space-3);
     height: var(--mild-space-3);
   }
-  
+
   .mild-accordion-trigger--lg & {
     width: var(--mild-space-5);
     height: var(--mild-space-5);
   }
-  
+
   svg {
     width: 100%;
     height: 100%;
@@ -217,21 +217,23 @@
   overflow: hidden;
   border-top: 1px solid var(--mild-border);
   background-color: var(--mild-background);
-  
+
   &[data-state="closed"] {
-    animation: mild-accordion-slide-up var(--mild-duration-200) var(--mild-easing-out);
+    animation: mild-accordion-slide-up var(--mild-duration-200)
+      var(--mild-easing-out);
   }
-  
+
   &[data-state="open"] {
-    animation: mild-accordion-slide-down var(--mild-duration-200) var(--mild-easing-out);
+    animation: mild-accordion-slide-down var(--mild-duration-200)
+      var(--mild-easing-out);
   }
-  
+
   // Variant specific styles
   .mild-accordion--ghost & {
     background-color: transparent;
     border-top: none;
   }
-  
+
   .mild-accordion--bordered & {
     background-color: var(--mild-muted);
   }
@@ -242,17 +244,17 @@
   font-size: var(--mild-font-size-sm);
   line-height: var(--mild-line-height-relaxed);
   color: var(--mild-muted-foreground);
-  
+
   &--sm {
     padding: var(--mild-space-3);
     font-size: var(--mild-font-size-xs);
   }
-  
+
   &--lg {
     padding: var(--mild-space-6);
     font-size: var(--mild-font-size-base);
   }
-  
+
   // Remove top padding when content immediately follows trigger
   .mild-accordion-trigger + .mild-accordion-content & {
     padding-top: var(--mild-space-4);
@@ -263,7 +265,7 @@
 .mild-accordion-trigger--with-icon {
   .mild-accordion-trigger-content {
     &::before {
-      content: '';
+      content: "";
       width: var(--mild-space-4);
       height: var(--mild-space-4);
       background-size: contain;

@@ -2,12 +2,12 @@
 /// Input component styling
 /// @group components
 
-@use '../tokens/colors' as colors;
-@use '../tokens/spacing' as spacing;
-@use '../tokens/typography' as typography;
-@use '../tokens/radius' as radius;
-@use '../tokens/animation' as animation;
-@use '../mixins/component-base' as base;
+@use "../tokens/colors" as colors;
+@use "../tokens/spacing" as spacing;
+@use "../tokens/typography" as typography;
+@use "../tokens/radius" as radius;
+@use "../tokens/animation" as animation;
+@use "../mixins/component-base" as base;
 
 // Input base styles
 .mild-input {
@@ -15,7 +15,7 @@
   @include base.focus-ring;
   @include base.disabled-state;
   @include base.interactive-transitions;
-  
+
   // Base styling
   appearance: none;
   width: 100%;
@@ -25,35 +25,35 @@
   color: var(--mild-foreground);
   font-size: var(--mild-font-size-sm);
   line-height: var(--mild-line-height-normal);
-  
+
   // Default size
   height: var(--mild-space-10);
   padding: 0 var(--mild-space-3);
-  
+
   // Placeholder styling
   &::placeholder {
     color: var(--mild-muted-foreground);
     opacity: 1;
   }
-  
+
   // Focus state
   &:focus {
     outline: none;
     border-color: var(--mild-color-primary-500);
     box-shadow: 0 0 0 1px var(--mild-color-primary-500);
   }
-  
+
   // Invalid/Error state
   &[aria-invalid="true"],
   &[data-invalid="true"] {
     border-color: var(--mild-color-red-500);
-    
+
     &:focus {
       border-color: var(--mild-color-red-500);
       box-shadow: 0 0 0 1px var(--mild-color-red-500);
     }
   }
-  
+
   // Readonly state
   &[readonly] {
     background-color: var(--mild-muted);
@@ -88,11 +88,11 @@
 .mild-input--filled {
   background-color: var(--mild-muted);
   border-color: transparent;
-  
+
   &:hover:not(:disabled):not(:focus) {
     background-color: var(--mild-accent);
   }
-  
+
   &:focus {
     background-color: var(--mild-background);
     border-color: var(--mild-color-primary-500);
@@ -105,7 +105,7 @@
   border-radius: 0;
   padding-left: 0;
   padding-right: 0;
-  
+
   &:focus {
     border-bottom-color: var(--mild-color-primary-500);
     box-shadow: 0 1px 0 0 var(--mild-color-primary-500);
@@ -117,7 +117,7 @@
   border: none;
   padding: 0;
   height: auto;
-  
+
   &:focus {
     box-shadow: none;
   }

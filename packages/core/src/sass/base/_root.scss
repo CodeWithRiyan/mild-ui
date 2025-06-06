@@ -2,7 +2,7 @@
 /// Root element styling
 /// @group base
 
-@use '../tokens/typography' as typography;
+@use "../tokens/typography" as typography;
 
 html {
   font-family: var(--mild-font-family-sans);

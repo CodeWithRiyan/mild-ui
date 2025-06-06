@@ -3,25 +3,25 @@
 /// @group tokens
 
 // Import required SASS modules
-@use 'sass:map';
+@use "sass:map";
 
 // Base color palette with QUOTED keys to fix interpolation warnings
 $mild-base-colors: (
   // Primary brand colors - using quoted strings
-  'blue': (
-    50: #f0f9ff,
-    100: #e0f2fe,
-    200: #bae6fd,
-    300: #7dd3fc,
-    400: #38bdf8,
-    500: #0ea5e9,
-    600: #0284c7,
-    700: #0369a1,
-    800: #075985,
-    900: #0c4a6e,
-    950: #082f49
-  ),
-  'gray': (
+  "blue": (
+      50: #f0f9ff,
+      100: #e0f2fe,
+      200: #bae6fd,
+      300: #7dd3fc,
+      400: #38bdf8,
+      500: #0ea5e9,
+      600: #0284c7,
+      700: #0369a1,
+      800: #075985,
+      900: #0c4a6e,
+      950: #082f49,
+    ),
+  "gray": (
     50: #f9fafb,
     100: #f3f4f6,
     200: #e5e7eb,
@@ -32,9 +32,9 @@ $mild-base-colors: (
     700: #374151,
     800: #1f2937,
     900: #111827,
-    950: #030712
+    950: #030712,
   ),
-  'red': (
+  "red": (
     50: #fef2f2,
     100: #fee2e2,
     200: #fecaca,
@@ -45,9 +45,9 @@ $mild-base-colors: (
     700: #b91c1c,
     800: #991b1b,
     900: #7f1d1d,
-    950: #450a0a
+    950: #450a0a,
   ),
-  'green': (
+  "green": (
     50: #f0fdf4,
     100: #dcfce7,
     200: #bbf7d0,
@@ -58,9 +58,9 @@ $mild-base-colors: (
     700: #15803d,
     800: #166534,
     900: #14532d,
-    950: #052e16
+    950: #052e16,
   ),
-  'yellow': (
+  "yellow": (
     50: #fefce8,
     100: #fef9c3,
     200: #fef08a,
@@ -71,18 +71,18 @@ $mild-base-colors: (
     700: #a16207,
     800: #854d0e,
     900: #713f12,
-    950: #422006
+    950: #422006,
   )
 ) !default;
 
 // Semantic color mapping with QUOTED keys
 $mild-semantic-colors: (
-  'primary': map.get($mild-base-colors, 'blue'),
-  'secondary': map.get($mild-base-colors, 'gray'),
-  'success': map.get($mild-base-colors, 'green'),
-  'warning': map.get($mild-base-colors, 'yellow'),
-  'danger': map.get($mild-base-colors, 'red'),
-  'error': map.get($mild-base-colors, 'red')
+  "primary": map.get($mild-base-colors, "blue"),
+  "secondary": map.get($mild-base-colors, "gray"),
+  "success": map.get($mild-base-colors, "green"),
+  "warning": map.get($mild-base-colors, "yellow"),
+  "danger": map.get($mild-base-colors, "red"),
+  "error": map.get($mild-base-colors, "red"),
 ) !default;
 
 // Complete color system

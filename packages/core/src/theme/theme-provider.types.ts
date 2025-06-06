@@ -2,7 +2,7 @@
 /// Theme provider universal types
 /// @fileoverview Framework-agnostic theme provider interfaces
 
-import type { ThemeConfig, ColorMode } from '../types/common';
+import type { ThemeConfig, ColorMode } from "../types/common";
 
 export interface ThemeProviderProps {
   /** Theme configuration */
@@ -10,7 +10,7 @@ export interface ThemeProviderProps {
   /** Initial color mode */
   colorMode?: ColorMode;
   /** Children components */
-   children?: any;
+  children?: any;
   /** CSS variables prefix */
   cssVarPrefix?: string;
   /** Storage key for persisting color mode */
@@ -27,7 +27,7 @@ export interface ThemeContextValue {
   /** Toggle between light and dark */
   toggleColorMode: () => void;
   /** Resolved color mode (system resolved to light/dark) */
-  resolvedColorMode: 'light' | 'dark';
+  resolvedColorMode: "light" | "dark";
 }
 
 export interface UseThemeReturn extends ThemeContextValue {

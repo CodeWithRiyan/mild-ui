@@ -2,13 +2,28 @@
 /// Input component universal types
 /// @fileoverview Framework-agnostic input component interfaces
 
-import type { BaseComponentProps, ColorScheme, AriaProps, EventHandlers } from '../../types/common';
+import type {
+  BaseComponentProps,
+  ColorScheme,
+  AriaProps,
+  EventHandlers,
+} from "../../types/common";
 
-export type InputType = 'text' | 'email' | 'password' | 'number' | 'tel' | 'url' | 'search';
-export type InputSize = 'sm' | 'md' | 'lg';
-export type InputVariant = 'outline' | 'filled' | 'flushed' | 'unstyled';
+export type InputType =
+  | "text"
+  | "email"
+  | "password"
+  | "number"
+  | "tel"
+  | "url"
+  | "search";
+export type InputSize = "sm" | "md" | "lg";
+export type InputVariant = "outline" | "filled" | "flushed" | "unstyled";
 
-export interface InputCoreProps extends BaseComponentProps, AriaProps, EventHandlers {
+export interface InputCoreProps
+  extends BaseComponentProps,
+    AriaProps,
+    EventHandlers {
   /** Input type */
   type?: InputType;
   /** Input variant */
@@ -43,7 +58,7 @@ export interface InputPlatformProps {
   /** Platform-specific change handler */
   onChange?: (value: string) => void;
   onChangeText?: (value: string) => void; // React Native
-  onInput?: (value: string) => void;      // Vue
+  onInput?: (value: string) => void; // Vue
 }
 
 export type InputProps = InputCoreProps & InputPlatformProps;

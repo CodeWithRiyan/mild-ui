@@ -2,48 +2,48 @@
 /// Spinner component styling
 /// @group components
 
-@use '../tokens/colors' as colors;
-@use '../tokens/spacing' as spacing;
-@use '../tokens/animation' as animation;
+@use "../tokens/colors" as colors;
+@use "../tokens/spacing" as spacing;
+@use "../tokens/animation" as animation;
 
 .mild-spinner {
   display: inline-block;
-  
+
   // Size variants
   &--xs {
     width: var(--mild-space-3);
     height: var(--mild-space-3);
   }
-  
+
   &--sm {
     width: var(--mild-space-4);
     height: var(--mild-space-4);
   }
-  
+
   &--md {
     width: var(--mild-space-6);
     height: var(--mild-space-6);
   }
-  
+
   &--lg {
     width: var(--mild-space-8);
     height: var(--mild-space-8);
   }
-  
+
   &--xl {
     width: var(--mild-space-12);
     height: var(--mild-space-12);
   }
-  
+
   // Speed variants
   &--slow {
     animation-duration: 1.5s;
   }
-  
+
   &--normal {
     animation-duration: 1s;
   }
-  
+
   &--fast {
     animation-duration: 0.75s;
   }
@@ -55,11 +55,11 @@
   border-top-color: var(--mild-color-primary-500);
   border-radius: 50%;
   animation: mild-spin var(--mild-duration-1000) linear infinite;
-  
+
   &.mild-spinner--xs {
     border-width: 1px;
   }
-  
+
   &.mild-spinner--xl {
     border-width: 3px;
   }
@@ -68,25 +68,25 @@
 // Dots spinner
 .mild-spinner--dots {
   position: relative;
-  
+
   &::before,
   &::after {
-    content: '';
+    content: "";
     position: absolute;
     border-radius: 50%;
     background-color: var(--mild-color-primary-500);
     animation: mild-dots var(--mild-duration-1000) ease-in-out infinite;
   }
-  
+
   &::before {
     left: -100%;
     animation-delay: -0.5s;
   }
-  
+
   &::after {
     right: -100%;
   }
-  
+
   & {
     background-color: var(--mild-color-primary-500);
     border-radius: 50%;
@@ -109,24 +109,24 @@
   justify-content: space-between;
   width: 100%;
   height: 100%;
-  
+
   &::before,
   &::after {
-    content: '';
+    content: "";
     background-color: var(--mild-color-primary-500);
     border-radius: 2px;
     animation: mild-bars var(--mild-duration-1000) ease-in-out infinite;
   }
-  
+
   &::before {
     width: 20%;
     height: 100%;
     animation-delay: -0.4s;
   }
-  
+
   & {
     position: relative;
-    
+
     &::before {
       position: absolute;
       left: 40%;
@@ -136,10 +136,10 @@
       border-radius: 2px;
       animation: mild-bars var(--mild-duration-1000) ease-in-out infinite;
       animation-delay: -0.2s;
-      content: '';
+      content: "";
     }
   }
-  
+
   &::after {
     width: 20%;
     height: 100%;
@@ -154,7 +154,9 @@
 }
 
 @keyframes mild-dots {
-  0%, 80%, 100% {
+  0%,
+  80%,
+  100% {
     transform: scale(0.8);
     opacity: 0.5;
   }
@@ -165,7 +167,8 @@
 }
 
 @keyframes mild-pulse {
-  0%, 100% {
+  0%,
+  100% {
     transform: scale(1);
     opacity: 0.8;
   }
@@ -176,7 +179,9 @@
 }
 
 @keyframes mild-bars {
-  0%, 40%, 100% {
+  0%,
+  40%,
+  100% {
     transform: scaleY(0.4);
     opacity: 0.5;
   }

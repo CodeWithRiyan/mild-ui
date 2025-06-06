@@ -6,7 +6,7 @@
 //   ButtonSize,
 // } from "@mild-ui/core";
 import { CoreButtonProps } from "../..";
-import { ButtonVariant, ButtonSize } from '../../../../core';
+import { ButtonVariant, ButtonSize } from "../../../../core";
 
 export interface ButtonProps extends CoreButtonProps {
   /** Button content */
@@ -20,7 +20,7 @@ export interface ButtonProps extends CoreButtonProps {
   /** Additional CSS class */
   className?: string;
   /** HTML button type */
-  type?: 'button' | 'submit' | 'reset';
+  type?: "button" | "submit" | "reset";
   /** Ref forwarding */
   ref?: React.Ref<HTMLButtonElement>;
 }

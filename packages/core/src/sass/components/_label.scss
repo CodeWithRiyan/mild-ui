@@ -2,10 +2,10 @@
 /// Label component styling
 /// @group components
 
-@use '../tokens/colors' as colors;
-@use '../tokens/typography' as typography;
-@use '../tokens/spacing' as spacing;
-@use '../mixins/component-base' as base;
+@use "../tokens/colors" as colors;
+@use "../tokens/typography" as typography;
+@use "../tokens/spacing" as spacing;
+@use "../mixins/component-base" as base;
 
 .mild-label {
   @include base.component-base;
@@ -16,27 +16,27 @@
   color: var(--mild-foreground);
   margin-bottom: var(--mild-space-1);
   cursor: pointer;
-  
+
   &--error {
     color: var(--mild-color-red-500);
   }
-  
+
   &--required::after {
-    content: '*';
+    content: "*";
     color: var(--mild-color-red-500);
     margin-left: var(--mild-space-1);
   }
-  
+
   &--disabled {
     opacity: 0.5;
     cursor: not-allowed;
   }
-  
+
   &--sm {
     font-size: var(--mild-font-size-xs);
     margin-bottom: var(--mild-space-0-5);
   }
-  
+
   &--lg {
     font-size: var(--mild-font-size-base);
     margin-bottom: var(--mild-space-1-5);

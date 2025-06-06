@@ -15,7 +15,7 @@ export const inputVariants = cva(
     variants: {
       variant: {
         outline: "mild-input--outline",
-        filled: "mild-input--filled", 
+        filled: "mild-input--filled",
         flushed: "mild-input--flushed",
         unstyled: "mild-input--unstyled",
       },
@@ -33,7 +33,7 @@ export const inputVariants = cva(
         false: "",
       },
       disabled: {
-        true: "mild-input--disabled", 
+        true: "mild-input--disabled",
         false: "",
       },
       readonly: {
@@ -55,7 +55,7 @@ export const inputVariants = cva(
       {
         variant: "filled",
         error: true,
-        class: "mild-input--filled-error", 
+        class: "mild-input--filled-error",
       },
       {
         variant: "flushed",
@@ -71,7 +71,7 @@ export const inputVariants = cva(
     ],
     defaultVariants: {
       variant: "outline",
-      size: "md", 
+      size: "md",
       fullWidth: true,
       error: false,
       disabled: false,
@@ -86,46 +86,40 @@ export type InputVariantProps = VariantProps<typeof inputVariants>;
 /**
  * Input group variants for input with addons
  */
-export const inputGroupVariants = cva(
-  "mild-input-group",
-  {
-    variants: {
-      size: {
-        sm: "mild-input-group--sm",
-        md: "mild-input-group--md",
-        lg: "mild-input-group--lg",
-      },
-      error: {
-        true: "mild-input-group--error",
-        false: "",
-      },
+export const inputGroupVariants = cva("mild-input-group", {
+  variants: {
+    size: {
+      sm: "mild-input-group--sm",
+      md: "mild-input-group--md",
+      lg: "mild-input-group--lg",
     },
-    defaultVariants: {
-      size: "md",
-      error: false,
+    error: {
+      true: "mild-input-group--error",
+      false: "",
     },
   },
-);
+  defaultVariants: {
+    size: "md",
+    error: false,
+  },
+});
 
 /**
  * Input addon variants (left/right elements)
  */
-export const inputAddonVariants = cva(
-  "mild-input-addon",
-  {
-    variants: {
-      position: {
-        left: "mild-input-addon--left",
-        right: "mild-input-addon--right",
-      },
-      size: {
-        sm: "mild-input-addon--sm", 
-        md: "mild-input-addon--md",
-        lg: "mild-input-addon--lg",
-      },
+export const inputAddonVariants = cva("mild-input-addon", {
+  variants: {
+    position: {
+      left: "mild-input-addon--left",
+      right: "mild-input-addon--right",
     },
-    defaultVariants: {
-      size: "md",
+    size: {
+      sm: "mild-input-addon--sm",
+      md: "mild-input-addon--md",
+      lg: "mild-input-addon--lg",
     },
   },
-);
+  defaultVariants: {
+    size: "md",
+  },
+});

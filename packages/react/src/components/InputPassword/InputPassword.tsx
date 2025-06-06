@@ -4,7 +4,7 @@ import {
   InputPasswordCoreProps,
   inputPasswordVariants,
   InputPasswordStyleProps,
-  cn
+  cn,
 } from "../../../../core";
 import { EyeIcon, EyeOffIcon } from "lucide-react";
 

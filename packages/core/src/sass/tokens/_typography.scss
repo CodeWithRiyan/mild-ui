@@ -3,94 +3,106 @@
 /// @group tokens
 
 // Import required SASS modules
-@use 'sass:map';
+@use "sass:map";
 
 // Font families
 $mild-font-families: (
-  'sans': (
-    'Inter',
-    '-apple-system',
-    'BlinkMacSystemFont',
-    'Segoe UI',
-    'Roboto',
-    'Helvetica Neue',
-    'Arial',
-    'Noto Sans',
-    'sans-serif',
-    'Apple Color Emoji',
-    'Segoe UI Emoji',
-    'Segoe UI Symbol',
-    'Noto Color Emoji'
+  "sans": (
+    "Inter",
+    "-apple-system",
+    "BlinkMacSystemFont",
+    "Segoe UI",
+    "Roboto",
+    "Helvetica Neue",
+    "Arial",
+    "Noto Sans",
+    "sans-serif",
+    "Apple Color Emoji",
+    "Segoe UI Emoji",
+    "Segoe UI Symbol",
+    "Noto Color Emoji",
   ),
-  'serif': (
-    'Georgia',
-    'Cambria',
-    'Times New Roman',
-    'Times',
-    'serif'
+  "serif": (
+    "Georgia",
+    "Cambria",
+    "Times New Roman",
+    "Times",
+    "serif",
   ),
-  'mono': (
-    'JetBrains Mono',
-    'SF Mono',
-    'Monaco',
-    'Inconsolata',
-    'Roboto Mono',
-    'source-code-pro',
-    'Menlo',
-    'Consolas',
-    'DejaVu Sans Mono',
-    'monospace'
-  )
+  "mono": (
+    "JetBrains Mono",
+    "SF Mono",
+    "Monaco",
+    "Inconsolata",
+    "Roboto Mono",
+    "source-code-pro",
+    "Menlo",
+    "Consolas",
+    "DejaVu Sans Mono",
+    "monospace",
+  ),
 ) !default;
 
 // Font sizes with responsive scaling
 $mild-font-sizes: (
-  'xs': 0.75rem,    // 12px
-  'sm': 0.875rem,   // 14px
-  'base': 1rem,     // 16px
-  'lg': 1.125rem,   // 18px
-  'xl': 1.25rem,    // 20px
-  '2xl': 1.5rem,    // 24px
-  '3xl': 1.875rem,  // 30px
-  '4xl': 2.25rem,   // 36px
-  '5xl': 3rem,      // 48px
-  '6xl': 3.75rem,   // 60px
-  '7xl': 4.5rem,    // 72px
-  '8xl': 6rem,      // 96px
-  '9xl': 8rem       // 128px
+  "xs": 0.75rem,
+  // 12px
+  "sm": 0.875rem,
+  // 14px
+  "base": 1rem,
+  // 16px
+  "lg": 1.125rem,
+  // 18px
+  "xl": 1.25rem,
+  // 20px
+  "2xl": 1.5rem,
+  // 24px
+  "3xl": 1.875rem,
+  // 30px
+  "4xl": 2.25rem,
+  // 36px
+  "5xl": 3rem,
+  // 48px
+  "6xl": 3.75rem,
+  // 60px
+  "7xl": 4.5rem,
+  // 72px
+  "8xl": 6rem,
+  // 96px
+  "9xl": 8rem, // 128px
 ) !default;
 
 // Font weights with QUOTED keys to fix interpolation warnings
 $mild-font-weights: (
-  'thin': 100,
-  'extralight': 200,
-  'light': 300,
-  'normal': 400,
-  'medium': 500,
-  'semibold': 600,
-  'bold': 700,
-  'extrabold': 800,
-  'black': 900
+  "thin": 100,
+  "extralight": 200,
+  "light": 300,
+  "normal": 400,
+  "medium": 500,
+  "semibold": 600,
+  "bold": 700,
+  "extrabold": 800,
+  "black": 900,
 ) !default;
 
 // Line heights
 $mild-line-heights: (
-  'none': 1,
-  'tight': 1.25,
-  'snug': 1.375,
-  'normal': 1.5,
-  'relaxed': 1.625,
-  'loose': 2
+  "none": 1,
+  "tight": 1.25,
+  "snug": 1.375,
+  "normal": 1.5,
+  "relaxed": 1.625,
+  "loose": 2,
 ) !default;
 
 // Letter spacing
 $mild-letter-spacing: (
-  'tighter': -0.05em,
-  'tight': -0.025em,
-  'normal': 0em,
-  'wide': 0.025em,
-  'wider': 0.05em,
-  'widest': 0.1em
+  "tighter": -0.05em,
+  "tight": -0.025em,
+  "normal": 0em,
+  "wide": 0.025em,
+  "wider": 0.05em,
+  "widest": 0.1em,
 ) !default;
 
 // Typography scale function
@@ -112,22 +124,22 @@ $mild-letter-spacing: (
   @each $family-name, $family-stack in $mild-font-families {
     --mild-font-family-#{$family-name}: #{$family-stack};
   }
-  
+
   // Font sizes
   @each $size-name, $size-value in $mild-font-sizes {
     --mild-font-size-#{$size-name}: #{$size-value};
   }
-  
+
   // Font weights
   @each $weight-name, $weight-value in $mild-font-weights {
     --mild-font-weight-#{$weight-name}: #{$weight-value};
   }
-  
+
   // Line heights
   @each $height-name, $height-value in $mild-line-heights {
     --mild-line-height-#{$height-name}: #{$height-value};
   }
-  
+
   // Letter spacing
   @each $spacing-name, $spacing-value in $mild-letter-spacing {
     --mild-letter-spacing-#{$spacing-name}: #{$spacing-value};

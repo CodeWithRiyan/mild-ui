@@ -24,6 +24,7 @@ npm install @mild-ui/react
 ```
 
 ### Peer Dependencies
+
 ```bash
 npm install react react-dom
 ```
@@ -31,9 +32,10 @@ npm install react react-dom
 ## Quick Start
 
 ### 1. Set up ThemeProvider
+
 ```tsx
 // app.tsx or index.tsx
-import { ThemeProvider } from '@mild-ui/react';
+import { ThemeProvider } from "@mild-ui/react";
 
 function App() {
   return (
@@ -47,8 +49,9 @@ export default App;
 ```
 
 ### 2. Import and use components
+
 ```tsx
-import { Button, Input, Card, Alert } from '@mild-ui/react';
+import { Button, Input, Card, Alert } from "@mild-ui/react";
 
 function Dashboard() {
   return (
@@ -56,17 +59,13 @@ function Dashboard() {
       <Alert status="success" title="Welcome!">
         Your React app is ready with mild-ui components.
       </Alert>
-      
-      <Input 
-        placeholder="Enter your name"
-        variant="outline"
+
+      <Input placeholder="Enter your name" variant="outline" size="lg" />
+
+      <Button
+        colorScheme="primary"
         size="lg"
-      />
-      
-      <Button 
-        colorScheme="primary" 
-        size="lg"
-        onClick={() => console.log('Clicked!')}
+        onClick={() => console.log("Clicked!")}
       >
         Get Started
       </Button>
@@ -78,18 +77,19 @@ function Dashboard() {
 ## Available Components
 
 ### ✅ **Form Components**
+
 ```tsx
-import { 
-  Button, 
-  Input, 
-  Checkbox, 
-  Radio, 
-  Select, 
+import {
+  Button,
+  Input,
+  Checkbox,
+  Radio,
+  Select,
   Switch,
   FormControl,
   FormLabel,
-  FormErrorMessage 
-} from '@mild-ui/react';
+  FormErrorMessage,
+} from "@mild-ui/react";
 ```
 
 - **Button** - Multiple variants (solid, outline, ghost, link) with 5 sizes
@@ -103,14 +103,9 @@ import {
 - **FormErrorMessage** - Error message display
 
 ### ✅ **Layout & Display**
+
 ```tsx
-import { 
-  Box, 
-  Text, 
-  Card, 
-  Alert, 
-  Spinner 
-} from '@mild-ui/react';
+import { Box, Text, Card, Alert, Spinner } from "@mild-ui/react";
 ```
 
 - **Box** - Flexible layout primitive with CSS Grid and Flexbox
@@ -120,12 +115,9 @@ import {
 - **Spinner** - Loading indicators with multiple variants
 
 ### ✅ **Navigation & Interaction**
+
 ```tsx
-import { 
-  Tabs, 
-  Modal, 
-  Accordion 
-} from '@mild-ui/react';
+import { Tabs, Modal, Accordion } from "@mild-ui/react";
 ```
 
 - **Tabs** - Tabbed navigation with multiple styles
@@ -135,33 +127,27 @@ import {
 ## Component Examples
 
 ### Button with Icons
+
 ```tsx
-import { Button } from '@mild-ui/react';
-import { ChevronRight, Download } from 'lucide-react';
+import { Button } from "@mild-ui/react";
+import { ChevronRight, Download } from "lucide-react";
 
 function ButtonExamples() {
   return (
-    <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
-      <Button 
-        variant="solid" 
+    <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
+      <Button
+        variant="solid"
         colorScheme="primary"
         leftIcon={<Download size={16} />}
       >
         Download
       </Button>
-      
-      <Button 
-        variant="outline" 
-        rightIcon={<ChevronRight size={16} />}
-      >
+
+      <Button variant="outline" rightIcon={<ChevronRight size={16} />}>
         Next Step
       </Button>
-      
-      <Button 
-        variant="ghost" 
-        size="sm"
-        isLoading
-      >
+
+      <Button variant="ghost" size="sm" isLoading>
         Loading...
       </Button>
     </div>
@@ -170,27 +156,28 @@ function ButtonExamples() {
 ```
 
 ### Form with Validation
+
 ```tsx
-import { 
-  FormControl, 
-  FormLabel, 
-  Input, 
-  FormErrorMessage, 
-  Button 
-} from '@mild-ui/react';
-import { useState } from 'react';
+import {
+  FormControl,
+  FormLabel,
+  Input,
+  FormErrorMessage,
+  Button,
+} from "@mild-ui/react";
+import { useState } from "react";
 
 function ContactForm() {
-  const [email, setEmail] = useState('');
-  const [error, setError] = useState('');
+  const [email, setEmail] = useState("");
+  const [error, setError] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!email.includes('@')) {
-      setError('Please enter a valid email');
+    if (!email.includes("@")) {
+      setError("Please enter a valid email");
     } else {
-      setError('');
-      console.log('Form submitted:', email);
+      setError("");
+      console.log("Form submitted:", email);
     }
   };
 
@@ -206,7 +193,7 @@ function ContactForm() {
         />
         <FormErrorMessage>{error}</FormErrorMessage>
       </FormControl>
-      
+
       <Button type="submit" colorScheme="primary" mt={4}>
         Subscribe
       </Button>
@@ -216,17 +203,13 @@ function ContactForm() {
 ```
 
 ### Responsive Card Layout
+
 ```tsx
-import { Card, Text, Button, Box } from '@mild-ui/react';
+import { Card, Text, Button, Box } from "@mild-ui/react";
 
 function ProductCard({ product }) {
   return (
-    <Card 
-      maxWidth="sm" 
-      shadow="lg" 
-      borderRadius="lg"
-      overflow="hidden"
-    >
+    <Card maxWidth="sm" shadow="lg" borderRadius="lg" overflow="hidden">
       <Box padding="lg">
         <Text fontSize="xl" fontWeight="bold" mb={2}>
           {product.title}
@@ -246,18 +229,19 @@ function ProductCard({ product }) {
 ## Theming & Customization
 
 ### Custom Theme
+
 ```tsx
-import { ThemeProvider, extendTheme } from '@mild-ui/react';
+import { ThemeProvider, extendTheme } from "@mild-ui/react";
 
 const customTheme = extendTheme({
   colors: {
     primary: {
-      500: '#8B5CF6', // Purple
-      600: '#7C3AED',
+      500: "#8B5CF6", // Purple
+      600: "#7C3AED",
     },
     brand: {
-      500: '#FF6B6B', // Custom brand color
-      600: '#FF5252',
+      500: "#FF6B6B", // Custom brand color
+      600: "#FF5252",
     },
   },
   fonts: {
@@ -267,7 +251,7 @@ const customTheme = extendTheme({
   components: {
     Button: {
       defaultProps: {
-        colorScheme: 'brand',
+        colorScheme: "brand",
       },
     },
   },
@@ -283,45 +267,43 @@ function App() {
 ```
 
 ### CSS Custom Properties
+
 ```css
 /* globals.css */
 :root {
   /* Override default colors */
-  --mild-color-primary-500: #8B5CF6;
-  --mild-color-primary-600: #7C3AED;
-  
+  --mild-color-primary-500: #8b5cf6;
+  --mild-color-primary-600: #7c3aed;
+
   /* Custom spacing */
   --mild-space-18: 4.5rem;
-  
+
   /* Custom fonts */
-  --mild-font-family-heading: 'Inter', sans-serif;
-  
+  --mild-font-family-heading: "Inter", sans-serif;
+
   /* Custom border radius */
   --mild-radius-2xl: 1rem;
 }
 
 /* Dark mode customization */
 [data-theme="dark"] {
-  --mild-color-primary-500: #A78BFA;
-  --mild-background: #1A202C;
-  --mild-foreground: #F7FAFC;
+  --mild-color-primary-500: #a78bfa;
+  --mild-background: #1a202c;
+  --mild-foreground: #f7fafc;
 }
 ```
 
 ### Color Mode Support
+
 ```tsx
-import { Button, useColorMode } from '@mild-ui/react';
+import { Button, useColorMode } from "@mild-ui/react";
 
 function ColorModeToggle() {
   const { colorMode, toggleColorMode } = useColorMode();
-  
+
   return (
-    <Button 
-      onClick={toggleColorMode}
-      variant="ghost"
-      size="sm"
-    >
-      {colorMode === 'light' ? '🌙 Dark' : '☀️ Light'}
+    <Button onClick={toggleColorMode} variant="ghost" size="sm">
+      {colorMode === "light" ? "🌙 Dark" : "☀️ Light"}
     </Button>
   );
 }
@@ -332,20 +314,20 @@ function ColorModeToggle() {
 Full TypeScript support with comprehensive type definitions:
 
 ```tsx
-import type { 
-  ButtonProps, 
-  InputProps, 
+import type {
+  ButtonProps,
+  InputProps,
   ThemeConfig,
-  ColorMode 
-} from '@mild-ui/react';
+  ColorMode,
+} from "@mild-ui/react";
 
 interface CustomButtonProps extends ButtonProps {
   customProp?: string;
 }
 
-const CustomButton: React.FC<CustomButtonProps> = ({ 
-  customProp, 
-  ...buttonProps 
+const CustomButton: React.FC<CustomButtonProps> = ({
+  customProp,
+  ...buttonProps
 }) => {
   return <Button {...buttonProps} />;
 };
@@ -357,7 +339,7 @@ mild-ui/react works seamlessly with Next.js, Remix, and other React frameworks:
 
 ```tsx
 // next.js app/layout.tsx
-import { ThemeProvider } from '@mild-ui/react';
+import { ThemeProvider } from "@mild-ui/react";
 
 export default function RootLayout({
   children,
@@ -367,9 +349,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <ThemeProvider>
-          {children}
-        </ThemeProvider>
+        <ThemeProvider>{children}</ThemeProvider>
       </body>
     </html>
   );
@@ -402,6 +382,7 @@ export default function RootLayout({
 We welcome contributions! See our [Contributing Guide](../../CONTRIBUTING.md) for details.
 
 ### Development Setup
+
 ```bash
 # Clone the repository
 git clone https://github.com/mild-ui/mild-ui.git

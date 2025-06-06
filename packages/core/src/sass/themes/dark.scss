@@ -2,7 +2,7 @@
 /// Dark theme configuration
 /// @group themes
 
-@use '../tokens/colors' as colors;
+@use "../tokens/colors" as colors;
 
 [data-theme="dark"] {
   // Semantic color mappings for dark theme
@@ -13,13 +13,13 @@
   --mild-border: #262626;
   --mild-input: #262626;
   --mild-ring: var(--mild-color-primary-400);
-  
+
   // Component-specific colors
   --mild-card: #0a0a0a;
   --mild-card-foreground: #fafafa;
   --mild-popover: #0a0a0a;
   --mild-popover-foreground: #fafafa;
-  
+
   // State colors
   --mild-accent: #262626;
   --mild-accent-foreground: #fafafa;

@@ -1,8 +1,8 @@
 // packages/react/src/components/Label/Label.tsx
-import React, { forwardRef } from 'react';
-import type { LabelProps as CoreLabelProps } from '../../../../core';
-import { labelVariants } from '../../../../core';
-import { cn } from '../../../../core';
+import React, { forwardRef } from "react";
+import type { LabelProps as CoreLabelProps } from "../../../../core";
+import { labelVariants } from "../../../../core";
+import { cn } from "../../../../core";
 
 export interface LabelProps extends CoreLabelProps {
   /** Label content */
@@ -29,7 +29,7 @@ export const Label = forwardRef<HTMLLabelElement, LabelProps>(
       onClick,
       ...rest
     },
-    ref
+    ref,
   ) => {
     const classes = labelVariants({
       required,
@@ -47,11 +47,15 @@ export const Label = forwardRef<HTMLLabelElement, LabelProps>(
       >
         {children}
         {required && (
-          <span className={cn("--mild-space-1 --mild-color-red-500", ui?.asterisk)}>*</span>
+          <span
+            className={cn("--mild-space-1 --mild-color-red-500", ui?.asterisk)}
+          >
+            *
+          </span>
         )}
       </label>
     );
-  }
+  },
 );
 
-Label.displayName = 'Label';
+Label.displayName = "Label";

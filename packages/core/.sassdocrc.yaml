@@ -3,9 +3,9 @@ dest: docs/sass
 theme: default
 groups:
   tokens: Design Tokens
-  mixins: Mixins & Functions  
+  mixins: Mixins & Functions
   components: Component Styles
   themes: Theme System
 display:
-  access: 
+  access:
     - public

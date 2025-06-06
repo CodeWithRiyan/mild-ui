@@ -2,13 +2,13 @@
 /// Modal component styling
 /// @group components
 
-@use '../tokens/colors' as colors;
-@use '../tokens/spacing' as spacing;
-@use '../tokens/typography' as typography;
-@use '../tokens/radius' as radius;
-@use '../tokens/elevation' as elevation;
-@use '../tokens/animation' as animation;
-@use '../mixins/component-base' as base;
+@use "../tokens/colors" as colors;
+@use "../tokens/spacing" as spacing;
+@use "../tokens/typography" as typography;
+@use "../tokens/radius" as radius;
+@use "../tokens/elevation" as elevation;
+@use "../tokens/animation" as animation;
+@use "../mixins/component-base" as base;
 
 .mild-modal-overlay {
   position: fixed;
@@ -19,18 +19,18 @@
   align-items: center;
   justify-content: center;
   padding: var(--mild-space-4);
-  
+
   // Animation
   animation: mild-fade-in var(--mild-duration-200) var(--mild-easing-out);
-  
+
   &--blur {
     backdrop-filter: blur(4px);
   }
-  
+
   &--dark {
     background-color: rgba(0, 0, 0, 0.7);
   }
-  
+
   &--light {
     background-color: rgba(255, 255, 255, 0.8);
   }
@@ -46,41 +46,42 @@
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  
+
   // Animation
-  animation: mild-slide-in-from-bottom var(--mild-duration-200) var(--mild-easing-out);
-  
+  animation: mild-slide-in-from-bottom var(--mild-duration-200)
+    var(--mild-easing-out);
+
   &--xs {
     max-width: 20rem;
   }
-  
+
   &--sm {
     max-width: 24rem;
   }
-  
+
   &--md {
     max-width: 32rem;
   }
-  
+
   &--lg {
     max-width: 48rem;
   }
-  
+
   &--xl {
     max-width: 64rem;
   }
-  
+
   &--full {
     max-width: 100%;
     max-height: 100%;
     margin: 0;
     border-radius: 0;
   }
-  
+
   &--centered {
     margin: auto;
   }
-  
+
   // Responsive behavior
   @media (max-width: 640px) {
     &:not(.mild-modal-content--full) {
@@ -94,10 +95,11 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: var(--mild-space-6) var(--mild-space-6) var(--mild-space-4) var(--mild-space-6);
+  padding: var(--mild-space-6) var(--mild-space-6) var(--mild-space-4)
+    var(--mild-space-6);
   border-bottom: 1px solid var(--mild-border);
   flex-shrink: 0;
-  
+
   &--no-border {
     border-bottom: none;
     padding-bottom: var(--mild-space-6);
@@ -110,11 +112,11 @@
   color: var(--mild-foreground);
   margin: 0;
   flex: 1;
-  
+
   &--sm {
     font-size: var(--mild-font-size-base);
   }
-  
+
   &--lg {
     font-size: var(--mild-font-size-xl);
   }
@@ -131,7 +133,7 @@
   @include base.component-base;
   @include base.focus-ring;
   @include base.interactive-transitions;
-  
+
   display: flex;
   align-items: center;
   justify-content: center;
@@ -143,16 +145,16 @@
   border: 1px solid transparent;
   cursor: pointer;
   margin-left: var(--mild-space-2);
-  
+
   &:hover {
     background-color: var(--mild-color-gray-100);
     color: var(--mild-foreground);
   }
-  
+
   &:active {
     background-color: var(--mild-color-gray-200);
   }
-  
+
   svg {
     width: var(--mild-space-4);
     height: var(--mild-space-4);
@@ -163,15 +165,15 @@
   flex: 1;
   padding: var(--mild-space-6);
   overflow-y: auto;
-  
+
   &--no-padding {
     padding: 0;
   }
-  
+
   &--sm {
     padding: var(--mild-space-4);
   }
-  
+
   &--lg {
     padding: var(--mild-space-8);
   }
@@ -182,32 +184,33 @@
   align-items: center;
   justify-content: flex-end;
   gap: var(--mild-space-3);
-  padding: var(--mild-space-4) var(--mild-space-6) var(--mild-space-6) var(--mild-space-6);
+  padding: var(--mild-space-4) var(--mild-space-6) var(--mild-space-6)
+    var(--mild-space-6);
   border-top: 1px solid var(--mild-border);
   flex-shrink: 0;
-  
+
   &--no-border {
     border-top: none;
     padding-top: var(--mild-space-6);
   }
-  
+
   &--start {
     justify-content: flex-start;
   }
-  
+
   &--center {
     justify-content: center;
   }
-  
+
   &--between {
     justify-content: space-between;
   }
-  
+
   // Responsive stacking
   @media (max-width: 480px) {
     flex-direction: column-reverse;
     align-items: stretch;
-    
+
     .mild-button {
       width: 100%;
       justify-content: center;

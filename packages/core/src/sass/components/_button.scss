@@ -2,186 +2,186 @@
 /// Button component styling with pure SASS variant system (Updated)
 /// @group components
 
-@use '../tokens/colors' as colors;
-@use '../tokens/spacing' as spacing;
-@use '../tokens/typography' as typography;
-@use '../tokens/radius' as radius;
-@use '../tokens/animation' as animation;
-@use '../mixins/component-base' as base;
-@use 'sass:map';
+@use "../tokens/colors" as colors;
+@use "../tokens/spacing" as spacing;
+@use "../tokens/typography" as typography;
+@use "../tokens/radius" as radius;
+@use "../tokens/animation" as animation;
+@use "../mixins/component-base" as base;
+@use "sass:map";
 
 // Button variant configurations (Updated with gray)
 $button-variants: (
-  'solid': (
-    'primary': (
+  "solid": (
+    "primary": (
       bg: var(--mild-color-primary-500),
       color: white,
       border: var(--mild-color-primary-500),
       hover-bg: var(--mild-color-primary-600),
       hover-border: var(--mild-color-primary-600),
       active-bg: var(--mild-color-primary-700),
-      active-border: var(--mild-color-primary-700)
+      active-border: var(--mild-color-primary-700),
     ),
-    'secondary': (
+    "secondary": (
       bg: var(--mild-color-gray-500),
       color: white,
       border: var(--mild-color-gray-500),
       hover-bg: var(--mild-color-gray-600),
       hover-border: var(--mild-color-gray-600),
       active-bg: var(--mild-color-gray-700),
-      active-border: var(--mild-color-gray-700)
+      active-border: var(--mild-color-gray-700),
     ),
-    'success': (
+    "success": (
       bg: var(--mild-color-green-500),
       color: white,
       border: var(--mild-color-green-500),
       hover-bg: var(--mild-color-green-600),
       hover-border: var(--mild-color-green-600),
       active-bg: var(--mild-color-green-700),
-      active-border: var(--mild-color-green-700)
+      active-border: var(--mild-color-green-700),
     ),
-    'warning': (
+    "warning": (
       bg: var(--mild-color-yellow-500),
       color: var(--mild-color-gray-900),
       border: var(--mild-color-yellow-500),
       hover-bg: var(--mild-color-yellow-600),
       hover-border: var(--mild-color-yellow-600),
       active-bg: var(--mild-color-yellow-700),
-      active-border: var(--mild-color-yellow-700)
+      active-border: var(--mild-color-yellow-700),
     ),
-    'danger': (
+    "danger": (
       bg: var(--mild-color-red-500),
       color: white,
       border: var(--mild-color-red-500),
       hover-bg: var(--mild-color-red-600),
       hover-border: var(--mild-color-red-600),
       active-bg: var(--mild-color-red-700),
-      active-border: var(--mild-color-red-700)
+      active-border: var(--mild-color-red-700),
     ),
-    'gray': (
+    "gray": (
       bg: var(--mild-color-gray-400),
       color: white,
       border: var(--mild-color-gray-400),
       hover-bg: var(--mild-color-gray-500),
       hover-border: var(--mild-color-gray-500),
       active-bg: var(--mild-color-gray-600),
-      active-border: var(--mild-color-gray-600)
-    )
+      active-border: var(--mild-color-gray-600),
+    ),
   ),
-  'outline': (
-    'primary': (
+  "outline": (
+    "primary": (
       bg: transparent,
       color: var(--mild-color-primary-500),
       border: var(--mild-color-primary-500),
       hover-bg: var(--mild-color-primary-50),
       hover-border: var(--mild-color-primary-500),
       active-bg: var(--mild-color-primary-100),
-      active-border: var(--mild-color-primary-500)
+      active-border: var(--mild-color-primary-500),
     ),
-    'secondary': (
+    "secondary": (
       bg: transparent,
       color: var(--mild-color-gray-500),
       border: var(--mild-color-gray-500),
       hover-bg: var(--mild-color-gray-50),
       hover-border: var(--mild-color-gray-500),
       active-bg: var(--mild-color-gray-100),
-      active-border: var(--mild-color-gray-500)
+      active-border: var(--mild-color-gray-500),
     ),
-    'success': (
+    "success": (
       bg: transparent,
       color: var(--mild-color-green-500),
       border: var(--mild-color-green-500),
       hover-bg: var(--mild-color-green-50),
       hover-border: var(--mild-color-green-500),
       active-bg: var(--mild-color-green-100),
-      active-border: var(--mild-color-green-500)
+      active-border: var(--mild-color-green-500),
     ),
-    'warning': (
+    "warning": (
       bg: transparent,
       color: var(--mild-color-yellow-600),
       border: var(--mild-color-yellow-500),
       hover-bg: var(--mild-color-yellow-50),
       hover-border: var(--mild-color-yellow-500),
       active-bg: var(--mild-color-yellow-100),
-      active-border: var(--mild-color-yellow-500)
+      active-border: var(--mild-color-yellow-500),
     ),
-    'danger': (
+    "danger": (
       bg: transparent,
       color: var(--mild-color-red-500),
       border: var(--mild-color-red-500),
       hover-bg: var(--mild-color-red-50),
       hover-border: var(--mild-color-red-500),
       active-bg: var(--mild-color-red-100),
-      active-border: var(--mild-color-red-500)
+      active-border: var(--mild-color-red-500),
     ),
-    'gray': (
+    "gray": (
       bg: transparent,
       color: var(--mild-color-gray-600),
       border: var(--mild-color-gray-400),
       hover-bg: var(--mild-color-gray-50),
       hover-border: var(--mild-color-gray-400),
       active-bg: var(--mild-color-gray-100),
-      active-border: var(--mild-color-gray-400)
-    )
+      active-border: var(--mild-color-gray-400),
+    ),
   ),
-  'ghost': (
-    'primary': (
+  "ghost": (
+    "primary": (
       bg: transparent,
       color: var(--mild-color-primary-500),
       border: transparent,
       hover-bg: var(--mild-color-primary-50),
       hover-border: transparent,
       active-bg: var(--mild-color-primary-100),
-      active-border: transparent
+      active-border: transparent,
     ),
-    'secondary': (
+    "secondary": (
       bg: transparent,
       color: var(--mild-color-gray-500),
       border: transparent,
       hover-bg: var(--mild-color-gray-50),
       hover-border: transparent,
       active-bg: var(--mild-color-gray-100),
-      active-border: transparent
+      active-border: transparent,
     ),
-    'success': (
+    "success": (
       bg: transparent,
       color: var(--mild-color-green-500),
       border: transparent,
       hover-bg: var(--mild-color-green-50),
       hover-border: transparent,
       active-bg: var(--mild-color-green-100),
-      active-border: transparent
+      active-border: transparent,
     ),
-    'warning': (
+    "warning": (
       bg: transparent,
       color: var(--mild-color-yellow-600),
       border: transparent,
       hover-bg: var(--mild-color-yellow-50),
       hover-border: transparent,
       active-bg: var(--mild-color-yellow-100),
-      active-border: transparent
+      active-border: transparent,
     ),
-    'danger': (
+    "danger": (
       bg: transparent,
       color: var(--mild-color-red-500),
       border: transparent,
       hover-bg: var(--mild-color-red-50),
       hover-border: transparent,
       active-bg: var(--mild-color-red-100),
-      active-border: transparent
+      active-border: transparent,
     ),
-    'gray': (
+    "gray": (
       bg: transparent,
       color: var(--mild-color-gray-600),
       border: transparent,
       hover-bg: var(--mild-color-gray-50),
       hover-border: transparent,
       active-bg: var(--mild-color-gray-100),
-      active-border: transparent
-    )
+      active-border: transparent,
+    ),
   ),
-  'link': (
-    'primary': (
+  "link": (
+    "primary": (
       bg: transparent,
       color: var(--mild-color-primary-500),
       border: transparent,
@@ -190,9 +190,9 @@ $button-variants: (
       active-bg: transparent,
       active-border: transparent,
       text-decoration: underline,
-      hover-text-decoration: none
+      hover-text-decoration: none,
     ),
-    'secondary': (
+    "secondary": (
       bg: transparent,
       color: var(--mild-color-gray-500),
       border: transparent,
@@ -201,9 +201,9 @@ $button-variants: (
       active-bg: transparent,
       active-border: transparent,
       text-decoration: underline,
-      hover-text-decoration: none
+      hover-text-decoration: none,
     ),
-    'success': (
+    "success": (
       bg: transparent,
       color: var(--mild-color-green-500),
       border: transparent,
@@ -212,9 +212,9 @@ $button-variants: (
       active-bg: transparent,
       active-border: transparent,
       text-decoration: underline,
-      hover-text-decoration: none
+      hover-text-decoration: none,
     ),
-    'warning': (
+    "warning": (
       bg: transparent,
       color: var(--mild-color-yellow-600),
       border: transparent,
@@ -223,9 +223,9 @@ $button-variants: (
       active-bg: transparent,
       active-border: transparent,
       text-decoration: underline,
-      hover-text-decoration: none
+      hover-text-decoration: none,
     ),
-    'danger': (
+    "danger": (
       bg: transparent,
       color: var(--mild-color-red-500),
       border: transparent,
@@ -234,9 +234,9 @@ $button-variants: (
       active-bg: transparent,
       active-border: transparent,
       text-decoration: underline,
-      hover-text-decoration: none
+      hover-text-decoration: none,
     ),
-    'gray': (
+    "gray": (
       bg: transparent,
       color: var(--mild-color-gray-600),
       border: transparent,
@@ -245,48 +245,48 @@ $button-variants: (
       active-bg: transparent,
       active-border: transparent,
       text-decoration: underline,
-      hover-text-decoration: none
-    )
-  )
+      hover-text-decoration: none,
+    ),
+  ),
 ) !default;
 
 // Button size configurations
 $button-sizes: (
-  'xs': (
+  "xs": (
     height: var(--mild-space-6),
     min-width: var(--mild-space-6),
     padding: 0 var(--mild-space-2),
     font-size: var(--mild-font-size-xs),
-    gap: var(--mild-space-1)
+    gap: var(--mild-space-1),
   ),
-  'sm': (
+  "sm": (
     height: var(--mild-space-8),
     min-width: var(--mild-space-8),
     padding: 0 var(--mild-space-3),
     font-size: var(--mild-font-size-sm),
-    gap: var(--mild-space-1-5)
+    gap: var(--mild-space-1-5),
   ),
-  'md': (
+  "md": (
     height: var(--mild-space-10),
     min-width: var(--mild-space-10),
     padding: 0 var(--mild-space-4),
     font-size: var(--mild-font-size-sm),
-    gap: var(--mild-space-2)
+    gap: var(--mild-space-2),
   ),
-  'lg': (
+  "lg": (
     height: var(--mild-space-12),
     min-width: var(--mild-space-12),
     padding: 0 var(--mild-space-6),
     font-size: var(--mild-font-size-base),
-    gap: var(--mild-space-2)
+    gap: var(--mild-space-2),
   ),
-  'xl': (
+  "xl": (
     height: var(--mild-space-14),
     min-width: var(--mild-space-14),
     padding: 0 var(--mild-space-8),
     font-size: var(--mild-font-size-lg),
-    gap: var(--mild-space-2-5)
-  )
+    gap: var(--mild-space-2-5),
+  ),
 ) !default;
 
 // Button base styles
@@ -295,7 +295,7 @@ $button-sizes: (
   @include base.focus-ring;
   @include base.disabled-state;
   @include base.interactive-transitions;
-  
+
   // Base styling
   display: inline-flex;
   align-items: center;
@@ -308,23 +308,23 @@ $button-sizes: (
   border-radius: var(--mild-radius-md);
   border: 1px solid transparent;
   text-decoration: none;
-  
+
   // Default size (md)
-  $default-size: map.get($button-sizes, 'md');
-  height: map.get($default-size, 'height');
-  min-width: map.get($default-size, 'min-width');
-  padding: map.get($default-size, 'padding');
-  font-size: map.get($default-size, 'font-size');
-  gap: map.get($default-size, 'gap');
-  
+  $default-size: map.get($button-sizes, "md");
+  height: map.get($default-size, "height");
+  min-width: map.get($default-size, "min-width");
+  padding: map.get($default-size, "padding");
+  font-size: map.get($default-size, "font-size");
+  gap: map.get($default-size, "gap");
+
   // Loading state
   &[data-loading="true"] {
     pointer-events: none;
-    
+
     .mild-button__content {
       opacity: 0;
     }
-    
+
     .mild-button__spinner {
       position: absolute;
       top: 50%;
@@ -332,13 +332,13 @@ $button-sizes: (
       transform: translate(-50%, -50%);
     }
   }
-  
+
   // Full width
   &[data-full-width="true"],
   &--full-width {
     width: 100%;
   }
-  
+
   // Disabled state
   &[disabled],
   &[aria-disabled="true"],
@@ -347,7 +347,7 @@ $button-sizes: (
     cursor: not-allowed;
     pointer-events: none;
   }
-  
+
   // Loading state
   &--loading {
     pointer-events: none;
@@ -358,11 +358,11 @@ $button-sizes: (
 // Generate size variants using SASS loops
 @each $size-name, $size-props in $button-sizes {
   .mild-button--#{$size-name} {
-    height: map.get($size-props, 'height');
-    min-width: map.get($size-props, 'min-width');
-    padding: map.get($size-props, 'padding');
-    font-size: map.get($size-props, 'font-size');
-    gap: map.get($size-props, 'gap');
+    height: map.get($size-props, "height");
+    min-width: map.get($size-props, "min-width");
+    padding: map.get($size-props, "padding");
+    font-size: map.get($size-props, "font-size");
+    gap: map.get($size-props, "gap");
   }
 }
 
@@ -370,26 +370,26 @@ $button-sizes: (
 @each $variant-name, $variant-colors in $button-variants {
   @each $color-name, $color-props in $variant-colors {
     .mild-button--#{$variant-name}.mild-button--#{$color-name} {
-      background-color: map.get($color-props, 'bg');
-      color: map.get($color-props, 'color');
-      border-color: map.get($color-props, 'border');
-      
-      @if map.has-key($color-props, 'text-decoration') {
-        text-decoration: map.get($color-props, 'text-decoration');
+      background-color: map.get($color-props, "bg");
+      color: map.get($color-props, "color");
+      border-color: map.get($color-props, "border");
+
+      @if map.has-key($color-props, "text-decoration") {
+        text-decoration: map.get($color-props, "text-decoration");
       }
-      
+
       &:hover:not(:disabled):not([aria-disabled="true"]) {
-        background-color: map.get($color-props, 'hover-bg');
-        border-color: map.get($color-props, 'hover-border');
-        
-        @if map.has-key($color-props, 'hover-text-decoration') {
-          text-decoration: map.get($color-props, 'hover-text-decoration');
+        background-color: map.get($color-props, "hover-bg");
+        border-color: map.get($color-props, "hover-border");
+
+        @if map.has-key($color-props, "hover-text-decoration") {
+          text-decoration: map.get($color-props, "hover-text-decoration");
         }
       }
-      
+
       &:active:not(:disabled):not([aria-disabled="true"]) {
-        background-color: map.get($color-props, 'active-bg');
-        border-color: map.get($color-props, 'active-border');
+        background-color: map.get($color-props, "active-bg");
+        border-color: map.get($color-props, "active-border");
       }
     }
   }
@@ -426,9 +426,9 @@ $button-sizes: (
   justify-content: center;
   width: 1em;
   height: 1em;
-  
+
   &::after {
-    content: '';
+    content: "";
     width: 1em;
     height: 1em;
     border: 2px solid transparent;

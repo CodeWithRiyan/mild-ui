@@ -1,13 +1,16 @@
 // packages/react/src/index.ts
 // Theme system
-export { ThemeProvider, useTheme } from './providers/ThemeProvider';
-export type { ThemeProviderProps, ThemeContextValue } from './providers/ThemeProvider';
+export { ThemeProvider, useTheme } from "./providers/ThemeProvider";
+export type {
+  ThemeProviderProps,
+  ThemeContextValue,
+} from "./providers/ThemeProvider";
 
 // Components
-export * from './components';
+export * from "./components";
 
 // Hooks
-export * from './hooks';
+export * from "./hooks";
 
 // Re-export core types and utilities for convenience
 export type {
@@ -20,7 +23,7 @@ export type {
   InputProps as CoreInputProps,
   TextProps as CoreTextProps,
   BoxProps as CoreBoxProps,
-} from '../../core';
+} from "../../core";
 
 export {
   defaultTheme,
@@ -34,4 +37,4 @@ export {
   cssVar,
   dataAttr,
   ariaAttr,
-} from '../../core';
+} from "../../core";

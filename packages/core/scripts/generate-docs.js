@@ -1,32 +1,35 @@
 // packages/core/scripts/generate-docs.js
-const fs = require('fs').promises;
-const path = require('path');
+const fs = require("fs").promises;
+const path = require("path");
 
 async function generateDocs() {
-  console.log('🔧 Generating documentation...');
-  
+  console.log("🔧 Generating documentation...");
+
   // Ensure docs directory exists
-  const docsDir = path.join(__dirname, '../docs');
+  const docsDir = path.join(__dirname, "../docs");
   await fs.mkdir(docsDir, { recursive: true });
-  
+
   // Read package.json for version and info
   const packageJson = JSON.parse(
-    await fs.readFile(path.join(__dirname, '../package.json'), 'utf8')
+    await fs.readFile(path.join(__dirname, "../package.json"), "utf8"),
   );
-  
+
   // Scan components
-  const componentsDir = path.join(__dirname, '../src/components');
+  const componentsDir = path.join(__dirname, "../src/components");
   let components = [];
-  
+
   try {
     const componentDirs = await fs.readdir(componentsDir);
-    console.log(`🔍 Found ${componentDirs.length} items in components directory:`, componentDirs);
-    
+    console.log(
+      `🔍 Found ${componentDirs.length} items in components directory:`,
+      componentDirs,
+    );
+
     for (const dir of componentDirs) {
       const componentPath = path.join(componentsDir, dir);
       try {
         const stat = await fs.stat(componentPath);
-        
+
         if (stat.isDirectory()) {
           console.log(`📁 Analyzing component: ${dir}`);
           const component = await analyzeComponent(componentPath, dir);
@@ -35,7 +38,7 @@ async function generateDocs() {
             hasTypes: !!component.types,
             hasStyles: !!component.styles,
             hasCore: !!component.core,
-            hasIndex: component.hasIndex
+            hasIndex: component.hasIndex,
           });
         }
       } catch (error) {
@@ -43,21 +46,21 @@ async function generateDocs() {
       }
     }
   } catch (error) {
-    console.log('📝 No components directory found, creating basic docs...');
-    console.log('💡 Expected components at:', componentsDir);
+    console.log("📝 No components directory found, creating basic docs...");
+    console.log("💡 Expected components at:", componentsDir);
   }
-  
+
   // Scan SASS files
   const sassInfo = await analyzeSassStructure();
-  
+
   // Generate main documentation
   const html = generateHTML(packageJson, components, sassInfo);
-  
-  await fs.writeFile(path.join(docsDir, 'index.html'), html);
-  
+
+  await fs.writeFile(path.join(docsDir, "index.html"), html);
+
   // Generate component API docs
   if (components.length > 0) {
-    console.log('📖 Generating individual component pages...');
+    console.log("📖 Generating individual component pages...");
     for (const component of components) {
       const componentHtml = generateComponentPage(component, packageJson);
       const fileName = `${component.name.toLowerCase()}.html`;
@@ -65,31 +68,31 @@ async function generateDocs() {
       console.log(`   ✓ Generated ${fileName}`);
     }
   } else {
-    console.log('ℹ️  No components found to generate individual pages');
+    console.log("ℹ️  No components found to generate individual pages");
   }
-  
-  console.log('✅ Documentation generated successfully!');
+
+  console.log("✅ Documentation generated successfully!");
   console.log(`📄 Generated docs for ${components.length} components`);
   if (components.length > 0) {
-    console.log('📋 Component pages generated:');
-    components.forEach(comp => {
+    console.log("📋 Component pages generated:");
+    components.forEach((comp) => {
       console.log(`   • ${comp.name.toLowerCase()}.html`);
     });
   }
-  
+
   // List all generated files
   try {
     const files = await fs.readdir(docsDir);
-    console.log('📂 All files in docs directory:', files);
+    console.log("📂 All files in docs directory:", files);
   } catch (error) {
-    console.log('⚠️ Could not list docs directory');
+    console.log("⚠️ Could not list docs directory");
   }
-  
-  console.log('🌐 Run `pnpm docs:serve` to view documentation');
-  console.log('🔗 Main page: http://localhost:3001/');
+
+  console.log("🌐 Run `pnpm docs:serve` to view documentation");
+  console.log("🔗 Main page: http://localhost:3001/");
   if (components.length > 0) {
-    console.log('🔗 Component pages:');
-    components.forEach(comp => {
+    console.log("🔗 Component pages:");
+    components.forEach((comp) => {
       console.log(`   • http://localhost:3001/${comp.name.toLowerCase()}.html`);
     });
   }
@@ -101,131 +104,131 @@ async function analyzeComponent(componentPath, name) {
     types: null,
     styles: null,
     core: null,
-    hasIndex: false
+    hasIndex: false,
   };
-  
+
   try {
     const files = await fs.readdir(componentPath);
-    
+
     for (const file of files) {
       const filePath = path.join(componentPath, file);
-      
-      if (file.endsWith('.types.ts')) {
-        const content = await fs.readFile(filePath, 'utf8');
+
+      if (file.endsWith(".types.ts")) {
+        const content = await fs.readFile(filePath, "utf8");
         component.types = extractTypeInfo(content);
-      } else if (file.endsWith('.styles.ts')) {
-        const content = await fs.readFile(filePath, 'utf8');
+      } else if (file.endsWith(".styles.ts")) {
+        const content = await fs.readFile(filePath, "utf8");
         component.styles = extractStyleInfo(content);
-      } else if (file.endsWith('.core.ts')) {
-        const content = await fs.readFile(filePath, 'utf8');
+      } else if (file.endsWith(".core.ts")) {
+        const content = await fs.readFile(filePath, "utf8");
         component.core = extractCoreInfo(content);
-      } else if (file === 'index.ts') {
+      } else if (file === "index.ts") {
         component.hasIndex = true;
       }
     }
   } catch (error) {
     console.log(`⚠️  Could not analyze component ${name}:`, error.message);
   }
-  
+
   return component;
 }
 
 function extractTypeInfo(content) {
   const interfaces = [];
   const types = [];
-  
+
   // Extract interfaces
   const interfaceRegex = /export interface (\w+)[^{]*{([^}]*)}/g;
   let match;
   while ((match = interfaceRegex.exec(content)) !== null) {
     interfaces.push({
       name: match[1],
-      properties: extractProperties(match[2])
+      properties: extractProperties(match[2]),
     });
   }
-  
+
   // Extract type aliases
   const typeRegex = /export type (\w+) = ([^;]+);/g;
   while ((match = typeRegex.exec(content)) !== null) {
     types.push({
       name: match[1],
-      definition: match[2].trim()
+      definition: match[2].trim(),
     });
   }
-  
+
   return { interfaces, types };
 }
 
 function extractProperties(propertiesStr) {
   const properties = [];
-  const lines = propertiesStr.split('\n');
-  
+  const lines = propertiesStr.split("\n");
+
   for (const line of lines) {
     const trimmed = line.trim();
-    if (trimmed && !trimmed.startsWith('//') && !trimmed.startsWith('*')) {
+    if (trimmed && !trimmed.startsWith("//") && !trimmed.startsWith("*")) {
       const propMatch = trimmed.match(/(\w+)\??\s*:\s*([^;]+);?/);
       if (propMatch) {
         properties.push({
           name: propMatch[1],
           type: propMatch[2].trim(),
-          optional: trimmed.includes('?')
+          optional: trimmed.includes("?"),
         });
       }
     }
   }
-  
+
   return properties;
 }
 
 function extractStyleInfo(content) {
   const variants = [];
-  
+
   // Extract cva calls and variants
   const cvaRegex = /export const (\w+) = cva\([^,]+,\s*{([^}]+)}/g;
   let match;
   while ((match = cvaRegex.exec(content)) !== null) {
     variants.push({
       name: match[1],
-      config: match[2]
+      config: match[2],
     });
   }
-  
+
   return { variants };
 }
 
 function extractCoreInfo(content) {
   const functions = [];
-  
+
   // Extract exported functions
   const functionRegex = /export function (\w+)\([^)]*\)/g;
   let match;
   while ((match = functionRegex.exec(content)) !== null) {
     functions.push(match[1]);
   }
-  
+
   return { functions };
 }
 
 async function analyzeSassStructure() {
-  const sassDir = path.join(__dirname, '../src/sass');
+  const sassDir = path.join(__dirname, "../src/sass");
   const structure = {};
-  
+
   try {
-    const tokensDir = path.join(sassDir, 'tokens');
+    const tokensDir = path.join(sassDir, "tokens");
     if (await fs.stat(tokensDir).catch(() => false)) {
       const tokenFiles = await fs.readdir(tokensDir);
-      structure.tokens = tokenFiles.filter(f => f.endsWith('.scss'));
+      structure.tokens = tokenFiles.filter((f) => f.endsWith(".scss"));
     }
-    
-    const componentsDir = path.join(sassDir, 'components');
+
+    const componentsDir = path.join(sassDir, "components");
     if (await fs.stat(componentsDir).catch(() => false)) {
       const componentFiles = await fs.readdir(componentsDir);
-      structure.components = componentFiles.filter(f => f.endsWith('.scss'));
+      structure.components = componentFiles.filter((f) => f.endsWith(".scss"));
     }
   } catch (error) {
     // SASS structure not found, that's okay
   }
-  
+
   return structure;
 }
 
@@ -358,50 +361,70 @@ function generateHTML(packageJson, components, sassInfo) {
         <div class="code">npm install ${packageJson.name}</div>
     </div>
 
-    ${components.length > 0 ? `
+    ${
+      components.length > 0
+        ? `
     <div class="section">
         <h2>🧩 Components</h2>
         <div class="grid">
-            ${components.map(component => `
+            ${components
+              .map(
+                (component) => `
                 <div class="card">
                     <h3><a href="${component.name.toLowerCase()}.html">${component.name}</a></h3>
                     <p>
-                        ${component.types ? `${component.types.interfaces.length} interfaces, ` : ''}
-                        ${component.styles ? `${component.styles.variants.length} style variants` : 'Basic styling'}
+                        ${component.types ? `${component.types.interfaces.length} interfaces, ` : ""}
+                        ${component.styles ? `${component.styles.variants.length} style variants` : "Basic styling"}
                     </p>
                 </div>
-            `).join('')}
+            `,
+              )
+              .join("")}
         </div>
     </div>
-    ` : ''}
+    `
+        : ""
+    }
 
-    ${Object.keys(sassInfo).length > 0 ? `
+    ${
+      Object.keys(sassInfo).length > 0
+        ? `
     <div class="section">
         <h2>🎨 SASS Architecture</h2>
         <div class="grid">
-            ${sassInfo.tokens ? `
+            ${
+              sassInfo.tokens
+                ? `
                 <div class="card">
                     <h3>Design Tokens</h3>
-                    <p>${sassInfo.tokens.length} token files: ${sassInfo.tokens.join(', ')}</p>
+                    <p>${sassInfo.tokens.length} token files: ${sassInfo.tokens.join(", ")}</p>
                 </div>
-            ` : ''}
-            ${sassInfo.components ? `
+            `
+                : ""
+            }
+            ${
+              sassInfo.components
+                ? `
                 <div class="card">
                     <h3>Component Styles</h3>
                     <p>${sassInfo.components.length} component stylesheets</p>
                 </div>
-            ` : ''}
+            `
+                : ""
+            }
         </div>
     </div>
-    ` : ''}
+    `
+        : ""
+    }
 
     <div class="section">
         <h2>🚀 Quick Start</h2>
-        <div class="code">import { ${components.length > 0 ? components[0].name : 'Component'} } from '${packageJson.name}';
+        <div class="code">import { ${components.length > 0 ? components[0].name : "Component"} } from '${packageJson.name}';
 
 // Use the component
 const MyApp = () => {
-  return &lt;${components.length > 0 ? components[0].name : 'Component'} /&gt;;
+  return &lt;${components.length > 0 ? components[0].name : "Component"} /&gt;;
 };</div>
     </div>
 
@@ -494,12 +517,18 @@ function generateComponentPage(component, packageJson) {
         <h1>${component.name}</h1>
     </div>
 
-    ${component.types && component.types.interfaces.length > 0 ? `
+    ${
+      component.types && component.types.interfaces.length > 0
+        ? `
     <div class="section">
         <h2>📝 Props</h2>
-        ${component.types.interfaces.map(interface => `
+        ${component.types.interfaces
+          .map(
+            (interface) => `
             <h3>${interface.name}</h3>
-            ${interface.properties.length > 0 ? `
+            ${
+              interface.properties.length > 0
+                ? `
                 <table class="prop-table">
                     <thead>
                         <tr>
@@ -509,39 +538,57 @@ function generateComponentPage(component, packageJson) {
                         </tr>
                     </thead>
                     <tbody>
-                        ${interface.properties.map(prop => `
+                        ${interface.properties
+                          .map(
+                            (prop) => `
                             <tr>
                                 <td><code>${prop.name}</code></td>
                                 <td><span class="type">${prop.type}</span></td>
-                                <td>${prop.optional ? '<span class="optional">Optional</span>' : '<strong>Required</strong>'}</td>
+                                <td>${prop.optional ? '<span class="optional">Optional</span>' : "<strong>Required</strong>"}</td>
                             </tr>
-                        `).join('')}
+                        `,
+                          )
+                          .join("")}
                     </tbody>
                 </table>
-            ` : '<p>No properties defined.</p>'}
-        `).join('')}
+            `
+                : "<p>No properties defined.</p>"
+            }
+        `,
+          )
+          .join("")}
     </div>
-    ` : ''}
+    `
+        : ""
+    }
 
-    ${component.styles && component.styles.variants.length > 0 ? `
+    ${
+      component.styles && component.styles.variants.length > 0
+        ? `
     <div class="section">
         <h2>🎨 Style Variants</h2>
         <p>This component has ${component.styles.variants.length} style variant(s):</p>
         <ul>
-            ${component.styles.variants.map(variant => `<li><code>${variant.name}</code></li>`).join('')}
+            ${component.styles.variants.map((variant) => `<li><code>${variant.name}</code></li>`).join("")}
         </ul>
     </div>
-    ` : ''}
+    `
+        : ""
+    }
 
-    ${component.core && component.core.functions.length > 0 ? `
+    ${
+      component.core && component.core.functions.length > 0
+        ? `
     <div class="section">
         <h2>⚙️ Core Functions</h2>
         <p>Available utility functions:</p>
         <ul>
-            ${component.core.functions.map(func => `<li><code>${func}()</code></li>`).join('')}
+            ${component.core.functions.map((func) => `<li><code>${func}()</code></li>`).join("")}
         </ul>
     </div>
-    ` : ''}
+    `
+        : ""
+    }
 
     <div class="section">
         <h2>💻 Usage</h2>

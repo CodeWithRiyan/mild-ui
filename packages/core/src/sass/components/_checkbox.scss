@@ -2,10 +2,10 @@
 /// Checkbox component styling
 /// @group components
 
-@use '../tokens/colors' as colors;
-@use '../tokens/spacing' as spacing;
-@use '../tokens/radius' as radius;
-@use '../mixins/component-base' as base;
+@use "../tokens/colors" as colors;
+@use "../tokens/spacing" as spacing;
+@use "../tokens/radius" as radius;
+@use "../mixins/component-base" as base;
 
 .mild-checkbox {
   @include base.component-base;
@@ -14,7 +14,7 @@
   align-items: center;
   position: relative;
   cursor: pointer;
-  
+
   input[type="checkbox"] {
     appearance: none;
     width: var(--mild-space-4);
@@ -25,13 +25,13 @@
     cursor: pointer;
     position: relative;
     transition: var(--mild-transition-colors);
-    
+
     &:checked {
       background-color: var(--mild-color-primary-500);
       border-color: var(--mild-color-primary-500);
-      
+
       &::after {
-        content: '';
+        content: "";
         position: absolute;
         left: 2px;
         top: -1px;
@@ -42,28 +42,28 @@
         transform: rotate(45deg);
       }
     }
-    
+
     &:hover:not(:disabled) {
       border-color: var(--mild-color-primary-300);
     }
-    
+
     &:focus {
       outline: none;
       border-color: var(--mild-color-primary-500);
       box-shadow: 0 0 0 1px var(--mild-color-primary-500);
     }
-    
+
     &:disabled {
       opacity: 0.5;
       cursor: not-allowed;
     }
-    
+
     &:indeterminate {
       background-color: var(--mild-color-primary-500);
       border-color: var(--mild-color-primary-500);
-      
+
       &::after {
-        content: '';
+        content: "";
         position: absolute;
         left: 2px;
         top: 50%;
@@ -74,53 +74,53 @@
       }
     }
   }
-  
+
   &--sm input[type="checkbox"] {
     width: var(--mild-space-3);
     height: var(--mild-space-3);
-    
+
     &:checked::after {
       left: 1px;
       top: -1px;
       width: 4px;
       height: 8px;
     }
-    
+
     &:indeterminate::after {
       left: 1px;
       width: 6px;
     }
   }
-  
+
   &--lg input[type="checkbox"] {
     width: var(--mild-space-5);
     height: var(--mild-space-5);
-    
+
     &:checked::after {
       left: 3px;
       top: 0px;
       width: 8px;
       height: 12px;
     }
-    
+
     &:indeterminate::after {
       left: 3px;
       width: 10px;
     }
   }
-  
+
   &--error input[type="checkbox"] {
     border-color: var(--mild-color-red-500);
-    
+
     &:focus {
       border-color: var(--mild-color-red-500);
       box-shadow: 0 0 0 1px var(--mild-color-red-500);
     }
   }
-  
+
   &--disabled {
     cursor: not-allowed;
-    
+
     input[type="checkbox"] {
       cursor: not-allowed;
     }
@@ -132,17 +132,17 @@
   margin-left: var(--mild-space-2);
   cursor: pointer;
   user-select: none;
-  
+
   &--sm {
     font-size: var(--mild-font-size-xs);
     margin-left: var(--mild-space-1-5);
   }
-  
+
   &--lg {
     font-size: var(--mild-font-size-base);
     margin-left: var(--mild-space-2-5);
   }
-  
+
   &--disabled {
     opacity: 0.5;
     cursor: not-allowed;

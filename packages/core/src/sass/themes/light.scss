@@ -2,7 +2,7 @@
 /// Light theme configuration
 /// @group themes
 
-@use '../tokens/colors' as colors;
+@use "../tokens/colors" as colors;
 
 :root,
 [data-theme="light"] {
@@ -14,13 +14,13 @@
   --mild-border: var(--mild-color-gray-200);
   --mild-input: var(--mild-color-gray-200);
   --mild-ring: var(--mild-color-primary-500);
-  
+
   // Component-specific colors
   --mild-card: var(--mild-color-gray-50);
   --mild-card-foreground: var(--mild-color-gray-900);
   --mild-popover: var(--mild-color-gray-50);
   --mild-popover-foreground: var(--mild-color-gray-900);
-  
+
   // State colors
   --mild-accent: var(--mild-color-gray-100);
   --mild-accent-foreground: var(--mild-color-gray-900);

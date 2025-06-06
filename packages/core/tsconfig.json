@@ -26,12 +26,10 @@
     "forceConsistentCasingInFileNames": true
   },
   "include": [
-    "src/**/*"
-, "scripts/watch-docs.js", "scripts/generate-token-docs.js", "scripts/generate-component-docs.js"  ],
-  "exclude": [
-    "dist",
-    "node_modules",
-    "src/**/*.test.ts",
-    "src/**/*.spec.ts"
-  ]
+    "src/**/*",
+    "scripts/watch-docs.js",
+    "scripts/generate-token-docs.js",
+    "scripts/generate-component-docs.js"
+  ],
+  "exclude": ["dist", "node_modules", "src/**/*.test.ts", "src/**/*.spec.ts"]
 }

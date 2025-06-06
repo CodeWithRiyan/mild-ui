@@ -18,21 +18,25 @@ mild-ui is a comprehensive cross-platform UI component library with **SASS-power
 ## Installation
 
 ### React (Web)
+
 ```bash
 npm install @mild-ui/react
 ```
 
 ### Vue (Web)
+
 ```bash
 npm install @mild-ui/vue
 ```
 
 ### React Native (Mobile)
+
 ```bash
 npm install @mild-ui/react-native
 ```
 
 ### Flutter (Mobile)
+
 ```yaml
 # pubspec.yaml
 dependencies:
@@ -42,8 +46,9 @@ dependencies:
 ## Quick Start
 
 ### React
+
 ```tsx
-import { ThemeProvider, Button, Input, Card } from '@mild-ui/react';
+import { ThemeProvider, Button, Input, Card } from "@mild-ui/react";
 
 function App() {
   return (
@@ -52,10 +57,7 @@ function App() {
         <Button colorScheme="primary" size="lg">
           Get Started
         </Button>
-        <Input 
-          placeholder="Enter your name" 
-          variant="outline" 
-        />
+        <Input placeholder="Enter your name" variant="outline" />
       </Card>
     </ThemeProvider>
   );
@@ -63,45 +65,39 @@ function App() {
 ```
 
 ### Vue
+
 ```vue
 <template>
   <ThemeProvider>
     <Card padding="lg">
-      <Button color-scheme="primary" size="lg">
-        Get Started
-      </Button>
-      <Input 
-        placeholder="Enter your name" 
-        variant="outline" 
-      />
+      <Button color-scheme="primary" size="lg"> Get Started </Button>
+      <Input placeholder="Enter your name" variant="outline" />
     </Card>
   </ThemeProvider>
 </template>
 
 <script setup>
-import { ThemeProvider, Button, Input, Card } from '@mild-ui/vue';
+import { ThemeProvider, Button, Input, Card } from "@mild-ui/vue";
 </script>
 ```
 
 ### React Native
+
 ```tsx
-import { ThemeProvider, Button, Input, Card } from '@mild-ui/react-native';
+import { ThemeProvider, Button, Input, Card } from "@mild-ui/react-native";
 
 export default function App() {
   return (
     <ThemeProvider>
       <Card padding="lg">
-        <Button 
-          colorScheme="primary" 
+        <Button
+          colorScheme="primary"
           size="lg"
-          onPress={() => console.log('Pressed!')}
+          onPress={() => console.log("Pressed!")}
         >
           Get Started
         </Button>
-        <Input 
-          placeholder="Enter your name"
-          variant="outline"
-        />
+        <Input placeholder="Enter your name" variant="outline" />
       </Card>
     </ThemeProvider>
   );
@@ -109,6 +105,7 @@ export default function App() {
 ```
 
 ### Flutter
+
 ```dart
 import 'package:mild_ui/mild_ui.dart';
 
@@ -143,6 +140,7 @@ class MyApp extends StatelessWidget {
 ## Available Components
 
 ### ✅ **Form Components**
+
 - **Button** - Multiple variants (solid, outline, ghost, link) with 5 sizes and 6 color schemes
 - **Input** - Text input with validation states and multiple variants
 - **Checkbox** - Interactive checkbox with indeterminate state
@@ -154,6 +152,7 @@ class MyApp extends StatelessWidget {
 - **FormErrorMessage** - Error message display
 
 ### ✅ **Layout & Display**
+
 - **Box** - Layout primitive with flexbox and grid support
 - **Text** - Typography component with responsive sizing
 - **Card** - Content container with elevation and variants
@@ -161,11 +160,13 @@ class MyApp extends StatelessWidget {
 - **Spinner** - Loading indicators with multiple variants
 
 ### ✅ **Navigation & Interaction**
+
 - **Tabs** - Tabbed navigation with multiple styles
 - **Modal** - Overlay dialogs with size variants
 - **Accordion** - Collapsible content sections
 
 ### 🔄 **Coming Soon**
+
 - Badge, Avatar, Tooltip, Popover
 - Table, List, Breadcrumb
 - DatePicker, Slider, Progress
@@ -176,18 +177,19 @@ class MyApp extends StatelessWidget {
 mild-ui provides extensive theming capabilities through **CSS custom properties** (no SASS knowledge required):
 
 ### Basic Theme Customization
+
 ```tsx
-import { ThemeProvider } from '@mild-ui/react';
+import { ThemeProvider } from "@mild-ui/react";
 
 const customTheme = {
   colors: {
     primary: {
-      500: '#8B5CF6', // Purple primary
-      600: '#7C3AED',
+      500: "#8B5CF6", // Purple primary
+      600: "#7C3AED",
     },
   },
   spacing: {
-    '4': '1.5rem', // Custom spacing
+    "4": "1.5rem", // Custom spacing
   },
 };
 
@@ -201,40 +203,42 @@ function App() {
 ```
 
 ### CSS Custom Properties
+
 ```css
 :root {
   /* Color system */
-  --mild-color-primary-500: #8B5CF6;
-  --mild-color-primary-600: #7C3AED;
-  
+  --mild-color-primary-500: #8b5cf6;
+  --mild-color-primary-600: #7c3aed;
+
   /* Spacing system */
   --mild-space-4: 1.5rem;
-  
+
   /* Typography */
   --mild-font-size-lg: 1.25rem;
-  
+
   /* Border radius */
   --mild-radius-md: 0.5rem;
 }
 
 /* Dark mode */
 [data-theme="dark"] {
-  --mild-color-primary-500: #A78BFA;
-  --mild-background: #1F2937;
-  --mild-foreground: #F9FAFB;
+  --mild-color-primary-500: #a78bfa;
+  --mild-background: #1f2937;
+  --mild-foreground: #f9fafb;
 }
 ```
 
 ### Color Mode Toggle
+
 ```tsx
-import { useTheme } from '@mild-ui/react';
+import { useTheme } from "@mild-ui/react";
 
 function ColorModeToggle() {
   const { colorMode, toggleColorMode } = useTheme();
-  
+
   return (
     <Button onClick={toggleColorMode}>
-      {colorMode === 'light' ? '🌙' : '☀️'}
+      {colorMode === "light" ? "🌙" : "☀️"}
     </Button>
   );
 }
@@ -253,18 +257,21 @@ While **users never interact with SASS**, mild-ui is built on a sophisticated SA
 ## Platform-Specific Features
 
 ### Web (React, Vue)
+
 - Responsive design with CSS Grid and Flexbox
 - CSS custom properties for runtime theming
 - Optimized CSS bundles with tree-shaking
 - SSR/SSG compatibility
 
 ### Mobile (React Native)
+
 - Platform-adaptive components (iOS/Android)
 - Optimized StyleSheet objects
 - Native performance with pre-compiled styles
 - React Navigation integration
 
 ### Mobile (Flutter)
+
 - Material Design and Cupertino adaptive widgets
 - Dart theme system with design tokens
 - Flutter widget composition patterns
@@ -289,15 +296,18 @@ While **users never interact with SASS**, mild-ui is built on a sophisticated SA
 We welcome contributions! mild-ui is designed to be extensible to new frameworks and platforms.
 
 ### Adding Components
+
 1. Implement component types in `packages/core/src/components/`
 2. Add SASS styling in `packages/core/src/sass/components/`
 3. Create platform implementations in respective packages
 4. Add documentation to Storybook/Widgetbook
 
 ### Adding Framework Support
+
 Want to add Angular, Svelte, or native mobile support? Check out our [Extension Guide](./EXTENSION_GUIDE.md) for detailed instructions.
 
 ### Development Setup
+
 ```bash
 # Clone and install
 git clone https://github.com/mild-ui/mild-ui.git

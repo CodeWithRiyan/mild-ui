@@ -2,8 +2,8 @@
 /// Layout utility mixins
 /// @group mixins
 
-@use '../tokens/spacing' as spacing;
-@use '../tokens/breakpoints' as breakpoints;
+@use "../tokens/spacing" as spacing;
+@use "../tokens/breakpoints" as breakpoints;
 
 /// Flex container with common patterns
 @mixin flex($direction: row, $align: center, $justify: flex-start, $gap: 0) {
@@ -11,7 +11,7 @@
   flex-direction: #{$direction};
   align-items: #{$align};
   justify-content: #{$justify};
-  
+
   @if $gap != 0 {
     gap: #{$gap};
   }

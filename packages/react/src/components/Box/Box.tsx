@@ -1,7 +1,7 @@
 // packages/react/src/components/Box/Box.tsx
-import React, { forwardRef } from 'react';
-import type { BoxProps as CoreBoxProps } from '../../../../core';
-import { cn, getSpacingValue, getColorValue } from '../../../../core';
+import React, { forwardRef } from "react";
+import type { BoxProps as CoreBoxProps } from "../../../../core";
+import { cn, getSpacingValue, getColorValue } from "../../../../core";
 
 export interface BoxProps extends CoreBoxProps {
   /** Box content */
@@ -17,8 +17,8 @@ export interface BoxProps extends CoreBoxProps {
 export const Box = forwardRef<HTMLDivElement, BoxProps>(
   (
     {
-      as = 'div',
-      display = 'block',
+      as = "div",
+      display = "block",
       children,
       className,
       onClick,
@@ -73,13 +73,13 @@ export const Box = forwardRef<HTMLDivElement, BoxProps>(
       overflowY,
       ...rest
     },
-    ref
+    ref,
   ) => {
     const Component = as;
-    
+
     // Build classes
     const classes = cn(
-      'mild-box',
+      "mild-box",
       `mild-box--${display}`,
       flexDirection && `mild-box--flex-${flexDirection}`,
       flexWrap && `mild-box--flex-${flexWrap}`,
@@ -89,55 +89,81 @@ export const Box = forwardRef<HTMLDivElement, BoxProps>(
       overflow && `mild-box--overflow-${overflow}`,
       overflowX && `mild-box--overflow-x-${overflowX}`,
       overflowY && `mild-box--overflow-y-${overflowY}`,
-      className
+      className,
     );
 
     // Build inline styles for dynamic values
     const style: React.CSSProperties = {
       // Spacing
       ...(padding && { padding: getSpacingValue(padding) }),
-      ...(paddingX && { paddingLeft: getSpacingValue(paddingX), paddingRight: getSpacingValue(paddingX) }),
-      ...(paddingY && { paddingTop: getSpacingValue(paddingY), paddingBottom: getSpacingValue(paddingY) }),
+      ...(paddingX && {
+        paddingLeft: getSpacingValue(paddingX),
+        paddingRight: getSpacingValue(paddingX),
+      }),
+      ...(paddingY && {
+        paddingTop: getSpacingValue(paddingY),
+        paddingBottom: getSpacingValue(paddingY),
+      }),
       ...(paddingTop && { paddingTop: getSpacingValue(paddingTop) }),
       ...(paddingRight && { paddingRight: getSpacingValue(paddingRight) }),
       ...(paddingBottom && { paddingBottom: getSpacingValue(paddingBottom) }),
       ...(paddingLeft && { paddingLeft: getSpacingValue(paddingLeft) }),
       ...(margin && { margin: getSpacingValue(margin) }),
-      ...(marginX && { marginLeft: getSpacingValue(marginX), marginRight: getSpacingValue(marginX) }),
-      ...(marginY && { marginTop: getSpacingValue(marginY), marginBottom: getSpacingValue(marginY) }),
+      ...(marginX && {
+        marginLeft: getSpacingValue(marginX),
+        marginRight: getSpacingValue(marginX),
+      }),
+      ...(marginY && {
+        marginTop: getSpacingValue(marginY),
+        marginBottom: getSpacingValue(marginY),
+      }),
       ...(marginTop && { marginTop: getSpacingValue(marginTop) }),
       ...(marginRight && { marginRight: getSpacingValue(marginRight) }),
       ...(marginBottom && { marginBottom: getSpacingValue(marginBottom) }),
       ...(marginLeft && { marginLeft: getSpacingValue(marginLeft) }),
-      
+
       // Flexbox
       ...(gap && { gap: getSpacingValue(gap) }),
-      
+
       // Grid
       ...(gridTemplateColumns && { gridTemplateColumns }),
       ...(gridTemplateRows && { gridTemplateRows }),
       ...(gridGap && { gap: getSpacingValue(gridGap) }),
-      
+
       // Sizing
-      ...(width && { width: typeof width === 'number' ? `${width}px` : width }),
-      ...(height && { height: typeof height === 'number' ? `${height}px` : height }),
-      ...(minWidth && { minWidth: typeof minWidth === 'number' ? `${minWidth}px` : minWidth }),
-      ...(minHeight && { minHeight: typeof minHeight === 'number' ? `${minHeight}px` : minHeight }),
-      ...(maxWidth && { maxWidth: typeof maxWidth === 'number' ? `${maxWidth}px` : maxWidth }),
-      ...(maxHeight && { maxHeight: typeof maxHeight === 'number' ? `${maxHeight}px` : maxHeight }),
-      
+      ...(width && { width: typeof width === "number" ? `${width}px` : width }),
+      ...(height && {
+        height: typeof height === "number" ? `${height}px` : height,
+      }),
+      ...(minWidth && {
+        minWidth: typeof minWidth === "number" ? `${minWidth}px` : minWidth,
+      }),
+      ...(minHeight && {
+        minHeight: typeof minHeight === "number" ? `${minHeight}px` : minHeight,
+      }),
+      ...(maxWidth && {
+        maxWidth: typeof maxWidth === "number" ? `${maxWidth}px` : maxWidth,
+      }),
+      ...(maxHeight && {
+        maxHeight: typeof maxHeight === "number" ? `${maxHeight}px` : maxHeight,
+      }),
+
       // Border and background
       ...(borderRadius && { borderRadius: getSpacingValue(borderRadius) }),
       ...(borderWidth && { borderWidth: getSpacingValue(borderWidth) }),
       ...(borderColor && { borderColor: getColorValue(borderColor) }),
-      ...(backgroundColor && { backgroundColor: getColorValue(backgroundColor) }),
+      ...(backgroundColor && {
+        backgroundColor: getColorValue(backgroundColor),
+      }),
       ...(color && { color: getColorValue(color) }),
-      
+
       // Position
-      ...(top && { top: typeof top === 'number' ? `${top}px` : top }),
-      ...(right && { right: typeof right === 'number' ? `${right}px` : right }),
-      ...(bottom && { bottom: typeof bottom === 'number' ? `${bottom}px` : bottom }),
-      ...(left && { left: typeof left === 'number' ? `${left}px` : left }),
+      ...(top && { top: typeof top === "number" ? `${top}px` : top }),
+      ...(right && { right: typeof right === "number" ? `${right}px` : right }),
+      ...(bottom && {
+        bottom: typeof bottom === "number" ? `${bottom}px` : bottom,
+      }),
+      ...(left && { left: typeof left === "number" ? `${left}px` : left }),
       ...(zIndex && { zIndex }),
     };
 
@@ -152,7 +178,7 @@ export const Box = forwardRef<HTMLDivElement, BoxProps>(
         {children}
       </div>
     );
-  }
+  },
 );
 
-Box.displayName = 'Box';
+Box.displayName = "Box";

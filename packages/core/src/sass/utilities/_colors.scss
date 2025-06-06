@@ -2,14 +2,14 @@
 /// Color utility classes
 /// @group utilities
 
-@use '../tokens/colors' as colors;
-@use 'sass:map';
+@use "../tokens/colors" as colors;
+@use "sass:map";
 
 // Text color utilities
 @each $color-name, $color-map in colors.$mild-colors {
   @each $shade, $value in $color-map {
-    .mild-text-#{$color-name}-#{$shade} { 
-      color: var(--mild-color-#{$color-name}-#{$shade}); 
+    .mild-text-#{$color-name}-#{$shade} {
+      color: var(--mild-color-#{$color-name}-#{$shade});
     }
   }
 }
@@ -17,8 +17,8 @@
 // Background color utilities
 @each $color-name, $color-map in colors.$mild-colors {
   @each $shade, $value in $color-map {
-    .mild-bg-#{$color-name}-#{$shade} { 
-      background-color: var(--mild-color-#{$color-name}-#{$shade}); 
+    .mild-bg-#{$color-name}-#{$shade} {
+      background-color: var(--mild-color-#{$color-name}-#{$shade});
     }
   }
 }
@@ -26,15 +26,25 @@
 // Border color utilities
 @each $color-name, $color-map in colors.$mild-colors {
   @each $shade, $value in $color-map {
-    .mild-border-#{$color-name}-#{$shade} { 
-      border-color: var(--mild-color-#{$color-name}-#{$shade}); 
+    .mild-border-#{$color-name}-#{$shade} {
+      border-color: var(--mild-color-#{$color-name}-#{$shade});
     }
   }
 }
 
 // Semantic color utilities
-.mild-text-muted { color: var(--mild-muted-foreground); }
-.mild-text-emphasis { color: var(--mild-foreground); }
-.mild-bg-background { background-color: var(--mild-background); }
-.mild-bg-muted { background-color: var(--mild-muted); }
-.mild-border-default { border-color: var(--mild-border); }
+.mild-text-muted {
+  color: var(--mild-muted-foreground);
+}
+.mild-text-emphasis {
+  color: var(--mild-foreground);
+}
+.mild-bg-background {
+  background-color: var(--mild-background);
+}
+.mild-bg-muted {
+  background-color: var(--mild-muted);
+}
+.mild-border-default {
+  border-color: var(--mild-border);
+}

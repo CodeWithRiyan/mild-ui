@@ -3,7 +3,7 @@
 /// @group tokens
 
 // Import required SASS modules
-@use 'sass:map';
+@use "sass:map";
 
 $mild-breakpoints: (
   xs: 0,
@@ -11,7 +11,7 @@ $mild-breakpoints: (
   md: 768px,
   lg: 1024px,
   xl: 1280px,
-  '2xl': 1536px
+  "2xl": 1536px,
 ) !default;
 
 // Breakpoint function

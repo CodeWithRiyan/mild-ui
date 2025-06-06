@@ -1,7 +1,7 @@
 // packages/core/src/components/Alert/Alert.types.ts
-export type AlertStatus = 'info' | 'success' | 'warning' | 'error';
-export type AlertVariant = 'subtle' | 'solid' | 'left-accent' | 'top-accent';
-export type AlertSize = 'sm' | 'md' | 'lg';
+export type AlertStatus = "info" | "success" | "warning" | "error";
+export type AlertVariant = "subtle" | "solid" | "left-accent" | "top-accent";
+export type AlertSize = "sm" | "md" | "lg";
 
 export interface AlertCoreProps {
   /** Alert status/severity */

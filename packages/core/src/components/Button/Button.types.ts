@@ -2,13 +2,22 @@
 /// Button component universal types (Updated with Gray ColorScheme)
 /// @fileoverview Framework-agnostic button component interfaces
 
-import type { BaseComponentProps, ColorScheme, Variant, AriaProps, EventHandlers } from '../../types/common';
+import type {
+  BaseComponentProps,
+  ColorScheme,
+  Variant,
+  AriaProps,
+  EventHandlers,
+} from "../../types/common";
 
 export type ButtonVariant = Variant;
-export type ButtonSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+export type ButtonSize = "xs" | "sm" | "md" | "lg" | "xl";
 export type ButtonColorScheme = ColorScheme; // This includes 'gray' now
 
-export interface ButtonCoreProps extends BaseComponentProps, AriaProps, EventHandlers {
+export interface ButtonCoreProps
+  extends BaseComponentProps,
+    AriaProps,
+    EventHandlers {
   /** Button visual variant */
   variant?: ButtonVariant;
   /** Button size */
@@ -22,7 +31,7 @@ export interface ButtonCoreProps extends BaseComponentProps, AriaProps, EventHan
   /** Disabled state */
   disabled?: boolean;
   /** Button type (for forms) */
-  type?: 'button' | 'submit' | 'reset';
+  type?: "button" | "submit" | "reset";
 }
 
 export interface ButtonStyleProps {
@@ -42,7 +51,7 @@ export interface ButtonPlatformProps {
   /** Platform-specific click handler */
   // onClick?: (e: any) => void;
   onPress?: () => void; // React Native
-  onTap?: () => void;   // Flutter equivalent
+  onTap?: () => void; // Flutter equivalent
 }
 
 export type ButtonProps = ButtonCoreProps & ButtonPlatformProps;

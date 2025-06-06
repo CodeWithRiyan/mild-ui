@@ -1,1 +1,1 @@
-export * from './FormControl.types'
+export * from "./FormControl.types";
