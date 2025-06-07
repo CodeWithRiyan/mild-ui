@@ -1,0 +1,62 @@
+// packages/core/src/sass/tokens/_animation.scss
+/// Animation and transition tokens
+/// @group tokens
+
+// Import required SASS modules
+@use "sass:map";
+
+$mild-transitions: (
+  none: none,
+  all: all 150ms cubic-bezier(0.4, 0, 0.2, 1),
+  default: all 150ms cubic-bezier(0.4, 0, 0.2, 1),
+  colors: color 150ms cubic-bezier(0.4, 0, 0.2, 1),
+  opacity: opacity 150ms cubic-bezier(0.4, 0, 0.2, 1),
+  shadow: box-shadow 150ms cubic-bezier(0.4, 0, 0.2, 1),
+  transform: transform 150ms cubic-bezier(0.4, 0, 0.2, 1),
+) !default;
+
+$mild-durations: (
+  75: 75ms,
+  100: 100ms,
+  150: 150ms,
+  200: 200ms,
+  300: 300ms,
+  500: 500ms,
+  700: 700ms,
+  1000: 1000ms,
+) !default;
+
+$mild-easings: (
+  linear: linear,
+  in: cubic-bezier(0.4, 0, 1, 1),
+  out: cubic-bezier(0, 0, 0.2, 1),
+  "in-out": cubic-bezier(0.4, 0, 0.2, 1),
+) !default;
+
+// Animation functions
+@function mild-transition($type) {
+  @return map.get($mild-transitions, $type);
+}
+
+@function mild-duration($duration) {
+  @return map.get($mild-durations, $duration);
+}
+
+@function mild-easing($easing) {
+  @return map.get($mild-easings, $easing);
+}
+
+// Generate animation custom properties
+@mixin generate-animation-properties() {
+  @each $transition-name, $transition-value in $mild-transitions {
+    --mild-transition-#{$transition-name}: #{$transition-value};
+  }
+
+  @each $duration-name, $duration-value in $mild-durations {
+    --mild-duration-#{$duration-name}: #{$duration-value};
+  }
+
+  @each $easing-name, $easing-value in $mild-easings {
+    --mild-easing-#{$easing-name}: #{$easing-value};
+  }
+}

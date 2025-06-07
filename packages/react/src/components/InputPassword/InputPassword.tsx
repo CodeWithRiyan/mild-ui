@@ -2,10 +2,10 @@
 import * as React from "react";
 import {
   InputPasswordCoreProps,
-  inputPasswordStyles,
+  inputPasswordVariants,
   InputPasswordStyleProps,
-} from "@mild-ui/core";
-import { cn } from "../../utils";
+  cn,
+} from "../../../../core";
 import { EyeIcon, EyeOffIcon } from "lucide-react";
 
 // Add 'value' to the Omit list
@@ -44,7 +44,7 @@ const InputPassword = React.forwardRef<HTMLInputElement, InputPasswordProps>(
         <input
           type={typeInput}
           className={cn(
-            inputPasswordStyles({ size, variant, fullWidth, error }),
+            inputPasswordVariants({ size, variant, fullWidth, error }),
             className,
             ui?.input,
           )}

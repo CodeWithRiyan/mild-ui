@@ -1,7 +1,6 @@
 // packages/core/src/components/Label/Label.types.ts
 export interface LabelCoreProps {
   required?: boolean;
-  error?: boolean;
   className?: string;
   ui?: {
     label?: string;
@@ -12,3 +11,5 @@ export interface LabelCoreProps {
 export interface LabelStyleProps {
   error?: boolean;
 }
+
+export type LabelProps = LabelCoreProps & LabelStyleProps;

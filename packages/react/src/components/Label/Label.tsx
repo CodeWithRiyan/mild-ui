@@ -1,34 +1,61 @@
-"use client";
+// packages/react/src/components/Label/Label.tsx
+import React, { forwardRef } from "react";
+import type { LabelProps as CoreLabelProps } from "../../../../core";
+import { labelVariants } from "../../../../core";
+import { cn } from "../../../../core";
 
-import * as React from "react";
-import {
-  cn,
-  LabelCoreProps,
-  LabelStyleProps,
-  labelStyles,
-} from "@mild-ui/core";
+export interface LabelProps extends CoreLabelProps {
+  /** Label content */
+  children: React.ReactNode;
+  /** Associated form control ID */
+  htmlFor?: string;
+  /** Additional CSS class */
+  className?: string;
+  /** Click handler */
+  onClick?: (event: React.MouseEvent<HTMLLabelElement>) => void;
+  /** Ref forwarding */
+  ref?: React.Ref<HTMLLabelElement>;
+}
 
-export interface LabelProps
-  extends React.LabelHTMLAttributes<HTMLLabelElement>,
-    LabelCoreProps,
-    LabelStyleProps {}
+export const Label = forwardRef<HTMLLabelElement, LabelProps>(
+  (
+    {
+      required = false,
+      error = false,
+      ui,
+      children,
+      htmlFor,
+      className,
+      onClick,
+      ...rest
+    },
+    ref,
+  ) => {
+    const classes = labelVariants({
+      required,
+      error,
+      className,
+    });
 
-const Label = React.forwardRef<HTMLLabelElement, LabelProps>(
-  ({ className, error, ui, children, required, ...props }, ref) => {
     return (
       <label
-        className={cn(labelStyles({ error }), className, ui?.label)}
         ref={ref}
-        {...props}
+        className={classes}
+        htmlFor={htmlFor}
+        onClick={onClick}
+        {...rest}
       >
         {children}
         {required && (
-          <span className={cn("pl-1 text-red-500", ui?.asterisk)}>*</span>
+          <span
+            className={cn("--mild-space-1 --mild-color-red-500", ui?.asterisk)}
+          >
+            *
+          </span>
         )}
       </label>
     );
   },
 );
-Label.displayName = "Label";
 
-export { Label };
+Label.displayName = "Label";

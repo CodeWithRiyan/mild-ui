@@ -1,32 +1,32 @@
 // packages/core/src/components/Tabs/Tabs.styles.ts
-import { cva } from "class-variance-authority";
+import { cva } from "../../utils/cn";
 
-export const tabsListStyles = cva("inline-flex items-center justify-center", {
+export const tabsListVariants = cva("mild-tabs-list", {
   variants: {
     variant: {
-      default: "rounded-md bg-muted p-1",
-      pills: "space-x-1",
-      underline: "border-b border-border",
+      default: "mild-tabs-list--default",
+      pills: "mild-tabs-list--pills",
+      underline: "mild-tabs-list--underline",
     },
     orientation: {
-      horizontal: "flex-row",
-      vertical: "flex-col space-y-1",
+      horizontal: "mild-tabs-list--horizontal",
+      vertical: "mild-tabs-list--vertical",
     },
     size: {
-      sm: "h-8",
-      md: "h-10",
-      lg: "h-12",
+      sm: "mild-tabs-list--sm",
+      md: "mild-tabs-list--md",
+      lg: "mild-tabs-list--lg",
     },
   },
   compoundVariants: [
     {
       variant: "underline",
-      class: "bg-transparent p-0 space-x-0",
+      class: "mild-tabs-list--underline-transparent",
     },
     {
       orientation: "vertical",
       variant: "default",
-      class: "h-auto w-fit flex-col space-y-1",
+      class: "mild-tabs-list--vertical-default",
     },
   ],
   defaultVariants: {
@@ -36,43 +36,44 @@ export const tabsListStyles = cva("inline-flex items-center justify-center", {
   },
 });
 
-export const tabsTriggerStyles = cva(
-  "inline-flex items-center justify-center whitespace-nowrap rounded-sm px-3 py-1.5 text-sm font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
-  {
-    variants: {
-      variant: {
-        default:
-          "data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow-sm",
-        pills:
-          "rounded-md hover:bg-muted data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow-sm",
-        underline:
-          "rounded-none border-b-2 border-transparent bg-transparent hover:text-foreground data-[state=active]:border-primary data-[state=active]:text-foreground",
-      },
-      size: {
-        sm: "text-xs px-2 py-1",
-        md: "text-sm px-3 py-1.5",
-        lg: "text-base px-4 py-2",
-      },
+export const tabsTriggerVariants = cva("mild-tabs-trigger", {
+  variants: {
+    variant: {
+      default: "mild-tabs-trigger--default",
+      pills: "mild-tabs-trigger--pills",
+      underline: "mild-tabs-trigger--underline",
     },
-    defaultVariants: {
-      variant: "default",
-      size: "md",
+    size: {
+      sm: "mild-tabs-trigger--sm",
+      md: "mild-tabs-trigger--md",
+      lg: "mild-tabs-trigger--lg",
+    },
+    active: {
+      true: "mild-tabs-trigger--active",
+      false: "",
+    },
+    disabled: {
+      true: "mild-tabs-trigger--disabled",
+      false: "",
     },
   },
-);
+  defaultVariants: {
+    variant: "default",
+    size: "md",
+    active: false,
+    disabled: false,
+  },
+});
 
-export const tabsContentStyles = cva(
-  "mt-2 ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
-  {
-    variants: {
-      size: {
-        sm: "text-sm",
-        md: "text-base",
-        lg: "text-lg",
-      },
-    },
-    defaultVariants: {
-      size: "md",
+export const tabsContentVariants = cva("mild-tabs-content", {
+  variants: {
+    size: {
+      sm: "mild-tabs-content--sm",
+      md: "mild-tabs-content--md",
+      lg: "mild-tabs-content--lg",
     },
   },
-);
+  defaultVariants: {
+    size: "md",
+  },
+});

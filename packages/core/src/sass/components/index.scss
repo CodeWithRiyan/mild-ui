@@ -1,0 +1,433 @@
+// packages/core/src/sass/components/index.scss
+/// Complete component styles generation using pure SASS
+/// @group components
+
+@use "../tokens/colors" as colors;
+@use "../tokens/typography" as typography;
+@use "../tokens/spacing" as spacing;
+@use "../tokens/radius" as radius;
+@use "../tokens/animation" as animation;
+@use "../tokens/elevation" as elevation;
+@use "../mixins/component-base" as base;
+@use "../mixins/component-variants" as variants;
+@use "sass:map";
+
+// Import individual component styles
+@use "button";
+@use "input";
+@use "label";
+@use "checkbox";
+@use "radio";
+@use "select";
+@use "switch";
+@use "modal";
+@use "tabs";
+@use "card";
+@use "accordion";
+
+// Generate Label Component
+.mild-label {
+  @include base.component-base;
+  display: inline-block;
+  font-size: var(--mild-font-size-sm);
+  font-weight: var(--mild-font-weight-medium);
+  line-height: var(--mild-line-height-normal);
+  color: var(--mild-foreground);
+  margin-bottom: var(--mild-space-1);
+
+  &--error {
+    color: var(--mild-color-red-500);
+  }
+
+  &--required::after {
+    content: "*";
+    color: var(--mild-color-red-500);
+    margin-left: var(--mild-space-1);
+  }
+
+  &--disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+// Generate Checkbox Component
+.mild-checkbox {
+  @include base.component-base;
+  @include base.focus-ring;
+  display: inline-flex;
+  align-items: center;
+  position: relative;
+  cursor: pointer;
+
+  input[type="checkbox"] {
+    appearance: none;
+    width: var(--mild-space-4);
+    height: var(--mild-space-4);
+    border: 1px solid var(--mild-border);
+    border-radius: var(--mild-radius-sm);
+    background-color: var(--mild-background);
+    cursor: pointer;
+    position: relative;
+
+    &:checked {
+      background-color: var(--mild-color-primary-500);
+      border-color: var(--mild-color-primary-500);
+
+      &::after {
+        content: "";
+        position: absolute;
+        left: 2px;
+        top: -1px;
+        width: 6px;
+        height: 10px;
+        border: solid white;
+        border-width: 0 2px 2px 0;
+        transform: rotate(45deg);
+      }
+    }
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  }
+
+  &--sm input[type="checkbox"] {
+    width: var(--mild-space-3);
+    height: var(--mild-space-3);
+  }
+
+  &--lg input[type="checkbox"] {
+    width: var(--mild-space-5);
+    height: var(--mild-space-5);
+  }
+
+  &--error input[type="checkbox"] {
+    border-color: var(--mild-color-red-500);
+  }
+}
+
+.mild-checkbox-label {
+  font-size: var(--mild-font-size-sm);
+  margin-left: var(--mild-space-2);
+  cursor: pointer;
+
+  &--sm {
+    font-size: var(--mild-font-size-xs);
+  }
+
+  &--lg {
+    font-size: var(--mild-font-size-base);
+  }
+
+  &--disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+// Generate Radio Component
+.mild-radio {
+  @include base.component-base;
+  @include base.focus-ring;
+  display: inline-flex;
+  align-items: center;
+  position: relative;
+  cursor: pointer;
+
+  input[type="radio"] {
+    appearance: none;
+    width: var(--mild-space-4);
+    height: var(--mild-space-4);
+    border: 1px solid var(--mild-border);
+    border-radius: 50%;
+    background-color: var(--mild-background);
+    cursor: pointer;
+    position: relative;
+
+    &:checked {
+      background-color: var(--mild-color-primary-500);
+      border-color: var(--mild-color-primary-500);
+
+      &::after {
+        content: "";
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background-color: white;
+        transform: translate(-50%, -50%);
+      }
+    }
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  }
+
+  &--sm input[type="radio"] {
+    width: var(--mild-space-3);
+    height: var(--mild-space-3);
+  }
+
+  &--lg input[type="radio"] {
+    width: var(--mild-space-5);
+    height: var(--mild-space-5);
+  }
+
+  &--error input[type="radio"] {
+    border-color: var(--mild-color-red-500);
+  }
+}
+
+.mild-radio-label {
+  font-size: var(--mild-font-size-sm);
+  margin-left: var(--mild-space-2);
+  cursor: pointer;
+
+  &--sm {
+    font-size: var(--mild-font-size-xs);
+  }
+
+  &--lg {
+    font-size: var(--mild-font-size-base);
+  }
+
+  &--disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+// Generate Select Component
+.mild-select-trigger {
+  @include base.component-base;
+  @include base.focus-ring;
+  @include base.interactive-transitions;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: var(--mild-space-10);
+  padding: 0 var(--mild-space-3);
+  background-color: var(--mild-background);
+  border: 1px solid var(--mild-border);
+  border-radius: var(--mild-radius-md);
+  font-size: var(--mild-font-size-sm);
+  cursor: pointer;
+
+  &--sm {
+    height: var(--mild-space-8);
+    padding: 0 var(--mild-space-2);
+    font-size: var(--mild-font-size-xs);
+  }
+
+  &--lg {
+    height: var(--mild-space-12);
+    padding: 0 var(--mild-space-4);
+    font-size: var(--mild-font-size-base);
+  }
+
+  &--full-width {
+    width: 100%;
+  }
+
+  &--error {
+    border-color: var(--mild-color-red-500);
+  }
+
+  &--disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+}
+
+.mild-select-content {
+  position: absolute;
+  z-index: 50;
+  min-width: 8rem;
+  overflow: hidden;
+  border: 1px solid var(--mild-border);
+  border-radius: var(--mild-radius-md);
+  background-color: var(--mild-background);
+  box-shadow: var(--mild-shadow-md);
+
+  &--popper {
+    transform: translateY(4px);
+  }
+}
+
+.mild-select-item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: var(--mild-space-2) var(--mild-space-8) var(--mild-space-2)
+    var(--mild-space-2);
+  font-size: var(--mild-font-size-sm);
+  cursor: pointer;
+  user-select: none;
+
+  &:hover {
+    background-color: var(--mild-color-gray-100);
+  }
+
+  &[data-selected="true"] {
+    background-color: var(--mild-color-primary-50);
+    color: var(--mild-color-primary-500);
+  }
+
+  &--sm {
+    padding: var(--mild-space-1) var(--mild-space-6) var(--mild-space-1)
+      var(--mild-space-1);
+    font-size: var(--mild-font-size-xs);
+  }
+
+  &--lg {
+    padding: var(--mild-space-3) var(--mild-space-10) var(--mild-space-3)
+      var(--mild-space-3);
+    font-size: var(--mild-font-size-base);
+  }
+
+  &--disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+}
+
+// Generate Switch Component
+.mild-switch {
+  @include base.component-base;
+  @include base.focus-ring;
+  display: inline-flex;
+  align-items: center;
+  position: relative;
+  cursor: pointer;
+
+  input[type="checkbox"] {
+    appearance: none;
+    width: var(--mild-space-9);
+    height: var(--mild-space-5);
+    border-radius: 9999px;
+    background-color: var(--mild-color-gray-200);
+    cursor: pointer;
+    position: relative;
+    transition: background-color 0.2s;
+
+    &::after {
+      content: "";
+      position: absolute;
+      left: 2px;
+      top: 2px;
+      width: var(--mild-space-4);
+      height: var(--mild-space-4);
+      border-radius: 50%;
+      background-color: white;
+      transition: transform 0.2s;
+    }
+
+    &:checked {
+      background-color: var(--mild-color-primary-500);
+
+      &::after {
+        transform: translateX(16px);
+      }
+    }
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  }
+
+  &--sm input[type="checkbox"] {
+    width: var(--mild-space-8);
+    height: var(--mild-space-4);
+
+    &::after {
+      width: var(--mild-space-3);
+      height: var(--mild-space-3);
+    }
+
+    &:checked::after {
+      transform: translateX(12px);
+    }
+  }
+
+  &--lg input[type="checkbox"] {
+    width: var(--mild-space-10);
+    height: var(--mild-space-6);
+
+    &::after {
+      width: var(--mild-space-5);
+      height: var(--mild-space-5);
+    }
+
+    &:checked::after {
+      transform: translateX(20px);
+    }
+  }
+}
+
+.mild-switch-label {
+  font-size: var(--mild-font-size-sm);
+  margin-left: var(--mild-space-2);
+  cursor: pointer;
+
+  &--sm {
+    font-size: var(--mild-font-size-xs);
+  }
+
+  &--lg {
+    font-size: var(--mild-font-size-base);
+  }
+
+  &--disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+// Generate basic Input Password styles (extends Input)
+.mild-input-password {
+  @extend .mild-input;
+  position: relative;
+
+  .mild-input-password__toggle {
+    position: absolute;
+    right: var(--mild-space-3);
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: var(--mild-color-gray-500);
+
+    &:hover {
+      color: var(--mild-color-gray-700);
+    }
+  }
+}
+
+// Generate utility classes for all components
+@each $component
+  in (
+    "button",
+    "input",
+    "label",
+    "checkbox",
+    "radio",
+    "select",
+    "switch",
+    "modal",
+    "tabs",
+    "card",
+    "accordion"
+  )
+{
+  @include variants.generate-utility-variants($component);
+}
