@@ -57,10 +57,10 @@ const config: StorybookConfig = {
 
       config.build.target = "es2020";
       config.build.minify = "esbuild";
-      
+
       // Disable sourcemap in production to avoid warnings
       config.build.sourcemap = false;
-      
+
       // Increase chunk size warning limit to reduce noise
       config.build.chunkSizeWarningLimit = 1000;
 
@@ -73,7 +73,7 @@ const config: StorybookConfig = {
           return;
         }
         // Suppress eval warnings from Storybook core (these are safe in dev/build context)
-        if (warning.message && warning.message.includes('Use of eval')) {
+        if (warning.message && warning.message.includes("Use of eval")) {
           return;
         }
         warn(warning);

@@ -453,7 +453,7 @@ export const MultipleFields: Story = {
           </Field>
 
           <div className="space-y-2">
-            <FormLabel id="newsletter" error={!!errors.newsletter}>
+            <FormLabel htmlFor="newsletter">
               Select newsletter topics you're interested in:
             </FormLabel>
             <div className="grid grid-cols-2 gap-4">

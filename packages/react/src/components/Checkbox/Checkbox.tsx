@@ -4,15 +4,14 @@ import * as CheckboxPrimitive from "@radix-ui/react-checkbox";
 import { Check } from "lucide-react";
 import {
   CheckboxCoreProps,
-  checkboxStyles,
-  CheckboxStyleProps,
-  checkboxLabelStyles,
-} from "@mild-ui/core";
-import { cn } from "../../utils";
+  checkboxVariants,
+  checkboxLabelVariants,
+  cn,
+} from "../../../../core";
 import { Label } from "../Label";
 
 // Extend from core types but manually handle React-specific props
-export interface CheckboxProps extends CheckboxCoreProps, CheckboxStyleProps {
+export interface CheckboxProps extends CheckboxCoreProps {
   // React-specific props
   id?: string;
   onCheckedChange?: (checked: boolean | "indeterminate") => void;
@@ -33,7 +32,6 @@ const Checkbox = React.forwardRef<HTMLButtonElement, CheckboxProps>(
       required,
       name,
       value,
-      indeterminate,
       id,
       onCheckedChange,
       ...restProps
@@ -50,7 +48,7 @@ const Checkbox = React.forwardRef<HTMLButtonElement, CheckboxProps>(
           name={name}
           value={value}
           onCheckedChange={onCheckedChange}
-          className={cn(checkboxStyles({ size }), className)}
+          className={cn(checkboxVariants({ size }), className)}
           {...restProps}
         >
           <CheckboxPrimitive.Indicator className="flex items-center justify-center">
@@ -60,7 +58,7 @@ const Checkbox = React.forwardRef<HTMLButtonElement, CheckboxProps>(
         {label && (
           <Label
             htmlFor={id}
-            className={cn(checkboxLabelStyles({ size }))}
+            className={cn(checkboxLabelVariants({ size }))}
             required={required}
           >
             {label}

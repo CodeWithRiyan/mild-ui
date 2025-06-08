@@ -1,4 +1,4 @@
-name: Build and Deploy Multi-Framework Storybooks
+name: Build and Deploy Multi-Framework Storybooks + Core Docs
 on:
   push:
     branches: [main]
@@ -41,13 +41,20 @@ jobs:
       - name: Build Vue package
         run: pnpm --filter @mild-ui/vue build
 
+      # Generate Core Documentation
+      - name: Generate Core API Documentation
+        run: |
+          cd packages/core
+          pnpm docs:build
+        env:
+          NODE_ENV: production
+
       - name: Build React Storybook
         run: |
           cd storybook/react
           STORYBOOK_BASE_URL="/mild-ui/react/" pnpm build
         env:
           NODE_ENV: production
-          # Suppress build warnings in CI
           CI: true
 
       - name: Build Vue Storybook
@@ -56,7 +63,6 @@ jobs:
           STORYBOOK_BASE_URL="/mild-ui/vue/" pnpm build
         env:
           NODE_ENV: production
-          # Suppress build warnings in CI
           CI: true
 
       - name: Create deployment directory
@@ -64,6 +70,7 @@ jobs:
           mkdir -p deploy
           mkdir -p deploy/react
           mkdir -p deploy/vue
+          mkdir -p deploy/core
 
       - name: Copy React Storybook
         run: cp -r storybook/react/storybook-static/* deploy/react/
@@ -71,7 +78,16 @@ jobs:
       - name: Copy Vue Storybook
         run: cp -r storybook/vue/storybook-static/* deploy/vue/
 
-      - name: Create main index page
+      # Copy Core Documentation
+      - name: Copy Core Documentation
+        run: |
+          if [ -d "packages/core/docs" ]; then
+            cp -r packages/core/docs/* deploy/core/
+          else
+            echo "Core docs not found, skipping..."
+          fi
+
+      - name: Create enhanced main index page
         run: |
           cat > deploy/index.html << 'EOF'
           <!DOCTYPE html>
@@ -83,44 +99,85 @@ jobs:
               <style>
                   body {
                       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
-                      max-width: 800px;
+                      max-width: 1200px;
                       margin: 0 auto;
                       padding: 2rem;
                       background: #fafafa;
+                      line-height: 1.6;
                   }
                   .container {
                       background: white;
                       padding: 3rem;
-                      border-radius: 8px;
-                      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+                      border-radius: 12px;
+                      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
                   }
                   h1 {
                       color: #1f2937;
-                      border-bottom: 2px solid #3b82f6;
+                      border-bottom: 3px solid #3b82f6;
                       padding-bottom: 1rem;
+                      margin-bottom: 2rem;
+                  }
+                  .description {
+                      color: #6b7280;
+                      font-size: 1.1rem;
+                      margin-bottom: 3rem;
+                  }
+                  .sections {
+                      display: grid;
+                      gap: 2rem;
+                  }
+                  .section {
+                      border: 1px solid #e5e7eb;
+                      border-radius: 8px;
+                      overflow: hidden;
+                  }
+                  .section-header {
+                      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                      color: white;
+                      padding: 1.5rem;
+                      margin: 0;
+                      font-size: 1.25rem;
+                      font-weight: 600;
+                  }
+                  .section-content {
+                      padding: 1.5rem;
                   }
                   .frameworks {
                       display: grid;
-                      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
                       gap: 1.5rem;
-                      margin-top: 2rem;
+                      margin-top: 1rem;
                   }
-                  .framework-card {
+                  .docs-grid {
+                      display: grid;
+                      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+                      gap: 1rem;
+                      margin-top: 1rem;
+                  }
+                  .framework-card, .doc-card {
                       border: 1px solid #e5e7eb;
                       border-radius: 8px;
                       padding: 1.5rem;
                       text-align: center;
-                      transition: transform 0.2s, box-shadow 0.2s;
+                      transition: all 0.2s ease;
+                      background: white;
                   }
-                  .framework-card:hover {
+                  .framework-card:hover, .doc-card:hover {
                       transform: translateY(-2px);
-                      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+                      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+                      border-color: #3b82f6;
                   }
-                  .framework-card h3 {
+                  .framework-card h3, .doc-card h3 {
                       margin: 0 0 1rem 0;
                       color: #374151;
+                      font-size: 1.1rem;
                   }
-                  .framework-card a {
+                  .framework-card p, .doc-card p {
+                      color: #6b7280;
+                      margin-bottom: 1.5rem;
+                      font-size: 0.95rem;
+                  }
+                  .framework-card a, .doc-card a {
                       display: inline-block;
                       background: #3b82f6;
                       color: white;
@@ -128,15 +185,11 @@ jobs:
                       text-decoration: none;
                       border-radius: 6px;
                       font-weight: 500;
+                      font-size: 0.9rem;
                       transition: background 0.2s;
                   }
-                  .framework-card a:hover {
+                  .framework-card a:hover, .doc-card a:hover {
                       background: #2563eb;
-                  }
-                  .description {
-                      color: #6b7280;
-                      line-height: 1.6;
-                      margin-bottom: 2rem;
                   }
                   .badge {
                       display: inline-block;
@@ -148,37 +201,91 @@ jobs:
                       font-weight: 500;
                       margin-left: 0.5rem;
                   }
+                  .auto-badge {
+                      background: #8b5cf6;
+                  }
+                  .footer {
+                      margin-top: 3rem;
+                      text-align: center;
+                      color: #6b7280;
+                      font-size: 0.9rem;
+                  }
+                  .footer a {
+                      color: #3b82f6;
+                      text-decoration: none;
+                  }
               </style>
           </head>
           <body>
               <div class="container">
-                  <h1>mild-ui Component Library <span class="badge">Multi-Framework</span></h1>
+                  <h1>mild-ui Component Library 
+                      <span class="badge">Multi-Framework</span>
+                      <span class="badge auto-badge">Auto-Generated</span>
+                  </h1>
                   
                   <p class="description">
-                      Welcome to mild-ui, a cross-framework UI component library inspired by shadcn/ui. 
-                      Our components work seamlessly across React, Vue, and Svelte, providing a consistent 
-                      design system for all your projects.
+                      Welcome to mild-ui, a cross-framework UI component library with SASS-powered styling. 
+                      Consistent components across React, Vue, and mobile platforms with comprehensive documentation.
                   </p>
-          
-                  <div class="frameworks">
-                      <div class="framework-card">
-                          <h3>⚛️ React</h3>
-                          <p>Explore React components with Radix UI primitives</p>
-                          <a href="./react/">View React Storybook</a>
+
+                  <div class="sections">
+                      <div class="section">
+                          <h2 class="section-header">🧩 Interactive Component Documentation</h2>
+                          <div class="section-content">
+                              <p>Live, interactive examples of components across different frameworks:</p>
+                              <div class="frameworks">
+                                  <div class="framework-card">
+                                      <h3>⚛️ React Components</h3>
+                                      <p>Interactive React components with hooks and modern patterns</p>
+                                      <a href="./react/">Explore React Storybook</a>
+                                  </div>
+                                  
+                                  <div class="framework-card">
+                                      <h3>💚 Vue Components</h3>
+                                      <p>Vue 3 components with Composition API and reactive patterns</p>
+                                      <a href="./vue/">Explore Vue Storybook</a>
+                                  </div>
+                              </div>
+                          </div>
                       </div>
-                      
-                      <div class="framework-card">
-                          <h3>💚 Vue</h3>
-                          <p>Discover Vue 3 components with Composition API</p>
-                          <a href="./vue/">View Vue Storybook</a>
+
+                      <div class="section">
+                          <h2 class="section-header">📚 Core Documentation & API</h2>
+                          <div class="section-content">
+                              <p>Auto-generated documentation from source code, design tokens, and APIs:</p>
+                              <div class="docs-grid">
+                                  <div class="doc-card">
+                                      <h3>🔧 TypeScript API</h3>
+                                      <p>Complete API reference with types and interfaces</p>
+                                      <a href="./core/api/">Browse API Docs</a>
+                                  </div>
+                                  
+                                  <div class="doc-card">
+                                      <h3>🎨 SASS Design System</h3>
+                                      <p>Design tokens, mixins, and functions documentation</p>
+                                      <a href="./core/sass/">Browse SASS Docs</a>
+                                  </div>
+                                  
+                                  <div class="doc-card">
+                                      <h3>🎯 Design Tokens</h3>
+                                      <p>Colors, typography, spacing with live previews</p>
+                                      <a href="./core/generated/design-tokens.md">View Tokens</a>
+                                  </div>
+                                  
+                                  <div class="doc-card">
+                                      <h3>⚙️ Component Props</h3>
+                                      <p>Auto-generated component prop tables and types</p>
+                                      <a href="./core/generated/component-api.md">View Props API</a>
+                                  </div>
+                              </div>
+                          </div>
                       </div>
                   </div>
                   
-                  <div style="margin-top: 3rem; text-align: center; color: #6b7280;">
+                  <div class="footer">
                       <p>
-                          <a href="https://github.com/CodeWithRiyan/mild-ui" style="color: #3b82f6; text-decoration: none;">
-                              📚 Documentation & Source Code
-                          </a>
+                          📝 Documentation auto-generated on $(date) | 
+                          <a href="https://github.com/CodeWithRiyan/mild-ui">View Source Code</a>
                       </p>
                   </div>
               </div>

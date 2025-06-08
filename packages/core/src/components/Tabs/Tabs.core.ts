@@ -1,9 +1,9 @@
 // packages/core/src/components/Tabs/Tabs.core.ts
 import { TabsStyleProps } from "./Tabs.types";
 import {
-  tabsListStyles,
-  tabsTriggerStyles,
-  tabsContentStyles,
+  tabsListVariants,
+  tabsTriggerVariants,
+  tabsContentVariants,
 } from "./Tabs.styles";
 import { cn } from "../../utils/cn";
 
@@ -13,7 +13,7 @@ export function getTabsListProps(
   const { variant = "default", size = "md", className } = props;
 
   return {
-    className: cn(tabsListStyles({ variant, size }), className),
+    className: cn(tabsListVariants({ variant, size }), className),
     variant,
     size,
   };
@@ -25,7 +25,7 @@ export function getTabsTriggerProps(
   const { variant = "default", size = "md", className } = props;
 
   return {
-    className: cn(tabsTriggerStyles({ variant, size }), className),
+    className: cn(tabsTriggerVariants({ variant, size }), className),
     variant,
     size,
   };
@@ -37,7 +37,7 @@ export function getTabsContentProps(
   const { size = "md", className } = props;
 
   return {
-    className: cn(tabsContentStyles({ size }), className),
+    className: cn(tabsContentVariants({ size }), className),
     size,
   };
 }

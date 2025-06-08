@@ -4,13 +4,13 @@ import * as SelectPrimitive from "@radix-ui/react-select";
 import { Check, ChevronDown } from "lucide-react";
 import {
   SelectCoreProps,
-  selectTriggerStyles,
+  selectTriggerVariants,
   SelectStyleProps,
-  selectContentStyles,
-  selectItemStyles,
+  selectContentVariants,
+  selectItemVariants,
   SelectOption,
-} from "@mild-ui/core";
-import { cn } from "../../utils";
+  cn,
+} from "../../../../core";
 
 // Define simple prop interfaces without complex type extending
 export interface SelectTriggerProps {
@@ -32,14 +32,14 @@ const SelectTrigger = React.forwardRef<HTMLButtonElement, SelectTriggerProps>(
       <SelectPrimitive.Trigger
         ref={ref}
         className={cn(
-          selectTriggerStyles({ size, fullWidth, error }),
+          selectTriggerVariants({ size, fullWidth, error }),
           className,
         )}
         {...restProps}
       >
         {children}
         <SelectPrimitive.Icon asChild>
-          <ChevronDown className="h-4 w-4 opacity-50" />
+          <ChevronDown className="--mild-h-4 --mild-w-4 --mild-opacity-50" />
         </SelectPrimitive.Icon>
       </SelectPrimitive.Trigger>
     );
@@ -64,11 +64,11 @@ const SelectContent = React.forwardRef<HTMLDivElement, SelectContentProps>(
       <SelectPrimitive.Portal>
         <SelectPrimitive.Content
           ref={ref}
-          className={cn(selectContentStyles({ position }), className)}
+          className={cn(selectContentVariants({ position }), className)}
           position={position}
           {...restProps}
         >
-          <SelectPrimitive.Viewport className="p-1">
+          <SelectPrimitive.Viewport className="--mild-p-1">
             {children}
           </SelectPrimitive.Viewport>
         </SelectPrimitive.Content>
@@ -96,12 +96,12 @@ const SelectItem = React.forwardRef<HTMLDivElement, SelectItemProps>(
     return (
       <SelectPrimitive.Item
         ref={ref}
-        className={cn(selectItemStyles({ size }), className)}
+        className={cn(selectItemVariants({ size }), className)}
         {...restProps}
       >
-        <span className="absolute left-2 flex h-3.5 w-3.5 items-center justify-center">
+        <span className="--mild-absolute --mild-left-2 --mild-flex --mild-h-3.5 --mild-w-3.5 --mild-items-center --mild-justify-center">
           <SelectPrimitive.ItemIndicator>
-            <Check className="h-4 w-4" />
+            <Check className="--mild-h-4 --mild-w-4" />
           </SelectPrimitive.ItemIndicator>
         </span>
         <SelectPrimitive.ItemText>{children}</SelectPrimitive.ItemText>

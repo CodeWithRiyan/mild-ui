@@ -1,0 +1,57 @@
+// packages/core/src/sass/mixins/_component-base.scss
+/// Base component styling mixins
+/// @group mixins
+
+@use "../tokens/spacing" as spacing;
+@use "../tokens/radius" as radius;
+@use "../tokens/animation" as animation;
+
+/// Base component reset and foundation
+@mixin component-base {
+  appearance: none;
+  background: none;
+  border: none;
+  outline: none;
+  font: inherit;
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
+  user-select: none;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/// Focus ring styling
+@mixin focus-ring($color: var(--mild-color-primary-500)) {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+
+  &:focus-visible {
+    outline: 2px solid #{$color};
+    outline-offset: 2px;
+  }
+}
+
+/// Disabled state styling
+@mixin disabled-state {
+  &:disabled,
+  &[aria-disabled="true"],
+  &[data-disabled] {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+}
+
+/// Interactive state transitions
+@mixin interactive-transitions {
+  transition: var(--mild-transition-colors), var(--mild-transition-shadow);
+
+  &:hover:not(:disabled):not([aria-disabled="true"]) {
+    transition-duration: var(--mild-duration-150);
+  }
+
+  &:active:not(:disabled):not([aria-disabled="true"]) {
+    transition-duration: var(--mild-duration-75);
+  }
+}

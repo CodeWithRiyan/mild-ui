@@ -1,22 +1,23 @@
 // packages/core/src/components/Input/Input.types.ts
-export interface InputCoreProps {
-  type?: "text" | "password" | "email" | "number" | "search" | "tel" | "url";
-  placeholder?: string;
-  value?: string;
-  disabled?: boolean;
-  readOnly?: boolean;
-  required?: boolean;
-  error?: boolean;
-  autoFocus?: boolean;
-  className?: string;
-}
+/// Input component universal types
+/// @fileoverview Framework-agnostic input component interfaces
 
 export type InputSize = "sm" | "md" | "lg";
-export type InputVariant = "default" | "filled" | "outline" | "ghost";
+export type InputVariant = "outline" | "filled" | "flushed" | "unstyled";
 
-export interface InputStyleProps {
-  size?: InputSize;
+export interface InputCoreProps {
+  /** Input variant */
   variant?: InputVariant;
-  fullWidth?: boolean;
+  /** Input size */
+  size?: InputSize;
+  /** Readonly field */
+  readonly?: boolean;
+  /** Invalid state */
+  invalid?: boolean;
+  /** Error state */
   error?: boolean;
+  /** Auto focus */
+  autoFocus?: boolean;
+  /** Full width size*/
+  fullWidth?: boolean;
 }
