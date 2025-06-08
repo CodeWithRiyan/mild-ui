@@ -1,5 +1,5 @@
 // packages/core/src/components/Switch/Switch.types.ts
-export interface SwitchCoreProps {
+export interface SwitchCoreProps extends SwitchStyleProps {
   checked?: boolean;
   defaultChecked?: boolean;
   disabled?: boolean;

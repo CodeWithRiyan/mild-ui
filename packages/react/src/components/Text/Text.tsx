@@ -1,19 +1,38 @@
 // packages/react/src/components/Text/Text.tsx
 import React, { forwardRef } from "react";
-import type { TextProps as CoreTextProps } from "../../../../core";
+import type { TextCoreProps } from "../../../../core";
 
-export interface TextProps extends CoreTextProps {
+type HTMLTextComponent =
+  | HTMLSpanElement
+  | HTMLParagraphElement
+  | HTMLHeadingElement
+  | HTMLLabelElement
+  | HTMLDivElement;
+
+export interface TextProps extends TextCoreProps {
+  as?:
+    | "span"
+    | "p"
+    | "div"
+    | "h1"
+    | "h2"
+    | "h3"
+    | "h4"
+    | "h5"
+    | "h6"
+    | "label"
+    | "caption";
   /** Text content */
   children: React.ReactNode;
   /** Additional CSS class */
   className?: string;
   /** Click handler */
-  onClick?: (event: React.MouseEvent<HTMLElement>) => void;
+  onClick?: (event: React.MouseEvent<HTMLTextComponent>) => void;
   /** Ref forwarding */
-  ref?: React.Ref<HTMLElement>;
+  ref?: React.Ref<HTMLTextComponent>;
 }
 
-export const Text = forwardRef<HTMLElement, TextProps>(
+export const Text = forwardRef<HTMLTextComponent, TextProps>(
   (
     {
       as = "span",

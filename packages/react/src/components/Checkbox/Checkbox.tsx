@@ -5,14 +5,13 @@ import { Check } from "lucide-react";
 import {
   CheckboxCoreProps,
   checkboxVariants,
-  CheckboxStyleProps,
   checkboxLabelVariants,
   cn,
 } from "../../../../core";
 import { Label } from "../Label";
 
 // Extend from core types but manually handle React-specific props
-export interface CheckboxProps extends CheckboxCoreProps, CheckboxStyleProps {
+export interface CheckboxProps extends CheckboxCoreProps {
   // React-specific props
   id?: string;
   onCheckedChange?: (checked: boolean | "indeterminate") => void;
@@ -33,7 +32,6 @@ const Checkbox = React.forwardRef<HTMLButtonElement, CheckboxProps>(
       required,
       name,
       value,
-      indeterminate,
       id,
       onCheckedChange,
       ...restProps

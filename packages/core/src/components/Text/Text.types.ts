@@ -2,11 +2,7 @@
 /// Text component universal types
 /// @fileoverview Framework-agnostic text component interfaces
 
-import type {
-  BaseComponentProps,
-  ColorScheme,
-  AriaProps,
-} from "../../types/common";
+import type { ColorScheme } from "../../types/common";
 
 export type TextSize =
   | "xs"
@@ -36,7 +32,7 @@ export type TextAlign = "left" | "center" | "right" | "justify";
 export type TextTransform = "none" | "uppercase" | "lowercase" | "capitalize";
 export type TextDecoration = "none" | "underline" | "line-through";
 
-export interface TextCoreProps extends BaseComponentProps, AriaProps {
+export interface TextCoreProps {
   /** Text size */
   fontSize?: TextSize;
   /** Font weight */
@@ -71,10 +67,3 @@ export interface TextCoreProps extends BaseComponentProps, AriaProps {
     | "label"
     | "caption";
 }
-
-export interface TextContentProps {
-  /** Text content */
-  children?: any;
-}
-
-export type TextProps = TextCoreProps & TextContentProps;

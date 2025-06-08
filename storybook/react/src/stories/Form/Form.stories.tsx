@@ -135,7 +135,7 @@ export const RegistrationForm: Story = {
             <Input
               placeholder="Enter your full name"
               autoComplete="name"
-              onChange={(e) => console.log("Name changed:", e.target.value)}
+              onChange={(v) => console.log("Name changed:", v)}
             />
           </Field>
 

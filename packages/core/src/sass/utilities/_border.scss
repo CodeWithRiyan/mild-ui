@@ -1,0 +1,35 @@
+// packages/core/src/sass/utilities/_spacing.scss
+/// Spacing utility classes
+/// @group utilities
+
+@use "../tokens/radius" as radius;
+
+@each $side in ("", "x", "y", "t", "r", "b", "l") {
+  @each $width in ("0", "2", "4", "8") {
+    .mild-border-#{$side}-#{$width} {
+      @if $side == "" {
+        border-width: #{$width}px;
+      } @else if $side == "x" {
+        border-left-width: #{$width}px;
+        border-right-width: #{$width}px;
+      } @else if $side == "y" {
+        border-top-width: #{$width}px;
+        border-bottom-width: #{$width}px;
+      } @else if $side == "t" {
+        border-top-width: #{$width}px;
+      } @else if $side == "r" {
+        border-right-width: #{$width}px;
+      } @else if $side == "b" {
+        border-bottom-width: #{$width}px;
+      } @else if $side == "l" {
+        border-left-width: #{$width}px;
+      }
+    }
+  }
+}
+
+@each $name, $value in spacing.$mild-radius {
+  .mild-radius-#{$name} {
+    border-radius: #{$value};
+  }
+}

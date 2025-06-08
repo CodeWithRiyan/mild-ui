@@ -1,12 +1,11 @@
 // packages/core/src/components/Radio/Radio.types.ts
-export interface RadioCoreProps {
-  checked?: boolean;
-  defaultChecked?: boolean;
+export interface RadioCoreProps extends RadioStyleProps {
+  error?: boolean;
   disabled?: boolean;
   required?: boolean;
   name?: string;
-  value: string;
-  className?: string;
+  defaultValue?: string;
+  value?: string | null;
 }
 
 export type RadioSize = "sm" | "md" | "lg";

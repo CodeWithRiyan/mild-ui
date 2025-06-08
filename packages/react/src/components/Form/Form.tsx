@@ -233,7 +233,11 @@ const Field = <
 
         return (
           <FormItem className={className}>
-            {label && <FormLabel required={required}>{label}</FormLabel>}
+            {label && (
+              <FormLabel htmlFor={name} required={required}>
+                {label}
+              </FormLabel>
+            )}
             <FormControl>
               <Slot {...field}>
                 {React.cloneElement(children, {
