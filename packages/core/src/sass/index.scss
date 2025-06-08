@@ -6,6 +6,7 @@
 @use "tokens/colors" as colors;
 @use "tokens/typography" as typography;
 @use "tokens/spacing" as spacing;
+@use "tokens/dimensions" as dimensions;
 @use "tokens/elevation" as elevation;
 @use "tokens/radius" as radius;
 @use "tokens/breakpoints" as breakpoints;
@@ -27,6 +28,7 @@
   @include colors.generate-color-properties();
   @include typography.generate-typography-properties();
   @include spacing.generate-spacing-properties();
+  @include dimensions.generate-dimensions-properties();
   @include elevation.generate-shadow-properties();
   @include radius.generate-radius-properties();
   @include animation.generate-animation-properties();

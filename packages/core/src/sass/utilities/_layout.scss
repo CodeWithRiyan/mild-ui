@@ -3,6 +3,8 @@
 /// @group utilities
 
 @use "../mixins/layout" as layout;
+@use "../tokens/dimensions" as dimensions;
+@use "../tokens/spacing" as spacing;
 
 // Display utilities
 .mild-block {
@@ -108,4 +110,76 @@
 }
 .mild-overflow-scroll {
   overflow: scroll;
+}
+
+// Grid utilities
+@for $i from 1 through 12 {
+  .mild-grid-cols-#{$i} {
+    grid-template-columns: repeat($i, minmax(0, 1fr));
+  }
+  .mild-grid-rows-#{$i} {
+    grid-template-rows: repeat($i, minmax(0, 1fr));
+  }
+  .mild-row-span-#{$i} {
+    grid-row: span #{$i} / span #{$i};
+  }
+  .mild-col-span-#{$i} {
+    grid-column: span #{$i} / span #{$i};
+  }
+}
+
+// Z-index utilities
+@for $i from 1 through 5 {
+  .mild-z-#{$i} {
+    z-index: $i;
+  }
+}
+
+@for $i from 1 through 10 {
+  .mild-z-#{$i*10} {
+    z-index: $i * 10;
+  }
+}
+
+// Dimension width height utilities
+@each $name, $value in dimensions.$mild-dimensions {
+  .mild-w-#{$name} {
+    width: #{$value};
+  }
+  .mild-h-#{$name} {
+    height: #{$value};
+  }
+  .mild-min-w-#{$name} {
+    min-width: #{$value};
+  }
+  .mild-min-h-#{$name} {
+    min-height: #{$value};
+  }
+  .mild-max-w-#{$name} {
+    max-width: #{$value};
+  }
+  .mild-max-h-#{$name} {
+    max-height: #{$value};
+  }
+}
+
+@each $name, $value in spacing.$mild-spacing {
+  .mild-w-#{$name} {
+    width: #{$value};
+  }
+  .mild-h-#{$name} {
+    height: #{$value};
+  }
+  .mild-min-w-#{$name} {
+    min-width: #{$value};
+  }
+  .mild-min-h-#{$name} {
+    min-height: #{$value};
+  }
+  .mild-max-w-#{$name} {
+    max-width: #{$value};
+  }
+  .mild-max-h-#{$name} {
+    max-height: #{$value};
+  }
 }

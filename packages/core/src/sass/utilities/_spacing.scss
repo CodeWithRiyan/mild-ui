@@ -70,3 +70,15 @@
     row-gap: #{$value};
   }
 }
+
+// Spacing between children utilities
+@each $name, $value in spacing.$mild-spacing {
+  .mild-space-x-#{$name} > :not([hidden]) ~ :not([hidden]) {
+    --mild-space-x: #{$value};
+    margin-left: var(--mild-space-x);
+  }
+  .mild-space-y-#{$name} > :not([hidden]) ~ :not([hidden]) {
+    --mild-space-y: #{$value};
+    margin-top: var(--mild-space-y);
+  }
+}
