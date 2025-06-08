@@ -19,9 +19,9 @@ export type {
   Size,
   ColorScheme,
   Variant,
-  ButtonProps as CoreButtonProps,
-  InputProps as CoreInputProps,
-  TextProps as CoreTextProps,
+  ButtonCoreProps,
+  InputCoreProps,
+  TextCoreProps,
   BoxProps as CoreBoxProps,
 } from "../../core";
 

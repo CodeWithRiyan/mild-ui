@@ -39,7 +39,7 @@ const SelectTrigger = React.forwardRef<HTMLButtonElement, SelectTriggerProps>(
       >
         {children}
         <SelectPrimitive.Icon asChild>
-          <ChevronDown className="h-4 w-4 opacity-50" />
+          <ChevronDown className="--mild-h-4 --mild-w-4 --mild-opacity-50" />
         </SelectPrimitive.Icon>
       </SelectPrimitive.Trigger>
     );
@@ -68,7 +68,7 @@ const SelectContent = React.forwardRef<HTMLDivElement, SelectContentProps>(
           position={position}
           {...restProps}
         >
-          <SelectPrimitive.Viewport className="p-1">
+          <SelectPrimitive.Viewport className="--mild-p-1">
             {children}
           </SelectPrimitive.Viewport>
         </SelectPrimitive.Content>
@@ -99,9 +99,9 @@ const SelectItem = React.forwardRef<HTMLDivElement, SelectItemProps>(
         className={cn(selectItemVariants({ size }), className)}
         {...restProps}
       >
-        <span className="absolute left-2 flex h-3.5 w-3.5 items-center justify-center">
+        <span className="--mild-absolute --mild-left-2 --mild-flex --mild-h-3.5 --mild-w-3.5 --mild-items-center --mild-justify-center">
           <SelectPrimitive.ItemIndicator>
-            <Check className="h-4 w-4" />
+            <Check className="--mild-h-4 --mild-w-4" />
           </SelectPrimitive.ItemIndicator>
         </span>
         <SelectPrimitive.ItemText>{children}</SelectPrimitive.ItemText>

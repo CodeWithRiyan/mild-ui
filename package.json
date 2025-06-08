@@ -4,6 +4,9 @@
   "type": "module",
   "scripts": {
     "build": "pnpm -r build",
+    "build:core": "cd packages/core && pnpm build",
+    "build:react": "cd packages/react && pnpm build",
+    "build:vue": "cd packages/vue && pnpm build",
     "dev": "pnpm -r dev",
     "test": "pnpm -r test",
     "lint": "eslint .",
