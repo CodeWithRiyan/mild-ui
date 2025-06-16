@@ -1,21 +1,17 @@
 // packages/react/src/components/Input/Input.tsx
 import * as React from "react";
+import type { InputPasswordCoreProps } from "../../types/input-password";
 import {
-  InputPasswordCoreProps,
-  inputPasswordStyles,
-  InputPasswordStyleProps,
-} from "@mild-ui/core";
+  inputPasswordVariants,
+  inputPasswordToggleVariants,
+} from "../../utils/input-password";
 import { cn } from "../../utils";
 import { EyeIcon, EyeOffIcon } from "lucide-react";
 
 // Add 'value' to the Omit list
 export interface InputPasswordProps
-  extends Omit<
-      React.InputHTMLAttributes<HTMLInputElement>,
-      "type" | "size" | "value"
-    >,
-    InputPasswordCoreProps,
-    InputPasswordStyleProps {
+  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "type" | "size">,
+    InputPasswordCoreProps {
   visibleIcon?: React.ReactNode;
   hiddenIcon?: React.ReactNode;
 }
@@ -23,41 +19,49 @@ export interface InputPasswordProps
 const InputPassword = React.forwardRef<HTMLInputElement, InputPasswordProps>(
   (
     {
+      variant = "outline",
+      size = "md",
+      fullWidth = true,
+      error = false,
+      isDisabled: disabled = false,
+      isReadOnly: readonly = false,
+      isRequired: required = false,
       className,
-      size,
-      variant,
-      fullWidth,
-      error,
-      value,
       ui,
       visibleIcon,
       hiddenIcon,
-      required,
-      ...props
+      ...rest
     },
     ref,
   ) => {
     const [typeInput, setTypeInput] = React.useState("password");
+    // Generate classes using core variant system
+    const classes = inputPasswordVariants({
+      variant,
+      size,
+      fullWidth,
+      error,
+      disabled,
+      readonly,
+      required,
+      className,
+    });
 
     return (
-      <div className={cn("relative", ui?.container)}>
+      <div style={{ position: "relative" }} className={cn(ui?.container)}>
         <input
-          type={typeInput}
-          className={cn(
-            inputPasswordStyles({ size, variant, fullWidth, error }),
-            className,
-            ui?.input,
-          )}
           ref={ref}
-          value={value}
-          {...props}
+          type={typeInput}
+          className={cn(classes, ui?.input)}
+          disabled={disabled}
+          required={required}
+          aria-invalid={error || undefined}
+          data-controlled={rest.value !== undefined ? "true" : undefined}
+          {...rest}
         />
         <button
           type="button"
-          className={cn(
-            "absolute top-0 right-0 flex h-full aspect-square items-center justify-center",
-            ui?.buttonIcon,
-          )}
+          className={cn(inputPasswordToggleVariants({ size }), ui?.buttonIcon)}
           onClick={() =>
             setTypeInput(typeInput === "password" ? "text" : "password")
           }

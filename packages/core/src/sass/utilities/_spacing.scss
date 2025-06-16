@@ -1,0 +1,84 @@
+// packages/core/src/sass/utilities/_spacing.scss
+/// Spacing utility classes
+/// @group utilities
+
+@use "../tokens/spacing" as spacing;
+
+// Generate margin utilities
+@each $name, $value in spacing.$mild-spacing {
+  .mild-m-#{$name} {
+    margin: #{$value};
+  }
+  .mild-mx-#{$name} {
+    margin-left: #{$value};
+    margin-right: #{$value};
+  }
+  .mild-my-#{$name} {
+    margin-top: #{$value};
+    margin-bottom: #{$value};
+  }
+  .mild-mt-#{$name} {
+    margin-top: #{$value};
+  }
+  .mild-mr-#{$name} {
+    margin-right: #{$value};
+  }
+  .mild-mb-#{$name} {
+    margin-bottom: #{$value};
+  }
+  .mild-ml-#{$name} {
+    margin-left: #{$value};
+  }
+}
+
+// Generate padding utilities
+@each $name, $value in spacing.$mild-spacing {
+  .mild-p-#{$name} {
+    padding: #{$value};
+  }
+  .mild-px-#{$name} {
+    padding-left: #{$value};
+    padding-right: #{$value};
+  }
+  .mild-py-#{$name} {
+    padding-top: #{$value};
+    padding-bottom: #{$value};
+  }
+  .mild-pt-#{$name} {
+    padding-top: #{$value};
+  }
+  .mild-pr-#{$name} {
+    padding-right: #{$value};
+  }
+  .mild-pb-#{$name} {
+    padding-bottom: #{$value};
+  }
+  .mild-pl-#{$name} {
+    padding-left: #{$value};
+  }
+}
+
+// Gap utilities
+@each $name, $value in spacing.$mild-spacing {
+  .mild-gap-#{$name} {
+    gap: #{$value};
+  }
+  .mild-gap-x-#{$name} {
+    column-gap: #{$value};
+  }
+  .mild-gap-y-#{$name} {
+    row-gap: #{$value};
+  }
+}
+
+// Spacing between children utilities
+@each $name, $value in spacing.$mild-spacing {
+  .mild-space-x-#{$name} > :not([hidden]) ~ :not([hidden]) {
+    --mild-space-x: #{$value};
+    margin-left: var(--mild-space-x);
+  }
+  .mild-space-y-#{$name} > :not([hidden]) ~ :not([hidden]) {
+    --mild-space-y: #{$value};
+    margin-top: var(--mild-space-y);
+  }
+}

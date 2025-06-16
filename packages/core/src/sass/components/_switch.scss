@@ -1,0 +1,183 @@
+// packages/core/src/sass/components/_switch.scss
+/// Switch component styling
+/// @group components
+
+@use "../tokens/colors" as colors;
+@use "../tokens/spacing" as spacing;
+@use "../tokens/animation" as animation;
+@use "../mixins/component-base" as base;
+
+.mild-switch {
+  @include base.component-base;
+  @include base.focus-ring;
+  display: inline-flex;
+  align-items: center;
+  position: relative;
+  cursor: pointer;
+
+  input[type="checkbox"] {
+    appearance: none;
+    width: var(--mild-space-9);
+    height: var(--mild-space-5);
+    border-radius: 9999px;
+    background-color: var(--mild-color-gray-200);
+    cursor: pointer;
+    position: relative;
+    transition: var(--mild-transition-colors);
+    border: 2px solid transparent;
+
+    &::after {
+      content: "";
+      position: absolute;
+      left: 2px;
+      top: 2px;
+      width: var(--mild-space-4);
+      height: var(--mild-space-4);
+      border-radius: 50%;
+      background-color: white;
+      transition: var(--mild-transition-transform);
+      box-shadow: var(--mild-shadow-sm);
+    }
+
+    &:checked {
+      background-color: var(--mild-color-primary-500);
+
+      &::after {
+        transform: translateX(16px);
+      }
+    }
+
+    &:hover:not(:disabled) {
+      &:not(:checked) {
+        background-color: var(--mild-color-gray-300);
+      }
+
+      &:checked {
+        background-color: var(--mild-color-primary-600);
+      }
+    }
+
+    &:focus {
+      outline: none;
+      box-shadow:
+        0 0 0 2px var(--mild-background),
+        0 0 0 4px var(--mild-color-primary-500);
+    }
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+
+      &::after {
+        box-shadow: none;
+      }
+    }
+  }
+
+  &--sm input[type="checkbox"] {
+    width: var(--mild-space-8);
+    height: var(--mild-space-4);
+
+    &::after {
+      width: var(--mild-space-3);
+      height: var(--mild-space-3);
+      left: 1px;
+      top: 1px;
+    }
+
+    &:checked::after {
+      transform: translateX(12px);
+    }
+  }
+
+  &--lg input[type="checkbox"] {
+    width: var(--mild-space-12);
+    height: var(--mild-space-6);
+
+    &::after {
+      width: var(--mild-space-5);
+      height: var(--mild-space-5);
+      left: 2px;
+      top: 2px;
+    }
+
+    &:checked::after {
+      transform: translateX(24px);
+    }
+  }
+
+  &--disabled {
+    cursor: not-allowed;
+
+    input[type="checkbox"] {
+      cursor: not-allowed;
+    }
+  }
+}
+
+.mild-switch-label {
+  font-size: var(--mild-font-size-sm);
+  margin-left: var(--mild-space-2);
+  cursor: pointer;
+  user-select: none;
+
+  &--sm {
+    font-size: var(--mild-font-size-xs);
+    margin-left: var(--mild-space-1-5);
+  }
+
+  &--lg {
+    font-size: var(--mild-font-size-base);
+    margin-left: var(--mild-space-3);
+  }
+
+  &--disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+.mild-switch-description {
+  font-size: var(--mild-font-size-xs);
+  color: var(--mild-muted-foreground);
+  margin-top: var(--mild-space-1);
+
+  .mild-switch--sm & {
+    font-size: var(--mild-font-size-xs);
+    margin-top: var(--mild-space-0-5);
+  }
+
+  .mild-switch--lg & {
+    font-size: var(--mild-font-size-sm);
+    margin-top: var(--mild-space-1-5);
+  }
+}
+
+// Switch with icons
+.mild-switch-with-icons {
+  input[type="checkbox"] {
+    &::before {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: 12px;
+      height: 12px;
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+      opacity: 0.7;
+      z-index: 1;
+    }
+
+    &:not(:checked)::before {
+      background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>');
+    }
+
+    &:checked::before {
+      background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>');
+      color: white;
+    }
+  }
+}

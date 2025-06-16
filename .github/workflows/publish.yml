@@ -32,6 +32,7 @@ jobs:
 
       - name: Build packages
         run: pnpm build
+        # Note: Core package now only builds CSS/SCSS, React/Vue build TypeScript
 
       - name: Setup npm authentication
         run: echo "//registry.npmjs.org/:_authToken=${NODE_AUTH_TOKEN}" > ~/.npmrc
@@ -41,7 +42,7 @@ jobs:
       - name: Check if packages are already published
         run: |
           # Create an array of packages to publish
-          PACKAGES=("core" "react" "vue" "cli")
+          PACKAGES=("core" "react" "vue")
 
           # Create a directory to store publish status
           mkdir -p publish_status
@@ -64,7 +65,7 @@ jobs:
 
       - name: Publish packages
         run: |
-          PACKAGES=("core" "react" "vue" "cli")
+          PACKAGES=("core" "react" "vue")
 
           for pkg in "${PACKAGES[@]}"; do
             if [[ -f "publish_status/${pkg}.status" && $(cat "publish_status/${pkg}.status") == "publish" ]]; then
@@ -101,7 +102,7 @@ jobs:
           echo "| Package | Status |" >> $GITHUB_STEP_SUMMARY
           echo "| ------- | ------ |" >> $GITHUB_STEP_SUMMARY
 
-          PACKAGES=("core" "react" "vue" "cli")
+          PACKAGES=("core" "react" "vue")
 
           for pkg in "${PACKAGES[@]}"; do
             PKG_NAME=$(node -p "require('./packages/${pkg}/package.json').name")

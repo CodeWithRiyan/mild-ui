@@ -11,7 +11,7 @@ import {
   type FieldPath,
   type FieldValues,
 } from "react-hook-form";
-import { cn } from "@mild-ui/core";
+import { cn } from "../../utils/cn";
 import { Label } from "../Label";
 
 type FormFieldContextValue<
@@ -233,7 +233,11 @@ const Field = <
 
         return (
           <FormItem className={className}>
-            {label && <FormLabel required={required}>{label}</FormLabel>}
+            {label && (
+              <FormLabel htmlFor={name} required={required}>
+                {label}
+              </FormLabel>
+            )}
             <FormControl>
               <Slot {...field}>
                 {React.cloneElement(children, {

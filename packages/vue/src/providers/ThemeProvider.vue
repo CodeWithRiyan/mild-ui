@@ -16,7 +16,7 @@ import {
   defaultTheme,
   darkTheme,
   applyTheme,
-} from "@mild-ui/core";
+} from "../types/theme";
 
 type ThemeMode = "light" | "dark" | "system";
 

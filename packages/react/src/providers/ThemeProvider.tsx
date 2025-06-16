@@ -1,108 +1,148 @@
-import React, { createContext, useContext, useEffect, useState } from "react";
+// packages/react/src/providers/ThemeProvider.tsx
+import React, {
+  createContext,
+  useContext,
+  useState,
+  useEffect,
+  ReactNode,
+} from "react";
+import type { ColorMode, ThemeConfig } from "../types";
 import {
-  ThemeConfig,
+  applyCSSProperties,
+  generateCSSProperties,
+  mergeThemes,
   defaultTheme,
-  darkTheme,
-  applyTheme,
-} from "@mild-ui/core";
+} from "../utils/theme";
 
-type ThemeMode = "light" | "dark" | "system";
-
-interface ThemeContextType {
-  theme: ThemeMode;
-  setTheme: (theme: ThemeMode) => void;
-  config: ThemeConfig;
-  setConfig: (config: ThemeConfig) => void;
+export interface ThemeContextValue {
+  theme: ThemeConfig;
+  colorMode: ColorMode;
+  setColorMode: (mode: ColorMode) => void;
+  toggleColorMode: () => void;
+  resolvedColorMode: "light" | "dark";
+  isDark: boolean;
+  isLight: boolean;
+  isSystem: boolean;
 }
 
-const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
+const ThemeContext = createContext<ThemeContextValue | undefined>(undefined);
 
-interface ThemeProviderProps {
-  children: React.ReactNode;
-  defaultTheme?: ThemeMode;
-  config?: ThemeConfig;
+export interface ThemeProviderProps {
+  /** Custom theme configuration */
+  theme?: Partial<ThemeConfig>;
+  /** Initial color mode */
+  colorMode?: ColorMode;
+  /** CSS variables prefix */
+  cssVarPrefix?: string;
+  /** Storage key for persisting color mode */
   storageKey?: string;
+  /** Children components */
+  children: ReactNode;
 }
 
-export function ThemeProvider({
+export const ThemeProvider: React.FC<ThemeProviderProps> = ({
+  theme: customTheme = {},
+  colorMode: initialColorMode = "light",
+  cssVarPrefix = "mild",
+  storageKey = "mild-ui-color-mode",
   children,
-  defaultTheme: initialTheme = "system",
-  config = defaultTheme,
-  storageKey = "mild-ui-theme",
-}: ThemeProviderProps) {
-  const [theme, setThemeState] = useState<ThemeMode>(() => {
-    if (typeof window !== "undefined") {
-      return (localStorage.getItem(storageKey) as ThemeMode) || initialTheme;
+}) => {
+  // Merge custom theme with default theme
+  const theme = mergeThemes(defaultTheme, customTheme);
+
+  // Color mode state with localStorage persistence
+  const [colorMode, setColorModeState] = useState<ColorMode>(() => {
+    if (typeof window === "undefined") return initialColorMode;
+
+    try {
+      const stored = localStorage.getItem(storageKey);
+      return (stored as ColorMode) || initialColorMode;
+    } catch {
+      return initialColorMode;
     }
-    return initialTheme;
   });
 
-  const [themeConfig, setThemeConfig] = useState<ThemeConfig>(config);
-
-  const setTheme = (newTheme: ThemeMode) => {
-    setThemeState(newTheme);
-    if (typeof window !== "undefined") {
-      localStorage.setItem(storageKey, newTheme);
-    }
-  };
-
-  useEffect(() => {
-    const root = window.document.documentElement;
-    root.classList.remove("light", "dark");
-
-    let effectiveTheme: "light" | "dark";
-
-    if (theme === "system") {
-      effectiveTheme = window.matchMedia("(prefers-color-scheme: dark)").matches
+  // Resolve system color mode
+  const [systemColorMode, setSystemColorMode] = useState<"light" | "dark">(
+    () => {
+      if (typeof window === "undefined") return "light";
+      return window.matchMedia("(prefers-color-scheme: dark)").matches
         ? "dark"
         : "light";
-    } else {
-      effectiveTheme = theme;
-    }
+    },
+  );
 
-    root.classList.add(effectiveTheme);
-
-    // Apply the theme configuration
-    const activeConfig = effectiveTheme === "dark" ? darkTheme : themeConfig;
-    applyTheme(activeConfig);
-  }, [theme, themeConfig]);
-
-  // Listen for system theme changes
+  // Listen for system color mode changes
   useEffect(() => {
-    if (theme !== "system") return;
+    if (typeof window === "undefined") return;
 
     const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
-    const handleChange = () => {
-      const root = window.document.documentElement;
-      root.classList.remove("light", "dark");
-      root.classList.add(mediaQuery.matches ? "dark" : "light");
-
-      const activeConfig = mediaQuery.matches ? darkTheme : themeConfig;
-      applyTheme(activeConfig);
+    const handleChange = (e: MediaQueryListEvent) => {
+      setSystemColorMode(e.matches ? "dark" : "light");
     };
 
     mediaQuery.addEventListener("change", handleChange);
     return () => mediaQuery.removeEventListener("change", handleChange);
-  }, [theme, themeConfig]);
+  }, []);
+
+  // Resolved color mode (system resolved to light/dark)
+  const resolvedColorMode =
+    colorMode === "system" ? systemColorMode : colorMode;
+
+  // Helper booleans
+  const isDark = resolvedColorMode === "dark";
+  const isLight = resolvedColorMode === "light";
+  const isSystem = colorMode === "system";
+
+  // Set color mode with persistence
+  const setColorMode = (mode: ColorMode) => {
+    setColorModeState(mode);
+    try {
+      localStorage.setItem(storageKey, mode);
+    } catch {
+      // Handle localStorage errors silently
+    }
+  };
+
+  // Toggle between light and dark
+  const toggleColorMode = () => {
+    setColorMode(resolvedColorMode === "light" ? "dark" : "light");
+  };
+
+  // Apply CSS custom properties when theme or color mode changes
+  useEffect(() => {
+    const properties = generateCSSProperties(theme, cssVarPrefix);
+    applyCSSProperties(properties);
+
+    // Set data attributes for styling
+    document.documentElement.setAttribute("data-theme", resolvedColorMode);
+    document.documentElement.setAttribute("data-color-mode", colorMode);
+  }, [theme, resolvedColorMode, colorMode, cssVarPrefix]);
+
+  const value: ThemeContextValue = {
+    theme,
+    colorMode,
+    setColorMode,
+    toggleColorMode,
+    resolvedColorMode,
+    isDark,
+    isLight,
+    isSystem,
+  };
 
   return (
-    <ThemeContext.Provider
-      value={{
-        theme,
-        setTheme,
-        config: themeConfig,
-        setConfig: setThemeConfig,
-      }}
-    >
-      {children}
+    <ThemeContext.Provider value={value}>
+      <div className="mild-react-root" data-theme={resolvedColorMode}>
+        {children}
+      </div>
     </ThemeContext.Provider>
   );
-}
+};
 
-export function useTheme() {
+export const useTheme = (): ThemeContextValue => {
   const context = useContext(ThemeContext);
-  if (!context) {
+  if (context === undefined) {
     throw new Error("useTheme must be used within a ThemeProvider");
   }
   return context;
-}
+};

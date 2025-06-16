@@ -1,0 +1,77 @@
+// packages/core/src/sass/utilities/_typography.scss
+/// Typography utility classes
+/// @group utilities
+
+@use "../tokens/typography" as typography;
+@use "sass:map";
+
+// Font size utilities
+@each $size-name, $size-value in typography.$mild-font-sizes {
+  .mild-text-#{$size-name} {
+    font-size: #{$size-value};
+  }
+}
+
+// Font weight utilities
+@each $weight-name, $weight-value in typography.$mild-font-weights {
+  .mild-font-#{$weight-name} {
+    font-weight: #{$weight-value};
+  }
+}
+
+// Font family utilities
+@each $family-name, $family-stack in typography.$mild-font-families {
+  .mild-font-#{$family-name} {
+    font-family: #{$family-stack};
+  }
+}
+
+// Text alignment utilities
+.mild-text-left {
+  text-align: left;
+}
+.mild-text-center {
+  text-align: center;
+}
+.mild-text-right {
+  text-align: right;
+}
+.mild-text-justify {
+  text-align: justify;
+}
+
+// Text transform utilities
+.mild-text-uppercase {
+  text-transform: uppercase;
+}
+.mild-text-lowercase {
+  text-transform: lowercase;
+}
+.mild-text-capitalize {
+  text-transform: capitalize;
+}
+
+// Text decoration utilities
+.mild-text-underline {
+  text-decoration: underline;
+}
+.mild-text-line-through {
+  text-decoration: line-through;
+}
+.mild-text-no-underline {
+  text-decoration: none;
+}
+
+// Line height utilities
+@each $height-name, $height-value in typography.$mild-line-heights {
+  .mild-leading-#{$height-name} {
+    line-height: #{$height-value};
+  }
+}
+
+// Letter spacing utilities
+@each $spacing-name, $spacing-value in typography.$mild-letter-spacing {
+  .mild-tracking-#{$spacing-name} {
+    letter-spacing: #{$spacing-value};
+  }
+}

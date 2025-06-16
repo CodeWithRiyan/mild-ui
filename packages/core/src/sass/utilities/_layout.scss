@@ -1,0 +1,185 @@
+// packages/core/src/sass/utilities/_layout.scss
+/// Layout utility classes
+/// @group utilities
+
+@use "../mixins/layout" as layout;
+@use "../tokens/dimensions" as dimensions;
+@use "../tokens/spacing" as spacing;
+
+// Display utilities
+.mild-block {
+  display: block;
+}
+.mild-inline-block {
+  display: inline-block;
+}
+.mild-inline {
+  display: inline;
+}
+.mild-flex {
+  display: flex;
+}
+.mild-inline-flex {
+  display: inline-flex;
+}
+.mild-grid {
+  display: grid;
+}
+.mild-inline-grid {
+  display: inline-grid;
+}
+.mild-hidden {
+  display: none;
+}
+
+// Flex utilities
+.mild-flex-row {
+  flex-direction: row;
+}
+.mild-flex-col {
+  flex-direction: column;
+}
+.mild-flex-wrap {
+  flex-wrap: wrap;
+}
+.mild-flex-nowrap {
+  flex-wrap: nowrap;
+}
+
+.mild-items-start {
+  align-items: flex-start;
+}
+.mild-items-end {
+  align-items: flex-end;
+}
+.mild-items-center {
+  align-items: center;
+}
+.mild-items-baseline {
+  align-items: baseline;
+}
+.mild-items-stretch {
+  align-items: stretch;
+}
+
+.mild-justify-start {
+  justify-content: flex-start;
+}
+.mild-justify-end {
+  justify-content: flex-end;
+}
+.mild-justify-center {
+  justify-content: center;
+}
+.mild-justify-between {
+  justify-content: space-between;
+}
+.mild-justify-around {
+  justify-content: space-around;
+}
+.mild-justify-evenly {
+  justify-content: space-evenly;
+}
+
+// Position utilities
+.mild-static {
+  position: static;
+}
+.mild-fixed {
+  position: fixed;
+}
+.mild-absolute {
+  position: absolute;
+}
+.mild-relative {
+  position: relative;
+}
+.mild-sticky {
+  position: sticky;
+}
+
+// Overflow utilities
+.mild-overflow-auto {
+  overflow: auto;
+}
+.mild-overflow-hidden {
+  overflow: hidden;
+}
+.mild-overflow-visible {
+  overflow: visible;
+}
+.mild-overflow-scroll {
+  overflow: scroll;
+}
+
+// Grid utilities
+@for $i from 1 through 12 {
+  .mild-grid-cols-#{$i} {
+    grid-template-columns: repeat($i, minmax(0, 1fr));
+  }
+  .mild-grid-rows-#{$i} {
+    grid-template-rows: repeat($i, minmax(0, 1fr));
+  }
+  .mild-row-span-#{$i} {
+    grid-row: span #{$i} / span #{$i};
+  }
+  .mild-col-span-#{$i} {
+    grid-column: span #{$i} / span #{$i};
+  }
+}
+
+// Z-index utilities
+@for $i from 1 through 5 {
+  .mild-z-#{$i} {
+    z-index: $i;
+  }
+}
+
+@for $i from 1 through 10 {
+  .mild-z-#{$i*10} {
+    z-index: $i * 10;
+  }
+}
+
+// Dimension width height utilities
+@each $name, $value in dimensions.$mild-dimensions {
+  .mild-w-#{$name} {
+    width: #{$value};
+  }
+  .mild-h-#{$name} {
+    height: #{$value};
+  }
+  .mild-min-w-#{$name} {
+    min-width: #{$value};
+  }
+  .mild-min-h-#{$name} {
+    min-height: #{$value};
+  }
+  .mild-max-w-#{$name} {
+    max-width: #{$value};
+  }
+  .mild-max-h-#{$name} {
+    max-height: #{$value};
+  }
+}
+
+@each $name, $value in spacing.$mild-spacing {
+  .mild-w-#{$name} {
+    width: #{$value};
+  }
+  .mild-h-#{$name} {
+    height: #{$value};
+  }
+  .mild-min-w-#{$name} {
+    min-width: #{$value};
+  }
+  .mild-min-h-#{$name} {
+    min-height: #{$value};
+  }
+  .mild-max-w-#{$name} {
+    max-width: #{$value};
+  }
+  .mild-max-h-#{$name} {
+    max-height: #{$value};
+  }
+}

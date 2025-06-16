@@ -12,11 +12,13 @@
 <script setup lang="ts">
 import { computed } from "vue";
 import {
-  inputStyles,
   type InputCoreProps,
   type InputStyleProps,
-} from "@mild-ui/core";
-import { cn } from "../../utils";
+} from "../../types";
+import {
+  cn,
+  inputStyles,
+} from "../../utils";
 
 interface Props extends InputCoreProps, InputStyleProps {
   modelValue?: string;

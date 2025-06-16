@@ -1,19 +1,17 @@
 // packages/react/src/components/Switch/Switch.tsx
 import * as React from "react";
 import * as SwitchPrimitive from "@radix-ui/react-switch";
-import { Check } from "lucide-react";
+import type { SwitchCoreProps } from "../../types";
 import {
-  SwitchCoreProps,
-  switchStyles,
-  SwitchStyleProps,
-  switchThumbStyles,
-  switchLabelStyles,
-} from "@mild-ui/core";
+  switchLabelVariants,
+  switchThumbVariants,
+  switchVariants,
+} from "../../utils/switch";
 import { cn } from "../../utils";
 import { Label } from "../Label";
 
 // Extend from core types but manually handle React-specific props
-export interface SwitchProps extends SwitchCoreProps, SwitchStyleProps {
+export interface SwitchProps extends Omit<SwitchCoreProps, "onCheckedChange" | "onChange"> {
   // React-specific props
   id?: string;
   onCheckedChange?: (checked: boolean | "indeterminate") => void;
@@ -52,17 +50,17 @@ const Switch = React.forwardRef<HTMLButtonElement, SwitchProps>(
           name={name}
           value={value}
           onCheckedChange={onCheckedChange}
-          className={cn(switchStyles({ size }), className, ui?.switch)}
+          className={cn(switchVariants({ size }), className, ui?.switch)}
           {...restProps}
         >
           <SwitchPrimitive.Thumb
-            className={cn(switchThumbStyles({ size }), ui?.thumb)}
+            className={cn(switchThumbVariants({ size }), ui?.thumb)}
           />
         </SwitchPrimitive.Root>
         {label && (
           <Label
             htmlFor={id}
-            className={cn(switchLabelStyles({ size }), ui?.label)}
+            className={cn(switchLabelVariants({ size }), ui?.label)}
             required={required}
           >
             {label}

@@ -7,6 +7,8 @@ node_modules
 dist
 build
 storybook-static
+docs
+sassdoc
 
 # Environment variables
 .env

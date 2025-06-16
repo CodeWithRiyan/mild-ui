@@ -1,38 +1,116 @@
 # @mild-ui/core
 
-Framework-agnostic core for mild-ui component library that works across React and Vue.
+Pure CSS/SCSS design system with Tailwind-like utilities - framework agnostic with zero dependencies
 
 ## Overview
 
-@mild-ui/core provides the shared logic, types, and styling definitions that are used by the framework-specific implementations of mild-ui. This package is not intended to be used directly by end users, but rather serves as a foundation for the framework-specific packages.
+@mild-ui/core provides a comprehensive CSS/SCSS design system with utility classes similar to Tailwind CSS, but with the `mild-` prefix to avoid conflicts. This package contains only CSS and SCSS files - no TypeScript types or JavaScript utilities.
 
 ## Features
 
-- Framework-agnostic component definitions
-- Shared TypeScript interfaces and types
-- Utility functions for common component logic
-- CSS variable definitions and styling foundations
+- **Tailwind-like utilities** with `mild-` prefix (no conflicts!)
+- **Design tokens** as CSS custom properties
+- **Component styles** for React/Vue packages
+- **Dark/Light themes** with automatic switching
+- **Responsive design** with mobile-first approach
+- **Zero dependencies** - pure CSS/SCSS only
 
 ## Installation
 
-This package is automatically installed as a dependency of the framework-specific packages:
-
 ```bash
-# You don't need to install this directly
 npm install @mild-ui/core
 ```
 
 ## Usage
 
-If you're developing components for the mild-ui library, you can import types and utilities from this package:
-
-```typescript
-import { ButtonVariant, ButtonSize, getButtonAttributes } from "@mild-ui/core";
+### Import CSS utilities only:
+```css
+@import '@mild-ui/core/css/utilities';
 ```
+
+### Import full design system (utilities + components):
+```css
+@import '@mild-ui/core/css';
+```
+
+### Import SCSS for customization:
+```scss
+@use '@mild-ui/core/scss';
+```
+
+### Minified versions:
+```css
+@import '@mild-ui/core/css/min';
+@import '@mild-ui/core/css/utilities/min';
+```
+
+## Available Utility Classes
+
+All utilities use the `mild-` prefix to avoid conflicts with Tailwind CSS:
+
+```html
+<!-- Layout -->
+<div class="mild-flex mild-items-center mild-justify-between">
+
+<!-- Spacing -->
+<div class="mild-p-4 mild-m-2 mild-gap-4">
+
+<!-- Colors -->
+<div class="mild-bg-primary-500 mild-text-white">
+
+<!-- Typography -->
+<h1 class="mild-text-xl mild-font-bold">
+
+<!-- Borders -->
+<div class="mild-border mild-border-gray-200 mild-radius-md">
+```
+
+## Use with Tailwind CSS
+
+Since all utilities use the `mild-` prefix, you can use both libraries together:
+
+```html
+<div class="flex items-center"> <!-- Tailwind -->
+  <div class="mild-p-4 mild-bg-primary-100"> <!-- Mild UI -->
+    No conflicts!
+  </div>
+</div>
+```
+
+## Theming
+
+Automatic dark mode support:
+
+```css
+/* System preference */
+@media (prefers-color-scheme: dark) { /* handled automatically */ }
+
+/* Manual toggle */
+<html data-theme="dark">
+```
+
+## Package Exports
+
+- `@mild-ui/core/css` - Full CSS (utilities + components)
+- `@mild-ui/core/css/min` - Minified full CSS
+- `@mild-ui/core/css/utilities` - Utilities only
+- `@mild-ui/core/css/utilities/min` - Minified utilities
+- `@mild-ui/core/scss` - Main SCSS entry point
+- `@mild-ui/core/scss/utilities` - Utilities SCSS only
+- `@mild-ui/core/themes/light` - Light theme CSS
+- `@mild-ui/core/themes/dark` - Dark theme CSS
+- `@mild-ui/core/tokens` - Design tokens JSON
 
 ## Documentation
 
-For complete documentation, visit our [Storybook site](https://codewithriyan.github.io/mild-ui/).
+- [Utilities Guide](./UTILITIES.md) - Complete list of utility classes
+- [Storybook](https://codewithriyan.github.io/mild-ui/) - Interactive examples
+
+## Framework Packages
+
+This core package is used by:
+- [`@mild-ui/react`](../react) - React components
+- [`@mild-ui/vue`](../vue) - Vue components
 
 ## License
 

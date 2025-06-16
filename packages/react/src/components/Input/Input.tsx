@@ -1,47 +1,60 @@
 // packages/react/src/components/Input/Input.tsx
-import * as React from "react";
-import { InputCoreProps, inputStyles, InputStyleProps } from "@mild-ui/core";
-import { cn } from "../../utils";
+import React, { forwardRef } from "react";
+import type { InputCoreProps } from "../../types";
+import { inputVariants } from "../../utils/input";
 
-// Add 'value' to the Omit list
 export interface InputProps
-  extends Omit<
-      React.InputHTMLAttributes<HTMLInputElement>,
-      "type" | "size" | "value"
-    >,
-    InputCoreProps,
-    InputStyleProps {}
+  extends Omit<InputCoreProps, "onChange" | "onBlur" | "onFocus" | "value" | "defaultValue" | "autoComplete" | "type">,
+    Omit<React.InputHTMLAttributes<HTMLInputElement>, "size"> {
+  /** Input blur handler */
+  onBlur?: (event: React.FocusEvent<HTMLInputElement>) => void;
+  /** Input focus handler */
+  onFocus?: (event: React.FocusEvent<HTMLInputElement>) => void;
+  /** Input change handler */
+  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+}
 
-const Input = React.forwardRef<HTMLInputElement, InputProps>(
+export const Input = forwardRef<HTMLInputElement, InputProps>(
   (
     {
-      className,
+      variant = "outline",
+      size = "md",
+      fullWidth = true,
+      error = false,
+      isDisabled: disabled = false,
+      isReadOnly: readonly = false,
+      isRequired: required = false,
       type = "text",
-      size,
-      variant,
-      fullWidth,
-      error,
-      value,
-      required,
-      ...props
+      className,
+      ...rest
     },
     ref,
   ) => {
+    // Generate classes using variant system
+    const classes = inputVariants({
+      variant,
+      size,
+      fullWidth,
+      error,
+      isDisabled: disabled,
+      isReadOnly: readonly,
+      isRequired: required,
+      className,
+    });
+
     return (
       <input
-        type={type}
-        className={cn(
-          inputStyles({ size, variant, fullWidth, error }),
-          className,
-        )}
         ref={ref}
-        value={value}
-        {...props}
+        type={type}
+        className={classes}
+        disabled={disabled}
+        required={required}
+        aria-invalid={error || undefined}
+        data-controlled={rest.value !== undefined ? "true" : undefined}
+        {...rest}
       />
     );
   },
 );
 
 Input.displayName = "Input";
-
-export { Input };

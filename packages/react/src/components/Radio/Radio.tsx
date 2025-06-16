@@ -2,13 +2,15 @@
 import * as React from "react";
 import * as RadioGroupPrimitive from "@radix-ui/react-radio-group";
 import { Circle } from "lucide-react";
-import {
+import type {
   RadioCoreProps,
-  radioStyles,
   RadioStyleProps,
-  radioLabelStyles,
   RadioSize,
-} from "@mild-ui/core";
+} from "../../types";
+import {
+  radioVariants,
+  radioLabelVariants,
+} from "../../utils/radio";
 import { cn } from "../../utils";
 
 // Props untuk RadioGroup
@@ -23,7 +25,7 @@ interface RadioGroupProps
 }
 
 // Props untuk RadioGroupItem
-interface RadioGroupItemProps extends RadioCoreProps, RadioStyleProps {
+interface RadioGroupItemProps extends RadioStyleProps {
   id?: string;
   className?: string;
   label?: string;
@@ -40,7 +42,7 @@ const RadioGroup = React.forwardRef<
 >(({ className, ...props }, ref) => {
   return (
     <RadioGroupPrimitive.Root
-      className={cn("grid gap-2", className)}
+      className={cn("--mild-grid --mild-gap-2", className)}
       {...props}
       ref={ref}
     />
@@ -60,26 +62,30 @@ const RadioGroupItem = React.forwardRef<
     const radioId = id || `radio-${value}`;
 
     return (
-      <div className="flex items-center space-x-2">
+      <div className="--mild-flex --mild-items-center --mild-space-x-2">
         <RadioGroupPrimitive.Item
           ref={ref}
-          className={cn(radioStyles({ size }), className)}
+          className={cn(radioVariants({ size }), className)}
           value={value}
           disabled={disabled}
           required={required}
           id={radioId}
           {...props}
         >
-          <RadioGroupPrimitive.Indicator className="flex items-center justify-center">
-            <Circle className={cn("h-2.5 w-2.5 fill-current text-current")} />
+          <RadioGroupPrimitive.Indicator className="--mild-flex --mild-items-center --mild-justify-center">
+            <Circle
+              className={cn(
+                "--mild-h-2.5 --mild-w-2.5 --mild-fill-current --mild-text-current",
+              )}
+            />
           </RadioGroupPrimitive.Indicator>
         </RadioGroupPrimitive.Item>
         {label && (
           <label
             htmlFor={radioId}
             className={cn(
-              radioLabelStyles({ size }),
-              disabled && "opacity-50 cursor-not-allowed",
+              radioLabelVariants({ size }),
+              disabled && "--mild-opacity-50 --mild-cursor-not-allowed",
             )}
           >
             {label}
@@ -122,4 +128,4 @@ const Radio = React.forwardRef<
 Radio.displayName = "Radio";
 
 export { RadioGroup, RadioGroupItem, Radio };
-export type { RadioGroupProps, RadioGroupItemProps, RadioProps };
+export type { RadioGroupProps as RadioGroupComponentProps, RadioGroupItemProps, RadioProps };

@@ -1,71 +1,89 @@
 // packages/react/src/components/Button/Button.tsx
-import * as React from "react";
-import { Slot } from "@radix-ui/react-slot";
-import { getButtonProps } from "@mild-ui/core";
-import type { ButtonProps } from "./Button.types";
+import React, { forwardRef } from "react";
+import {
+  getButtonProps,
+  getButtonState,
+  getButtonA11yProps,
+} from "../../utils/button";
+import { ButtonProps } from "./Button.types";
 
-const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
+export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   (
     {
       variant = "primary",
       size = "md",
-      asChild = false,
-      className,
+      colorScheme = "primary",
+      fullWidth = false,
+      loading = false,
       disabled = false,
-      onClick,
-      leadingIcon,
-      trailingIcon,
       children,
-      ...props
+      onClick,
+      leftIcon,
+      rightIcon,
+      className,
+      type = "button" as const,
+      ...rest
     },
     ref,
   ) => {
-    const { className: buttonClassName, ...buttonProps } = getButtonProps({
+    // Get computed props from core
+    const buttonProps = getButtonProps({
       variant,
       size,
+      colorScheme,
+      fullWidth,
+      loading,
       disabled,
       className,
     });
 
-    if (asChild) {
-      // When using asChild, we need to ensure only one child element is passed to Slot
-      const child = React.Children.only(children) as React.ReactElement;
+    // Get button state
+    const { canClick, isLoading } = getButtonState({ loading, disabled });
 
-      return (
-        <Slot ref={ref} {...props} {...buttonProps}>
-          {React.cloneElement(child, {
-            ...child.props,
-            className:
-              `${child.props.className || ""} ${buttonClassName}`.trim(),
-            onClick: onClick,
-            children: (
-              <>
-                {leadingIcon && <span className="mr-2">{leadingIcon}</span>}
-                {child.props.children}
-                {trailingIcon && <span className="ml-2">{trailingIcon}</span>}
-              </>
-            ),
-          })}
-        </Slot>
-      );
-    }
+    // Get accessibility props
+    const a11yProps = getButtonA11yProps({ loading, disabled, type });
 
+    // Handle click events
+    const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+      if (!canClick) {
+        event.preventDefault();
+        return;
+      }
+      onClick?.(event);
+    };
+
+    // Extract type from rest if it exists
+    const restWithoutType = rest;
+    
     return (
       <button
-        className={buttonClassName}
         ref={ref}
-        onClick={onClick}
-        {...props}
         {...buttonProps}
+        {...a11yProps}
+        {...restWithoutType}
+        type={type}
+        onClick={handleClick}
       >
-        {leadingIcon && <span className="mr-2">{leadingIcon}</span>}
-        {children}
-        {trailingIcon && <span className="ml-2">{trailingIcon}</span>}
+        {leftIcon && (
+          <span className="mild-button__left-icon" aria-hidden="true">
+            {leftIcon}
+          </span>
+        )}
+
+        {isLoading ? (
+          <span className="mild-button__spinner" aria-hidden="true" />
+        ) : (
+          <span className="mild-button__content">{children}</span>
+        )}
+
+        {rightIcon && (
+          <span className="mild-button__right-icon" aria-hidden="true">
+            {rightIcon}
+          </span>
+        )}
       </button>
     );
   },
 );
 
 Button.displayName = "Button";
-
-export { Button };

@@ -1,0 +1,26 @@
+// packages/core/src/sass/base/_root.scss
+/// Root element styling
+/// @group base
+
+@use "../tokens/typography" as typography;
+
+html {
+  font-family: var(--mild-font-family-sans);
+  font-size: 16px;
+  line-height: var(--mild-line-height-normal);
+  color: var(--mild-color-gray-900);
+  background-color: var(--mild-color-gray-50);
+  text-rendering: optimizeLegibility;
+  -webkit-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  font-family: inherit;
+  font-size: var(--mild-font-size-base);
+  font-weight: var(--mild-font-weight-normal);
+  line-height: inherit;
+  color: inherit;
+  background-color: inherit;
+}
