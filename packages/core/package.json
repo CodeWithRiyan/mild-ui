@@ -19,11 +19,16 @@
     "docs:generate": "node scripts/generate-docs.js",
     "docs:build": "pnpm run docs:generate",
     "docs:serve": "pnpm run docs:generate && serve docs -p 3001",
-    "docs:watch": "nodemon --watch src --ext scss --exec \"pnpm docs:generate\""
+    "docs:watch": "nodemon --watch src --ext scss --exec \"pnpm docs:generate\"",
+    "examples:serve": "serve . -p 3002",
+    "examples:dev": "concurrently \"pnpm run sass:watch\" \"pnpm run examples:serve\"",
+    "examples:open": "pnpm run examples:serve && open http://localhost:3002/examples",
+    "dev:full": "concurrently \"pnpm run sass:watch\" \"pnpm run docs:serve\" \"pnpm run examples:serve\""
   },
   "devDependencies": {
     "autoprefixer": "^10.4.16",
     "chokidar": "^4.0.3",
+    "concurrently": "^8.2.2",
     "cssnano": "^6.0.1",
     "nodemon": "^3.0.2",
     "postcss": "^8.4.32",
