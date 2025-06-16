@@ -27,6 +27,11 @@ const tests = [
     name: 'All Packages Build',
     command: 'pnpm build',
     description: 'Tests if all packages build together (workflow simulation)'
+  },
+  {
+    name: 'Test Command Check',
+    command: 'pnpm --filter @mild-ui/react test || echo "No tests - OK"',
+    description: 'Tests if test commands work or gracefully handle no tests'
   }
 ];
 

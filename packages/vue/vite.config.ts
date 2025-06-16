@@ -12,7 +12,7 @@ export default defineConfig({
       fileName: "index",
     },
     rollupOptions: {
-      external: ["vue", "lucide-vue-next", "@mild-ui/core"],
+      external: ["vue", "lucide-vue-next"],
     },
   },
 });

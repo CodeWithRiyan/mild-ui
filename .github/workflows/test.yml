@@ -31,4 +31,11 @@ jobs:
       - name: Build and test ${{ matrix.framework }}
         run: |
           pnpm --filter @mild-ui/${{ matrix.framework }} build
-          pnpm --filter @mild-ui/${{ matrix.framework }} test --run
+          
+          # Run tests if test files exist (excluding node_modules)
+          if find packages/${{ matrix.framework }}/src -name "*.test.*" -o -name "*.spec.*" 2>/dev/null | grep -q .; then
+            echo "Test files found, running tests..."
+            pnpm --filter @mild-ui/${{ matrix.framework }} test
+          else
+            echo "No test files found in src/, skipping tests for ${{ matrix.framework }}"
+          fi

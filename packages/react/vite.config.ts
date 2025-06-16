@@ -22,12 +22,11 @@ export default defineConfig({
       fileName: (format) => `index.${format === "es" ? "esm" : format}.js`,
     },
     rollupOptions: {
-      external: ["react", "react-dom", "@mild-ui/core"],
+      external: ["react", "react-dom"],
       output: {
         globals: {
           react: "React",
           "react-dom": "ReactDOM",
-          "@mild-ui/core": "MildUICore",
         },
         exports: "named",
       },
