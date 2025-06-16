@@ -2,20 +2,24 @@
 import * as React from "react";
 import * as SelectPrimitive from "@radix-ui/react-select";
 import { Check, ChevronDown } from "lucide-react";
-import {
+import type {
   SelectCoreProps,
-  selectTriggerVariants,
   SelectStyleProps,
+  SelectOption,
+} from "../../types";
+import {
+  selectTriggerVariants,
   selectContentVariants,
   selectItemVariants,
-  SelectOption,
-  cn,
-} from "../../../../core";
+} from "../../utils/select";
+import { cn } from "../../utils";
 
 // Define simple prop interfaces without complex type extending
+import type { Size } from "../../types";
+
 export interface SelectTriggerProps {
   className?: string;
-  size?: "sm" | "md" | "lg";
+  size?: Size;
   fullWidth?: boolean;
   error?: boolean;
   children?: React.ReactNode;
@@ -83,7 +87,7 @@ const SelectContent = React.forwardRef<HTMLDivElement, SelectContentProps>(
 // Simple props for item
 export interface SelectItemProps {
   className?: string;
-  size?: "sm" | "md" | "lg";
+  size?: Size;
   children?: React.ReactNode;
   value: string;
   disabled?: boolean;

@@ -11,7 +11,7 @@ import {
   type FieldPath,
   type FieldValues,
 } from "react-hook-form";
-import { cn } from "@mild-ui/core";
+import { cn } from "../../utils/cn";
 import { Label } from "../Label";
 
 type FormFieldContextValue<

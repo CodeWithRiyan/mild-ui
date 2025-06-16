@@ -9,7 +9,6 @@ async function buildSass() {
     // Ensure dist directories exist
     await fs.mkdir("dist", { recursive: true });
     await fs.mkdir("dist/themes", { recursive: true });
-    await fs.mkdir("dist/compiled", { recursive: true });
 
     // Compile main CSS
     const mainResult = sass.compile("src/sass/index.scss", {
@@ -29,6 +28,25 @@ async function buildSass() {
 
     await fs.writeFile("dist/mild-ui.min.css", minResult.css);
     console.log("✅ Built minified CSS");
+
+    // Compile utilities-only CSS
+    const utilsResult = sass.compile("src/sass/mild-utilities.scss", {
+      style: "expanded",
+      sourceMap: true,
+      loadPaths: ["src/sass"],
+    });
+
+    await fs.writeFile("dist/mild-utilities.css", utilsResult.css);
+    console.log("✅ Built utilities-only CSS");
+
+    // Compile minified utilities CSS
+    const utilsMinResult = sass.compile("src/sass/mild-utilities.scss", {
+      style: "compressed",
+      loadPaths: ["src/sass"],
+    });
+
+    await fs.writeFile("dist/mild-utilities.min.css", utilsMinResult.css);
+    console.log("✅ Built minified utilities-only CSS");
 
     // Compile theme CSS files
     const themes = ["light", "dark"];

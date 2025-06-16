@@ -32,6 +32,7 @@ jobs:
 
       - name: Build packages
         run: pnpm build
+        # Note: Core package now only builds CSS/SCSS, React/Vue build TypeScript
 
       - name: Setup npm authentication
         run: echo "//registry.npmjs.org/:_authToken=${NODE_AUTH_TOKEN}" > ~/.npmrc

@@ -6,14 +6,13 @@ import React, {
   useEffect,
   ReactNode,
 } from "react";
+import type { ColorMode, ThemeConfig } from "../types";
 import {
   applyCSSProperties,
   generateCSSProperties,
   mergeThemes,
   defaultTheme,
-  ColorMode,
-  ThemeConfig,
-} from "../../../core";
+} from "../utils/theme";
 
 export interface ThemeContextValue {
   theme: ThemeConfig;

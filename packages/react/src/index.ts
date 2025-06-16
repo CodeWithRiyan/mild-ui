@@ -12,29 +12,8 @@ export * from "./components";
 // Hooks
 export * from "./hooks";
 
-// Re-export core types and utilities for convenience
-export type {
-  ThemeConfig,
-  ColorMode,
-  Size,
-  ColorScheme,
-  Variant,
-  ButtonCoreProps,
-  InputCoreProps,
-  TextCoreProps,
-  BoxProps as CoreBoxProps,
-} from "../../core";
+// Types
+export type * from "./types";
 
-export {
-  defaultTheme,
-  darkTheme,
-  mergeThemes,
-  getThemeColor,
-  generateCSSProperties,
-  applyCSSProperties,
-  cn,
-  cva,
-  cssVar,
-  dataAttr,
-  ariaAttr,
-} from "../../core";
+// Utilities
+export * from "./utils";

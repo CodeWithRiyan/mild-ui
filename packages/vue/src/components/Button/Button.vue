@@ -20,8 +20,8 @@
 
 <script setup lang="ts">
 import { computed } from "vue";
-import { getButtonProps } from "@mild-ui/core";
-import type { ButtonVariant, ButtonSize } from "@mild-ui/core";
+import { getButtonProps } from "../../utils/button";
+import type { ButtonVariant, ButtonSize } from "../../types/button";
 
 interface Props {
   variant?: ButtonVariant;

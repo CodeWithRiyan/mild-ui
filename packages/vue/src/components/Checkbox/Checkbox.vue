@@ -26,12 +26,14 @@
 <script setup lang="ts">
 import { computed } from "vue";
 import {
-  checkboxStyles,
-  checkboxLabelStyles,
   type CheckboxCoreProps,
   type CheckboxStyleProps,
-} from "@mild-ui/core";
-import { cn } from "../../utils";
+} from "../../types";
+import {
+  cn,
+  checkboxStyles,
+  checkboxLabelStyles,
+} from "../../utils";
 
 interface Props extends CheckboxCoreProps, CheckboxStyleProps {
   modelValue?: boolean;

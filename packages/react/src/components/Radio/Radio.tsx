@@ -2,14 +2,16 @@
 import * as React from "react";
 import * as RadioGroupPrimitive from "@radix-ui/react-radio-group";
 import { Circle } from "lucide-react";
-import {
+import type {
   RadioCoreProps,
-  radioVariants,
   RadioStyleProps,
-  radioLabelVariants,
   RadioSize,
-  cn,
-} from "../../../../core";
+} from "../../types";
+import {
+  radioVariants,
+  radioLabelVariants,
+} from "../../utils/radio";
+import { cn } from "../../utils";
 
 // Props untuk RadioGroup
 interface RadioGroupProps
@@ -126,4 +128,4 @@ const Radio = React.forwardRef<
 Radio.displayName = "Radio";
 
 export { RadioGroup, RadioGroupItem, Radio };
-export type { RadioGroupProps, RadioGroupItemProps, RadioProps };
+export type { RadioGroupProps as RadioGroupComponentProps, RadioGroupItemProps, RadioProps };

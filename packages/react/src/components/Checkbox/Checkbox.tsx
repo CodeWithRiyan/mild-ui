@@ -2,16 +2,16 @@
 import * as React from "react";
 import * as CheckboxPrimitive from "@radix-ui/react-checkbox";
 import { Check } from "lucide-react";
+import type { CheckboxCoreProps } from "../../types";
 import {
-  CheckboxCoreProps,
   checkboxVariants,
   checkboxLabelVariants,
-  cn,
-} from "../../../../core";
+} from "../../utils/checkbox";
+import { cn } from "../../utils";
 import { Label } from "../Label";
 
 // Extend from core types but manually handle React-specific props
-export interface CheckboxProps extends CheckboxCoreProps {
+export interface CheckboxProps extends Omit<CheckboxCoreProps, "onCheckedChange" | "onChange"> {
   // React-specific props
   id?: string;
   onCheckedChange?: (checked: boolean | "indeterminate") => void;

@@ -1,6 +1,6 @@
 // packages/react/src/components/Text/Text.tsx
 import React, { forwardRef } from "react";
-import type { TextCoreProps } from "../../../../core";
+import type { TextCoreProps } from "../../types";
 
 type HTMLTextComponent =
   | HTMLSpanElement

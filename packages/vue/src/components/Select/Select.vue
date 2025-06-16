@@ -71,11 +71,13 @@ import {
   type SelectCoreProps,
   type SelectStyleProps,
   type SelectOption,
+  Keys,
+} from "../../types";
+import { 
+  cn,
   selectTriggerStyles,
   selectItemStyles,
-  Keys,
-} from "@mild-ui/core";
-import { cn } from "../../utils";
+} from "../../utils";
 
 interface Props extends SelectCoreProps, SelectStyleProps {}
 

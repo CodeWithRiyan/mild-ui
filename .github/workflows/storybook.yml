@@ -32,7 +32,7 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
-      - name: Build core package
+      - name: Build core package (CSS only)
         run: pnpm --filter @mild-ui/core build
 
       - name: Build React package
@@ -41,11 +41,19 @@ jobs:
       - name: Build Vue package
         run: pnpm --filter @mild-ui/vue build
 
-      # Generate Core Documentation
-      - name: Generate Core API Documentation
+      # Generate Core Documentation (CSS/SCSS only now)
+      - name: Generate Core Documentation
         run: |
           cd packages/core
-          pnpm docs:build
+          # Core is now CSS-only, check if docs generation is available
+          if [ -f "package.json" ] && grep -q "docs:build" package.json; then
+            pnpm docs:build
+          else
+            echo "Core docs generation not available (CSS-only package now)"
+            mkdir -p docs
+            echo "# @mild-ui/core Documentation" > docs/index.html
+            echo "CSS/SCSS design system documentation" >> docs/index.html
+          fi
         env:
           NODE_ENV: production
 
@@ -255,27 +263,27 @@ jobs:
                               <p>Auto-generated documentation from source code, design tokens, and APIs:</p>
                               <div class="docs-grid">
                                   <div class="doc-card">
-                                      <h3>🔧 TypeScript API</h3>
-                                      <p>Complete API reference with types and interfaces</p>
-                                      <a href="./core/api/">Browse API Docs</a>
-                                  </div>
-                                  
-                                  <div class="doc-card">
                                       <h3>🎨 SASS Design System</h3>
-                                      <p>Design tokens, mixins, and functions documentation</p>
-                                      <a href="./core/sass/">Browse SASS Docs</a>
+                                      <p>CSS/SCSS utilities, design tokens, and styling</p>
+                                      <a href="./core/">Browse Core Docs</a>
                                   </div>
                                   
                                   <div class="doc-card">
-                                      <h3>🎯 Design Tokens</h3>
-                                      <p>Colors, typography, spacing with live previews</p>
-                                      <a href="./core/generated/design-tokens.md">View Tokens</a>
+                                      <h3>🎯 Utility Classes</h3>
+                                      <p>Tailwind-like utilities with mild- prefix</p>
+                                      <a href="https://github.com/CodeWithRiyan/mild-ui/blob/main/packages/core/UTILITIES.md">View Utilities Guide</a>
                                   </div>
                                   
                                   <div class="doc-card">
-                                      <h3>⚙️ Component Props</h3>
-                                      <p>Auto-generated component prop tables and types</p>
-                                      <a href="./core/generated/component-api.md">View Props API</a>
+                                      <h3>⚛️ React API</h3>
+                                      <p>React component props and TypeScript types</p>
+                                      <a href="./react/">React Components</a>
+                                  </div>
+                                  
+                                  <div class="doc-card">
+                                      <h3>💚 Vue API</h3>
+                                      <p>Vue component props and TypeScript types</p>
+                                      <a href="./vue/">Vue Components</a>
                                   </div>
                               </div>
                           </div>

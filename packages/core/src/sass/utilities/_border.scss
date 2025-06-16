@@ -1,5 +1,5 @@
-// packages/core/src/sass/utilities/_spacing.scss
-/// Spacing utility classes
+// packages/core/src/sass/utilities/_border.scss
+/// Border utility classes
 /// @group utilities
 
 @use "../tokens/radius" as radius;
@@ -28,8 +28,25 @@
   }
 }
 
-@each $name, $value in spacing.$mild-radius {
+@each $name, $value in radius.$mild-radius {
   .mild-radius-#{$name} {
     border-radius: #{$value};
   }
+}
+
+// Border style utilities
+.mild-border-solid {
+  border-style: solid;
+}
+.mild-border-dashed {
+  border-style: dashed;
+}
+.mild-border-dotted {
+  border-style: dotted;
+}
+.mild-border-double {
+  border-style: double;
+}
+.mild-border-none {
+  border-style: none;
 }

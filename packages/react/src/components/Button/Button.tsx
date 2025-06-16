@@ -4,13 +4,13 @@ import {
   getButtonProps,
   getButtonState,
   getButtonA11yProps,
-} from "../../../../core";
+} from "../../utils/button";
 import { ButtonProps } from "./Button.types";
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   (
     {
-      variant = "solid",
+      variant = "primary",
       size = "md",
       colorScheme = "primary",
       fullWidth = false,
@@ -21,7 +21,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       leftIcon,
       rightIcon,
       className,
-      type = "button",
+      type = "button" as const,
       ...rest
     },
     ref,
@@ -52,12 +52,16 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       onClick?.(event);
     };
 
+    // Extract type from rest if it exists
+    const restWithoutType = rest;
+    
     return (
       <button
         ref={ref}
         {...buttonProps}
         {...a11yProps}
-        {...rest}
+        {...restWithoutType}
+        type={type}
         onClick={handleClick}
       >
         {leftIcon && (

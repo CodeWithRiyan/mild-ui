@@ -1,11 +1,11 @@
 // packages/react/src/components/Input/Input.tsx
 import * as React from "react";
+import type { InputPasswordCoreProps } from "../../types/input-password";
 import {
-  InputPasswordCoreProps,
   inputPasswordVariants,
-  cn,
   inputPasswordToggleVariants,
-} from "../../../../core";
+} from "../../utils/input-password";
+import { cn } from "../../utils";
 import { EyeIcon, EyeOffIcon } from "lucide-react";
 
 // Add 'value' to the Omit list
@@ -23,9 +23,9 @@ const InputPassword = React.forwardRef<HTMLInputElement, InputPasswordProps>(
       size = "md",
       fullWidth = true,
       error = false,
-      disabled = false,
-      readonly = false,
-      required = false,
+      isDisabled: disabled = false,
+      isReadOnly: readonly = false,
+      isRequired: required = false,
       className,
       ui,
       visibleIcon,

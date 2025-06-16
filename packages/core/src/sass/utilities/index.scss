@@ -1,0 +1,142 @@
+// packages/core/src/sass/utilities/index.scss
+/// Utilities-only entry point for Tailwind-like classes
+/// @group utilities
+
+// Import utility modules
+@use "layout";
+@use "spacing";
+@use "typography";
+@use "colors";
+@use "border";
+
+// Additional utility classes for common patterns
+
+// Opacity utilities
+.mild-opacity-0 { opacity: 0; }
+.mild-opacity-25 { opacity: 0.25; }
+.mild-opacity-50 { opacity: 0.5; }
+.mild-opacity-75 { opacity: 0.75; }
+.mild-opacity-100 { opacity: 1; }
+
+// Visibility utilities
+.mild-visible { visibility: visible; }
+.mild-invisible { visibility: hidden; }
+
+// Cursor utilities
+.mild-cursor-auto { cursor: auto; }
+.mild-cursor-default { cursor: default; }
+.mild-cursor-pointer { cursor: pointer; }
+.mild-cursor-wait { cursor: wait; }
+.mild-cursor-text { cursor: text; }
+.mild-cursor-move { cursor: move; }
+.mild-cursor-help { cursor: help; }
+.mild-cursor-not-allowed { cursor: not-allowed; }
+
+// Pointer events
+.mild-pointer-events-none { pointer-events: none; }
+.mild-pointer-events-auto { pointer-events: auto; }
+
+// User select
+.mild-select-none { user-select: none; }
+.mild-select-text { user-select: text; }
+.mild-select-all { user-select: all; }
+.mild-select-auto { user-select: auto; }
+
+// Transition utilities
+.mild-transition-none { transition: none; }
+.mild-transition-all { transition: all 150ms ease-in-out; }
+.mild-transition-colors { transition: background-color, border-color, color, fill, stroke 150ms ease-in-out; }
+.mild-transition-opacity { transition: opacity 150ms ease-in-out; }
+.mild-transition-shadow { transition: box-shadow 150ms ease-in-out; }
+.mild-transition-transform { transition: transform 150ms ease-in-out; }
+
+// Transform utilities
+.mild-transform { transform: translateX(var(--mild-translate-x, 0)) translateY(var(--mild-translate-y, 0)) rotate(var(--mild-rotate, 0)) skewX(var(--mild-skew-x, 0)) skewY(var(--mild-skew-y, 0)) scaleX(var(--mild-scale-x, 1)) scaleY(var(--mild-scale-y, 1)); }
+.mild-transform-none { transform: none; }
+
+// Scale utilities
+.mild-scale-0 { --mild-scale-x: 0; --mild-scale-y: 0; }
+.mild-scale-50 { --mild-scale-x: 0.5; --mild-scale-y: 0.5; }
+.mild-scale-75 { --mild-scale-x: 0.75; --mild-scale-y: 0.75; }
+.mild-scale-90 { --mild-scale-x: 0.9; --mild-scale-y: 0.9; }
+.mild-scale-95 { --mild-scale-x: 0.95; --mild-scale-y: 0.95; }
+.mild-scale-100 { --mild-scale-x: 1; --mild-scale-y: 1; }
+.mild-scale-105 { --mild-scale-x: 1.05; --mild-scale-y: 1.05; }
+.mild-scale-110 { --mild-scale-x: 1.1; --mild-scale-y: 1.1; }
+.mild-scale-125 { --mild-scale-x: 1.25; --mild-scale-y: 1.25; }
+.mild-scale-150 { --mild-scale-x: 1.5; --mild-scale-y: 1.5; }
+
+// Rotate utilities
+.mild-rotate-0 { --mild-rotate: 0deg; }
+.mild-rotate-1 { --mild-rotate: 1deg; }
+.mild-rotate-2 { --mild-rotate: 2deg; }
+.mild-rotate-3 { --mild-rotate: 3deg; }
+.mild-rotate-6 { --mild-rotate: 6deg; }
+.mild-rotate-12 { --mild-rotate: 12deg; }
+.mild-rotate-45 { --mild-rotate: 45deg; }
+.mild-rotate-90 { --mild-rotate: 90deg; }
+.mild-rotate-180 { --mild-rotate: 180deg; }
+
+// Shadow utilities
+.mild-shadow-none { box-shadow: none; }
+.mild-shadow-sm { box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05); }
+.mild-shadow { box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06); }
+.mild-shadow-md { box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); }
+.mild-shadow-lg { box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); }
+.mild-shadow-xl { box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04); }
+.mild-shadow-2xl { box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); }
+.mild-shadow-inner { box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, 0.06); }
+
+// Outline utilities
+.mild-outline-none { outline: none; }
+.mild-outline { outline: 2px solid transparent; outline-offset: 2px; }
+.mild-outline-dashed { outline: 2px dashed transparent; outline-offset: 2px; }
+.mild-outline-dotted { outline: 2px dotted transparent; outline-offset: 2px; }
+
+// Ring utilities
+.mild-ring-0 { --mild-ring-offset-shadow: var(--mild-ring-inset) 0 0 0 var(--mild-ring-offset-width) var(--mild-ring-offset-color); --mild-ring-shadow: var(--mild-ring-inset) 0 0 0 calc(0px + var(--mild-ring-offset-width)) var(--mild-ring-color); box-shadow: var(--mild-ring-offset-shadow), var(--mild-ring-shadow), var(--mild-shadow, 0 0 #0000); }
+.mild-ring-1 { --mild-ring-offset-shadow: var(--mild-ring-inset) 0 0 0 var(--mild-ring-offset-width) var(--mild-ring-offset-color); --mild-ring-shadow: var(--mild-ring-inset) 0 0 0 calc(1px + var(--mild-ring-offset-width)) var(--mild-ring-color); box-shadow: var(--mild-ring-offset-shadow), var(--mild-ring-shadow), var(--mild-shadow, 0 0 #0000); }
+.mild-ring-2 { --mild-ring-offset-shadow: var(--mild-ring-inset) 0 0 0 var(--mild-ring-offset-width) var(--mild-ring-offset-color); --mild-ring-shadow: var(--mild-ring-inset) 0 0 0 calc(2px + var(--mild-ring-offset-width)) var(--mild-ring-color); box-shadow: var(--mild-ring-offset-shadow), var(--mild-ring-shadow), var(--mild-shadow, 0 0 #0000); }
+.mild-ring-4 { --mild-ring-offset-shadow: var(--mild-ring-inset) 0 0 0 var(--mild-ring-offset-width) var(--mild-ring-offset-color); --mild-ring-shadow: var(--mild-ring-inset) 0 0 0 calc(4px + var(--mild-ring-offset-width)) var(--mild-ring-color); box-shadow: var(--mild-ring-offset-shadow), var(--mild-ring-shadow), var(--mild-shadow, 0 0 #0000); }
+.mild-ring-8 { --mild-ring-offset-shadow: var(--mild-ring-inset) 0 0 0 var(--mild-ring-offset-width) var(--mild-ring-offset-color); --mild-ring-shadow: var(--mild-ring-inset) 0 0 0 calc(8px + var(--mild-ring-offset-width)) var(--mild-ring-color); box-shadow: var(--mild-ring-offset-shadow), var(--mild-ring-shadow), var(--mild-shadow, 0 0 #0000); }
+
+// Container utilities
+.mild-container {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+@media (min-width: 640px) {
+  .mild-container {
+    max-width: 640px;
+  }
+}
+
+@media (min-width: 768px) {
+  .mild-container {
+    max-width: 768px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .mild-container {
+    max-width: 1024px;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}
+
+@media (min-width: 1280px) {
+  .mild-container {
+    max-width: 1280px;
+  }
+}
+
+@media (min-width: 1536px) {
+  .mild-container {
+    max-width: 1536px;
+  }
+}

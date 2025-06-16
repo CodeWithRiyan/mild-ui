@@ -18,9 +18,10 @@
     "vue": "^3.3.0"
   },
   "dependencies": {
-    "@mild-ui/core": "workspace:*",
     "@vueuse/core": "^13.2.0",
-    "lucide-vue-next": "^0.230.0"
+    "clsx": "^2.1.0",
+    "lucide-vue-next": "^0.230.0",
+    "tailwind-merge": "^2.5.0"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^4.6.2",

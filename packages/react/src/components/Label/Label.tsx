@@ -1,8 +1,8 @@
 // packages/react/src/components/Label/Label.tsx
 import React, { forwardRef } from "react";
-import type { LabelCoreProps } from "../../../../core";
-import { labelVariants } from "../../../../core";
-import { cn } from "../../../../core";
+import type { LabelCoreProps } from "../../types/label";
+import { labelVariants } from "../../utils/label";
+import { cn } from "../../utils";
 
 export interface LabelProps
   extends LabelCoreProps,

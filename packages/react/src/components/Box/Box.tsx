@@ -1,9 +1,9 @@
 // packages/react/src/components/Box/Box.tsx
 import React, { forwardRef } from "react";
-import type { BoxProps as CoreBoxProps } from "../../../../core";
-import { cn, getSpacingValue, getColorValue } from "../../../../core";
+import type { BoxCoreProps } from "../../types";
+import { cn, getSpacingValue, getColorValue } from "../../utils";
 
-export interface BoxProps extends CoreBoxProps {
+export interface BoxProps extends BoxCoreProps {
   /** Box content */
   children?: React.ReactNode;
   /** HTML element to render */
