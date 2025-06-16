@@ -1,0 +1,76 @@
+// Border Utilities
+// @description Border utility classes with mild- prefix to avoid Tailwind conflicts
+
+// Border width utilities
+.mild-border-0 { border-width: 0px; }
+.mild-border { border-width: 1px; }
+.mild-border-2 { border-width: 2px; }
+.mild-border-4 { border-width: 4px; }
+.mild-border-8 { border-width: 8px; }
+
+.mild-border-t-0 { border-top-width: 0px; }
+.mild-border-t { border-top-width: 1px; }
+.mild-border-t-2 { border-top-width: 2px; }
+.mild-border-t-4 { border-top-width: 4px; }
+.mild-border-t-8 { border-top-width: 8px; }
+
+.mild-border-r-0 { border-right-width: 0px; }
+.mild-border-r { border-right-width: 1px; }
+.mild-border-r-2 { border-right-width: 2px; }
+.mild-border-r-4 { border-right-width: 4px; }
+.mild-border-r-8 { border-right-width: 8px; }
+
+.mild-border-b-0 { border-bottom-width: 0px; }
+.mild-border-b { border-bottom-width: 1px; }
+.mild-border-b-2 { border-bottom-width: 2px; }
+.mild-border-b-4 { border-bottom-width: 4px; }
+.mild-border-b-8 { border-bottom-width: 8px; }
+
+.mild-border-l-0 { border-left-width: 0px; }
+.mild-border-l { border-left-width: 1px; }
+.mild-border-l-2 { border-left-width: 2px; }
+.mild-border-l-4 { border-left-width: 4px; }
+.mild-border-l-8 { border-left-width: 8px; }
+
+// Border style utilities
+.mild-border-solid { border-style: solid; }
+.mild-border-dashed { border-style: dashed; }
+.mild-border-dotted { border-style: dotted; }
+.mild-border-double { border-style: double; }
+.mild-border-hidden { border-style: hidden; }
+.mild-border-none { border-style: none; }
+
+// Border radius utilities
+@each $radius-name, $radius-value in $mild-radius {
+  .mild-rounded-#{$radius-name} { border-radius: #{$radius-value}; }
+  .mild-rounded-t-#{$radius-name} { 
+    border-top-left-radius: #{$radius-value}; 
+    border-top-right-radius: #{$radius-value}; 
+  }
+  .mild-rounded-r-#{$radius-name} { 
+    border-top-right-radius: #{$radius-value}; 
+    border-bottom-right-radius: #{$radius-value}; 
+  }
+  .mild-rounded-b-#{$radius-name} { 
+    border-bottom-right-radius: #{$radius-value}; 
+    border-bottom-left-radius: #{$radius-value}; 
+  }
+  .mild-rounded-l-#{$radius-name} { 
+    border-top-left-radius: #{$radius-value}; 
+    border-bottom-left-radius: #{$radius-value}; 
+  }
+  .mild-rounded-tl-#{$radius-name} { border-top-left-radius: #{$radius-value}; }
+  .mild-rounded-tr-#{$radius-name} { border-top-right-radius: #{$radius-value}; }
+  .mild-rounded-br-#{$radius-name} { border-bottom-right-radius: #{$radius-value}; }
+  .mild-rounded-bl-#{$radius-name} { border-bottom-left-radius: #{$radius-value}; }
+}
+
+// Shorthand border radius
+.mild-rounded { border-radius: radius('base'); }
+.mild-rounded-sm { border-radius: radius('sm'); }
+.mild-rounded-md { border-radius: radius('md'); }
+.mild-rounded-lg { border-radius: radius('lg'); }
+.mild-rounded-xl { border-radius: radius('xl'); }
+.mild-rounded-2xl { border-radius: radius('2xl'); }
+.mild-rounded-3xl { border-radius: radius('3xl'); }
+.mild-rounded-full { border-radius: radius('full'); }

@@ -1,0 +1,66 @@
+/// Color Utilities
+/// @group utilities
+/// @author Mild UI Team
+/// @description Text, background, and border color utility classes with mild- prefix to avoid Tailwind conflicts. Generates utilities for all color tokens and semantic colors.
+
+/// Text color utilities
+/// @description Generates .mild-text-{color}-{shade} classes for all color tokens
+/// @example scss - Generated classes
+///   .mild-text-blue-500 { color: #0ea5e9; }
+///   .mild-text-red-300 { color: #fca5a5; }
+///   .mild-text-white { color: #ffffff; }
+@each $color-name, $color-map in $mild-colors {
+  @if type-of($color-map) == 'map' {
+    @each $shade, $value in $color-map {
+      .mild-text-#{$color-name}-#{$shade} { color: #{$value}; }
+    }
+  } @else {
+    .mild-text-#{$color-name} { color: #{$color-map}; }
+  }
+}
+
+// Background colors
+@each $color-name, $color-map in $mild-colors {
+  @if type-of($color-map) == 'map' {
+    @each $shade, $value in $color-map {
+      .mild-bg-#{$color-name}-#{$shade} { background-color: #{$value}; }
+    }
+  } @else {
+    .mild-bg-#{$color-name} { background-color: #{$color-map}; }
+  }
+}
+
+// Border colors
+@each $color-name, $color-map in $mild-colors {
+  @if type-of($color-map) == 'map' {
+    @each $shade, $value in $color-map {
+      .mild-border-#{$color-name}-#{$shade} { border-color: #{$value}; }
+    }
+  } @else {
+    .mild-border-#{$color-name} { border-color: #{$color-map}; }
+  }
+}
+
+/// Semantic color utilities
+/// @description Utility classes using semantic color names (primary, success, etc.)
+/// @example scss - Generated classes
+///   .mild-text-primary { color: color('primary'); }
+///   .mild-bg-success { background-color: color('success'); }
+///   .mild-border-danger { border-color: color('danger'); }
+.mild-text-primary { color: color('primary'); }
+.mild-text-secondary { color: color('secondary'); }
+.mild-text-success { color: color('success'); }
+.mild-text-warning { color: color('warning'); }
+.mild-text-danger { color: color('danger'); }
+
+.mild-bg-primary { background-color: color('primary'); }
+.mild-bg-secondary { background-color: color('secondary'); }
+.mild-bg-success { background-color: color('success'); }
+.mild-bg-warning { background-color: color('warning'); }
+.mild-bg-danger { background-color: color('danger'); }
+
+.mild-border-primary { border-color: color('primary'); }
+.mild-border-secondary { border-color: color('secondary'); }
+.mild-border-success { border-color: color('success'); }
+.mild-border-warning { border-color: color('warning'); }
+.mild-border-danger { border-color: color('danger'); }

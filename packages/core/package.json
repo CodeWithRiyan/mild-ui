@@ -1,10 +1,10 @@
 {
   "name": "@mild-ui/core",
   "version": "0.3.1",
-  "description": "Universal design system built with SASS/SCSS - framework agnostic core with zero dependencies",
-  "main": "dist/index.js",
-  "module": "dist/index.esm.js",
-  "types": "dist/index.d.ts",
+  "description": "Pure SASS design system with utility classes - like Tailwind CSS but with mild- prefix to avoid conflicts",
+  "main": "dist/mild-ui.css",
+  "style": "dist/mild-ui.css",
+  "sass": "src/sass/index.scss",
   "sideEffects": [
     "*.css",
     "*.scss"
@@ -12,47 +12,36 @@
   "files": [
     "dist/",
     "src/sass/",
-    "src/compiled/"
+    "src/utilities/"
   ],
   "scripts": {
-    "build": "pnpm run build:sass && pnpm run build:ts && pnpm run build:bundle",
-    "build:sass": "node scripts/build-sass.js",
-    "build:ts": "tsc",
-    "build:bundle": "vite build",
-    "dev": "pnpm run build:sass && tsc --watch",
-    "sass:watch": "node scripts/watch-sass.js",
-    "clean": "rimraf dist",
-    "docs:generate": "node scripts/generate-docs.js",
-    "docs:build": "pnpm run docs:generate",
-    "docs:serve": "pnpm run docs:generate && serve docs -p 3001",
-    "docs:watch": "nodemon --watch src --ext ts,scss --exec \"pnpm docs:generate\"",
-    "debug:components": "node scripts/debug-components.js"
+    "build": "pnpm run build:sass",
+    "build:sass": "pnpm run sass:compile && pnpm run sass:minify",
+    "sass:compile": "sass src/sass/index.scss:dist/mild-ui.css --style=expanded --source-map",
+    "sass:minify": "sass src/sass/index.scss:dist/mild-ui.min.css --style=compressed --no-source-map",
+    "dev": "pnpm run sass:watch",
+    "sass:watch": "sass src/sass/index.scss:dist/mild-ui.css --watch --style=expanded --source-map",
+    "docs:build": "sassdoc src/sass src/utilities --dest docs --config .sassdocrc",
+    "clean": "rimraf dist docs",
+    "prepare": "pnpm run build"
   },
   "devDependencies": {
-    "@types/node": "^20.0.0",
-    "autoprefixer": "^10.4.16",
-    "chokidar": "^4.0.3",
-    "cssnano": "^6.0.1",
-    "nodemon": "^3.0.2",
-    "postcss": "^8.4.32",
     "rimraf": "^5.0.0",
     "sass": "^1.69.5",
-    "serve": "^14.2.1",
-    "typescript": "^5.3.0",
-    "vite": "^5.0.0",
-    "vite-plugin-dts": "^3.6.0"
+    "sassdoc": "^2.7.4"
   },
   "exports": {
     ".": {
-      "types": "./dist/index.d.ts",
-      "import": "./dist/index.esm.js",
-      "require": "./dist/index.js"
+      "sass": "./src/sass/index.scss",
+      "style": "./dist/mild-ui.css",
+      "default": "./dist/mild-ui.css"
     },
     "./css": "./dist/mild-ui.css",
     "./css/min": "./dist/mild-ui.min.css",
-    "./themes/light": "./dist/themes/light.css",
-    "./themes/dark": "./dist/themes/dark.css",
-    "./tokens": "./dist/tokens.json",
+    "./sass": "./src/sass/index.scss",
+    "./sass/*": "./src/sass/*",
+    "./utilities": "./src/utilities/index.scss",
+    "./utilities/*": "./src/utilities/*",
     "./package.json": "./package.json"
   },
   "publishConfig": {

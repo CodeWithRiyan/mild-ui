@@ -1,30 +1,32 @@
-// packages/core/src/sass/tokens/_radius.scss
-/// Border radius system
-/// @group tokens
+// Design System Border Radius
+// @description Core border radius tokens for SASS compilation
 
-// Import required SASS modules
-@use 'sass:map';
-
+// Border radius scale (matching TypeScript tokens)
 $mild-radius: (
-  none: 0px,
-  sm: 0.125rem,
-  base: 0.25rem,
-  md: 0.375rem,
-  lg: 0.5rem,
-  xl: 0.75rem,
+  'none': 0px,
+  'sm': 0.125rem,
+  'base': 0.25rem,
+  'md': 0.375rem,
+  'lg': 0.5rem,
+  'xl': 0.75rem,
   '2xl': 1rem,
   '3xl': 1.5rem,
-  full: 9999px
+  'full': 9999px
 ) !default;
 
-// Radius function
-@function mild-radius($size) {
-  @return map.get($mild-radius, $size);
+// Radius function to get design token values
+@function radius($size) {
+  @if map-has-key($mild-radius, $size) {
+    @return map-get($mild-radius, $size);
+  }
+  
+  @warn "Radius size `#{$size}` not found in design system";
+  @return null;
 }
 
-// Generate radius custom properties
-@mixin generate-radius-properties() {
-  @each $radius-name, $radius-value in $mild-radius {
-    --mild-radius-#{$radius-name}: #{$radius-value};
+// Generate CSS custom properties for radius
+@mixin generate-radius-custom-properties() {
+  @each $token, $value in $mild-radius {
+    --mild-radius-#{$token}: #{$value};
   }
 }

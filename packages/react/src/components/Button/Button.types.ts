@@ -1,25 +1,32 @@
-// packages/react/src/components/Button/Button.types.ts
-import type {
-  ButtonCoreProps,
-  ButtonStyleProps,
+/**
+ * React Button Types
+ * @description React-specific button type definitions extending core types
+ */
+
+import type { 
+  ButtonProps as CoreButtonProps,
   ButtonVariant,
   ButtonSize,
-} from "@mild-ui/core";
+  ButtonColorScheme
+} from '@mild-ui/core';
+import type { ReactNode } from 'react';
 
-export interface ButtonReactProps extends ButtonCoreProps, ButtonStyleProps {
+export interface ReactButtonProps extends CoreButtonProps {
+  /** Render as child element */
   asChild?: boolean;
-  leadingIcon?: React.ReactNode;
-  trailingIcon?: React.ReactNode;
-  children: React.ReactNode;
+  /** Left icon element */
+  leftIcon?: ReactNode;
+  /** Right icon element */
+  rightIcon?: ReactNode;
+  /** Button content */
+  children?: ReactNode;
+  /** React click handler */
   onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
 export interface ButtonProps
-  extends ButtonReactProps,
-    Omit<
-      React.ButtonHTMLAttributes<HTMLButtonElement>,
-      keyof ButtonReactProps
-    > {}
+  extends ReactButtonProps,
+    Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, keyof ReactButtonProps> {}
 
-// Re-export these for convenience
-export type { ButtonVariant, ButtonSize };
+// Re-export core types for convenience
+export type { ButtonVariant, ButtonSize, ButtonColorScheme };

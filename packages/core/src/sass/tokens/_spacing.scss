@@ -1,24 +1,17 @@
-// packages/core/src/sass/tokens/_spacing.scss
-/// Spacing system with consistent scaling (Final Clean Version)
-/// @group tokens
+// Design System Spacing
+// @description Core spacing tokens for SASS compilation
 
-// Import required SASS modules ONLY
-@use 'sass:map';
-
-// Base spacing unit
-$mild-spacing-base: 0.25rem !default; // 4px
-
-// Spacing scale (using quoted strings to avoid interpolation issues)
+// Spacing scale (matching TypeScript tokens, using hyphens for decimal values)
 $mild-spacing: (
   '0': 0px,
   'px': 1px,
-  '0-5': 0.125rem,  // 2px
+  '0-5': 0.125rem,  // 2px (0.5 in TypeScript)
   '1': 0.25rem,     // 4px
-  '1-5': 0.375rem,  // 6px
+  '1-5': 0.375rem,  // 6px (1.5 in TypeScript)
   '2': 0.5rem,      // 8px
-  '2-5': 0.625rem,  // 10px
+  '2-5': 0.625rem,  // 10px (2.5 in TypeScript)
   '3': 0.75rem,     // 12px
-  '3-5': 0.875rem,  // 14px
+  '3-5': 0.875rem,  // 14px (3.5 in TypeScript)
   '4': 1rem,        // 16px
   '5': 1.25rem,     // 20px
   '6': 1.5rem,      // 24px
@@ -47,14 +40,35 @@ $mild-spacing: (
   '96': 24rem       // 384px
 ) !default;
 
-// Spacing function
-@function mild-space($size) {
-  @return map.get($mild-spacing, $size);
+// Spacing function to get design token values
+@function spacing($size) {
+  // Convert decimal notation (0.5) to hyphen notation (0-5) for SASS compatibility
+  $sass-key: str-replace($size + '', '.', '-');
+  
+  @if map-has-key($mild-spacing, $sass-key) {
+    @return map-get($mild-spacing, $sass-key);
+  }
+  
+  @warn "Spacing size `#{$size}` not found in design system";
+  @return null;
 }
 
-// Generate spacing custom properties
-@mixin generate-spacing-properties() {
-  @each $size-name, $size-value in $mild-spacing {
-    --mild-space-#{$size-name}: #{$size-value};
+// Generate CSS custom properties for spacing
+@mixin generate-spacing-custom-properties() {
+  @each $token, $value in $mild-spacing {
+    // Convert hyphen back to decimal for CSS custom properties
+    $css-token: str-replace($token, '-', '.');
+    --mild-space-#{$css-token}: #{$value};
   }
+}
+
+// String replace helper function
+@function str-replace($string, $search, $replace: '') {
+  $index: str-index($string, $search);
+  
+  @if $index {
+    @return str-slice($string, 1, $index - 1) + $replace + str-replace(str-slice($string, $index + str-length($search)), $search, $replace);
+  }
+  
+  @return $string;
 }

@@ -1,108 +1,182 @@
-// packages/core/src/sass/tokens/_colors.scss
-/// Color system with systematic generation (FIXED)
+/// Design System Colors
 /// @group tokens
+/// @author Mild UI Team
+/// @description Core color tokens for the Mild UI design system. Provides comprehensive color scales and semantic color mapping for consistent theming across all components.
 
-// Import required SASS modules
-@use 'sass:map';
-
-// Base color palette with QUOTED keys to fix interpolation warnings
-$mild-base-colors: (
-  // Primary brand colors - using quoted strings
-  'blue': (
-    50: #f0f9ff,
-    100: #e0f2fe,
-    200: #bae6fd,
-    300: #7dd3fc,
-    400: #38bdf8,
-    500: #0ea5e9,
-    600: #0284c7,
-    700: #0369a1,
-    800: #075985,
-    900: #0c4a6e,
-    950: #082f49
-  ),
-  'gray': (
-    50: #f9fafb,
-    100: #f3f4f6,
-    200: #e5e7eb,
-    300: #d1d5db,
-    400: #9ca3af,
-    500: #6b7280,
-    600: #4b5563,
-    700: #374151,
-    800: #1f2937,
-    900: #111827,
-    950: #030712
-  ),
-  'red': (
-    50: #fef2f2,
-    100: #fee2e2,
-    200: #fecaca,
-    300: #fca5a5,
-    400: #f87171,
-    500: #ef4444,
-    600: #dc2626,
-    700: #b91c1c,
-    800: #991b1b,
-    900: #7f1d1d,
-    950: #450a0a
-  ),
-  'green': (
-    50: #f0fdf4,
-    100: #dcfce7,
-    200: #bbf7d0,
-    300: #86efac,
-    400: #4ade80,
-    500: #22c55e,
-    600: #16a34a,
-    700: #15803d,
-    800: #166534,
-    900: #14532d,
-    950: #052e16
-  ),
-  'yellow': (
-    50: #fefce8,
-    100: #fef9c3,
-    200: #fef08a,
-    300: #fde047,
-    400: #facc15,
-    500: #eab308,
-    600: #ca8a04,
-    700: #a16207,
-    800: #854d0e,
-    900: #713f12,
-    950: #422006
-  )
+/// Base color palette with comprehensive scales from 50-950
+/// @type Map
+/// @group tokens
+$mild-colors: (
+  // Blue scale
+  'blue-50': #f0f9ff,
+  'blue-100': #e0f2fe,
+  'blue-200': #bae6fd,
+  'blue-300': #7dd3fc,
+  'blue-400': #38bdf8,
+  'blue-500': #0ea5e9,
+  'blue-600': #0284c7,
+  'blue-700': #0369a1,
+  'blue-800': #075985,
+  'blue-900': #0c4a6e,
+  'blue-950': #082f49,
+  
+  // Gray scale
+  'gray-50': #f9fafb,
+  'gray-100': #f3f4f6,
+  'gray-200': #e5e7eb,
+  'gray-300': #d1d5db,
+  'gray-400': #9ca3af,
+  'gray-500': #6b7280,
+  'gray-600': #4b5563,
+  'gray-700': #374151,
+  'gray-800': #1f2937,
+  'gray-900': #111827,
+  'gray-950': #030712,
+  
+  // Red scale
+  'red-50': #fef2f2,
+  'red-100': #fee2e2,
+  'red-200': #fecaca,
+  'red-300': #fca5a5,
+  'red-400': #f87171,
+  'red-500': #ef4444,
+  'red-600': #dc2626,
+  'red-700': #b91c1c,
+  'red-800': #991b1b,
+  'red-900': #7f1d1d,
+  'red-950': #450a0a,
+  
+  // Green scale
+  'green-50': #f0fdf4,
+  'green-100': #dcfce7,
+  'green-200': #bbf7d0,
+  'green-300': #86efac,
+  'green-400': #4ade80,
+  'green-500': #22c55e,
+  'green-600': #16a34a,
+  'green-700': #15803d,
+  'green-800': #166534,
+  'green-900': #14532d,
+  'green-950': #052e16,
+  
+  // Yellow scale
+  'yellow-50': #fefce8,
+  'yellow-100': #fef9c3,
+  'yellow-200': #fef08a,
+  'yellow-300': #fde047,
+  'yellow-400': #facc15,
+  'yellow-500': #eab308,
+  'yellow-600': #ca8a04,
+  'yellow-700': #a16207,
+  'yellow-800': #854d0e,
+  'yellow-900': #713f12,
+  'yellow-950': #422006,
+  
+  // Purple scale
+  'purple-50': #faf5ff,
+  'purple-100': #f3e8ff,
+  'purple-200': #e9d5ff,
+  'purple-300': #d8b4fe,
+  'purple-400': #c084fc,
+  'purple-500': #a855f7,
+  'purple-600': #9333ea,
+  'purple-700': #7c3aed,
+  'purple-800': #6b21a8,
+  'purple-900': #581c87,
+  'purple-950': #3b0764,
+  
+  // Teal scale
+  'teal-50': #f0fdfa,
+  'teal-100': #ccfbf1,
+  'teal-200': #99f6e4,
+  'teal-300': #5eead4,
+  'teal-400': #2dd4bf,
+  'teal-500': #14b8a6,
+  'teal-600': #0d9488,
+  'teal-700': #0f766e,
+  'teal-800': #115e59,
+  'teal-900': #134e4a,
+  'teal-950': #042f2e,
+  
+  // Orange scale
+  'orange-50': #fff7ed,
+  'orange-100': #ffedd5,
+  'orange-200': #fed7aa,
+  'orange-300': #fdba74,
+  'orange-400': #fb923c,
+  'orange-500': #f97316,
+  'orange-600': #ea580c,
+  'orange-700': #c2410c,
+  'orange-800': #9a3412,
+  'orange-900': #7c2d12,
+  'orange-950': #431407,
+  
+  // Special colors
+  'white': #ffffff,
+  'black': #000000,
+  'transparent': transparent
 ) !default;
 
-// Semantic color mapping with QUOTED keys
+// Semantic color mapping
 $mild-semantic-colors: (
-  'primary': map.get($mild-base-colors, 'blue'),
-  'secondary': map.get($mild-base-colors, 'gray'),
-  'success': map.get($mild-base-colors, 'green'),
-  'warning': map.get($mild-base-colors, 'yellow'),
-  'danger': map.get($mild-base-colors, 'red'),
-  'error': map.get($mild-base-colors, 'red')
+  'primary': 'blue',
+  'secondary': 'gray',
+  'success': 'green',
+  'warning': 'yellow',
+  'danger': 'red',
+  'info': 'teal'
 ) !default;
 
-// Complete color system
-$mild-colors: map.merge($mild-base-colors, $mild-semantic-colors) !default;
-
-// Color generation function
-@function mild-color($color, $shade: 500) {
-  $color-map: map.get($mild-colors, $color);
-  @if $color-map {
-    @return map.get($color-map, $shade);
+/// Get color value from design tokens
+/// @function color
+/// @group tokens
+/// @param {String} $name - Color name (e.g., 'blue', 'primary', 'white')
+/// @param {Number} $shade [500] - Color shade (50-950)
+/// @return {Color} - Color value
+/// @example scss - Basic usage
+///   .button {
+///     background-color: color('primary', 500);
+///     color: color('white');
+///   }
+/// @example scss - Semantic colors
+///   .alert-success {
+///     background-color: color('success', 100);
+///     border-color: color('success', 300);
+///   }
+@function color($name, $shade: 500) {
+  // Handle semantic colors
+  @if map-has-key($mild-semantic-colors, $name) {
+    $base-color: map-get($mild-semantic-colors, $name);
+    $token-key: $base-color + '-' + $shade;
+    @return map-get($mild-colors, $token-key);
   }
-  @warn "Color `#{$color}` not found in color system";
+  
+  // Handle direct color access
+  $token-key: $name + '-' + $shade;
+  @if map-has-key($mild-colors, $token-key) {
+    @return map-get($mild-colors, $token-key);
+  }
+  
+  // Handle special colors (white, black, transparent)
+  @if map-has-key($mild-colors, $name) {
+    @return map-get($mild-colors, $name);
+  }
+  
+  @warn "Color `#{$name}` with shade `#{$shade}` not found in design system";
   @return null;
 }
 
-// Generate CSS custom properties for colors
-@mixin generate-color-properties() {
-  @each $color-name, $color-map in $mild-colors {
-    @each $shade, $value in $color-map {
-      --mild-color-#{$color-name}-#{$shade}: #{$value};
-    }
+/// Generate CSS custom properties for all color tokens
+/// @mixin generate-color-custom-properties
+/// @group tokens
+/// @description Creates CSS custom properties for all color tokens in the format --mild-color-{token}
+/// @example scss - Usage
+///   :root {
+///     @include generate-color-custom-properties();
+///   }
+/// @output CSS custom properties for all colors
+@mixin generate-color-custom-properties() {
+  @each $token, $value in $mild-colors {
+    --mild-color-#{$token}: #{$value};
   }
 }

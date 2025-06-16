@@ -1,0 +1,71 @@
+// Typography Utilities
+// @description Font and text utility classes with mild- prefix to avoid Tailwind conflicts
+
+// Font family utilities
+.mild-font-sans { font-family: font-family('sans'); }
+.mild-font-serif { font-family: font-family('serif'); }
+.mild-font-mono { font-family: font-family('mono'); }
+
+// Font size utilities
+@each $size-name, $size-value in $mild-font-sizes {
+  .mild-text-#{$size-name} { font-size: #{$size-value}; }
+}
+
+// Font weight utilities
+@each $weight-name, $weight-value in $mild-font-weights {
+  .mild-font-#{$weight-name} { font-weight: #{$weight-value}; }
+}
+
+// Line height utilities
+@each $height-name, $height-value in $mild-line-heights {
+  .mild-leading-#{$height-name} { line-height: #{$height-value}; }
+}
+
+// Letter spacing utilities
+@each $spacing-name, $spacing-value in $mild-letter-spacing {
+  .mild-tracking-#{$spacing-name} { letter-spacing: #{$spacing-value}; }
+}
+
+// Text alignment utilities
+.mild-text-left { text-align: left; }
+.mild-text-center { text-align: center; }
+.mild-text-right { text-align: right; }
+.mild-text-justify { text-align: justify; }
+
+// Text decoration utilities
+.mild-underline { text-decoration: underline; }
+.mild-overline { text-decoration: overline; }
+.mild-line-through { text-decoration: line-through; }
+.mild-no-underline { text-decoration: none; }
+
+// Text transform utilities
+.mild-uppercase { text-transform: uppercase; }
+.mild-lowercase { text-transform: lowercase; }
+.mild-capitalize { text-transform: capitalize; }
+.mild-normal-case { text-transform: none; }
+
+// Text overflow utilities
+.mild-truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.mild-text-ellipsis { text-overflow: ellipsis; }
+.mild-text-clip { text-overflow: clip; }
+
+// White space utilities
+.mild-whitespace-normal { white-space: normal; }
+.mild-whitespace-nowrap { white-space: nowrap; }
+.mild-whitespace-pre { white-space: pre; }
+.mild-whitespace-pre-line { white-space: pre-line; }
+.mild-whitespace-pre-wrap { white-space: pre-wrap; }
+
+// Word break utilities
+.mild-break-normal {
+  overflow-wrap: normal;
+  word-break: normal;
+}
+
+.mild-break-words { overflow-wrap: break-word; }
+.mild-break-all { word-break: break-all; }

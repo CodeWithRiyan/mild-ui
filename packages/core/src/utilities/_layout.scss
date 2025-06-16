@@ -1,0 +1,121 @@
+/// Layout Utilities
+/// @group utilities
+/// @author Mild UI Team
+/// @description Layout utility classes with mild- prefix to avoid Tailwind conflicts. Includes display, position, flexbox, grid, and sizing utilities.
+
+/// Display utilities
+/// @description Basic display property utilities
+/// @example scss - Generated classes
+///   .mild-flex { display: flex; }
+///   .mild-grid { display: grid; }
+///   .mild-hidden { display: none; }
+.mild-block { display: block; }
+.mild-inline-block { display: inline-block; }
+.mild-inline { display: inline; }
+.mild-flex { display: flex; }
+.mild-inline-flex { display: inline-flex; }
+.mild-table { display: table; }
+.mild-inline-table { display: inline-table; }
+.mild-table-caption { display: table-caption; }
+.mild-table-cell { display: table-cell; }
+.mild-table-column { display: table-column; }
+.mild-table-column-group { display: table-column-group; }
+.mild-table-footer-group { display: table-footer-group; }
+.mild-table-header-group { display: table-header-group; }
+.mild-table-row-group { display: table-row-group; }
+.mild-table-row { display: table-row; }
+.mild-flow-root { display: flow-root; }
+.mild-grid { display: grid; }
+.mild-inline-grid { display: inline-grid; }
+.mild-contents { display: contents; }
+.mild-list-item { display: list-item; }
+.mild-hidden { display: none; }
+
+// Position utilities
+.mild-static { position: static; }
+.mild-fixed { position: fixed; }
+.mild-absolute { position: absolute; }
+.mild-relative { position: relative; }
+.mild-sticky { position: sticky; }
+
+// Top/Right/Bottom/Left utilities
+@each $size-name, $size-value in $mild-spacing {
+  .mild-top-#{$size-name} { top: #{$size-value}; }
+  .mild-right-#{$size-name} { right: #{$size-value}; }
+  .mild-bottom-#{$size-name} { bottom: #{$size-value}; }
+  .mild-left-#{$size-name} { left: #{$size-value}; }
+  .mild-inset-#{$size-name} { 
+    top: #{$size-value}; 
+    right: #{$size-value}; 
+    bottom: #{$size-value}; 
+    left: #{$size-value}; 
+  }
+}
+
+// Width utilities
+.mild-w-auto { width: auto; }
+.mild-w-full { width: 100%; }
+.mild-w-screen { width: 100vw; }
+.mild-w-min { width: min-content; }
+.mild-w-max { width: max-content; }
+.mild-w-fit { width: fit-content; }
+
+@each $size-name, $size-value in $mild-spacing {
+  .mild-w-#{$size-name} { width: #{$size-value}; }
+}
+
+// Height utilities
+.mild-h-auto { height: auto; }
+.mild-h-full { height: 100%; }
+.mild-h-screen { height: 100vh; }
+.mild-h-min { height: min-content; }
+.mild-h-max { height: max-content; }
+.mild-h-fit { height: fit-content; }
+
+@each $size-name, $size-value in $mild-spacing {
+  .mild-h-#{$size-name} { height: #{$size-value}; }
+}
+
+// Flexbox utilities
+.mild-flex-row { flex-direction: row; }
+.mild-flex-row-reverse { flex-direction: row-reverse; }
+.mild-flex-col { flex-direction: column; }
+.mild-flex-col-reverse { flex-direction: column-reverse; }
+
+.mild-flex-wrap { flex-wrap: wrap; }
+.mild-flex-wrap-reverse { flex-wrap: wrap-reverse; }
+.mild-flex-nowrap { flex-wrap: nowrap; }
+
+.mild-flex-1 { flex: 1 1 0%; }
+.mild-flex-auto { flex: 1 1 auto; }
+.mild-flex-initial { flex: 0 1 auto; }
+.mild-flex-none { flex: none; }
+
+.mild-justify-start { justify-content: flex-start; }
+.mild-justify-end { justify-content: flex-end; }
+.mild-justify-center { justify-content: center; }
+.mild-justify-between { justify-content: space-between; }
+.mild-justify-around { justify-content: space-around; }
+.mild-justify-evenly { justify-content: space-evenly; }
+
+.mild-items-start { align-items: flex-start; }
+.mild-items-end { align-items: flex-end; }
+.mild-items-center { align-items: center; }
+.mild-items-baseline { align-items: baseline; }
+.mild-items-stretch { align-items: stretch; }
+
+// Grid utilities
+.mild-grid-cols-1 { grid-template-columns: repeat(1, minmax(0, 1fr)); }
+.mild-grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.mild-grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.mild-grid-cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.mild-grid-cols-5 { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+.mild-grid-cols-6 { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+.mild-grid-cols-12 { grid-template-columns: repeat(12, minmax(0, 1fr)); }
+
+.mild-gap-0 { gap: 0; }
+@each $size-name, $size-value in $mild-spacing {
+  .mild-gap-#{$size-name} { gap: #{$size-value}; }
+  .mild-gap-x-#{$size-name} { column-gap: #{$size-value}; }
+  .mild-gap-y-#{$size-name} { row-gap: #{$size-value}; }
+}

@@ -1,49 +1,7 @@
-// packages/core/src/sass/tokens/_typography.scss
-/// Typography system with responsive scaling (FIXED)
-/// @group tokens
+// Design System Typography
+// @description Core typography tokens for SASS compilation
 
-// Import required SASS modules
-@use 'sass:map';
-
-// Font families
-$mild-font-families: (
-  'sans': (
-    'Inter',
-    '-apple-system',
-    'BlinkMacSystemFont',
-    'Segoe UI',
-    'Roboto',
-    'Helvetica Neue',
-    'Arial',
-    'Noto Sans',
-    'sans-serif',
-    'Apple Color Emoji',
-    'Segoe UI Emoji',
-    'Segoe UI Symbol',
-    'Noto Color Emoji'
-  ),
-  'serif': (
-    'Georgia',
-    'Cambria',
-    'Times New Roman',
-    'Times',
-    'serif'
-  ),
-  'mono': (
-    'JetBrains Mono',
-    'SF Mono',
-    'Monaco',
-    'Inconsolata',
-    'Roboto Mono',
-    'source-code-pro',
-    'Menlo',
-    'Consolas',
-    'DejaVu Sans Mono',
-    'monospace'
-  )
-) !default;
-
-// Font sizes with responsive scaling
+// Font size scale (matching TypeScript tokens)
 $mild-font-sizes: (
   'xs': 0.75rem,    // 12px
   'sm': 0.875rem,   // 14px
@@ -60,7 +18,7 @@ $mild-font-sizes: (
   '9xl': 8rem       // 128px
 ) !default;
 
-// Font weights with QUOTED keys to fix interpolation warnings
+// Font weight scale (matching TypeScript tokens)
 $mild-font-weights: (
   'thin': 100,
   'extralight': 200,
@@ -73,7 +31,44 @@ $mild-font-weights: (
   'black': 900
 ) !default;
 
-// Line heights
+// Font family stacks (matching TypeScript tokens)
+$mild-font-families: (
+  'sans': (
+    'ui-sans-serif',
+    'system-ui',
+    '-apple-system',
+    'BlinkMacSystemFont',
+    '"Segoe UI"',
+    'Roboto',
+    '"Helvetica Neue"',
+    'Arial',
+    '"Noto Sans"',
+    'sans-serif',
+    '"Apple Color Emoji"',
+    '"Segoe UI Emoji"',
+    '"Segoe UI Symbol"',
+    '"Noto Color Emoji"'
+  ),
+  'serif': (
+    'ui-serif',
+    'Georgia',
+    'Cambria',
+    '"Times New Roman"',
+    'Times',
+    'serif'
+  ),
+  'mono': (
+    'ui-monospace',
+    'SFMono-Regular',
+    '"SF Mono"',
+    'Consolas',
+    '"Liberation Mono"',
+    'Menlo',
+    'monospace'
+  )
+) !default;
+
+// Line height scale (matching TypeScript tokens)
 $mild-line-heights: (
   'none': 1,
   'tight': 1.25,
@@ -83,7 +78,7 @@ $mild-line-heights: (
   'loose': 2
 ) !default;
 
-// Letter spacing
+// Letter spacing scale (matching TypeScript tokens)
 $mild-letter-spacing: (
   'tighter': -0.05em,
   'tight': -0.025em,
@@ -93,43 +88,89 @@ $mild-letter-spacing: (
   'widest': 0.1em
 ) !default;
 
-// Typography scale function
-@function mild-font-size($size) {
-  @return map.get($mild-font-sizes, $size);
-}
-
-@function mild-font-weight($weight) {
-  @return map.get($mild-font-weights, $weight);
-}
-
-@function mild-line-height($height) {
-  @return map.get($mild-line-heights, $height);
-}
-
-// Generate typography custom properties
-@mixin generate-typography-properties() {
-  // Font families
-  @each $family-name, $family-stack in $mild-font-families {
-    --mild-font-family-#{$family-name}: #{$family-stack};
+// Typography utility functions
+@function font-size($size) {
+  @if map-has-key($mild-font-sizes, $size) {
+    @return map-get($mild-font-sizes, $size);
   }
   
+  @warn "Font size `#{$size}` not found in design system";
+  @return null;
+}
+
+@function font-weight($weight) {
+  @if map-has-key($mild-font-weights, $weight) {
+    @return map-get($mild-font-weights, $weight);
+  }
+  
+  @warn "Font weight `#{$weight}` not found in design system";
+  @return null;
+}
+
+@function font-family($family) {
+  @if map-has-key($mild-font-families, $family) {
+    $font-stack: map-get($mild-font-families, $family);
+    @return list-to-string($font-stack, ', ');
+  }
+  
+  @warn "Font family `#{$family}` not found in design system";
+  @return null;
+}
+
+@function line-height($height) {
+  @if map-has-key($mild-line-heights, $height) {
+    @return map-get($mild-line-heights, $height);
+  }
+  
+  @warn "Line height `#{$height}` not found in design system";
+  @return null;
+}
+
+@function letter-spacing($spacing) {
+  @if map-has-key($mild-letter-spacing, $spacing) {
+    @return map-get($mild-letter-spacing, $spacing);
+  }
+  
+  @warn "Letter spacing `#{$spacing}` not found in design system";
+  @return null;
+}
+
+// Generate CSS custom properties for typography
+@mixin generate-typography-custom-properties() {
   // Font sizes
-  @each $size-name, $size-value in $mild-font-sizes {
-    --mild-font-size-#{$size-name}: #{$size-value};
+  @each $token, $value in $mild-font-sizes {
+    --mild-font-size-#{$token}: #{$value};
   }
   
   // Font weights
-  @each $weight-name, $weight-value in $mild-font-weights {
-    --mild-font-weight-#{$weight-name}: #{$weight-value};
+  @each $token, $value in $mild-font-weights {
+    --mild-font-weight-#{$token}: #{$value};
+  }
+  
+  // Font families
+  @each $token, $value in $mild-font-families {
+    --mild-font-family-#{$token}: #{list-to-string($value, ', ')};
   }
   
   // Line heights
-  @each $height-name, $height-value in $mild-line-heights {
-    --mild-line-height-#{$height-name}: #{$height-value};
+  @each $token, $value in $mild-line-heights {
+    --mild-line-height-#{$token}: #{$value};
   }
   
   // Letter spacing
-  @each $spacing-name, $spacing-value in $mild-letter-spacing {
-    --mild-letter-spacing-#{$spacing-name}: #{$spacing-value};
+  @each $token, $value in $mild-letter-spacing {
+    --mild-letter-spacing-#{$token}: #{$value};
   }
+}
+
+// Helper function to convert list to string
+@function list-to-string($list, $separator: ', ') {
+  $result: '';
+  @for $i from 1 through length($list) {
+    $result: $result + nth($list, $i);
+    @if $i < length($list) {
+      $result: $result + $separator;
+    }
+  }
+  @return $result;
 }

@@ -1,0 +1,28 @@
+{
+  "theme": "default",
+  "dest": "docs",
+  "package": "./package.json",
+  "autofill": ["requires", "throws", "content"],
+  "groups": {
+    "tokens": "Design Tokens",
+    "utilities": "Utility Classes", 
+    "mixins": "Mixins & Functions",
+    "base": "Base Styles",
+    "themes": "Theming"
+  },
+  "display": {
+    "access": ["public"],
+    "alias": false,
+    "watermark": true
+  },
+  "basePath": "https://codewithriyan.github.io/mild-ui/core/",
+  "shortcutIcon": "https://raw.githubusercontent.com/CodeWithRiyan/mild-ui/main/assets/favicon.ico",
+  "googleAnalytics": "",
+  "tracking": false,
+  "sort": [
+    "group>",
+    "file",
+    "line<",
+    "access"
+  ]
+}

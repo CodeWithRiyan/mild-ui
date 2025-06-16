@@ -1,0 +1,63 @@
+/// Spacing Utilities
+/// @group utilities
+/// @author Mild UI Team
+/// @description Margin and padding utility classes with mild- prefix to avoid Tailwind conflicts. Generates utilities for all spacing tokens including negative margins.
+
+/// Margin utilities
+/// @description Generates margin classes for all spacing tokens
+/// @example scss - Generated classes
+///   .mild-m-4 { margin: 1rem; }
+///   .mild-mx-2 { margin-left: 0.5rem; margin-right: 0.5rem; }
+///   .mild-mt-8 { margin-top: 2rem; }
+.mild-m-auto { margin: auto; }
+@each $size-name, $size-value in $mild-spacing {
+  .mild-m-#{$size-name} { margin: #{$size-value}; }
+  .mild-mx-#{$size-name} { 
+    margin-left: #{$size-value}; 
+    margin-right: #{$size-value}; 
+  }
+  .mild-my-#{$size-name} { 
+    margin-top: #{$size-value}; 
+    margin-bottom: #{$size-value}; 
+  }
+  .mild-mt-#{$size-name} { margin-top: #{$size-value}; }
+  .mild-mr-#{$size-name} { margin-right: #{$size-value}; }
+  .mild-mb-#{$size-name} { margin-bottom: #{$size-value}; }
+  .mild-ml-#{$size-name} { margin-left: #{$size-value}; }
+}
+
+// Negative margins
+@each $size-name, $size-value in $mild-spacing {
+  @if $size-name != '0' {
+    .mild--m-#{$size-name} { margin: -#{$size-value}; }
+    .mild--mx-#{$size-name} { 
+      margin-left: -#{$size-value}; 
+      margin-right: -#{$size-value}; 
+    }
+    .mild--my-#{$size-name} { 
+      margin-top: -#{$size-value}; 
+      margin-bottom: -#{$size-value}; 
+    }
+    .mild--mt-#{$size-name} { margin-top: -#{$size-value}; }
+    .mild--mr-#{$size-name} { margin-right: -#{$size-value}; }
+    .mild--mb-#{$size-name} { margin-bottom: -#{$size-value}; }
+    .mild--ml-#{$size-name} { margin-left: -#{$size-value}; }
+  }
+}
+
+// Padding utilities
+@each $size-name, $size-value in $mild-spacing {
+  .mild-p-#{$size-name} { padding: #{$size-value}; }
+  .mild-px-#{$size-name} { 
+    padding-left: #{$size-value}; 
+    padding-right: #{$size-value}; 
+  }
+  .mild-py-#{$size-name} { 
+    padding-top: #{$size-value}; 
+    padding-bottom: #{$size-value}; 
+  }
+  .mild-pt-#{$size-name} { padding-top: #{$size-value}; }
+  .mild-pr-#{$size-name} { padding-right: #{$size-value}; }
+  .mild-pb-#{$size-name} { padding-bottom: #{$size-value}; }
+  .mild-pl-#{$size-name} { padding-left: #{$size-value}; }
+}

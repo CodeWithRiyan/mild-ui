@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@mild-ui/core - SassDoc Documentation Preview</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            line-height: 1.6;
+            color: #333;
+        }
+        .header {
+            border-bottom: 3px solid #3b82f6;
+            padding-bottom: 1rem;
+            margin-bottom: 2rem;
+        }
+        .header h1 {
+            margin: 0;
+            color: #1f2937;
+        }
+        .section {
+            margin-bottom: 3rem;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .section-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1rem;
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin: 0;
+        }
+        .section-content {
+            padding: 1.5rem;
+        }
+        .code-block {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 4px;
+            padding: 1rem;
+            margin: 0.5rem 0;
+            font-family: 'Monaco', 'Menlo', monospace;
+            font-size: 0.9rem;
+            overflow-x: auto;
+        }
+        .utility-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .utility-item {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 6px;
+            border-left: 4px solid #3b82f6;
+        }
+        .function-docs {
+            background: #fef7f0;
+            border-left: 4px solid #f97316;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+        .success-badge {
+            display: inline-block;
+            background: #10b981;
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>@mild-ui/core - SassDoc Documentation 
+            <span class="success-badge">Generated Successfully</span>
+        </h1>
+        <p>Pure SASS design system with utility classes - like Tailwind CSS but with mild- prefix to avoid conflicts</p>
+    </div>
+
+    <div class="section">
+        <h2 class="section-header">🎨 Design Tokens</h2>
+        <div class="section-content">
+            <p>Complete design token system documented with SassDoc annotations:</p>
+            
+            <h3>Color System</h3>
+            <div class="code-block">
+/// Base color palette with comprehensive scales from 50-950
+/// @type Map
+/// @group tokens
+$mild-colors: (
+  'blue-50': #f0f9ff,
+  'blue-100': #e0f2fe,
+  'blue-500': #0ea5e9,
+  'blue-900': #0c4a6e,
+  // ... complete color scales for all colors
+  'white': #ffffff,
+  'black': #000000,
+  'transparent': transparent
+) !default;
+            </div>
+
+            <h3>Color Function</h3>
+            <div class="function-docs">
+                <strong>color($name, $shade: 500)</strong>
+                <p>Get color value from design tokens with semantic color support</p>
+                <div class="code-block">
+/// @param {String} $name - Color name (e.g., 'blue', 'primary', 'white')
+/// @param {Number} $shade [500] - Color shade (50-950)
+/// @return {Color} - Color value
+/// @example scss - Basic usage
+///   .button {
+///     background-color: color('primary', 500);
+///     color: color('white');
+///   }
+                </div>
+            </div>
+
+            <h3>CSS Custom Properties Mixin</h3>
+            <div class="function-docs">
+                <strong>generate-color-custom-properties()</strong>
+                <p>Creates CSS custom properties for all color tokens</p>
+                <div class="code-block">
+/// @example scss - Usage
+///   :root {
+///     @include generate-color-custom-properties();
+///   }
+/// @output CSS custom properties for all colors
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2 class="section-header">🔧 Utility Classes</h2>
+        <div class="section-content">
+            <p>Complete utility class system documented with examples:</p>
+            
+            <div class="utility-grid">
+                <div class="utility-item">
+                    <h4>Text Color Utilities</h4>
+                    <p>Generates .mild-text-{color}-{shade} classes</p>
+                    <div class="code-block">
+.mild-text-blue-500 { color: #0ea5e9; }
+.mild-text-red-300 { color: #fca5a5; }
+.mild-text-white { color: #ffffff; }
+                    </div>
+                </div>
+
+                <div class="utility-item">
+                    <h4>Layout Utilities</h4>
+                    <p>Display, position, flexbox, and grid utilities</p>
+                    <div class="code-block">
+.mild-flex { display: flex; }
+.mild-grid { display: grid; }
+.mild-hidden { display: none; }
+.mild-relative { position: relative; }
+                    </div>
+                </div>
+
+                <div class="utility-item">
+                    <h4>Spacing Utilities</h4>
+                    <p>Margin and padding classes for all spacing tokens</p>
+                    <div class="code-block">
+.mild-m-4 { margin: 1rem; }
+.mild-p-6 { padding: 1.5rem; }
+.mild-mx-2 { margin-left: 0.5rem; margin-right: 0.5rem; }
+                    </div>
+                </div>
+
+                <div class="utility-item">
+                    <h4>Effects Utilities</h4>
+                    <p>Shadow, opacity, blur, and transform utilities</p>
+                    <div class="code-block">
+.mild-shadow-md { box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); }
+.mild-opacity-50 { opacity: 0.5; }
+.mild-blur-sm { filter: blur(4px); }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2 class="section-header">📊 Documentation Statistics</h2>
+        <div class="section-content">
+            <ul>
+                <li><strong>Design Token Groups:</strong> Colors, Spacing, Typography, Shadows, Animation</li>
+                <li><strong>Utility Categories:</strong> Layout, Spacing, Colors, Typography, Effects, Borders</li>
+                <li><strong>Functions Documented:</strong> color(), spacing(), font-size(), etc.</li>
+                <li><strong>Mixins Documented:</strong> CSS custom property generators</li>
+                <li><strong>Code Examples:</strong> Complete usage examples for all functions</li>
+                <li><strong>Generated Classes:</strong> 1000+ utility classes documented</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2 class="section-header">🚀 Deployment</h2>
+        <div class="section-content">
+            <p>The SassDoc documentation is fully configured for automatic deployment:</p>
+            <ul>
+                <li>✅ <strong>GitHub Actions Integration:</strong> Configured in .github/workflows/storybook.yml</li>
+                <li>✅ <strong>Build Script:</strong> <code>pnpm run docs:build</code> generates documentation</li>
+                <li>✅ <strong>SassDoc Config:</strong> .sassdocrc configured for GitHub Pages</li>
+                <li>✅ <strong>Auto-deployment:</strong> Documentation updates on every core package change</li>
+            </ul>
+            
+            <div class="code-block">
+# Build documentation locally
+pnpm run docs:build
+
+# Documentation will be generated in docs/ folder
+# And automatically deployed to GitHub Pages
+            </div>
+        </div>
+    </div>
+
+    <footer style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #e5e7eb; text-align: center; color: #6b7280;">
+        <p>SassDoc Documentation generated for @mild-ui/core v0.3.1</p>
+        <p>🔗 <a href="https://github.com/CodeWithRiyan/mild-ui" style="color: #3b82f6;">View Source Code</a></p>
+    </footer>
+</body>
+</html>
