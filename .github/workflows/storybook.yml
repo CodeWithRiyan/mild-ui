@@ -19,14 +19,14 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Setup pnpm
-        uses: pnpm/action-setup@v2
+        uses: pnpm/action-setup@v4
         with:
           version: 8
 
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: "18"
+          node-version: "20"
           cache: "pnpm"
 
       - name: Install dependencies
@@ -41,19 +41,39 @@ jobs:
       - name: Build Vue package
         run: pnpm --filter @mild-ui/vue build
 
-      # Generate Core Documentation (CSS/SCSS only now)
+      # Generate Core Documentation from README and UTILITIES
       - name: Generate Core Documentation
         run: |
           cd packages/core
-          # Core is now CSS-only, check if docs generation is available
-          if [ -f "package.json" ] && grep -q "docs:build" package.json; then
-            pnpm docs:build
+          mkdir -p docs
+          
+          # Create a simple HTML page from the README
+          echo '<!DOCTYPE html>
+          <html lang="en">
+          <head>
+              <meta charset="UTF-8">
+              <meta name="viewport" content="width=device-width, initial-scale=1.0">
+              <title>@mild-ui/core Documentation</title>
+              <style>
+                  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; max-width: 800px; margin: 0 auto; padding: 2rem; line-height: 1.6; }
+                  pre { background: #f6f8fa; padding: 1rem; border-radius: 6px; overflow-x: auto; }
+                  code { background: #f6f8fa; padding: 0.2em 0.4em; border-radius: 3px; }
+                  h1, h2, h3 { color: #24292f; }
+                  h1 { border-bottom: 1px solid #d1d9e0; padding-bottom: 0.3em; }
+              </style>
+          </head>
+          <body>' > docs/index.html
+          
+          # Convert README to basic HTML (simple approach)
+          if command -v pandoc >/dev/null 2>&1; then
+            pandoc README.md -t html >> docs/index.html
           else
-            echo "Core docs generation not available (CSS-only package now)"
-            mkdir -p docs
-            echo "# @mild-ui/core Documentation" > docs/index.html
-            echo "CSS/SCSS design system documentation" >> docs/index.html
+            echo '<pre>' >> docs/index.html
+            cat README.md >> docs/index.html
+            echo '</pre>' >> docs/index.html
           fi
+          
+          echo '</body></html>' >> docs/index.html
         env:
           NODE_ENV: production
 
@@ -79,6 +99,7 @@ jobs:
           mkdir -p deploy/react
           mkdir -p deploy/vue
           mkdir -p deploy/core
+          mkdir -p deploy/examples
 
       - name: Copy React Storybook
         run: cp -r storybook/react/storybook-static/* deploy/react/
@@ -94,6 +115,71 @@ jobs:
           else
             echo "Core docs not found, skipping..."
           fi
+
+      # Copy Core Examples
+      - name: Copy Core Examples
+        run: |
+          # Copy examples
+          cp -r packages/core/examples/* deploy/examples/
+          
+          # Copy dist files so examples can access CSS
+          cp -r packages/core/dist deploy/examples/dist
+          
+          # Fix CSS paths in example files for deployment
+          sed -i 's|href="../dist/mild-ui.css"|href="./dist/mild-ui.css"|g' deploy/examples/*.html
+          
+          # Rename the main examples file to avoid conflicts
+          mv deploy/examples/index.html deploy/examples/examples.html
+          
+          # Create examples navigation index page
+          cat > deploy/examples/index.html << 'EXAMPLES_EOF'
+          <!DOCTYPE html>
+          <html lang="en">
+          <head>
+              <meta charset="UTF-8">
+              <meta name="viewport" content="width=device-width, initial-scale=1.0">
+              <title>@mild-ui/core Examples</title>
+              <style>
+                  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; max-width: 800px; margin: 0 auto; padding: 2rem; line-height: 1.6; }
+                  h1 { color: #1e293b; border-bottom: 1px solid #e2e8f0; padding-bottom: 1rem; }
+                  .example-grid { display: grid; gap: 1.5rem; margin-top: 2rem; }
+                  .example-card { border: 1px solid #e2e8f0; border-radius: 8px; padding: 1.5rem; background: white; }
+                  .example-card h3 { margin: 0 0 0.5rem 0; color: #374151; }
+                  .example-card p { color: #6b7280; margin-bottom: 1rem; }
+                  .example-card a { background: #3b82f6; color: white; padding: 0.5rem 1rem; text-decoration: none; border-radius: 4px; display: inline-block; }
+                  .example-card a:hover { background: #2563eb; }
+              </style>
+          </head>
+          <body>
+              <h1>@mild-ui/core Live Examples</h1>
+              <p>Interactive examples demonstrating mild-ui CSS utilities in action. These examples use only CSS and HTML to showcase the framework-agnostic nature of the library.</p>
+              
+              <div class="example-grid">
+                  <div class="example-card">
+                      <h3>🎯 Complete Examples</h3>
+                      <p>Comprehensive showcase of all mild-ui utilities with working dark mode toggle</p>
+                      <a href="./examples.html">View Examples</a>
+                  </div>
+                  
+                  <div class="example-card">
+                      <h3>🌐 Landing Page</h3>
+                      <p>Complete marketing website built with mild-ui utilities</p>
+                      <a href="./landing-page.html">View Landing Page</a>
+                  </div>
+                  
+                  <div class="example-card">
+                      <h3>📊 Dashboard</h3>
+                      <p>Admin dashboard interface with sidebar, cards, and data tables</p>
+                      <a href="./dashboard.html">View Dashboard</a>
+                  </div>
+              </div>
+              
+              <div style="margin-top: 2rem; padding-top: 1rem; border-top: 1px solid #e2e8f0; text-align: center;">
+                  <a href="../" style="color: #3b82f6; text-decoration: none;">← Back to Main Documentation</a>
+              </div>
+          </body>
+          </html>
+          EXAMPLES_EOF
 
       - name: Create enhanced main index page
         run: |
@@ -266,6 +352,12 @@ jobs:
                                       <h3>🎨 SASS Design System</h3>
                                       <p>CSS/SCSS utilities, design tokens, and styling</p>
                                       <a href="./core/">Browse Core Docs</a>
+                                  </div>
+                                  
+                                  <div class="doc-card">
+                                      <h3>🚀 Live CSS Examples</h3>
+                                      <p>Interactive examples using only CSS utilities</p>
+                                      <a href="./examples/">View CSS Examples</a>
                                   </div>
                                   
                                   <div class="doc-card">

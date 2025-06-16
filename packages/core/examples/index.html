@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@mild-ui/core Examples</title>
+    <link rel="stylesheet" href="../dist/mild-ui.css">
+    <style>
+        /* Fix: Override CSS specificity for themes */
+        html[data-theme="light"] {
+            --mild-background: #f8fafc !important;
+            --mild-foreground: #1e293b !important;
+            --mild-muted: #f1f5f9 !important;
+            --mild-muted-foreground: #64748b !important;
+            --mild-border: #e2e8f0 !important;
+            --mild-card: #ffffff !important;
+            --mild-card-foreground: #1e293b !important;
+        }
+        
+        html[data-theme="dark"] {
+            --mild-background: #0a0a0a !important;
+            --mild-foreground: #fafafa !important;
+            --mild-muted: #262626 !important;
+            --mild-muted-foreground: #a3a3a3 !important;
+            --mild-border: #262626 !important;
+            --mild-card: #0a0a0a !important;
+            --mild-card-foreground: #fafafa !important;
+        }
+        
+        /* Debug: Force visible theme changes */
+        html {
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        
+        body {
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        
+        /* Theme-aware custom classes with fallbacks */
+        .theme-header {
+            background-color: var(--mild-background, #f8fafc);
+            border-bottom: 1px solid var(--mild-border, #e2e8f0);
+            transition: background-color 0.3s ease;
+        }
+        
+        .theme-text {
+            color: var(--mild-foreground, #1e293b);
+            transition: color 0.3s ease;
+        }
+        
+        .theme-muted {
+            color: var(--mild-muted-foreground, #64748b);
+            transition: color 0.3s ease;
+        }
+        
+        .theme-bg {
+            background-color: var(--mild-background, #f8fafc);
+            transition: background-color 0.3s ease;
+        }
+        
+        .theme-card {
+            background-color: var(--mild-card, #ffffff);
+            color: var(--mild-card-foreground, #1e293b);
+            border: 1px solid var(--mild-border, #e2e8f0);
+            transition: all 0.3s ease;
+        }
+        
+        /* Debug classes to test variables */
+        .debug-vars {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            padding: 10px;
+            background: rgba(0,0,0,0.8);
+            color: white;
+            font-size: 12px;
+            border-radius: 4px;
+            z-index: 1000;
+        }
+    </style>
+</head>
+<body>
+    
+    <!-- Debug Panel -->
+    <div id="debug-panel" class="debug-vars">
+        <div>Theme: <span id="debug-theme">light</span></div>
+        <div>Background: <span id="debug-bg">loading...</span></div>
+        <div>Foreground: <span id="debug-fg">loading...</span></div>
+        <div>Data-theme: <span id="debug-attr">loading...</span></div>
+    </div>
+    
+    <!-- Header -->
+    <header class="theme-header mild-shadow-sm">
+        <div class="mild-container mild-mx-auto mild-px-4 mild-py-6">
+            <div class="mild-flex mild-items-center mild-justify-between">
+                <div>
+                    <h1 class="theme-text mild-text-3xl mild-font-bold">@mild-ui/core Examples</h1>
+                    <p class="theme-muted mild-mt-2">Live examples showing how to use mild-ui CSS utilities</p>
+                </div>
+                <div class="mild-flex mild-gap-2">
+                    <button onclick="toggleTheme()" class="mild-px-4 mild-py-2 mild-bg-blue-600 mild-text-white mild-radius-md hover:mild-bg-blue-700 mild-transition-colors">
+                        🌓 Toggle Theme
+                    </button>
+                    <span id="current-theme" class="theme-text mild-px-3 mild-py-2 mild-text-sm">Light</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="theme-bg mild-container mild-mx-auto mild-px-4 mild-py-8">
+        
+        <!-- Layout Examples -->
+        <section class="theme-card mild-p-6 mild-radius-lg mild-shadow-sm mild-mb-8">
+            <h2 class="theme-text mild-text-2xl mild-font-bold mild-mb-6">Layout & Flexbox</h2>
+            
+            <div class="mild-bg-blue-50 mild-border mild-border-blue-200 mild-radius-md mild-p-4 mild-mb-4">
+                <div class="mild-flex mild-items-center mild-justify-between">
+                    <div class="mild-text-blue-900 mild-font-semibold">Left Content</div>
+                    <div class="mild-flex mild-gap-2">
+                        <button class="mild-px-3 mild-py-1 mild-bg-blue-500 mild-text-white mild-radius-sm mild-text-sm hover:mild-bg-blue-600 mild-transition-colors">Action</button>
+                        <button class="mild-px-3 mild-py-1 mild-bg-gray-200 mild-text-gray-700 mild-radius-sm mild-text-sm hover:mild-bg-gray-300 mild-transition-colors">Cancel</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mild-bg-gray-100 mild-p-4 mild-radius-md mild-text-sm mild-font-mono">
+                &lt;div class="mild-flex mild-items-center mild-justify-between"&gt;<br>
+                &nbsp;&nbsp;&lt;div&gt;Left Content&lt;/div&gt;<br>
+                &nbsp;&nbsp;&lt;div class="mild-flex mild-gap-2"&gt;<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&lt;button&gt;Action&lt;/button&gt;<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&lt;button&gt;Cancel&lt;/button&gt;<br>
+                &nbsp;&nbsp;&lt;/div&gt;<br>
+                &lt;/div&gt;
+            </div>
+        </section>
+
+        <!-- Grid Examples -->
+        <section class="theme-card mild-p-6 mild-radius-lg mild-shadow-sm mild-mb-8">
+            <h2 class="theme-text mild-text-2xl mild-font-bold mild-mb-6">Grid System</h2>
+            
+            <div class="mild-grid mild-grid-cols-1 md:mild-grid-cols-3 mild-gap-4 mild-mb-4">
+                <div class="mild-p-4 mild-bg-green-100 mild-border mild-border-green-200 mild-radius-md mild-text-center">
+                    <h3 class="mild-text-green-800 mild-font-semibold mild-mb-2">Card 1</h3>
+                    <p class="mild-text-green-600 mild-text-sm">This is a grid item with green styling</p>
+                </div>
+                <div class="mild-p-4 mild-bg-purple-100 mild-border mild-border-purple-200 mild-radius-md mild-text-center">
+                    <h3 class="mild-text-purple-800 mild-font-semibold mild-mb-2">Card 2</h3>
+                    <p class="mild-text-purple-600 mild-text-sm">This is a grid item with purple styling</p>
+                </div>
+                <div class="mild-p-4 mild-bg-orange-100 mild-border mild-border-orange-200 mild-radius-md mild-text-center">
+                    <h3 class="mild-text-orange-800 mild-font-semibold mild-mb-2">Card 3</h3>
+                    <p class="mild-text-orange-600 mild-text-sm">This is a grid item with orange styling</p>
+                </div>
+            </div>
+
+            <div class="mild-bg-gray-100 mild-p-4 mild-radius-md mild-text-sm mild-font-mono">
+                &lt;div class="mild-grid mild-grid-cols-1 md:mild-grid-cols-3 mild-gap-4"&gt;<br>
+                &nbsp;&nbsp;&lt;div class="mild-p-4 mild-bg-green-100"&gt;Card 1&lt;/div&gt;<br>
+                &nbsp;&nbsp;&lt;div class="mild-p-4 mild-bg-purple-100"&gt;Card 2&lt;/div&gt;<br>
+                &nbsp;&nbsp;&lt;div class="mild-p-4 mild-bg-orange-100"&gt;Card 3&lt;/div&gt;<br>
+                &lt;/div&gt;
+            </div>
+        </section>
+
+        <!-- Typography & Colors -->
+        <section class="theme-card mild-p-6 mild-radius-lg mild-shadow-sm mild-mb-8">
+            <h2 class="theme-text mild-text-2xl mild-font-bold mild-mb-6">Typography & Colors</h2>
+            
+            <div class="mild-space-y-4 mild-mb-4">
+                <h1 class="theme-text mild-text-4xl mild-font-bold">Heading 1 - 4xl Bold</h1>
+                <h2 class="theme-text mild-text-3xl mild-font-semibold">Heading 2 - 3xl Semibold</h2>
+                <h3 class="theme-text mild-text-2xl mild-font-medium">Heading 3 - 2xl Medium</h3>
+                <p class="theme-text mild-text-lg">Large paragraph text</p>
+                <p class="theme-muted mild-text-base">Base paragraph text (muted)</p>
+                <p class="theme-muted mild-text-sm">Small text (muted)</p>
+            </div>
+
+            <div class="mild-flex mild-flex-wrap mild-gap-2 mild-mb-4">
+                <span class="mild-px-3 mild-py-1 mild-bg-blue-100 mild-text-blue-800 mild-radius-full mild-text-sm">Blue Badge</span>
+                <span class="mild-px-3 mild-py-1 mild-bg-green-100 mild-text-green-800 mild-radius-full mild-text-sm">Green Badge</span>
+                <span class="mild-px-3 mild-py-1 mild-bg-yellow-100 mild-text-yellow-800 mild-radius-full mild-text-sm">Yellow Badge</span>
+                <span class="mild-px-3 mild-py-1 mild-bg-red-100 mild-text-red-800 mild-radius-full mild-text-sm">Red Badge</span>
+                <span class="mild-px-3 mild-py-1 mild-bg-purple-100 mild-text-purple-800 mild-radius-full mild-text-sm">Purple Badge</span>
+            </div>
+        </section>
+
+        <!-- Buttons -->
+        <section class="theme-card mild-p-6 mild-radius-lg mild-shadow-sm mild-mb-8">
+            <h2 class="theme-text mild-text-2xl mild-font-bold mild-mb-6">Buttons</h2>
+            
+            <div class="mild-flex mild-flex-wrap mild-gap-4 mild-mb-4">
+                <button class="mild-px-4 mild-py-2 mild-bg-blue-600 mild-text-white mild-radius-md hover:mild-bg-blue-700 mild-transition-colors">Primary</button>
+                <button class="mild-px-4 mild-py-2 mild-bg-gray-600 mild-text-white mild-radius-md hover:mild-bg-gray-700 mild-transition-colors">Secondary</button>
+                <button class="mild-px-4 mild-py-2 mild-bg-green-600 mild-text-white mild-radius-md hover:mild-bg-green-700 mild-transition-colors">Success</button>
+                <button class="mild-px-4 mild-py-2 mild-bg-red-600 mild-text-white mild-radius-md hover:mild-bg-red-700 mild-transition-colors">Danger</button>
+                <button class="mild-px-4 mild-py-2 mild-border mild-border-gray-300 mild-text-gray-700 mild-radius-md hover:mild-bg-gray-50 mild-transition-colors">Outline</button>
+            </div>
+
+            <div class="mild-flex mild-flex-wrap mild-gap-4">
+                <button class="mild-px-3 mild-py-1 mild-bg-blue-500 mild-text-white mild-radius-sm mild-text-sm hover:mild-bg-blue-600 mild-transition-colors">Small</button>
+                <button class="mild-px-4 mild-py-2 mild-bg-blue-600 mild-text-white mild-radius-md hover:mild-bg-blue-700 mild-transition-colors">Medium</button>
+                <button class="mild-px-6 mild-py-3 mild-bg-blue-700 mild-text-white mild-radius-lg mild-text-lg hover:mild-bg-blue-800 mild-transition-colors">Large</button>
+            </div>
+        </section>
+
+        <!-- Form Components -->
+        <section class="theme-card mild-p-6 mild-radius-lg mild-shadow-sm mild-mb-8">
+            <h2 class="theme-text mild-text-2xl mild-font-bold mild-mb-6">Form Components</h2>
+            
+            <form class="mild-space-y-4 mild-max-w-md">
+                <div>
+                    <label class="theme-text mild-block mild-text-sm mild-font-medium mild-mb-1">Name</label>
+                    <input type="text" class="mild-w-full mild-px-3 mild-py-2 mild-border mild-border-gray-300 mild-radius-md mild-text-sm focus:mild-border-blue-500 focus:mild-outline-none" placeholder="Enter your name">
+                </div>
+                <div>
+                    <label class="theme-text mild-block mild-text-sm mild-font-medium mild-mb-1">Email</label>
+                    <input type="email" class="mild-w-full mild-px-3 mild-py-2 mild-border mild-border-gray-300 mild-radius-md mild-text-sm focus:mild-border-blue-500 focus:mild-outline-none" placeholder="Enter your email">
+                </div>
+                <div>
+                    <label class="theme-text mild-block mild-text-sm mild-font-medium mild-mb-1">Message</label>
+                    <textarea rows="3" class="mild-w-full mild-px-3 mild-py-2 mild-border mild-border-gray-300 mild-radius-md mild-text-sm focus:mild-border-blue-500 focus:mild-outline-none" placeholder="Enter your message"></textarea>
+                </div>
+                <div class="mild-flex mild-items-center mild-gap-2">
+                    <input type="checkbox" id="agree" class="mild-w-4 mild-h-4">
+                    <label for="agree" class="theme-text mild-text-sm">I agree to the terms and conditions</label>
+                </div>
+                <button type="submit" class="mild-w-full mild-px-4 mild-py-2 mild-bg-blue-600 mild-text-white mild-font-medium mild-radius-md hover:mild-bg-blue-700 mild-transition-colors">
+                    Send Message
+                </button>
+            </form>
+        </section>
+
+        <!-- Cards -->
+        <section class="theme-card mild-p-6 mild-radius-lg mild-shadow-sm mild-mb-8">
+            <h2 class="theme-text mild-text-2xl mild-font-bold mild-mb-6">Card Components</h2>
+            
+            <div class="mild-grid mild-grid-cols-1 md:mild-grid-cols-2 lg:mild-grid-cols-3 mild-gap-6">
+                <div class="theme-card mild-radius-lg mild-overflow-hidden mild-shadow-sm hover:mild-shadow-md mild-transition-shadow">
+                    <div class="mild-h-32 mild-bg-gradient-to-br mild-from-blue-400 mild-to-purple-500"></div>
+                    <div class="mild-p-4">
+                        <h3 class="theme-text mild-text-lg mild-font-semibold mild-mb-2">Product Card</h3>
+                        <p class="theme-muted mild-text-sm mild-mb-4">This is a sample product card with a gradient header.</p>
+                        <div class="mild-flex mild-items-center mild-justify-between">
+                            <span class="mild-text-xl mild-font-bold mild-text-blue-600">$29.99</span>
+                            <button class="mild-px-3 mild-py-1 mild-bg-blue-600 mild-text-white mild-text-sm mild-radius-md hover:mild-bg-blue-700 mild-transition-colors">
+                                Buy Now
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="theme-card mild-radius-lg mild-overflow-hidden mild-shadow-sm hover:mild-shadow-md mild-transition-shadow">
+                    <div class="mild-h-32 mild-bg-gradient-to-br mild-from-green-400 mild-to-blue-500"></div>
+                    <div class="mild-p-4">
+                        <h3 class="theme-text mild-text-lg mild-font-semibold mild-mb-2">Feature Card</h3>
+                        <p class="theme-muted mild-text-sm mild-mb-4">Another card example with different gradient colors.</p>
+                        <button class="mild-w-full mild-px-3 mild-py-2 mild-bg-green-600 mild-text-white mild-text-sm mild-radius-md hover:mild-bg-green-700 mild-transition-colors">
+                            Learn More
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="theme-card mild-radius-lg mild-overflow-hidden mild-shadow-sm hover:mild-shadow-md mild-transition-shadow md:mild-col-span-2 lg:mild-col-span-1">
+                    <div class="mild-h-32 mild-bg-gradient-to-br mild-from-purple-400 mild-to-pink-500"></div>
+                    <div class="mild-p-4">
+                        <h3 class="theme-text mild-text-lg mild-font-semibold mild-mb-2">Info Card</h3>
+                        <p class="theme-muted mild-text-sm mild-mb-4">A third card to show responsive grid behavior.</p>
+                        <div class="mild-flex mild-gap-2">
+                            <button class="mild-flex-1 mild-px-3 mild-py-1 mild-bg-purple-600 mild-text-white mild-text-sm mild-radius-md hover:mild-bg-purple-700 mild-transition-colors">
+                                Action
+                            </button>
+                            <button class="mild-flex-1 mild-px-3 mild-py-1 mild-border mild-border-gray-300 mild-text-gray-700 mild-text-sm mild-radius-md hover:mild-bg-gray-50 mild-transition-colors">
+                                Cancel
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Dark Mode Demo -->
+        <section class="theme-card mild-p-6 mild-radius-lg mild-shadow-sm mild-mb-8">
+            <h2 class="theme-text mild-text-2xl mild-font-bold mild-mb-6">Dark Mode Support</h2>
+            
+            <div class="theme-bg mild-p-6 mild-border mild-border-gray-200 mild-radius-lg">
+                <h3 class="theme-text mild-text-lg mild-font-semibold mild-mb-4">
+                    Theme-Aware Content
+                </h3>
+                <p class="theme-muted mild-mb-4">
+                    This content automatically adapts when you toggle between light and dark themes using the button in the header.
+                </p>
+                <div class="mild-flex mild-gap-2">
+                    <button onclick="setTheme('light')" class="mild-px-3 mild-py-1 mild-bg-yellow-500 mild-text-white mild-radius-md hover:mild-bg-yellow-600 mild-transition-colors mild-text-sm">
+                        ☀️ Light
+                    </button>
+                    <button onclick="setTheme('dark')" class="mild-px-3 mild-py-1 mild-bg-gray-800 mild-text-white mild-radius-md hover:mild-bg-gray-900 mild-transition-colors mild-text-sm">
+                        🌙 Dark
+                    </button>
+                    <button onclick="setTheme('auto')" class="mild-px-3 mild-py-1 mild-bg-blue-600 mild-text-white mild-radius-md hover:mild-bg-blue-700 mild-transition-colors mild-text-sm">
+                        🌓 Auto
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Spacing Demo -->
+        <section class="theme-card mild-p-6 mild-radius-lg mild-shadow-sm mild-mb-8">
+            <h2 class="theme-text mild-text-2xl mild-font-bold mild-mb-6">Spacing System</h2>
+            
+            <div class="mild-space-y-4">
+                <div class="mild-flex mild-items-center mild-gap-4">
+                    <div class="mild-bg-blue-100 mild-p-1 mild-radius-md mild-text-blue-800 mild-text-sm mild-font-mono">p-1</div>
+                    <div class="mild-bg-blue-100 mild-p-2 mild-radius-md mild-text-blue-800 mild-text-sm mild-font-mono">p-2</div>
+                    <div class="mild-bg-blue-100 mild-p-3 mild-radius-md mild-text-blue-800 mild-text-sm mild-font-mono">p-3</div>
+                    <div class="mild-bg-blue-100 mild-p-4 mild-radius-md mild-text-blue-800 mild-text-sm mild-font-mono">p-4</div>
+                    <div class="mild-bg-blue-100 mild-p-6 mild-radius-md mild-text-blue-800 mild-text-sm mild-font-mono">p-6</div>
+                </div>
+                
+                <div class="mild-flex mild-gap-1">
+                    <div class="mild-bg-green-100 mild-p-2 mild-radius-md mild-text-green-800 mild-text-sm mild-font-mono">gap-1</div>
+                </div>
+                <div class="mild-flex mild-gap-2">
+                    <div class="mild-bg-green-100 mild-p-2 mild-radius-md mild-text-green-800 mild-text-sm mild-font-mono">gap-2</div>
+                    <div class="mild-bg-green-100 mild-p-2 mild-radius-md mild-text-green-800 mild-text-sm mild-font-mono">gap-2</div>
+                </div>
+                <div class="mild-flex mild-gap-4">
+                    <div class="mild-bg-green-100 mild-p-2 mild-radius-md mild-text-green-800 mild-text-sm mild-font-mono">gap-4</div>
+                    <div class="mild-bg-green-100 mild-p-2 mild-radius-md mild-text-green-800 mild-text-sm mild-font-mono">gap-4</div>
+                    <div class="mild-bg-green-100 mild-p-2 mild-radius-md mild-text-green-800 mild-text-sm mild-font-mono">gap-4</div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="theme-card mild-border-t mild-py-8 mild-mt-12">
+        <div class="mild-container mild-mx-auto mild-px-4 mild-text-center">
+            <p class="theme-muted mild-text-sm mild-mb-4">
+                @mild-ui/core examples - Framework-agnostic CSS utilities with the <code class="theme-muted mild-px-1 mild-radius-sm">mild-</code> prefix
+            </p>
+            <div class="mild-flex mild-justify-center mild-gap-4 mild-text-sm">
+                <a href="../README.md" class="mild-text-blue-600 hover:mild-text-blue-700 mild-transition-colors">Documentation</a>
+                <a href="../UTILITIES.md" class="mild-text-blue-600 hover:mild-text-blue-700 mild-transition-colors">Utilities Reference</a>
+                <a href="https://github.com/CodeWithRiyan/mild-ui" class="mild-text-blue-600 hover:mild-text-blue-700 mild-transition-colors">GitHub</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Theme management
+        let currentTheme = 'light';
+        
+        function setTheme(theme) {
+            const html = document.documentElement;
+            
+            if (theme === 'auto') {
+                // Use system preference
+                const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                theme = systemPrefersDark ? 'dark' : 'light';
+            }
+            
+            html.setAttribute('data-theme', theme);
+            currentTheme = theme;
+            
+            // Store preference
+            localStorage.setItem('mild-ui-theme', theme);
+            
+            // Update theme indicator
+            const indicator = document.getElementById('current-theme');
+            if (indicator) {
+                indicator.textContent = theme.charAt(0).toUpperCase() + theme.slice(1);
+            }
+            
+            // Debug: Update debug panel
+            updateDebugPanel(theme);
+            
+            console.log('Theme set to:', theme); // Debug log
+        }
+        
+        function updateDebugPanel(theme) {
+            // Get computed styles to see actual CSS variable values
+            const computedStyle = getComputedStyle(document.documentElement);
+            
+            document.getElementById('debug-theme').textContent = theme;
+            document.getElementById('debug-bg').textContent = computedStyle.getPropertyValue('--mild-background').trim() || 'undefined';
+            document.getElementById('debug-fg').textContent = computedStyle.getPropertyValue('--mild-foreground').trim() || 'undefined';
+            document.getElementById('debug-attr').textContent = document.documentElement.getAttribute('data-theme') || 'none';
+        }
+        
+        function toggleTheme() {
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            setTheme(newTheme);
+        }
+        
+        // Initialize theme on page load
+        function initTheme() {
+            const savedTheme = localStorage.getItem('mild-ui-theme');
+            const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            const initialTheme = savedTheme || (systemPrefersDark ? 'dark' : 'light');
+            setTheme(initialTheme);
+        }
+        
+        // Listen for system theme changes
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+            if (!localStorage.getItem('mild-ui-theme')) {
+                setTheme(e.matches ? 'dark' : 'light');
+            }
+        });
+        
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            initTheme();
+            // Initial debug update
+            setTimeout(() => updateDebugPanel(currentTheme), 100);
+        });
+    </script>
+</body>
+</html>

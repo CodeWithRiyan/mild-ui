@@ -1,5 +1,6 @@
 import type { Preview } from "@storybook/react";
 import "../src/styles/globals.css";
+import "../../../packages/core/dist/mild-ui.css";
 
 const preview: Preview = {
   parameters: {

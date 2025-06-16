@@ -1,5 +1,6 @@
 import type { Preview } from "@storybook/vue3";
 import "../src/styles/globals.css";
+import "@mild-ui/core/dist/mild-ui.css";
 
 const preview: Preview = {
   parameters: {

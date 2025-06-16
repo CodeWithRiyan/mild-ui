@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - @mild-ui/core Example</title>
+    <link rel="stylesheet" href="../dist/mild-ui.css">
+    <style>
+        /* Custom scrollbar */
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 3px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+    </style>
+</head>
+<body class="mild-bg-gray-50">
+    
+    <!-- Sidebar -->
+    <div class="mild-flex mild-h-screen">
+        <aside class="mild-w-64 mild-bg-white mild-shadow-lg mild-border-r mild-border-gray-200">
+            <!-- Logo -->
+            <div class="mild-p-6 mild-border-b mild-border-gray-200">
+                <div class="mild-flex mild-items-center mild-gap-3">
+                    <div class="mild-w-8 mild-h-8 mild-bg-blue-600 mild-radius-md"></div>
+                    <h1 class="mild-text-xl mild-font-bold mild-text-gray-900">Dashboard</h1>
+                </div>
+            </div>
+            
+            <!-- Navigation -->
+            <nav class="mild-p-4">
+                <ul class="mild-space-y-2">
+                    <li>
+                        <a href="#" class="mild-flex mild-items-center mild-gap-3 mild-px-3 mild-py-2 mild-bg-blue-50 mild-text-blue-700 mild-radius-md mild-font-medium">
+                            <svg class="mild-w-5 mild-h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2H5a2 2 0 00-2-2z"></path>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5a2 2 0 012-2h4a2 2 0 012 2v0M8 5a2 2 0 000 4h8a2 2 0 000-4M8 5v0"></path>
+                            </svg>
+                            Overview
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="mild-flex mild-items-center mild-gap-3 mild-px-3 mild-py-2 mild-text-gray-700 hover:mild-bg-gray-50 mild-radius-md mild-font-medium mild-transition-colors">
+                            <svg class="mild-w-5 mild-h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                            </svg>
+                            Analytics
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="mild-flex mild-items-center mild-gap-3 mild-px-3 mild-py-2 mild-text-gray-700 hover:mild-bg-gray-50 mild-radius-md mild-font-medium mild-transition-colors">
+                            <svg class="mild-w-5 mild-h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z"></path>
+                            </svg>
+                            Users
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="mild-flex mild-items-center mild-gap-3 mild-px-3 mild-py-2 mild-text-gray-700 hover:mild-bg-gray-50 mild-radius-md mild-font-medium mild-transition-colors">
+                            <svg class="mild-w-5 mild-h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
+                            </svg>
+                            Products
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="mild-flex mild-items-center mild-gap-3 mild-px-3 mild-py-2 mild-text-gray-700 hover:mild-bg-gray-50 mild-radius-md mild-font-medium mild-transition-colors">
+                            <svg class="mild-w-5 mild-h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                            </svg>
+                            Settings
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="mild-flex-1 mild-overflow-hidden">
+            <!-- Header -->
+            <header class="mild-bg-white mild-shadow-sm mild-border-b mild-border-gray-200">
+                <div class="mild-flex mild-items-center mild-justify-between mild-px-6 mild-py-4">
+                    <div>
+                        <h2 class="mild-text-2xl mild-font-bold mild-text-gray-900">Overview</h2>
+                        <p class="mild-text-gray-600">Welcome back! Here's what's happening.</p>
+                    </div>
+                    
+                    <div class="mild-flex mild-items-center mild-gap-4">
+                        <!-- Search -->
+                        <div class="mild-relative">
+                            <input type="text" placeholder="Search..." class="mild-w-64 mild-pl-10 mild-pr-4 mild-py-2 mild-border mild-border-gray-300 mild-radius-md mild-text-sm focus:mild-border-blue-500">
+                            <svg class="mild-absolute mild-left-3 mild-top-2.5 mild-w-4 mild-h-4 mild-text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                            </svg>
+                        </div>
+                        
+                        <!-- Notifications -->
+                        <button class="mild-relative mild-p-2 mild-text-gray-400 hover:mild-text-gray-600 mild-transition-colors">
+                            <svg class="mild-w-6 mild-h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-5 5v-5zM10.24 17H3c-.88 0-1.5-.64-1.5-1.5v-15C1.5 0 2.12 0 3 0h15c.88 0 1.5.64 1.5 1.5V12"></path>
+                            </svg>
+                            <span class="mild-absolute mild-top-0 mild-right-0 mild-w-2 mild-h-2 mild-bg-red-500 mild-radius-full"></span>
+                        </button>
+                        
+                        <!-- Profile -->
+                        <div class="mild-flex mild-items-center mild-gap-3">
+                            <div class="mild-w-8 mild-h-8 mild-bg-blue-600 mild-radius-full mild-flex mild-items-center mild-justify-center">
+                                <span class="mild-text-white mild-text-sm mild-font-medium">JD</span>
+                            </div>
+                            <div class="mild-hidden md:mild-block">
+                                <div class="mild-text-sm mild-font-medium mild-text-gray-900">John Doe</div>
+                                <div class="mild-text-xs mild-text-gray-500">Admin</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Content Area -->
+            <div class="mild-p-6 mild-h-full mild-overflow-y-auto custom-scrollbar">
+                
+                <!-- Stats Cards -->
+                <div class="mild-grid mild-grid-cols-1 md:mild-grid-cols-2 lg:mild-grid-cols-4 mild-gap-6 mild-mb-8">
+                    <div class="mild-bg-white mild-p-6 mild-radius-lg mild-shadow-sm mild-border mild-border-gray-200">
+                        <div class="mild-flex mild-items-center mild-justify-between">
+                            <div>
+                                <p class="mild-text-sm mild-font-medium mild-text-gray-600">Total Revenue</p>
+                                <p class="mild-text-3xl mild-font-bold mild-text-gray-900">$45,231</p>
+                                <p class="mild-text-sm mild-text-green-600 mild-flex mild-items-center mild-gap-1">
+                                    <svg class="mild-w-4 mild-h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
+                                    </svg>
+                                    +12.5% from last month
+                                </p>
+                            </div>
+                            <div class="mild-w-12 mild-h-12 mild-bg-green-100 mild-radius-full mild-flex mild-items-center mild-justify-center">
+                                <svg class="mild-w-6 mild-h-6 mild-text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"></path>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mild-bg-white mild-p-6 mild-radius-lg mild-shadow-sm mild-border mild-border-gray-200">
+                        <div class="mild-flex mild-items-center mild-justify-between">
+                            <div>
+                                <p class="mild-text-sm mild-font-medium mild-text-gray-600">New Customers</p>
+                                <p class="mild-text-3xl mild-font-bold mild-text-gray-900">2,350</p>
+                                <p class="mild-text-sm mild-text-blue-600 mild-flex mild-items-center mild-gap-1">
+                                    <svg class="mild-w-4 mild-h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
+                                    </svg>
+                                    +8.1% from last month
+                                </p>
+                            </div>
+                            <div class="mild-w-12 mild-h-12 mild-bg-blue-100 mild-radius-full mild-flex mild-items-center mild-justify-center">
+                                <svg class="mild-w-6 mild-h-6 mild-text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mild-bg-white mild-p-6 mild-radius-lg mild-shadow-sm mild-border mild-border-gray-200">
+                        <div class="mild-flex mild-items-center mild-justify-between">
+                            <div>
+                                <p class="mild-text-sm mild-font-medium mild-text-gray-600">Orders</p>
+                                <p class="mild-text-3xl mild-font-bold mild-text-gray-900">1,234</p>
+                                <p class="mild-text-sm mild-text-red-600 mild-flex mild-items-center mild-gap-1">
+                                    <svg class="mild-w-4 mild-h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+                                    </svg>
+                                    -2.4% from last month
+                                </p>
+                            </div>
+                            <div class="mild-w-12 mild-h-12 mild-bg-orange-100 mild-radius-full mild-flex mild-items-center mild-justify-center">
+                                <svg class="mild-w-6 mild-h-6 mild-text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mild-bg-white mild-p-6 mild-radius-lg mild-shadow-sm mild-border mild-border-gray-200">
+                        <div class="mild-flex mild-items-center mild-justify-between">
+                            <div>
+                                <p class="mild-text-sm mild-font-medium mild-text-gray-600">Active Users</p>
+                                <p class="mild-text-3xl mild-font-bold mild-text-gray-900">573</p>
+                                <p class="mild-text-sm mild-text-green-600 mild-flex mild-items-center mild-gap-1">
+                                    <svg class="mild-w-4 mild-h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
+                                    </svg>
+                                    +4.9% from last month
+                                </p>
+                            </div>
+                            <div class="mild-w-12 mild-h-12 mild-bg-purple-100 mild-radius-full mild-flex mild-items-center mild-justify-center">
+                                <svg class="mild-w-6 mild-h-6 mild-text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Charts and Recent Activity -->
+                <div class="mild-grid mild-grid-cols-1 lg:mild-grid-cols-3 mild-gap-6 mild-mb-8">
+                    
+                    <!-- Chart Area -->
+                    <div class="lg:mild-col-span-2 mild-bg-white mild-p-6 mild-radius-lg mild-shadow-sm mild-border mild-border-gray-200">
+                        <div class="mild-flex mild-items-center mild-justify-between mild-mb-6">
+                            <h3 class="mild-text-lg mild-font-semibold mild-text-gray-900">Revenue Overview</h3>
+                            <div class="mild-flex mild-gap-2">
+                                <button class="mild-px-3 mild-py-1 mild-text-sm mild-bg-blue-100 mild-text-blue-700 mild-radius-md mild-font-medium">7 days</button>
+                                <button class="mild-px-3 mild-py-1 mild-text-sm mild-text-gray-600 hover:mild-bg-gray-100 mild-radius-md mild-font-medium mild-transition-colors">30 days</button>
+                                <button class="mild-px-3 mild-py-1 mild-text-sm mild-text-gray-600 hover:mild-bg-gray-100 mild-radius-md mild-font-medium mild-transition-colors">90 days</button>
+                            </div>
+                        </div>
+                        
+                        <!-- Mock Chart -->
+                        <div class="mild-h-64 mild-bg-gradient-to-t mild-from-blue-50 mild-to-transparent mild-radius-md mild-flex mild-items-end mild-justify-center mild-relative">
+                            <div class="mild-absolute mild-inset-0 mild-flex mild-items-end mild-justify-around mild-px-4 mild-pb-4">
+                                <div class="mild-bg-blue-500 mild-w-8 mild-radius-t-md" style="height: 60%"></div>
+                                <div class="mild-bg-blue-500 mild-w-8 mild-radius-t-md" style="height: 80%"></div>
+                                <div class="mild-bg-blue-500 mild-w-8 mild-radius-t-md" style="height: 45%"></div>
+                                <div class="mild-bg-blue-500 mild-w-8 mild-radius-t-md" style="height: 90%"></div>
+                                <div class="mild-bg-blue-500 mild-w-8 mild-radius-t-md" style="height: 70%"></div>
+                                <div class="mild-bg-blue-500 mild-w-8 mild-radius-t-md" style="height: 95%"></div>
+                                <div class="mild-bg-blue-500 mild-w-8 mild-radius-t-md" style="height: 55%"></div>
+                            </div>
+                            <div class="mild-text-gray-500 mild-text-sm mild-mb-4">Revenue trend over the last 7 days</div>
+                        </div>
+                    </div>
+
+                    <!-- Recent Activity -->
+                    <div class="mild-bg-white mild-p-6 mild-radius-lg mild-shadow-sm mild-border mild-border-gray-200">
+                        <h3 class="mild-text-lg mild-font-semibold mild-text-gray-900 mild-mb-6">Recent Activity</h3>
+                        <div class="mild-space-y-4">
+                            <div class="mild-flex mild-items-start mild-gap-3">
+                                <div class="mild-w-2 mild-h-2 mild-bg-green-500 mild-radius-full mild-mt-2"></div>
+                                <div class="mild-flex-1">
+                                    <p class="mild-text-sm mild-font-medium mild-text-gray-900">New order received</p>
+                                    <p class="mild-text-xs mild-text-gray-500">Order #12345 from John Smith</p>
+                                    <p class="mild-text-xs mild-text-gray-400">2 minutes ago</p>
+                                </div>
+                            </div>
+                            
+                            <div class="mild-flex mild-items-start mild-gap-3">
+                                <div class="mild-w-2 mild-h-2 mild-bg-blue-500 mild-radius-full mild-mt-2"></div>
+                                <div class="mild-flex-1">
+                                    <p class="mild-text-sm mild-font-medium mild-text-gray-900">Payment processed</p>
+                                    <p class="mild-text-xs mild-text-gray-500">$299.99 from Customer #678</p>
+                                    <p class="mild-text-xs mild-text-gray-400">15 minutes ago</p>
+                                </div>
+                            </div>
+                            
+                            <div class="mild-flex mild-items-start mild-gap-3">
+                                <div class="mild-w-2 mild-h-2 mild-bg-yellow-500 mild-radius-full mild-mt-2"></div>
+                                <div class="mild-flex-1">
+                                    <p class="mild-text-sm mild-font-medium mild-text-gray-900">Product updated</p>
+                                    <p class="mild-text-xs mild-text-gray-500">iPhone 15 Pro Max inventory</p>
+                                    <p class="mild-text-xs mild-text-gray-400">1 hour ago</p>
+                                </div>
+                            </div>
+                            
+                            <div class="mild-flex mild-items-start mild-gap-3">
+                                <div class="mild-w-2 mild-h-2 mild-bg-purple-500 mild-radius-full mild-mt-2"></div>
+                                <div class="mild-flex-1">
+                                    <p class="mild-text-sm mild-font-medium mild-text-gray-900">New customer registered</p>
+                                    <p class="mild-text-xs mild-text-gray-500">sarah.jones@email.com</p>
+                                    <p class="mild-text-xs mild-text-gray-400">3 hours ago</p>
+                                </div>
+                            </div>
+                            
+                            <div class="mild-flex mild-items-start mild-gap-3">
+                                <div class="mild-w-2 mild-h-2 mild-bg-red-500 mild-radius-full mild-mt-2"></div>
+                                <div class="mild-flex-1">
+                                    <p class="mild-text-sm mild-font-medium mild-text-gray-900">Server alert</p>
+                                    <p class="mild-text-xs mild-text-gray-500">High CPU usage detected</p>
+                                    <p class="mild-text-xs mild-text-gray-400">5 hours ago</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Orders Table -->
+                <div class="mild-bg-white mild-radius-lg mild-shadow-sm mild-border mild-border-gray-200">
+                    <div class="mild-px-6 mild-py-4 mild-border-b mild-border-gray-200">
+                        <h3 class="mild-text-lg mild-font-semibold mild-text-gray-900">Recent Orders</h3>
+                    </div>
+                    <div class="mild-overflow-x-auto">
+                        <table class="mild-w-full">
+                            <thead class="mild-bg-gray-50">
+                                <tr>
+                                    <th class="mild-px-6 mild-py-3 mild-text-left mild-text-xs mild-font-medium mild-text-gray-500 mild-uppercase">Order ID</th>
+                                    <th class="mild-px-6 mild-py-3 mild-text-left mild-text-xs mild-font-medium mild-text-gray-500 mild-uppercase">Customer</th>
+                                    <th class="mild-px-6 mild-py-3 mild-text-left mild-text-xs mild-font-medium mild-text-gray-500 mild-uppercase">Product</th>
+                                    <th class="mild-px-6 mild-py-3 mild-text-left mild-text-xs mild-font-medium mild-text-gray-500 mild-uppercase">Amount</th>
+                                    <th class="mild-px-6 mild-py-3 mild-text-left mild-text-xs mild-font-medium mild-text-gray-500 mild-uppercase">Status</th>
+                                    <th class="mild-px-6 mild-py-3 mild-text-left mild-text-xs mild-font-medium mild-text-gray-500 mild-uppercase">Date</th>
+                                </tr>
+                            </thead>
+                            <tbody class="mild-divide-y mild-divide-gray-200">
+                                <tr class="hover:mild-bg-gray-50 mild-transition-colors">
+                                    <td class="mild-px-6 mild-py-4 mild-text-sm mild-font-medium mild-text-gray-900">#12345</td>
+                                    <td class="mild-px-6 mild-py-4 mild-text-sm mild-text-gray-900">John Smith</td>
+                                    <td class="mild-px-6 mild-py-4 mild-text-sm mild-text-gray-900">iPhone 15 Pro</td>
+                                    <td class="mild-px-6 mild-py-4 mild-text-sm mild-text-gray-900">$999.99</td>
+                                    <td class="mild-px-6 mild-py-4">
+                                        <span class="mild-px-2 mild-py-1 mild-text-xs mild-font-medium mild-bg-green-100 mild-text-green-800 mild-radius-full">Completed</span>
+                                    </td>
+                                    <td class="mild-px-6 mild-py-4 mild-text-sm mild-text-gray-500">Dec 15, 2024</td>
+                                </tr>
+                                <tr class="hover:mild-bg-gray-50 mild-transition-colors">
+                                    <td class="mild-px-6 mild-py-4 mild-text-sm mild-font-medium mild-text-gray-900">#12344</td>
+                                    <td class="mild-px-6 mild-py-4 mild-text-sm mild-text-gray-900">Sarah Johnson</td>
+                                    <td class="mild-px-6 mild-py-4 mild-text-sm mild-text-gray-900">MacBook Pro</td>
+                                    <td class="mild-px-6 mild-py-4 mild-text-sm mild-text-gray-900">$2,399.99</td>
+                                    <td class="mild-px-6 mild-py-4">
+                                        <span class="mild-px-2 mild-py-1 mild-text-xs mild-font-medium mild-bg-yellow-100 mild-text-yellow-800 mild-radius-full">Processing</span>
+                                    </td>
+                                    <td class="mild-px-6 mild-py-4 mild-text-sm mild-text-gray-500">Dec 14, 2024</td>
+                                </tr>
+                                <tr class="hover:mild-bg-gray-50 mild-transition-colors">
+                                    <td class="mild-px-6 mild-py-4 mild-text-sm mild-font-medium mild-text-gray-900">#12343</td>
+                                    <td class="mild-px-6 mild-py-4 mild-text-sm mild-text-gray-900">Mike Wilson</td>
+                                    <td class="mild-px-6 mild-py-4 mild-text-sm mild-text-gray-900">AirPods Pro</td>
+                                    <td class="mild-px-6 mild-py-4 mild-text-sm mild-text-gray-900">$249.99</td>
+                                    <td class="mild-px-6 mild-py-4">
+                                        <span class="mild-px-2 mild-py-1 mild-text-xs mild-font-medium mild-bg-red-100 mild-text-red-800 mild-radius-full">Cancelled</span>
+                                    </td>
+                                    <td class="mild-px-6 mild-py-4 mild-text-sm mild-text-gray-500">Dec 13, 2024</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+</body>
+</html>

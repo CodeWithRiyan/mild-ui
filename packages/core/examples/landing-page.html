@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Landing Page - @mild-ui/core Example</title>
+    <link rel="stylesheet" href="../dist/mild-ui.css">
+    <style>
+        /* Custom hero gradient */
+        .hero-gradient {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        /* Custom animations */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .floating {
+            animation: float 3s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body class="mild-bg-gray-50">
+    
+    <!-- Navigation -->
+    <nav class="mild-bg-white mild-shadow-sm mild-border-b mild-border-gray-200">
+        <div class="mild-container mild-mx-auto mild-px-4">
+            <div class="mild-flex mild-items-center mild-justify-between mild-h-16">
+                <div class="mild-flex mild-items-center mild-gap-2">
+                    <div class="mild-w-8 mild-h-8 mild-bg-blue-600 mild-radius-md"></div>
+                    <span class="mild-text-xl mild-font-bold mild-text-gray-900">mild-ui</span>
+                </div>
+                
+                <div class="mild-hidden md:mild-flex mild-items-center mild-gap-8">
+                    <a href="#features" class="mild-text-gray-600 hover:mild-text-blue-600 mild-transition-colors">Features</a>
+                    <a href="#examples" class="mild-text-gray-600 hover:mild-text-blue-600 mild-transition-colors">Examples</a>
+                    <a href="#docs" class="mild-text-gray-600 hover:mild-text-blue-600 mild-transition-colors">Docs</a>
+                    <button class="mild-px-4 mild-py-2 mild-bg-blue-600 mild-text-white mild-radius-md hover:mild-bg-blue-700 mild-transition-colors">Get Started</button>
+                </div>
+                
+                <!-- Mobile menu button -->
+                <button class="md:mild-hidden mild-p-2">
+                    <svg class="mild-w-6 mild-h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-gradient mild-text-white mild-py-20">
+        <div class="mild-container mild-mx-auto mild-px-4 mild-text-center">
+            <div class="mild-max-w-4xl mild-mx-auto">
+                <h1 class="mild-text-4xl md:mild-text-6xl mild-font-bold mild-mb-6 floating">
+                    Build Beautiful UIs with
+                    <span class="mild-text-yellow-300">mild-ui</span>
+                </h1>
+                <p class="mild-text-xl md:mild-text-2xl mild-mb-8 mild-text-blue-100">
+                    Framework-agnostic CSS utilities and components. 
+                    Tailwind-like utilities with the <code class="mild-bg-blue-800 mild-px-2 mild-py-1 mild-radius-sm">mild-</code> prefix.
+                </p>
+                <div class="mild-flex mild-flex-col sm:mild-flex-row mild-gap-4 mild-justify-center">
+                    <button class="mild-px-8 mild-py-4 mild-bg-white mild-text-blue-600 mild-font-semibold mild-radius-lg hover:mild-bg-blue-50 mild-transition-colors mild-shadow-lg">
+                        Get Started
+                    </button>
+                    <button class="mild-px-8 mild-py-4 mild-border-2 mild-border-white mild-text-white mild-font-semibold mild-radius-lg hover:mild-bg-white hover:mild-text-blue-600 mild-transition-colors">
+                        View Examples
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="mild-py-20">
+        <div class="mild-container mild-mx-auto mild-px-4">
+            <div class="mild-text-center mild-mb-16">
+                <h2 class="mild-text-3xl md:mild-text-4xl mild-font-bold mild-text-gray-900 mild-mb-4">
+                    Why Choose mild-ui?
+                </h2>
+                <p class="mild-text-xl mild-text-gray-600 mild-max-w-2xl mild-mx-auto">
+                    Built for modern web development with flexibility and performance in mind
+                </p>
+            </div>
+            
+            <div class="mild-grid mild-grid-cols-1 md:mild-grid-cols-3 mild-gap-8">
+                <div class="mild-bg-white mild-p-8 mild-radius-xl mild-shadow-lg mild-text-center hover:mild-shadow-xl mild-transition-shadow">
+                    <div class="mild-w-16 mild-h-16 mild-bg-blue-100 mild-radius-full mild-flex mild-items-center mild-justify-center mild-mx-auto mild-mb-6">
+                        <svg class="mild-w-8 mild-h-8 mild-text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="mild-text-xl mild-font-semibold mild-text-gray-900 mild-mb-4">Lightning Fast</h3>
+                    <p class="mild-text-gray-600">Pure CSS with zero JavaScript. Minimal bundle size and optimal performance.</p>
+                </div>
+                
+                <div class="mild-bg-white mild-p-8 mild-radius-xl mild-shadow-lg mild-text-center hover:mild-shadow-xl mild-transition-shadow">
+                    <div class="mild-w-16 mild-h-16 mild-bg-green-100 mild-radius-full mild-flex mild-items-center mild-justify-center mild-mx-auto mild-mb-6">
+                        <svg class="mild-w-8 mild-h-8 mild-text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
+                        </svg>
+                    </div>
+                    <h3 class="mild-text-xl mild-font-semibold mild-text-gray-900 mild-mb-4">Framework Agnostic</h3>
+                    <p class="mild-text-gray-600">Works with React, Vue, Angular, or vanilla HTML. Use anywhere.</p>
+                </div>
+                
+                <div class="mild-bg-white mild-p-8 mild-radius-xl mild-shadow-lg mild-text-center hover:mild-shadow-xl mild-transition-shadow">
+                    <div class="mild-w-16 mild-h-16 mild-bg-purple-100 mild-radius-full mild-flex mild-items-center mild-justify-center mild-mx-auto mild-mb-6">
+                        <svg class="mild-w-8 mild-h-8 mild-text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4"></path>
+                        </svg>
+                    </div>
+                    <h3 class="mild-text-xl mild-font-semibold mild-text-gray-900 mild-mb-4">Highly Customizable</h3>
+                    <p class="mild-text-gray-600">SCSS variables, design tokens, and CSS custom properties for full control.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Code Example Section -->
+    <section id="examples" class="mild-py-20 mild-bg-gray-900 mild-text-white">
+        <div class="mild-container mild-mx-auto mild-px-4">
+            <div class="mild-text-center mild-mb-16">
+                <h2 class="mild-text-3xl md:mild-text-4xl mild-font-bold mild-mb-4">
+                    Easy to Use
+                </h2>
+                <p class="mild-text-xl mild-text-gray-300">
+                    Just add the CSS file and start using utility classes
+                </p>
+            </div>
+            
+            <div class="mild-grid mild-grid-cols-1 lg:mild-grid-cols-2 mild-gap-8">
+                <div>
+                    <h3 class="mild-text-lg mild-font-semibold mild-mb-4 mild-text-green-400">1. Install & Import</h3>
+                    <div class="mild-bg-gray-800 mild-p-6 mild-radius-lg mild-border mild-border-gray-700">
+                        <pre class="mild-text-sm"><code># Install via npm
+npm install @mild-ui/core
+
+# Import in your CSS
+@import '@mild-ui/core/dist/mild-ui.css';
+
+# Or use CDN
+&lt;link rel="stylesheet" href="path/to/mild-ui.css"&gt;</code></pre>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="mild-text-lg mild-font-semibold mild-mb-4 mild-text-blue-400">2. Use Utility Classes</h3>
+                    <div class="mild-bg-gray-800 mild-p-6 mild-radius-lg mild-border mild-border-gray-700">
+                        <pre class="mild-text-sm"><code>&lt;div class="mild-flex mild-items-center mild-gap-4"&gt;
+  &lt;img class="mild-w-12 mild-h-12 mild-radius-full" 
+       src="avatar.jpg" alt="Avatar"&gt;
+  &lt;div&gt;
+    &lt;h3 class="mild-font-semibold mild-text-gray-900"&gt;
+      John Doe
+    &lt;/h3&gt;
+    &lt;p class="mild-text-gray-600 mild-text-sm"&gt;
+      Web Developer
+    &lt;/p&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="mild-py-20 mild-bg-blue-600 mild-text-white">
+        <div class="mild-container mild-mx-auto mild-px-4">
+            <div class="mild-grid mild-grid-cols-2 md:mild-grid-cols-4 mild-gap-8 mild-text-center">
+                <div>
+                    <div class="mild-text-4xl mild-font-bold mild-mb-2">500+</div>
+                    <div class="mild-text-blue-200">Utility Classes</div>
+                </div>
+                <div>
+                    <div class="mild-text-4xl mild-font-bold mild-mb-2">0</div>
+                    <div class="mild-text-blue-200">JavaScript</div>
+                </div>
+                <div>
+                    <div class="mild-text-4xl mild-font-bold mild-mb-2">15KB</div>
+                    <div class="mild-text-blue-200">Minified Size</div>
+                </div>
+                <div>
+                    <div class="mild-text-4xl mild-font-bold mild-mb-2">3</div>
+                    <div class="mild-text-blue-200">Frameworks</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="mild-py-20">
+        <div class="mild-container mild-mx-auto mild-px-4 mild-text-center">
+            <div class="mild-max-w-3xl mild-mx-auto">
+                <h2 class="mild-text-3xl md:mild-text-4xl mild-font-bold mild-text-gray-900 mild-mb-6">
+                    Ready to Get Started?
+                </h2>
+                <p class="mild-text-xl mild-text-gray-600 mild-mb-8">
+                    Join thousands of developers building beautiful UIs with mild-ui
+                </p>
+                <div class="mild-flex mild-flex-col sm:mild-flex-row mild-gap-4 mild-justify-center">
+                    <button class="mild-px-8 mild-py-4 mild-bg-blue-600 mild-text-white mild-font-semibold mild-radius-lg hover:mild-bg-blue-700 mild-transition-colors mild-shadow-lg">
+                        View Documentation
+                    </button>
+                    <button class="mild-px-8 mild-py-4 mild-border mild-border-gray-300 mild-text-gray-700 mild-font-semibold mild-radius-lg hover:mild-bg-gray-50 mild-transition-colors">
+                        Browse Examples
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="mild-bg-gray-900 mild-text-white mild-py-12">
+        <div class="mild-container mild-mx-auto mild-px-4">
+            <div class="mild-grid mild-grid-cols-1 md:mild-grid-cols-4 mild-gap-8">
+                <div class="md:mild-col-span-2">
+                    <div class="mild-flex mild-items-center mild-gap-2 mild-mb-4">
+                        <div class="mild-w-8 mild-h-8 mild-bg-blue-600 mild-radius-md"></div>
+                        <span class="mild-text-xl mild-font-bold">mild-ui</span>
+                    </div>
+                    <p class="mild-text-gray-400 mild-mb-4">
+                        A modern, framework-agnostic CSS component library with Tailwind-like utilities. 
+                        Build faster, ship sooner.
+                    </p>
+                    <div class="mild-flex mild-gap-4">
+                        <a href="#" class="mild-text-gray-400 hover:mild-text-white mild-transition-colors">
+                            <svg class="mild-w-6 mild-h-6" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                            </svg>
+                        </a>
+                        <a href="#" class="mild-text-gray-400 hover:mild-text-white mild-transition-colors">
+                            <svg class="mild-w-6 mild-h-6" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="mild-font-semibold mild-mb-4">Documentation</h4>
+                    <ul class="mild-space-y-2 mild-text-gray-400">
+                        <li><a href="#" class="hover:mild-text-white mild-transition-colors">Getting Started</a></li>
+                        <li><a href="#" class="hover:mild-text-white mild-transition-colors">Utility Classes</a></li>
+                        <li><a href="#" class="hover:mild-text-white mild-transition-colors">Components</a></li>
+                        <li><a href="#" class="hover:mild-text-white mild-transition-colors">Customization</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="mild-font-semibold mild-mb-4">Community</h4>
+                    <ul class="mild-space-y-2 mild-text-gray-400">
+                        <li><a href="#" class="hover:mild-text-white mild-transition-colors">GitHub</a></li>
+                        <li><a href="#" class="hover:mild-text-white mild-transition-colors">Discord</a></li>
+                        <li><a href="#" class="hover:mild-text-white mild-transition-colors">Twitter</a></li>
+                        <li><a href="#" class="hover:mild-text-white mild-transition-colors">Blog</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="mild-border-t mild-border-gray-800 mild-mt-12 mild-pt-8 mild-text-center mild-text-gray-400">
+                <p>&copy; 2024 mild-ui. Built with ❤️ for the web development community.</p>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
