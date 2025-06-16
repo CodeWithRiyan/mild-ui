@@ -8,7 +8,7 @@ import type {
   ButtonVariant,
   ButtonSize,
   ButtonColorScheme
-} from '@mild-ui/core';
+} from '../../types';
 import type { ReactNode } from 'react';
 
 export interface ReactButtonProps extends CoreButtonProps {

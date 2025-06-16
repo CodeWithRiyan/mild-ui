@@ -1,3 +1,6 @@
+@use 'sass:map';
+@use 'sass:list';
+
 // Design System Typography
 // @description Core typography tokens for SASS compilation
 
@@ -90,8 +93,8 @@ $mild-letter-spacing: (
 
 // Typography utility functions
 @function font-size($size) {
-  @if map-has-key($mild-font-sizes, $size) {
-    @return map-get($mild-font-sizes, $size);
+  @if map.has-key($mild-font-sizes, $size) {
+    @return map.get($mild-font-sizes, $size);
   }
   
   @warn "Font size `#{$size}` not found in design system";
@@ -99,8 +102,8 @@ $mild-letter-spacing: (
 }
 
 @function font-weight($weight) {
-  @if map-has-key($mild-font-weights, $weight) {
-    @return map-get($mild-font-weights, $weight);
+  @if map.has-key($mild-font-weights, $weight) {
+    @return map.get($mild-font-weights, $weight);
   }
   
   @warn "Font weight `#{$weight}` not found in design system";
@@ -108,8 +111,8 @@ $mild-letter-spacing: (
 }
 
 @function font-family($family) {
-  @if map-has-key($mild-font-families, $family) {
-    $font-stack: map-get($mild-font-families, $family);
+  @if map.has-key($mild-font-families, $family) {
+    $font-stack: map.get($mild-font-families, $family);
     @return list-to-string($font-stack, ', ');
   }
   
@@ -118,8 +121,8 @@ $mild-letter-spacing: (
 }
 
 @function line-height($height) {
-  @if map-has-key($mild-line-heights, $height) {
-    @return map-get($mild-line-heights, $height);
+  @if map.has-key($mild-line-heights, $height) {
+    @return map.get($mild-line-heights, $height);
   }
   
   @warn "Line height `#{$height}` not found in design system";
@@ -127,8 +130,8 @@ $mild-letter-spacing: (
 }
 
 @function letter-spacing($spacing) {
-  @if map-has-key($mild-letter-spacing, $spacing) {
-    @return map-get($mild-letter-spacing, $spacing);
+  @if map.has-key($mild-letter-spacing, $spacing) {
+    @return map.get($mild-letter-spacing, $spacing);
   }
   
   @warn "Letter spacing `#{$spacing}` not found in design system";
@@ -166,9 +169,9 @@ $mild-letter-spacing: (
 // Helper function to convert list to string
 @function list-to-string($list, $separator: ', ') {
   $result: '';
-  @for $i from 1 through length($list) {
-    $result: $result + nth($list, $i);
-    @if $i < length($list) {
+  @for $i from 1 through list.length($list) {
+    $result: $result + list.nth($list, $i);
+    @if $i < list.length($list) {
       $result: $result + $separator;
     }
   }

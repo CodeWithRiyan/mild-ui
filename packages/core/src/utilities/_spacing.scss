@@ -1,3 +1,5 @@
+@use '../sass/tokens/spacing';
+
 /// Spacing Utilities
 /// @group utilities
 /// @author Mild UI Team
@@ -10,7 +12,7 @@
 ///   .mild-mx-2 { margin-left: 0.5rem; margin-right: 0.5rem; }
 ///   .mild-mt-8 { margin-top: 2rem; }
 .mild-m-auto { margin: auto; }
-@each $size-name, $size-value in $mild-spacing {
+@each $size-name, $size-value in spacing.$mild-spacing {
   .mild-m-#{$size-name} { margin: #{$size-value}; }
   .mild-mx-#{$size-name} { 
     margin-left: #{$size-value}; 
@@ -27,7 +29,7 @@
 }
 
 // Negative margins
-@each $size-name, $size-value in $mild-spacing {
+@each $size-name, $size-value in spacing.$mild-spacing {
   @if $size-name != '0' {
     .mild--m-#{$size-name} { margin: -#{$size-value}; }
     .mild--mx-#{$size-name} { 
@@ -46,7 +48,7 @@
 }
 
 // Padding utilities
-@each $size-name, $size-value in $mild-spacing {
+@each $size-name, $size-value in spacing.$mild-spacing {
   .mild-p-#{$size-name} { padding: #{$size-value}; }
   .mild-px-#{$size-name} { 
     padding-left: #{$size-value}; 

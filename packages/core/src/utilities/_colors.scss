@@ -1,3 +1,6 @@
+@use 'sass:meta';
+@use '../sass/tokens/colors';
+
 /// Color Utilities
 /// @group utilities
 /// @author Mild UI Team
@@ -9,58 +12,42 @@
 ///   .mild-text-blue-500 { color: #0ea5e9; }
 ///   .mild-text-red-300 { color: #fca5a5; }
 ///   .mild-text-white { color: #ffffff; }
-@each $color-name, $color-map in $mild-colors {
-  @if type-of($color-map) == 'map' {
-    @each $shade, $value in $color-map {
-      .mild-text-#{$color-name}-#{$shade} { color: #{$value}; }
-    }
-  } @else {
-    .mild-text-#{$color-name} { color: #{$color-map}; }
-  }
+@each $color-name, $color-value in colors.$mild-colors {
+  .mild-text-#{$color-name} { color: #{$color-value}; }
 }
 
-// Background colors
-@each $color-name, $color-map in $mild-colors {
-  @if type-of($color-map) == 'map' {
-    @each $shade, $value in $color-map {
-      .mild-bg-#{$color-name}-#{$shade} { background-color: #{$value}; }
-    }
-  } @else {
-    .mild-bg-#{$color-name} { background-color: #{$color-map}; }
-  }
+/// Background color utilities
+/// @description Generates .mild-bg-{color}-{shade} classes for all color tokens
+@each $color-name, $color-value in colors.$mild-colors {
+  .mild-bg-#{$color-name} { background-color: #{$color-value}; }
 }
 
-// Border colors
-@each $color-name, $color-map in $mild-colors {
-  @if type-of($color-map) == 'map' {
-    @each $shade, $value in $color-map {
-      .mild-border-#{$color-name}-#{$shade} { border-color: #{$value}; }
-    }
-  } @else {
-    .mild-border-#{$color-name} { border-color: #{$color-map}; }
-  }
+/// Border color utilities  
+/// @description Generates .mild-border-{color}-{shade} classes for all color tokens
+@each $color-name, $color-value in colors.$mild-colors {
+  .mild-border-#{$color-name} { border-color: #{$color-value}; }
 }
 
 /// Semantic color utilities
 /// @description Utility classes using semantic color names (primary, success, etc.)
 /// @example scss - Generated classes
-///   .mild-text-primary { color: color('primary'); }
-///   .mild-bg-success { background-color: color('success'); }
-///   .mild-border-danger { border-color: color('danger'); }
-.mild-text-primary { color: color('primary'); }
-.mild-text-secondary { color: color('secondary'); }
-.mild-text-success { color: color('success'); }
-.mild-text-warning { color: color('warning'); }
-.mild-text-danger { color: color('danger'); }
+///   .mild-text-primary { color: colors.color('primary'); }
+///   .mild-bg-success { background-color: colors.color('success'); }
+///   .mild-border-danger { border-color: colors.color('danger'); }
+.mild-text-primary { color: colors.color('primary'); }
+.mild-text-secondary { color: colors.color('secondary'); }
+.mild-text-success { color: colors.color('success'); }
+.mild-text-warning { color: colors.color('warning'); }
+.mild-text-danger { color: colors.color('danger'); }
 
-.mild-bg-primary { background-color: color('primary'); }
-.mild-bg-secondary { background-color: color('secondary'); }
-.mild-bg-success { background-color: color('success'); }
-.mild-bg-warning { background-color: color('warning'); }
-.mild-bg-danger { background-color: color('danger'); }
+.mild-bg-primary { background-color: colors.color('primary'); }
+.mild-bg-secondary { background-color: colors.color('secondary'); }
+.mild-bg-success { background-color: colors.color('success'); }
+.mild-bg-warning { background-color: colors.color('warning'); }
+.mild-bg-danger { background-color: colors.color('danger'); }
 
-.mild-border-primary { border-color: color('primary'); }
-.mild-border-secondary { border-color: color('secondary'); }
-.mild-border-success { border-color: color('success'); }
-.mild-border-warning { border-color: color('warning'); }
-.mild-border-danger { border-color: color('danger'); }
+.mild-border-primary { border-color: colors.color('primary'); }
+.mild-border-secondary { border-color: colors.color('secondary'); }
+.mild-border-success { border-color: colors.color('success'); }
+.mild-border-warning { border-color: colors.color('warning'); }
+.mild-border-danger { border-color: colors.color('danger'); }

@@ -1,3 +1,5 @@
+@use '../sass/tokens/radius';
+
 // Border Utilities
 // @description Border utility classes with mild- prefix to avoid Tailwind conflicts
 
@@ -41,7 +43,7 @@
 .mild-border-none { border-style: none; }
 
 // Border radius utilities
-@each $radius-name, $radius-value in $mild-radius {
+@each $radius-name, $radius-value in radius.$mild-radius {
   .mild-rounded-#{$radius-name} { border-radius: #{$radius-value}; }
   .mild-rounded-t-#{$radius-name} { 
     border-top-left-radius: #{$radius-value}; 

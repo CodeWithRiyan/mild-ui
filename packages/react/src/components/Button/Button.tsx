@@ -1,17 +1,11 @@
 // packages/react/src/components/Button/Button.tsx
 import * as React from "react";
 import { Slot } from "@radix-ui/react-slot";
-import type { ButtonProps } from "@mild-ui/core";
+import type { ButtonProps } from "./Button.types";
 import { cn } from "../../utils";
 
-// React-specific button props
-interface ReactButtonProps extends ButtonProps {
-  asChild?: boolean;
-  leftIcon?: React.ReactNode;
-  rightIcon?: React.ReactNode;
-  children?: React.ReactNode;
-  onClick?: () => void;
-}
+// Use the ReactButtonProps from Button.types
+import type { ReactButtonProps } from "./Button.types";
 
 const Button = React.forwardRef<HTMLButtonElement, ReactButtonProps>(
   (

@@ -1,28 +1,30 @@
+@use '../sass/tokens/typography';
+
 // Typography Utilities
 // @description Font and text utility classes with mild- prefix to avoid Tailwind conflicts
 
 // Font family utilities
-.mild-font-sans { font-family: font-family('sans'); }
-.mild-font-serif { font-family: font-family('serif'); }
-.mild-font-mono { font-family: font-family('mono'); }
+.mild-font-sans { font-family: typography.font-family('sans'); }
+.mild-font-serif { font-family: typography.font-family('serif'); }
+.mild-font-mono { font-family: typography.font-family('mono'); }
 
 // Font size utilities
-@each $size-name, $size-value in $mild-font-sizes {
+@each $size-name, $size-value in typography.$mild-font-sizes {
   .mild-text-#{$size-name} { font-size: #{$size-value}; }
 }
 
 // Font weight utilities
-@each $weight-name, $weight-value in $mild-font-weights {
+@each $weight-name, $weight-value in typography.$mild-font-weights {
   .mild-font-#{$weight-name} { font-weight: #{$weight-value}; }
 }
 
 // Line height utilities
-@each $height-name, $height-value in $mild-line-heights {
+@each $height-name, $height-value in typography.$mild-line-heights {
   .mild-leading-#{$height-name} { line-height: #{$height-value}; }
 }
 
 // Letter spacing utilities
-@each $spacing-name, $spacing-value in $mild-letter-spacing {
+@each $spacing-name, $spacing-value in typography.$mild-letter-spacing {
   .mild-tracking-#{$spacing-name} { letter-spacing: #{$spacing-value}; }
 }
 

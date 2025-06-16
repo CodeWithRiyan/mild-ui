@@ -1,3 +1,5 @@
+@use '../sass/tokens/spacing';
+
 /// Layout Utilities
 /// @group utilities
 /// @author Mild UI Team
@@ -39,7 +41,7 @@
 .mild-sticky { position: sticky; }
 
 // Top/Right/Bottom/Left utilities
-@each $size-name, $size-value in $mild-spacing {
+@each $size-name, $size-value in spacing.$mild-spacing {
   .mild-top-#{$size-name} { top: #{$size-value}; }
   .mild-right-#{$size-name} { right: #{$size-value}; }
   .mild-bottom-#{$size-name} { bottom: #{$size-value}; }
@@ -60,7 +62,7 @@
 .mild-w-max { width: max-content; }
 .mild-w-fit { width: fit-content; }
 
-@each $size-name, $size-value in $mild-spacing {
+@each $size-name, $size-value in spacing.$mild-spacing {
   .mild-w-#{$size-name} { width: #{$size-value}; }
 }
 
@@ -72,7 +74,7 @@
 .mild-h-max { height: max-content; }
 .mild-h-fit { height: fit-content; }
 
-@each $size-name, $size-value in $mild-spacing {
+@each $size-name, $size-value in spacing.$mild-spacing {
   .mild-h-#{$size-name} { height: #{$size-value}; }
 }
 
@@ -114,7 +116,7 @@
 .mild-grid-cols-12 { grid-template-columns: repeat(12, minmax(0, 1fr)); }
 
 .mild-gap-0 { gap: 0; }
-@each $size-name, $size-value in $mild-spacing {
+@each $size-name, $size-value in spacing.$mild-spacing {
   .mild-gap-#{$size-name} { gap: #{$size-value}; }
   .mild-gap-x-#{$size-name} { column-gap: #{$size-value}; }
   .mild-gap-y-#{$size-name} { row-gap: #{$size-value}; }

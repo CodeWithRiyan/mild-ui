@@ -2,30 +2,30 @@
 // @description Main SASS entry point - like Tailwind CSS
 
 // Design tokens
-@import 'tokens/colors';
-@import 'tokens/spacing';
-@import 'tokens/typography';
-@import 'tokens/radius';
-@import 'tokens/shadows';
-@import 'tokens/breakpoints';
+@use 'tokens/colors';
+@use 'tokens/spacing';
+@use 'tokens/typography';
+@use 'tokens/radius';
+@use 'tokens/shadows';
+@use 'tokens/breakpoints';
 
 // Base styles
-@import 'base/root';
-@import 'base/reset';
+@use 'base/root';
+@use 'base/reset';
 
 // Themes
-@import 'themes/light';
-@import 'themes/dark';
+@use 'themes/light';
+@use 'themes/dark';
 
 // Utility classes (like Tailwind)
-@import '../utilities/index';
+@use '../utilities/index';
 
 // Generate CSS custom properties for all design tokens
 :root {
-  @include generate-color-custom-properties();
-  @include generate-spacing-custom-properties();
-  @include generate-typography-custom-properties();
-  @include generate-radius-custom-properties();
-  @include generate-shadow-custom-properties();
-  @include generate-breakpoint-custom-properties();
+  @include colors.generate-color-custom-properties();
+  @include spacing.generate-spacing-custom-properties();
+  @include typography.generate-typography-custom-properties();
+  @include radius.generate-radius-custom-properties();
+  @include shadows.generate-shadow-custom-properties();
+  @include breakpoints.generate-breakpoint-custom-properties();
 }

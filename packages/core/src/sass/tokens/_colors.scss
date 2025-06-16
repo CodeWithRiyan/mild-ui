@@ -127,6 +127,9 @@ $mild-semantic-colors: (
   'info': 'teal'
 ) !default;
 
+@use 'sass:map';
+@use 'sass:meta';
+
 /// Get color value from design tokens
 /// @function color
 /// @group tokens
@@ -145,21 +148,21 @@ $mild-semantic-colors: (
 ///   }
 @function color($name, $shade: 500) {
   // Handle semantic colors
-  @if map-has-key($mild-semantic-colors, $name) {
-    $base-color: map-get($mild-semantic-colors, $name);
+  @if map.has-key($mild-semantic-colors, $name) {
+    $base-color: map.get($mild-semantic-colors, $name);
     $token-key: $base-color + '-' + $shade;
-    @return map-get($mild-colors, $token-key);
+    @return map.get($mild-colors, $token-key);
   }
   
   // Handle direct color access
   $token-key: $name + '-' + $shade;
-  @if map-has-key($mild-colors, $token-key) {
-    @return map-get($mild-colors, $token-key);
+  @if map.has-key($mild-colors, $token-key) {
+    @return map.get($mild-colors, $token-key);
   }
   
   // Handle special colors (white, black, transparent)
-  @if map-has-key($mild-colors, $name) {
-    @return map-get($mild-colors, $name);
+  @if map.has-key($mild-colors, $name) {
+    @return map.get($mild-colors, $name);
   }
   
   @warn "Color `#{$name}` with shade `#{$shade}` not found in design system";
