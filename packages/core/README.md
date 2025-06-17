@@ -106,11 +106,52 @@ Automatic dark mode support:
 - [Utilities Guide](./UTILITIES.md) - Complete list of utility classes
 - [Storybook](https://codewithriyan.github.io/mild-ui/) - Interactive examples
 
+## Mobile Platform Support
+
+Convert mild-ui design tokens to mobile platforms:
+
+### 🐦 Flutter
+```dart
+import 'package:flutter/material.dart';
+import 'themes/mild_theme.dart';
+
+// Use in MaterialApp
+MaterialApp(
+  theme: MildTheme.lightTheme,
+  darkTheme: MildTheme.darkTheme,
+)
+
+// Use utility extensions
+Text('Hello').textXl().fontBold().p4()
+```
+
+### 📱 React Native
+```javascript
+import { MildTheme, MildUtils } from '@mild-ui/core/react-native/theme';
+
+// Use in StyleSheet
+const styles = StyleSheet.create({
+  container: {
+    ...MildUtils.spacing.p4,
+    backgroundColor: MildTheme.colors.primary[500],
+  }
+});
+```
+
+### Generate Mobile Themes
+```bash
+npm run mobile:flutter      # Generate Flutter theme
+npm run mobile:react-native # Generate React Native theme  
+npm run mobile:all          # Generate both platforms
+```
+
 ## Framework Packages
 
 This core package is used by:
 - [`@mild-ui/react`](../react) - React components
 - [`@mild-ui/vue`](../vue) - Vue components
+- **Flutter** - Auto-generated Dart theme files
+- **React Native** - Auto-generated StyleSheet utilities
 
 ## License
 

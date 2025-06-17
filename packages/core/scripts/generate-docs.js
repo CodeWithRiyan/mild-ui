@@ -9,6 +9,11 @@ async function generateDocs() {
   const docsDir = path.join(__dirname, "../docs");
   await fs.mkdir(docsDir, { recursive: true });
 
+  // Generate utility class documentation
+  console.log("📚 Generating utility class documentation...");
+  const { generateUtilityDocs } = require('./generate-utility-docs.js');
+  await generateUtilityDocs();
+
   // Read package.json for version and info
   const packageJson = JSON.parse(
     await fs.readFile(path.join(__dirname, "../package.json"), "utf8"),
@@ -53,10 +58,10 @@ async function generateDocs() {
   // Scan SASS files
   const sassInfo = await analyzeSassStructure();
 
-  // Generate main documentation
+  // Generate main documentation (now overview page)
   const html = generateHTML(packageJson, components, sassInfo);
 
-  await fs.writeFile(path.join(docsDir, "index.html"), html);
+  await fs.writeFile(path.join(docsDir, "overview.html"), html);
 
   // Generate component API docs
   if (components.length > 0) {
@@ -340,6 +345,11 @@ function generateHTML(packageJson, components, sassInfo) {
     <div class="header">
         <h1>${packageJson.name}<span class="badge">v${packageJson.version}</span></h1>
         <p>${packageJson.description}</p>
+        <div style="margin-top: 1rem;">
+            <a href="#" style="color: #64748b; margin-right: 1rem;">📖 Overview (Current)</a>
+            <a href="index.html" style="color: #3182ce; text-decoration: none; margin-right: 1rem;">🎨 Utility Classes</a>
+            <a href="utilities.json" style="color: #3182ce; text-decoration: none;">📊 Utilities API</a>
+        </div>
         <div class="stats">
             <div class="stat">
                 <div class="stat-number">${components.length}</div>
@@ -359,6 +369,24 @@ function generateHTML(packageJson, components, sassInfo) {
     <div class="section">
         <h2>📦 Installation</h2>
         <div class="code">npm install ${packageJson.name}</div>
+    </div>
+
+    <div class="section">
+        <h2>📖 Documentation</h2>
+        <div class="grid">
+            <div class="card">
+                <h3><a href="index.html">🎨 Utility Classes (Main)</a></h3>
+                <p>Interactive reference for all ${Object.keys(sassInfo).length > 0 ? '1600+' : 'available'} utility classes with search and filtering</p>
+            </div>
+            <div class="card">
+                <h3><a href="utilities.json">📊 Utilities API</a></h3>
+                <p>JSON API for programmatic access to all utility classes and design tokens</p>
+            </div>
+            <div class="card">
+                <h3><a href="UTILITIES.md">📝 Markdown Docs</a></h3>
+                <p>Markdown format documentation for easy integration into your project</p>
+            </div>
+        </div>
     </div>
 
     ${
