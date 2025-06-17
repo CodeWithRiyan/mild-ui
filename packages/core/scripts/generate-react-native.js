@@ -991,151 +991,33 @@ Convert your mild-ui design system to React Native with identical design tokens,
 
 1. Copy the generated files to your React Native project:
    \`\`\`
-   src/
-     theme/
-       MildTheme.js (or .ts)
-       MildUtils.js (or .ts)
+   src/theme/
+     MildTheme.js (or .ts)
+     MildUtils.js (or .ts)
    \`\`\`
 
 2. Import the theme in your app:
    \`\`\`javascript
    import { MildTheme, MildUtils } from './theme/MildTheme';
-   // or for TypeScript
-   import { MildTheme, MildUtils } from './theme/MildTheme.ts';
    \`\`\`
 
 ## Usage
 
-### Basic Theme Setup
+Access design tokens and utility StyleSheets directly in your React Native components:
 
 \`\`\`javascript
-import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import { MildTheme } from './theme/MildTheme';
+import { MildTheme, MildUtils } from './theme/MildTheme';
 
-const App = () => {
-  return (
-    <View style={[styles.container, { backgroundColor: MildTheme.semanticColors.light.background }]}>
-      <Text style={[styles.title, { color: MildTheme.semanticColors.light.foreground }]}>
-        Hello Mild UI!
-      </Text>
-    </View>
-  );
-};
-
+// Use design tokens
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     padding: MildTheme.spacing[4],
-  },
-  title: {
-    fontSize: MildTheme.typography.fontSize.xl,
-    fontWeight: MildTheme.typography.fontWeight.bold,
-  },
+    backgroundColor: MildTheme.colors.primary[500],
+  }
 });
-\`\`\`
 
-### Using Utility StyleSheets
-
-\`\`\`javascript
-import React from 'react';
-import { View, Text } from 'react-native';
-import { MildUtils } from './theme/MildUtils';
-
-const MyComponent = () => {
-  return (
-    // Equivalent to: <div class="mild-flex mild-flex-row mild-items-center mild-p-4">
-    <View style={[MildUtils.layout.flex, MildUtils.layout.flexRow, MildUtils.layout.itemsCenter, MildUtils.spacing.p4]}>
-      {/* Equivalent to: <h1 class="mild-text-xl mild-font-bold"> */}
-      <Text style={[MildUtils.typography.textXl, MildUtils.typography.fontBold]}>
-        Title
-      </Text>
-      {/* Equivalent to: <p class="mild-text-sm mild-text-gray-600"> */}
-      <Text style={[MildUtils.typography.textSm, MildUtils.colorsLight.textGray600]}>
-        Subtitle
-      </Text>
-    </View>
-  );
-};
-\`\`\`
-
-### Dark Mode Support
-
-\`\`\`javascript
-import React, { useState } from 'react';
-import { View, Text, Switch } from 'react-native';
-import { MildTheme, MildUtils } from './theme';
-
-const ThemedComponent = () => {
-  const [isDark, setIsDark] = useState(false);
-  const theme = isDark ? MildTheme.semanticColors.dark : MildTheme.semanticColors.light;
-  const colors = isDark ? MildUtils.colorsDark : MildUtils.colorsLight;
-
-  return (
-    <View style={[MildUtils.spacing.p4, { backgroundColor: theme.background }]}>
-      <Text style={[MildUtils.typography.textLg, { color: theme.foreground }]}>
-        Dark Mode Example
-      </Text>
-      <Switch value={isDark} onValueChange={setIsDark} />
-    </View>
-  );
-};
-\`\`\`
-
-### Component Styling Examples
-
-\`\`\`javascript
-// Button Component (equivalent to mild-ui button)
-const PrimaryButton = ({ title, onPress }) => (
-  <TouchableOpacity
-    style={[
-      MildUtils.spacing.px4,
-      MildUtils.spacing.py2,
-      MildUtils.borders.roundedMd,
-      MildUtils.shadows.shadow,
-      { backgroundColor: MildTheme.colors.primary[500] }
-    ]}
-    onPress={onPress}
-  >
-    <Text style={[MildUtils.typography.fontMedium, { color: '#ffffff' }]}>
-      {title}
-    </Text>
-  </TouchableOpacity>
-);
-
-// Card Component (equivalent to mild-ui card)
-const Card = ({ children }) => (
-  <View style={[
-    MildUtils.spacing.p4,
-    MildUtils.borders.roundedLg,
-    MildUtils.shadows.shadowLg,
-    MildUtils.colorsLight.bgWhite,
-    MildUtils.spacing.m2,
-  ]}>
-    {children}
-  </View>
-);
-
-// Avatar Component (equivalent to mild-ui avatar)
-const Avatar = ({ source, size = 'md' }) => {
-  const sizeMap = {
-    sm: MildUtils.sizing.size8,
-    md: MildUtils.sizing.size12,
-    lg: MildUtils.sizing.size16,
-  };
-
-  return (
-    <Image
-      source={source}
-      style={[
-        sizeMap[size],
-        MildUtils.borders.roundedFull,
-        MildUtils.borders.border,
-        MildUtils.colorsLight.borderGray200,
-      ]}
-    />
-  );
-};
+// Use utility StyleSheets
+<View style={[MildUtils.layout.flex, MildUtils.spacing.p4]} />
 \`\`\`
 
 ## Design Token Mapping
@@ -1144,71 +1026,13 @@ const Avatar = ({ source, size = 'md' }) => {
 |---------|-------------------------|
 | \`mild-p-4\` | \`MildUtils.spacing.p4\` |
 | \`mild-text-xl\` | \`MildUtils.typography.textXl\` |
-| \`mild-font-bold\` | \`MildUtils.typography.fontBold\` |
 | \`mild-bg-primary-500\` | \`{ backgroundColor: MildTheme.colors.primary[500] }\` |
-| \`mild-radius-md\` | \`MildUtils.borders.roundedMd\` |
-| \`mild-shadow-lg\` | \`MildUtils.shadows.shadowLg\` |
-| \`mild-flex mild-items-center\` | \`[MildUtils.layout.flex, MildUtils.layout.itemsCenter]\` |
 
 ## TypeScript Support
 
-All files include full TypeScript definitions:
+All files include full TypeScript definitions for type safety.
 
-\`\`\`typescript
-import { MildTheme, MildUtils } from './theme/MildTheme';
-import type { ViewStyle, TextStyle } from 'react-native';
-
-const buttonStyle: ViewStyle = {
-  ...MildUtils.spacing.px4,
-  ...MildUtils.spacing.py2,
-  backgroundColor: MildTheme.colors.primary[500],
-};
-
-const textStyle: TextStyle = {
-  ...MildUtils.typography.textBase,
-  ...MildUtils.typography.fontMedium,
-  color: MildTheme.semanticColors.light.foreground,
-};
-\`\`\`
-
-## Custom Hook for Theme
-
-\`\`\`javascript
-import { useState, useEffect } from 'react';
-import { Appearance } from 'react-native';
-import { MildTheme } from './theme/MildTheme';
-
-export const useMildTheme = () => {
-  const [isDark, setIsDark] = useState(Appearance.getColorScheme() === 'dark');
-
-  useEffect(() => {
-    const subscription = Appearance.addChangeListener(({ colorScheme }) => {
-      setIsDark(colorScheme === 'dark');
-    });
-    return () => subscription.remove();
-  }, []);
-
-  const theme = isDark ? MildTheme.semanticColors.dark : MildTheme.semanticColors.light;
-  
-  return { theme, isDark, setIsDark };
-};
-\`\`\`
-
-## Platform-Specific Styles
-
-\`\`\`javascript
-import { Platform } from 'react-native';
-
-const platformStyles = StyleSheet.create({
-  card: {
-    ...MildUtils.spacing.p4,
-    ...MildUtils.borders.roundedLg,
-    ...(Platform.OS === 'ios' ? MildUtils.shadows.shadowLg : { elevation: 4 }),
-  },
-});
-\`\`\`
-
-This React Native theme maintains 100% design consistency with your mild-ui web application across all platforms!
+This React Native theme maintains 100% design consistency with your mild-ui web application.
 `;
 }
 
