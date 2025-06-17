@@ -556,40 +556,8 @@ ${category.description}
     markdown += '\n';
   });
 
-  // Add usage examples
-  markdown += `## Usage Examples
-
-### Basic Layout
-\`\`\`html
-<div class="mild-flex mild-items-center mild-justify-between mild-p-4">
-  <h1 class="mild-text-xl mild-font-bold mild-text-gray-900">Title</h1>
-  <button class="mild-bg-blue-500 mild-text-white mild-px-4 mild-py-2 mild-radius-md">
-    Button
-  </button>
-</div>
-\`\`\`
-
-### Responsive Design
-\`\`\`html
-<div class="mild-grid mild-grid-cols-1 md:mild-grid-cols-2 lg:mild-grid-cols-3 mild-gap-4">
-  <div class="mild-p-6 mild-bg-white mild-radius-lg mild-shadow">Card 1</div>
-  <div class="mild-p-6 mild-bg-white mild-radius-lg mild-shadow">Card 2</div>
-  <div class="mild-p-6 mild-bg-white mild-radius-lg mild-shadow">Card 3</div>
-</div>
-\`\`\`
-
-### Dark Mode
-\`\`\`html
-<html data-theme="dark">
-<body class="mild-bg-gray-900 mild-text-gray-100">
-  <div class="mild-p-4 mild-bg-gray-800 mild-radius-md">
-    Dark mode content
-  </div>
-</body>
-</html>
-\`\`\`
-
-## Design Tokens
+  // Add design tokens section
+  markdown += `## Design Tokens
 
 ### Color Palettes
 ${Object.entries(tokens.colors).map(([name, palette]) => {

@@ -316,25 +316,6 @@ All utilities automatically support dark mode through:
 1. **System preference**: `@media (prefers-color-scheme: dark)`
 2. **Manual toggle**: `[data-theme="dark"]` attribute
 
-## Example Usage
-
-```html
-<!-- Tailwind-like utilities with mild- prefix -->
-<div class="mild-flex mild-items-center mild-justify-between mild-p-4 mild-bg-gray-100 mild-border mild-border-gray-200 mild-radius-md">
-  <h2 class="mild-text-lg mild-font-semibold mild-text-gray-900">Card Title</h2>
-  <button class="mild-px-4 mild-py-2 mild-bg-primary-500 mild-text-white mild-radius-sm mild-transition-colors">
-    Click me
-  </button>
-</div>
-
-<!-- Can be used alongside Tailwind CSS without conflicts -->
-<div class="flex items-center"> <!-- Tailwind classes -->
-  <div class="mild-p-4 mild-bg-primary-100"> <!-- Mild UI utilities -->
-    Content with both libraries
-  </div>
-</div>
-```
-
 ## Why Use Mild UI Utilities?
 
 1. **No Conflicts**: Uses `mild-` prefix so you can use alongside Tailwind CSS

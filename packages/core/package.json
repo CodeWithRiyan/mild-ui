@@ -21,10 +21,7 @@
     "docs:build": "pnpm run docs:generate",
     "docs:serve": "pnpm run docs:generate && serve docs -p 3001",
     "docs:watch": "nodemon --watch src --ext scss --exec \"pnpm docs:generate\"",
-    "examples:serve": "serve . -p 3002",
-    "examples:dev": "concurrently \"pnpm run sass:watch\" \"pnpm run examples:serve\"",
-    "examples:open": "pnpm run examples:serve && open http://localhost:3002/examples",
-    "dev:full": "concurrently \"pnpm run sass:watch\" \"pnpm run docs:serve\" \"pnpm run examples:serve\"",
+    "dev:full": "concurrently \"pnpm run sass:watch\" \"pnpm run docs:serve\"",
     "mobile:flutter": "node scripts/generate-flutter.js",
     "mobile:react-native": "node scripts/generate-react-native.js",
     "mobile:all": "concurrently \"pnpm run mobile:flutter\" \"pnpm run mobile:react-native\""
