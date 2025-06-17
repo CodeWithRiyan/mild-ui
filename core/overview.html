@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@mild-ui/core Documentation</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            line-height: 1.6;
+            color: #333;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 2px solid #e0e0e0;
+        }
+        .header h1 {
+            color: #2d3748;
+            margin-bottom: 0.5rem;
+            font-size: 2.5rem;
+        }
+        .badge {
+            display: inline-block;
+            background: #3182ce;
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            margin-left: 0.5rem;
+        }
+        .section {
+            margin: 2rem 0;
+            padding: 1.5rem;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            background: #f7fafc;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        .card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+        .card h3 {
+            margin-top: 0;
+            margin-bottom: 0.5rem;
+            color: #2d3748;
+        }
+        .card a {
+            color: #3182ce;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .card a:hover {
+            text-decoration: underline;
+        }
+        .stats {
+            display: flex;
+            gap: 2rem;
+            margin: 1rem 0;
+            flex-wrap: wrap;
+        }
+        .stat {
+            background: white;
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+            text-align: center;
+        }
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #3182ce;
+        }
+        .stat-label {
+            color: #718096;
+            font-size: 0.875rem;
+        }
+        .code {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 1rem;
+            border-radius: 6px;
+            font-family: 'Monaco', 'Menlo', monospace;
+            font-size: 0.875rem;
+            margin: 1rem 0;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>@mild-ui/core<span class="badge">v0.3.1</span></h1>
+        <p>Universal design system built with SASS/SCSS - framework agnostic CSS-only core with zero dependencies</p>
+        <div style="margin-top: 1rem;">
+            <a href="#" style="color: #64748b; margin-right: 1rem;">📖 Overview (Current)</a>
+            <a href="index.html" style="color: #3182ce; text-decoration: none; margin-right: 1rem;">🎨 Utility Classes</a>
+            <a href="utilities.json" style="color: #3182ce; text-decoration: none;">📊 Utilities API</a>
+        </div>
+        <div class="stats">
+            <div class="stat">
+                <div class="stat-number">0</div>
+                <div class="stat-label">Components</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number">2</div>
+                <div class="stat-label">SASS Modules</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number">0</div>
+                <div class="stat-label">Dependencies</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>📦 Installation</h2>
+        <div class="code">npm install @mild-ui/core</div>
+    </div>
+
+    <div class="section">
+        <h2>📖 Documentation</h2>
+        <div class="grid">
+            <div class="card">
+                <h3><a href="index.html">🎨 Utility Classes (Main)</a></h3>
+                <p>Interactive reference for all 1600+ utility classes with search and filtering</p>
+            </div>
+            <div class="card">
+                <h3><a href="utilities.json">📊 Utilities API</a></h3>
+                <p>JSON API for programmatic access to all utility classes and design tokens</p>
+            </div>
+            <div class="card">
+                <h3><a href="UTILITIES.md">📝 Markdown Docs</a></h3>
+                <p>Markdown format documentation for easy integration into your project</p>
+            </div>
+        </div>
+    </div>
+
+    
+
+    
+    <div class="section">
+        <h2>🎨 SASS Architecture</h2>
+        <div class="grid">
+            
+                <div class="card">
+                    <h3>Design Tokens</h3>
+                    <p>8 token files: _animation.scss, _breakpoints.scss, _colors.scss, _dimensions.scss, _elevation.scss, _radius.scss, _spacing.scss, _typography.scss</p>
+                </div>
+            
+            
+                <div class="card">
+                    <h3>Component Styles</h3>
+                    <p>16 component stylesheets</p>
+                </div>
+            
+        </div>
+    </div>
+    
+
+    <div class="section">
+        <h2>🚀 Quick Start</h2>
+        <div class="code">import { Component } from '@mild-ui/core';
+
+// Use the component
+const MyApp = () => {
+  return &lt;Component /&gt;;
+};</div>
+    </div>
+
+    <div style="text-align: center; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #e2e8f0; color: #718096;">
+        <p>Generated automatically from source code • 6/17/2025</p>
+    </div>
+</body>
+</html>
