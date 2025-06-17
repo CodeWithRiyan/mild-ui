@@ -17,13 +17,17 @@
     "sass:watch": "node scripts/watch-sass.js",
     "clean": "rimraf dist",
     "docs:generate": "node scripts/generate-docs.js",
+    "docs:utilities": "node scripts/generate-utility-docs.js",
     "docs:build": "pnpm run docs:generate",
     "docs:serve": "pnpm run docs:generate && serve docs -p 3001",
     "docs:watch": "nodemon --watch src --ext scss --exec \"pnpm docs:generate\"",
     "examples:serve": "serve . -p 3002",
     "examples:dev": "concurrently \"pnpm run sass:watch\" \"pnpm run examples:serve\"",
     "examples:open": "pnpm run examples:serve && open http://localhost:3002/examples",
-    "dev:full": "concurrently \"pnpm run sass:watch\" \"pnpm run docs:serve\" \"pnpm run examples:serve\""
+    "dev:full": "concurrently \"pnpm run sass:watch\" \"pnpm run docs:serve\" \"pnpm run examples:serve\"",
+    "mobile:flutter": "node scripts/generate-flutter.js",
+    "mobile:react-native": "node scripts/generate-react-native.js",
+    "mobile:all": "concurrently \"pnpm run mobile:flutter\" \"pnpm run mobile:react-native\""
   },
   "devDependencies": {
     "autoprefixer": "^10.4.16",
@@ -46,6 +50,14 @@
     "./tokens": "./dist/tokens.json",
     "./scss": "./src/sass/index.scss",
     "./scss/utilities": "./src/sass/mild-utilities.scss",
+    "./flutter": "./dist/flutter",
+    "./flutter/theme": "./dist/flutter/mild_theme.dart",
+    "./flutter/utils": "./dist/flutter/mild_utilities.dart",
+    "./react-native": "./dist/react-native",
+    "./react-native/theme": "./dist/react-native/MildTheme.js",
+    "./react-native/theme/ts": "./dist/react-native/MildTheme.ts",
+    "./react-native/utils": "./dist/react-native/MildUtils.js",
+    "./react-native/utils/ts": "./dist/react-native/MildUtils.ts",
     "./package.json": "./package.json"
   },
   "publishConfig": {

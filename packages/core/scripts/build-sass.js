@@ -64,6 +64,9 @@ async function buildSass() {
     // Generate design tokens JSON
     await generateTokensJSON();
 
+    // Generate mobile platform themes
+    await generateMobilePlatforms();
+
     console.log("🎉 SASS build completed successfully!");
   } catch (error) {
     console.error("❌ SASS build failed:", error);
@@ -146,6 +149,25 @@ async function generateTokensJSON() {
 
   await fs.writeFile("dist/tokens.json", JSON.stringify(tokens, null, 2));
   console.log("✅ Generated design tokens JSON");
+}
+
+async function generateMobilePlatforms() {
+  try {
+    console.log("📱 Generating mobile platform themes...");
+    
+    // Generate Flutter theme
+    const { generateFlutterTheme } = require('./generate-flutter.js');
+    await generateFlutterTheme();
+    
+    // Generate React Native theme
+    const { generateReactNativeStyles } = require('./generate-react-native.js');
+    await generateReactNativeStyles();
+    
+    console.log("✅ Mobile platform themes generated successfully!");
+  } catch (error) {
+    console.error("❌ Mobile platform generation failed:", error);
+    // Don't exit the build process, just log the error
+  }
 }
 
 buildSass();
