@@ -2,6 +2,7 @@
   "name": "@mild-ui/core",
   "version": "0.3.1",
   "description": "Universal design system built with SASS/SCSS - framework agnostic CSS-only core with zero dependencies",
+  "license": "MIT",
   "sideEffects": [
     "*.css",
     "*.scss"

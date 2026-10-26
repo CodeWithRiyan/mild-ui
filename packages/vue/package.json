@@ -1,6 +1,7 @@
 {
   "name": "@mild-ui/vue",
   "version": "0.1.2",
+  "license": "MIT",
   "type": "module",
   "files": [
     "dist"
