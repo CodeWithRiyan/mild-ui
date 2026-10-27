@@ -55,10 +55,7 @@
     "docs:build": "pnpm run docs:generate",
     "docs:serve": "pnpm run docs:generate && serve docs -p 3001",
     "docs:watch": "nodemon --watch src --ext scss --exec \"pnpm docs:generate\"",
-    "dev:full": "concurrently \"pnpm run sass:watch\" \"pnpm run docs:serve\"",
-    "mobile:flutter": "node scripts/generate-flutter.js",
-    "mobile:react-native": "node scripts/generate-react-native.js",
-    "mobile:all": "concurrently \"pnpm run mobile:flutter\" \"pnpm run mobile:react-native\""
+    "dev:full": "concurrently \"pnpm run sass:watch\" \"pnpm run docs:serve\""
   },
   "devDependencies": {
     "autoprefixer": "^10.4.16",
