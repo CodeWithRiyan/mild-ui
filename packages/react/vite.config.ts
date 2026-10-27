@@ -1,5 +1,5 @@
 // packages/react/vite.config.ts
-import { readFileSync, rmSync, writeFileSync } from "fs";
+import { readFileSync, writeFileSync } from "fs";
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import dts from "vite-plugin-dts";
@@ -19,13 +19,10 @@ export default defineConfig({
       insertTypesEntry: false,
       outDir: "dist",
       exclude: ["**/*.test.ts", "**/*.test.tsx", "**/*.stories.tsx"],
-      // The rolled-up file is named after the last lib output (index.cjs). Publish one
+      // The rolled-up file is named after the last lib output (dist/index.d.cts). Publish one
       // declaration file per module format so ESM and CJS consumers both resolve types.
       afterBuild: () => {
-        const types = readFileSync("dist/index.d.cts.d.ts");
-        writeFileSync("dist/index.d.mts", types);
-        writeFileSync("dist/index.d.cts", types);
-        rmSync("dist/index.d.cts.d.ts");
+        writeFileSync("dist/index.d.mts", readFileSync("dist/index.d.cts"));
       },
     }),
   ],

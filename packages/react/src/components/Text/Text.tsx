@@ -3,11 +3,7 @@ import React, { forwardRef } from "react";
 import type { TextCoreProps } from "../../types";
 
 type HTMLTextComponent =
-  | HTMLSpanElement
-  | HTMLParagraphElement
-  | HTMLHeadingElement
-  | HTMLLabelElement
-  | HTMLDivElement;
+  HTMLSpanElement | HTMLParagraphElement | HTMLHeadingElement | HTMLLabelElement | HTMLDivElement;
 
 export interface TextProps extends TextCoreProps {
   as?: "span" | "p" | "div" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "label" | "caption";

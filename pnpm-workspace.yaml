@@ -8,3 +8,8 @@ onlyBuiltDependencies:
 ignoredBuiltDependencies:
   - "@parcel/watcher"
   - "@swc/core"
+
+# Security fixes for transitive dev dependencies whose parents have no fixed release yet.
+overrides:
+  "serve>compression": "^1.8.2"
+  "uuid@<11.1.1": "^11.1.1"

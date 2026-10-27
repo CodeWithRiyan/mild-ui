@@ -4,7 +4,8 @@ import type { InputCoreProps } from "../../types";
 import { inputVariants } from "../../utils/input";
 
 export interface InputProps
-  extends Omit<
+  extends
+    Omit<
       InputCoreProps,
       "onChange" | "onBlur" | "onFocus" | "value" | "defaultValue" | "autoComplete" | "type"
     >,

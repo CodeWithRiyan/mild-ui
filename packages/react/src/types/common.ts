@@ -82,12 +82,7 @@ export type FlexDirection = "row" | "row-reverse" | "column" | "column-reverse";
 export type FlexWrap = "nowrap" | "wrap" | "wrap-reverse";
 export type AlignItems = "flex-start" | "flex-end" | "center" | "baseline" | "stretch";
 export type JustifyContent =
-  | "flex-start"
-  | "flex-end"
-  | "center"
-  | "space-between"
-  | "space-around"
-  | "space-evenly";
+  "flex-start" | "flex-end" | "center" | "space-between" | "space-around" | "space-evenly";
 
 // Position values
 export type PositionValue = "static" | "relative" | "absolute" | "fixed" | "sticky";
@@ -98,14 +93,7 @@ export type OverflowValue = "visible" | "hidden" | "scroll" | "auto";
 // Text values
 export type FontSize = "xs" | "sm" | "md" | "lg" | "xl" | "2xl" | "3xl" | "4xl" | "5xl" | "6xl";
 export type FontWeight =
-  | "thin"
-  | "light"
-  | "normal"
-  | "medium"
-  | "semibold"
-  | "bold"
-  | "extrabold"
-  | "black";
+  "thin" | "light" | "normal" | "medium" | "semibold" | "bold" | "extrabold" | "black";
 export type TextAlign = "left" | "center" | "right" | "justify";
 export type TextTransform = "none" | "uppercase" | "lowercase" | "capitalize";
 export type TextDecoration = "none" | "underline" | "line-through" | "overline";

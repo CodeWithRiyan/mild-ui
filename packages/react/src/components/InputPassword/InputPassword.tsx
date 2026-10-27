@@ -7,7 +7,8 @@ import { EyeIcon, EyeOffIcon } from "lucide-react";
 
 // Add 'value' to the Omit list
 export interface InputPasswordProps
-  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "type" | "size">,
+  extends
+    Omit<React.InputHTMLAttributes<HTMLInputElement>, "type" | "size">,
     InputPasswordCoreProps {
   visibleIcon?: React.ReactNode;
   hiddenIcon?: React.ReactNode;

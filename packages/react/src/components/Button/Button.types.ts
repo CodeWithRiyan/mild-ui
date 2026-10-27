@@ -2,8 +2,7 @@
 import type { ButtonCoreProps, ButtonVariant, ButtonSize } from "../../types/button";
 
 export interface ButtonProps
-  extends ButtonCoreProps,
-    Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, "type"> {
+  extends ButtonCoreProps, Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, "type"> {
   /** Left icon element */
   leftIcon?: React.ReactElement;
   /** Right icon element */

@@ -58,15 +58,15 @@
     "dev:full": "concurrently \"pnpm run sass:watch\" \"pnpm run docs:serve\""
   },
   "devDependencies": {
-    "autoprefixer": "^10.4.16",
+    "autoprefixer": "^10.6.2",
     "chokidar": "^4.0.3",
     "concurrently": "^8.2.2",
-    "cssnano": "^6.0.1",
-    "nodemon": "^3.0.2",
+    "cssnano": "^6.1.2",
+    "nodemon": "^3.1.14",
     "postcss": "^8.5.32",
-    "rimraf": "^5.0.0",
-    "sass": "^1.69.5",
-    "serve": "^14.2.1"
+    "rimraf": "^5.0.10",
+    "sass": "^1.99.0",
+    "serve": "^14.2.6"
   },
   "engines": {
     "node": ">=18"
