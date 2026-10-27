@@ -1,0 +1,16 @@
+{
+  "name": "@mild-ui/tokens",
+  "version": "0.5.1",
+  "private": true,
+  "description": "Design tokens for mild-ui (DTCG source, Style Dictionary build)",
+  "license": "MIT",
+  "type": "module",
+  "engines": {
+    "node": "^20.0.0 || ^22.0.0 || >=24.0.0"
+  },
+  "devDependencies": {
+    "ajv": "^8.20.0",
+    "ajv-formats": "^3.0.1",
+    "style-dictionary": "~4.2.0"
+  }
+}
