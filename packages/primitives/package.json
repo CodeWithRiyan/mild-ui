@@ -1,0 +1,22 @@
+{
+  "name": "@mild-ui/primitives",
+  "version": "0.5.1",
+  "private": true,
+  "description": "Framework-agnostic state, keyboard, focus, and ARIA logic for mild-ui",
+  "license": "MIT",
+  "type": "module",
+  "sideEffects": false,
+  "engines": {
+    "node": "^20.0.0 || ^22.0.0 || >=24.0.0"
+  },
+  "devDependencies": {
+    "@zag-js/checkbox": "^1.47.0",
+    "@zag-js/core": "^1.47.0",
+    "@zag-js/listbox": "^1.47.0",
+    "@zag-js/radio-group": "^1.47.0",
+    "@zag-js/switch": "^1.47.0",
+    "jsdom": "^24.1.3",
+    "typescript": "^5.9.3",
+    "vitest": "^4.1.12"
+  }
+}
