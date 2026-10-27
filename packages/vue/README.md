@@ -57,17 +57,9 @@ import { ThemeProvider } from "@mild-ui/vue";
       Your Vue app is ready with mild-ui components.
     </Alert>
 
-    <Input
-      v-model="name"
-      placeholder="Enter your name"
-      variant="outline"
-      size="lg"
-      class="mb-4"
-    />
+    <Input v-model="name" placeholder="Enter your name" variant="outline" size="lg" class="mb-4" />
 
-    <Button color-scheme="primary" size="lg" @click="handleSubmit">
-      Get Started
-    </Button>
+    <Button color-scheme="primary" size="lg" @click="handleSubmit"> Get Started </Button>
   </Card>
 </template>
 
@@ -212,13 +204,7 @@ const handleLoad = async () => {
       </FormErrorMessage>
     </FormControl>
 
-    <Button
-      type="submit"
-      color-scheme="primary"
-      :disabled="!isFormValid"
-      class="mt-6"
-      full-width
-    >
+    <Button type="submit" color-scheme="primary" :disabled="!isFormValid" class="mt-6" full-width>
       Sign In
     </Button>
   </form>
@@ -226,13 +212,7 @@ const handleLoad = async () => {
 
 <script setup>
 import { reactive, computed } from "vue";
-import {
-  FormControl,
-  FormLabel,
-  Input,
-  FormErrorMessage,
-  Button,
-} from "@mild-ui/vue";
+import { FormControl, FormLabel, Input, FormErrorMessage, Button } from "@mild-ui/vue";
 
 const form = reactive({
   email: "",
@@ -292,9 +272,7 @@ const handleSubmit = () => {
 
     <TabPanel value="profile">
       <Card padding="lg">
-        <Text font-size="xl" font-weight="bold" class="mb-4">
-          Profile Information
-        </Text>
+        <Text font-size="xl" font-weight="bold" class="mb-4"> Profile Information </Text>
         <Input v-model="profile.name" placeholder="Full Name" class="mb-3" />
         <Input v-model="profile.bio" placeholder="Bio" type="textarea" />
       </Card>
@@ -303,26 +281,16 @@ const handleSubmit = () => {
     <TabPanel value="settings">
       <Card padding="lg">
         <Text font-size="xl" font-weight="bold" class="mb-4"> Settings </Text>
-        <Switch v-model="settings.notifications" class="mb-3">
-          Enable Notifications
-        </Switch>
-        <Switch v-model="settings.darkMode" @change="toggleColorMode">
-          Dark Mode
-        </Switch>
+        <Switch v-model="settings.notifications" class="mb-3"> Enable Notifications </Switch>
+        <Switch v-model="settings.darkMode" @change="toggleColorMode"> Dark Mode </Switch>
       </Card>
     </TabPanel>
 
     <TabPanel value="notifications">
       <Card padding="lg">
-        <Text font-size="xl" font-weight="bold" class="mb-4">
-          Notification Preferences
-        </Text>
-        <Checkbox v-model="notifications.email" class="mb-2">
-          Email notifications
-        </Checkbox>
-        <Checkbox v-model="notifications.push" class="mb-2">
-          Push notifications
-        </Checkbox>
+        <Text font-size="xl" font-weight="bold" class="mb-4"> Notification Preferences </Text>
+        <Checkbox v-model="notifications.email" class="mb-2"> Email notifications </Checkbox>
+        <Checkbox v-model="notifications.push" class="mb-2"> Push notifications </Checkbox>
       </Card>
     </TabPanel>
   </Tabs>
@@ -330,16 +298,7 @@ const handleSubmit = () => {
 
 <script setup>
 import { ref, reactive } from "vue";
-import {
-  Tabs,
-  Tab,
-  TabPanel,
-  Card,
-  Text,
-  Input,
-  Switch,
-  Checkbox,
-} from "@mild-ui/vue";
+import { Tabs, Tab, TabPanel, Card, Text, Input, Switch, Checkbox } from "@mild-ui/vue";
 import { useColorMode } from "@mild-ui/vue";
 
 const { toggleColorMode } = useColorMode();
@@ -491,11 +450,7 @@ Full TypeScript support with comprehensive type definitions:
 
 ```vue
 <template>
-  <CustomButton
-    :custom-prop="myProp"
-    color-scheme="primary"
-    @click="handleClick"
-  >
+  <CustomButton :custom-prop="myProp" color-scheme="primary" @click="handleClick">
     Custom Button
   </CustomButton>
 </template>
@@ -597,14 +552,7 @@ export default defineConfig({
 
 <script setup>
 import { ref } from "vue";
-import {
-  Button,
-  Modal,
-  ModalHeader,
-  ModalBody,
-  ModalFooter,
-  Text,
-} from "@mild-ui/vue";
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Text } from "@mild-ui/vue";
 
 const showModal = ref(false);
 </script>

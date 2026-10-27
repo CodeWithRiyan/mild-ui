@@ -22,10 +22,7 @@ async function generateTokenDocs() {
     await fs.writeFile("docs/generated/design-tokens.md", markdown);
 
     // Write JSON file
-    await fs.writeFile(
-      "docs/generated/design-tokens.json",
-      JSON.stringify(tokens, null, 2),
-    );
+    await fs.writeFile("docs/generated/design-tokens.json", JSON.stringify(tokens, null, 2));
 
     console.log("✅ Design token documentation generated");
   } catch (error) {

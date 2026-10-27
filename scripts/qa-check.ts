@@ -155,9 +155,7 @@ class QualityAssuranceChecker {
       if (!result.success) {
         allPassed = false;
         if (result.details) {
-          console.log(
-            chalk.gray(`   Details: ${result.details.slice(0, 100)}...`),
-          );
+          console.log(chalk.gray(`   Details: ${result.details.slice(0, 100)}...`));
         }
       }
     });
@@ -167,11 +165,7 @@ class QualityAssuranceChecker {
     if (allPassed) {
       console.log(chalk.green("🎉 All quality checks passed!"));
     } else {
-      console.log(
-        chalk.red(
-          "❌ Some quality checks failed. Please fix the issues above.",
-        ),
-      );
+      console.log(chalk.red("❌ Some quality checks failed. Please fix the issues above."));
       process.exit(1);
     }
   }

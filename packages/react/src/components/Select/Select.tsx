@@ -2,11 +2,7 @@
 import * as React from "react";
 import * as SelectPrimitive from "@radix-ui/react-select";
 import { Check, ChevronDown } from "lucide-react";
-import type {
-  SelectCoreProps,
-  SelectStyleProps,
-  SelectOption,
-} from "../../types";
+import type { SelectCoreProps, SelectStyleProps, SelectOption } from "../../types";
 import {
   selectTriggerVariants,
   selectContentVariants,
@@ -28,27 +24,22 @@ export interface SelectTriggerProps {
 }
 
 // Fix the forwardRef syntax with explicit types
-const SelectTrigger = React.forwardRef<HTMLButtonElement, SelectTriggerProps>(
-  (props, ref) => {
-    const { className, size, fullWidth, error, children, ...restProps } = props;
+const SelectTrigger = React.forwardRef<HTMLButtonElement, SelectTriggerProps>((props, ref) => {
+  const { className, size, fullWidth, error, children, ...restProps } = props;
 
-    return (
-      <SelectPrimitive.Trigger
-        ref={ref}
-        className={cn(
-          selectTriggerVariants({ size, fullWidth, error }),
-          className,
-        )}
-        {...restProps}
-      >
-        {children}
-        <SelectPrimitive.Icon asChild>
-          <ChevronDown className="--mild-h-4 --mild-w-4 --mild-opacity-50" />
-        </SelectPrimitive.Icon>
-      </SelectPrimitive.Trigger>
-    );
-  },
-);
+  return (
+    <SelectPrimitive.Trigger
+      ref={ref}
+      className={cn(selectTriggerVariants({ size, fullWidth, error }), className)}
+      {...restProps}
+    >
+      {children}
+      <SelectPrimitive.Icon asChild>
+        <ChevronDown className="--mild-h-4 --mild-w-4 --mild-opacity-50" />
+      </SelectPrimitive.Icon>
+    </SelectPrimitive.Trigger>
+  );
+});
 
 // Use type assertion for displayName
 (SelectTrigger as any).displayName = "SelectTrigger";
@@ -60,26 +51,22 @@ export interface SelectContentProps {
   position?: "popper" | "item-aligned";
 }
 
-const SelectContent = React.forwardRef<HTMLDivElement, SelectContentProps>(
-  (props, ref) => {
-    const { className, children, position = "popper", ...restProps } = props;
+const SelectContent = React.forwardRef<HTMLDivElement, SelectContentProps>((props, ref) => {
+  const { className, children, position = "popper", ...restProps } = props;
 
-    return (
-      <SelectPrimitive.Portal>
-        <SelectPrimitive.Content
-          ref={ref}
-          className={cn(selectContentVariants({ position }), className)}
-          position={position}
-          {...restProps}
-        >
-          <SelectPrimitive.Viewport className="--mild-p-1">
-            {children}
-          </SelectPrimitive.Viewport>
-        </SelectPrimitive.Content>
-      </SelectPrimitive.Portal>
-    );
-  },
-);
+  return (
+    <SelectPrimitive.Portal>
+      <SelectPrimitive.Content
+        ref={ref}
+        className={cn(selectContentVariants({ position }), className)}
+        position={position}
+        {...restProps}
+      >
+        <SelectPrimitive.Viewport className="--mild-p-1">{children}</SelectPrimitive.Viewport>
+      </SelectPrimitive.Content>
+    </SelectPrimitive.Portal>
+  );
+});
 
 // Use type assertion for displayName
 (SelectContent as any).displayName = "SelectContent";
@@ -93,26 +80,24 @@ export interface SelectItemProps {
   disabled?: boolean;
 }
 
-const SelectItem = React.forwardRef<HTMLDivElement, SelectItemProps>(
-  (props, ref) => {
-    const { className, size, children, ...restProps } = props;
+const SelectItem = React.forwardRef<HTMLDivElement, SelectItemProps>((props, ref) => {
+  const { className, size, children, ...restProps } = props;
 
-    return (
-      <SelectPrimitive.Item
-        ref={ref}
-        className={cn(selectItemVariants({ size }), className)}
-        {...restProps}
-      >
-        <span className="--mild-absolute --mild-left-2 --mild-flex --mild-h-3.5 --mild-w-3.5 --mild-items-center --mild-justify-center">
-          <SelectPrimitive.ItemIndicator>
-            <Check className="--mild-h-4 --mild-w-4" />
-          </SelectPrimitive.ItemIndicator>
-        </span>
-        <SelectPrimitive.ItemText>{children}</SelectPrimitive.ItemText>
-      </SelectPrimitive.Item>
-    );
-  },
-);
+  return (
+    <SelectPrimitive.Item
+      ref={ref}
+      className={cn(selectItemVariants({ size }), className)}
+      {...restProps}
+    >
+      <span className="--mild-absolute --mild-left-2 --mild-flex --mild-h-3.5 --mild-w-3.5 --mild-items-center --mild-justify-center">
+        <SelectPrimitive.ItemIndicator>
+          <Check className="--mild-h-4 --mild-w-4" />
+        </SelectPrimitive.ItemIndicator>
+      </span>
+      <SelectPrimitive.ItemText>{children}</SelectPrimitive.ItemText>
+    </SelectPrimitive.Item>
+  );
+});
 
 // Use type assertion for displayName
 (SelectItem as any).displayName = "SelectItem";

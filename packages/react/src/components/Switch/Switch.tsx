@@ -2,11 +2,7 @@
 import * as React from "react";
 import * as SwitchPrimitive from "@radix-ui/react-switch";
 import type { SwitchCoreProps } from "../../types";
-import {
-  switchLabelVariants,
-  switchThumbVariants,
-  switchVariants,
-} from "../../utils/switch";
+import { switchLabelVariants, switchThumbVariants, switchVariants } from "../../utils/switch";
 import { cn } from "../../utils";
 import { Label } from "../Label";
 
@@ -20,56 +16,52 @@ export interface SwitchProps extends Omit<SwitchCoreProps, "onCheckedChange" | "
 }
 
 // Use explicit type annotations
-const Switch = React.forwardRef<HTMLButtonElement, SwitchProps>(
-  (props, ref) => {
-    const {
-      className,
-      size = "md",
-      label,
-      checked,
-      defaultChecked,
-      disabled,
-      required,
-      name,
-      value,
-      indeterminate,
-      id,
-      ui,
-      onCheckedChange,
-      ...restProps
-    } = props;
+const Switch = React.forwardRef<HTMLButtonElement, SwitchProps>((props, ref) => {
+  const {
+    className,
+    size = "md",
+    label,
+    checked,
+    defaultChecked,
+    disabled,
+    required,
+    name,
+    value,
+    indeterminate,
+    id,
+    ui,
+    onCheckedChange,
+    ...restProps
+  } = props;
 
-    return (
-      <div className={cn("flex items-center space-x-4", ui?.container)}>
-        <SwitchPrimitive.Root
-          ref={ref}
-          id={id}
-          checked={checked}
-          defaultChecked={defaultChecked}
-          disabled={disabled}
-          name={name}
-          value={value}
-          onCheckedChange={onCheckedChange}
-          className={cn(switchVariants({ size }), className, ui?.switch)}
-          {...restProps}
+  return (
+    <div className={cn("flex items-center space-x-4", ui?.container)}>
+      <SwitchPrimitive.Root
+        ref={ref}
+        id={id}
+        checked={checked}
+        defaultChecked={defaultChecked}
+        disabled={disabled}
+        name={name}
+        value={value}
+        onCheckedChange={onCheckedChange}
+        className={cn(switchVariants({ size }), className, ui?.switch)}
+        {...restProps}
+      >
+        <SwitchPrimitive.Thumb className={cn(switchThumbVariants({ size }), ui?.thumb)} />
+      </SwitchPrimitive.Root>
+      {label && (
+        <Label
+          htmlFor={id}
+          className={cn(switchLabelVariants({ size }), ui?.label)}
+          required={required}
         >
-          <SwitchPrimitive.Thumb
-            className={cn(switchThumbVariants({ size }), ui?.thumb)}
-          />
-        </SwitchPrimitive.Root>
-        {label && (
-          <Label
-            htmlFor={id}
-            className={cn(switchLabelVariants({ size }), ui?.label)}
-            required={required}
-          >
-            {label}
-          </Label>
-        )}
-      </div>
-    );
-  },
-);
+          {label}
+        </Label>
+      )}
+    </div>
+  );
+});
 
 // Set a simple displayName
 Switch.displayName = "Switch";

@@ -1,10 +1,7 @@
 // packages/react/src/components/Input/Input.tsx
 import * as React from "react";
 import type { InputPasswordCoreProps } from "../../types/input-password";
-import {
-  inputPasswordVariants,
-  inputPasswordToggleVariants,
-} from "../../utils/input-password";
+import { inputPasswordVariants, inputPasswordToggleVariants } from "../../utils/input-password";
 import { cn } from "../../utils";
 import { EyeIcon, EyeOffIcon } from "lucide-react";
 
@@ -62,9 +59,7 @@ const InputPassword = React.forwardRef<HTMLInputElement, InputPasswordProps>(
         <button
           type="button"
           className={cn(inputPasswordToggleVariants({ size }), ui?.buttonIcon)}
-          onClick={() =>
-            setTypeInput(typeInput === "password" ? "text" : "password")
-          }
+          onClick={() => setTypeInput(typeInput === "password" ? "text" : "password")}
         >
           {typeInput === "password"
             ? visibleIcon || <EyeIcon size={16} />

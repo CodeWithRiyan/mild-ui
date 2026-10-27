@@ -11,19 +11,19 @@ npm install @mild-ui/core
 ### Import utilities only (without components):
 
 ```css
-@import '@mild-ui/core/css/utilities';
+@import "@mild-ui/core/css/utilities";
 ```
 
 ### Import utilities minified:
 
 ```css
-@import '@mild-ui/core/css/utilities/min';
+@import "@mild-ui/core/css/utilities/min";
 ```
 
 ### Import full Mild UI (utilities + components):
 
 ```css
-@import '@mild-ui/core/css';
+@import "@mild-ui/core/css";
 ```
 
 ## Available Utility Classes
@@ -329,11 +329,11 @@ All utilities automatically support dark mode through:
 You can customize utilities by modifying the design tokens in your SCSS files:
 
 ```scss
-@use '@mild-ui/core/src/sass/tokens/colors' with (
+@use "@mild-ui/core/src/sass/tokens/colors" with (
   $mild-colors: (
     primary: (
-      500: #your-color
-    )
+      500: #your-color,
+    ),
   )
 );
 ```

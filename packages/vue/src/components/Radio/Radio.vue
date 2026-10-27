@@ -13,11 +13,7 @@
       v-bind="$attrs"
     />
     <slot v-if="$slots.default" />
-    <label
-      v-else-if="label"
-      :for="$attrs.id as string | undefined"
-      :class="labelClasses"
-    >
+    <label v-else-if="label" :for="$attrs.id as string | undefined" :class="labelClasses">
       {{ label }}
     </label>
   </div>
@@ -25,15 +21,8 @@
 
 <script setup lang="ts">
 import { computed } from "vue";
-import {
-  type RadioCoreProps,
-  type RadioStyleProps,
-} from "../../types";
-import {
-  cn,
-  radioStyles,
-  radioLabelStyles,
-} from "../../utils";
+import { type RadioCoreProps, type RadioStyleProps } from "../../types";
+import { cn, radioStyles, radioLabelStyles } from "../../utils";
 
 interface Props extends RadioCoreProps, RadioStyleProps {
   label?: string;

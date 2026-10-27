@@ -1,12 +1,5 @@
 import { yupResolver } from "@hookform/resolvers/yup";
-import {
-  Button,
-  Field,
-  Form,
-  Radio,
-  RadioGroup,
-  RadioGroupItem,
-} from "@mild-ui/react";
+import { Button, Field, Form, Radio, RadioGroup, RadioGroupItem } from "@mild-ui/react";
 import type { Meta, StoryObj } from "@storybook/react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";

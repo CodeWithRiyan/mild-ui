@@ -56,21 +56,8 @@ const PlusIcon = () => (
 );
 
 const LoadingIcon = () => (
-  <svg
-    width="16"
-    height="16"
-    viewBox="0 0 24 24"
-    fill="none"
-    className="animate-spin"
-  >
-    <circle
-      cx="12"
-      cy="12"
-      r="10"
-      stroke="currentColor"
-      strokeWidth="4"
-      className="opacity-25"
-    />
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" className="animate-spin">
+    <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" className="opacity-25" />
     <path
       d="m12 2a10 10 0 0 1 10 10"
       stroke="currentColor"
@@ -88,8 +75,7 @@ const meta: Meta<typeof Button> = {
     layout: "centered",
     docs: {
       description: {
-        component:
-          "A versatile button component with multiple variants, sizes, and icon support.",
+        component: "A versatile button component with multiple variants, sizes, and icon support.",
       },
     },
   },
@@ -220,11 +206,7 @@ export const WithBothIcons = {
       <Button leadingIcon={<PlusIcon />} trailingIcon={<ChevronRightIcon />}>
         Add & Continue
       </Button>
-      <Button
-        variant="outline"
-        leadingIcon={<DownloadIcon />}
-        trailingIcon={<ChevronRightIcon />}
-      >
+      <Button variant="outline" leadingIcon={<DownloadIcon />} trailingIcon={<ChevronRightIcon />}>
         Download & Next
       </Button>
     </div>
@@ -254,9 +236,7 @@ export const LoadingStates = {
           variant="secondary"
           onClick={() => handleClick("secondary")}
           disabled={loading === "secondary"}
-          leadingIcon={
-            loading === "secondary" ? <LoadingIcon /> : <DownloadIcon />
-          }
+          leadingIcon={loading === "secondary" ? <LoadingIcon /> : <DownloadIcon />}
         >
           {loading === "secondary" ? "Downloading..." : "Download"}
         </Button>
@@ -265,9 +245,7 @@ export const LoadingStates = {
           variant="outline"
           onClick={() => handleClick("outline")}
           disabled={loading === "outline"}
-          trailingIcon={
-            loading === "outline" ? <LoadingIcon /> : <ChevronRightIcon />
-          }
+          trailingIcon={loading === "outline" ? <LoadingIcon /> : <ChevronRightIcon />}
         >
           {loading === "outline" ? "Loading..." : "Continue"}
         </Button>
@@ -285,12 +263,7 @@ export const AsChild = {
         </a>
       </Button>
       <Button variant="outline" asChild>
-        <a
-          href="#external"
-          target="_blank"
-          rel="noopener noreferrer"
-          role="button"
-        >
+        <a href="#external" target="_blank" rel="noopener noreferrer" role="button">
           External Link
         </a>
       </Button>
@@ -378,11 +351,7 @@ export const ResponsiveButtons = {
   render: () => (
     <div className="space-y-4 w-full max-w-md">
       <Button className="w-full">Full Width Button</Button>
-      <Button
-        variant="outline"
-        className="w-full"
-        leadingIcon={<DownloadIcon />}
-      >
+      <Button variant="outline" className="w-full" leadingIcon={<DownloadIcon />}>
         Full Width with Icon
       </Button>
       <div className="flex gap-2">

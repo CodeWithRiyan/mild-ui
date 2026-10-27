@@ -1,22 +1,12 @@
 <template>
   <div>
-    <slot
-      :theme="theme"
-      :setTheme="setTheme"
-      :config="config"
-      :setConfig="setConfig"
-    />
+    <slot :theme="theme" :setTheme="setTheme" :config="config" :setConfig="setConfig" />
   </div>
 </template>
 
 <script setup lang="ts">
 import { ref, provide, onMounted, watch, computed } from "vue";
-import {
-  ThemeConfig,
-  defaultTheme,
-  darkTheme,
-  applyTheme,
-} from "../types/theme";
+import { ThemeConfig, defaultTheme, darkTheme, applyTheme } from "../types/theme";
 
 type ThemeMode = "light" | "dark" | "system";
 
@@ -60,9 +50,7 @@ const setConfig = (newConfig: ThemeConfig) => {
 const effectiveTheme = computed(() => {
   if (theme.value === "system") {
     if (typeof window !== "undefined") {
-      return window.matchMedia("(prefers-color-scheme: dark)").matches
-        ? "dark"
-        : "light";
+      return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
     }
     return "light";
   }
@@ -76,8 +64,7 @@ const applyCurrentTheme = () => {
   root.classList.remove("light", "dark");
   root.classList.add(effectiveTheme.value);
 
-  const activeConfig =
-    effectiveTheme.value === "dark" ? darkTheme : config.value;
+  const activeConfig = effectiveTheme.value === "dark" ? darkTheme : config.value;
   applyTheme(activeConfig);
 };
 

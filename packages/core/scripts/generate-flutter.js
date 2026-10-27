@@ -15,7 +15,7 @@ async function generateFlutterTheme() {
 
     // Create Flutter theme structure
     const flutterTheme = generateFlutterThemeData(tokens);
-    
+
     // Ensure dist directory exists
     await fs.mkdir("dist/flutter", { recursive: true });
 

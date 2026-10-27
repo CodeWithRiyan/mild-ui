@@ -27,22 +27,9 @@
   @each $color-name, $color-props in $color-schemes {
     .mild-#{$component}--#{$variant}.mild-#{$component}--#{$color-name} {
       @each $prop, $value in $color-props {
-        @if $prop ==
-          "hover-bg" or
-          $prop ==
-          "hover-border" or
-          $prop ==
-          "hover-color"
-        {
+        @if $prop == "hover-bg" or $prop == "hover-border" or $prop == "hover-color" {
           // Skip hover properties - handle separately
-        } @else if
-          $prop ==
-          "active-bg" or
-          $prop ==
-          "active-border" or
-          $prop ==
-          "active-color"
-        {
+        } @else if $prop == "active-bg" or $prop == "active-border" or $prop == "active-color" {
           // Skip active properties - handle separately
         } @else if $prop == "hover-text-decoration" {
           // Skip hover text decoration - handle separately

@@ -14,13 +14,13 @@ export function selectTriggerVariants(props: SelectTriggerVariantProps) {
   return cn(
     // Base classes
     "mild-select-trigger",
-    
+
     // Size classes
     `mild-select-trigger--${size}`,
-    
+
     // State classes
     fullWidth && "mild-select-trigger--full-width",
-    error && "mild-select-trigger--error"
+    error && "mild-select-trigger--error",
   );
 }
 
@@ -34,9 +34,9 @@ export function selectContentVariants(props: SelectContentVariantProps) {
   return cn(
     // Base classes
     "mild-select-content",
-    
+
     // Position classes
-    `mild-select-content--${position}`
+    `mild-select-content--${position}`,
   );
 }
 
@@ -50,8 +50,8 @@ export function selectItemVariants(props: SelectItemVariantProps) {
   return cn(
     // Base classes
     "mild-select-item",
-    
+
     // Size classes
-    `mild-select-item--${size}`
+    `mild-select-item--${size}`,
   );
 }

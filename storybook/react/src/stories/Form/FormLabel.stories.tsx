@@ -1,12 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { useForm, FormProvider } from "react-hook-form";
-import {
-  FormLabel,
-  FormField,
-  FormItem,
-  FormControl,
-  Input,
-} from "@mild-ui/react";
+import { FormLabel, FormField, FormItem, FormControl, Input } from "@mild-ui/react";
 import React from "react";
 
 const meta: Meta<typeof FormLabel> = {
@@ -139,15 +133,13 @@ export const LongLabel: Story = {
   render: (args) => (
     <FormLabelWrapper>
       <FormLabel {...args}>
-        This is a very long label that demonstrates how the component handles
-        longer text content
+        This is a very long label that demonstrates how the component handles longer text content
       </FormLabel>
     </FormLabelWrapper>
   ),
   parameters: {
     docs: {
-      storyDescription:
-        "A form label with long text content to test text wrapping behavior.",
+      storyDescription: "A form label with long text content to test text wrapping behavior.",
     },
   },
 };
@@ -231,8 +223,7 @@ export const MultipleLabels: Story = {
   },
   parameters: {
     docs: {
-      storyDescription:
-        "Multiple form labels showing different states side by side.",
+      storyDescription: "Multiple form labels showing different states side by side.",
     },
   },
 };

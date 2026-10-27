@@ -13,12 +13,12 @@ export function labelVariants(props: LabelVariantProps) {
   return cn(
     // Base classes
     "mild-label",
-    
+
     // State classes
     required && "mild-label--required",
     error && "mild-label--error",
-    
+
     // Custom className
-    className
+    className,
   );
 }

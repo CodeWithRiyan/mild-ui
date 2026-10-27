@@ -88,7 +88,6 @@ jobs:
             echo "Core docs not found, skipping..."
           fi
 
-
       - name: Create enhanced main index page
         run: |
           cat > deploy/index.html << 'EOF'

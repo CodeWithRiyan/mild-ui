@@ -1,38 +1,38 @@
 #!/usr/bin/env node
 
-const { execSync } = require('child_process');
-const fs = require('fs');
-const path = require('path');
+const { execSync } = require("child_process");
+const fs = require("fs");
+const path = require("path");
 
-console.log('🔍 Validating Workflow Compatibility...\n');
+console.log("🔍 Validating Workflow Compatibility...\n");
 
 // Test functions
 const tests = [
   {
-    name: 'Core Package Build (CSS-only)',
-    command: 'pnpm --filter @mild-ui/core build',
-    description: 'Tests if core package builds CSS/SCSS successfully'
+    name: "Core Package Build (CSS-only)",
+    command: "pnpm --filter @mild-ui/core build",
+    description: "Tests if core package builds CSS/SCSS successfully",
   },
   {
-    name: 'React Package Build',
-    command: 'pnpm --filter @mild-ui/react build',
-    description: 'Tests if React package builds with local types'
+    name: "React Package Build",
+    command: "pnpm --filter @mild-ui/react build",
+    description: "Tests if React package builds with local types",
   },
   {
-    name: 'Vue Package Build',
-    command: 'pnpm --filter @mild-ui/vue build',
-    description: 'Tests if Vue package builds with local types'
+    name: "Vue Package Build",
+    command: "pnpm --filter @mild-ui/vue build",
+    description: "Tests if Vue package builds with local types",
   },
   {
-    name: 'All Packages Build',
-    command: 'pnpm build',
-    description: 'Tests if all packages build together (workflow simulation)'
+    name: "All Packages Build",
+    command: "pnpm build",
+    description: "Tests if all packages build together (workflow simulation)",
   },
   {
-    name: 'Test Command Check',
+    name: "Test Command Check",
     command: 'pnpm --filter @mild-ui/react test || echo "No tests - OK"',
-    description: 'Tests if test commands work or gracefully handle no tests'
-  }
+    description: "Tests if test commands work or gracefully handle no tests",
+  },
 ];
 
 let passedTests = 0;
@@ -42,51 +42,66 @@ for (const test of tests) {
   try {
     console.log(`▶️  ${test.name}`);
     console.log(`   ${test.description}`);
-    
-    const output = execSync(test.command, { 
-      stdio: 'pipe', 
-      encoding: 'utf8',
-      cwd: process.cwd()
+
+    const output = execSync(test.command, {
+      stdio: "pipe",
+      encoding: "utf8",
+      cwd: process.cwd(),
     });
-    
-    console.log('   ✅ PASSED\n');
+
+    console.log("   ✅ PASSED\n");
     passedTests++;
   } catch (error) {
-    console.log('   ❌ FAILED');
+    console.log("   ❌ FAILED");
     console.log(`   Error: ${error.message}`);
-    console.log('');
+    console.log("");
   }
 }
 
 // Check package exports
-console.log('📦 Checking Package Exports...\n');
+console.log("📦 Checking Package Exports...\n");
 
 const packageChecks = [
   {
-    name: 'Core Package Exports',
-    path: './packages/core/package.json',
-    expectedExports: ['./css', './css/min', './css/utilities', './css/utilities/min', './scss', './scss/utilities']
+    name: "Core Package Exports",
+    path: "./packages/core/package.json",
+    expectedExports: [
+      "./css",
+      "./css/min",
+      "./css/utilities",
+      "./css/utilities/min",
+      "./scss",
+      "./scss/utilities",
+    ],
   },
   {
-    name: 'React Package Dependencies',
-    path: './packages/react/package.json',
-    check: (pkg) => !pkg.dependencies['@mild-ui/core'] && pkg.dependencies['clsx'] && pkg.dependencies['tailwind-merge']
+    name: "React Package Dependencies",
+    path: "./packages/react/package.json",
+    check: (pkg) =>
+      !pkg.dependencies["@mild-ui/core"] &&
+      pkg.dependencies["clsx"] &&
+      pkg.dependencies["tailwind-merge"],
   },
   {
-    name: 'Vue Package Dependencies',
-    path: './packages/vue/package.json',
-    check: (pkg) => !pkg.dependencies['@mild-ui/core'] && pkg.dependencies['clsx'] && pkg.dependencies['tailwind-merge']
-  }
+    name: "Vue Package Dependencies",
+    path: "./packages/vue/package.json",
+    check: (pkg) =>
+      !pkg.dependencies["@mild-ui/core"] &&
+      pkg.dependencies["clsx"] &&
+      pkg.dependencies["tailwind-merge"],
+  },
 ];
 
 let passedExportChecks = 0;
 
 for (const check of packageChecks) {
   try {
-    const packageJson = JSON.parse(fs.readFileSync(check.path, 'utf8'));
-    
+    const packageJson = JSON.parse(fs.readFileSync(check.path, "utf8"));
+
     if (check.expectedExports) {
-      const hasAllExports = check.expectedExports.every(exp => packageJson.exports && packageJson.exports[exp]);
+      const hasAllExports = check.expectedExports.every(
+        (exp) => packageJson.exports && packageJson.exports[exp],
+      );
       if (hasAllExports) {
         console.log(`✅ ${check.name} - All exports present`);
         passedExportChecks++;
@@ -107,12 +122,12 @@ for (const check of packageChecks) {
 }
 
 // Check workflow files exist and are valid
-console.log('\n🔧 Checking Workflow Files...\n');
+console.log("\n🔧 Checking Workflow Files...\n");
 
 const workflowFiles = [
-  '.github/workflows/test.yml',
-  '.github/workflows/publish.yml', 
-  '.github/workflows/storybook.yml'
+  ".github/workflows/test.yml",
+  ".github/workflows/publish.yml",
+  ".github/workflows/storybook.yml",
 ];
 
 let workflowChecks = 0;
@@ -127,21 +142,22 @@ for (const workflow of workflowFiles) {
 }
 
 // Summary
-console.log('\n' + '='.repeat(50));
-console.log('📊 VALIDATION SUMMARY');
-console.log('='.repeat(50));
+console.log("\n" + "=".repeat(50));
+console.log("📊 VALIDATION SUMMARY");
+console.log("=".repeat(50));
 console.log(`Build Tests: ${passedTests}/${totalTests} passed`);
 console.log(`Export Checks: ${passedExportChecks}/${packageChecks.length} passed`);
 console.log(`Workflow Files: ${workflowChecks}/${workflowFiles.length} found`);
 
-const allPassed = passedTests === totalTests && 
-                  passedExportChecks === packageChecks.length && 
-                  workflowChecks === workflowFiles.length;
+const allPassed =
+  passedTests === totalTests &&
+  passedExportChecks === packageChecks.length &&
+  workflowChecks === workflowFiles.length;
 
 if (allPassed) {
-  console.log('\n🎉 ALL VALIDATIONS PASSED! Workflows should run successfully.');
+  console.log("\n🎉 ALL VALIDATIONS PASSED! Workflows should run successfully.");
   process.exit(0);
 } else {
-  console.log('\n⚠️  Some validations failed. Please check the issues above.');
+  console.log("\n⚠️  Some validations failed. Please check the issues above.");
   process.exit(1);
 }

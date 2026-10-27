@@ -1,13 +1,6 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import type { Meta, StoryObj } from "@storybook/react";
-import {
-  Button,
-  Checkbox,
-  Field,
-  Form,
-  FormLabel,
-  FormMessage,
-} from "@mild-ui/react";
+import { Button, Checkbox, Field, Form, FormLabel, FormMessage } from "@mild-ui/react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
@@ -20,8 +13,7 @@ const meta = {
     layout: "centered",
     docs: {
       description: {
-        component:
-          "A versatile checkbox component with multiple sizes and states.",
+        component: "A versatile checkbox component with multiple sizes and states.",
       },
     },
   },
@@ -111,9 +103,7 @@ export const UncontrolledCheckbox = {
 
 export const ToggleableIndeterminate = {
   render: () => {
-    const [state, setState] = useState<boolean | "indeterminate">(
-      "indeterminate",
-    );
+    const [state, setState] = useState<boolean | "indeterminate">("indeterminate");
 
     const handleToggle = () => {
       if (state === "indeterminate") setState(true);
@@ -135,10 +125,7 @@ export const ToggleableIndeterminate = {
 export const ReactHookFormWithYup = {
   render: () => {
     const schema = yup.object({
-      terms: yup
-        .boolean()
-        .required()
-        .oneOf([true], "You must accept the terms and conditions"),
+      terms: yup.boolean().required().oneOf([true], "You must accept the terms and conditions"),
       newsletter: yup.boolean().required(),
       marketing: yup.boolean().required(),
     });
@@ -258,9 +245,7 @@ export const CheckboxGroup = {
                 </Field>
               ))}
             </div>
-            {errors.newsletter && (
-              <FormMessage>{errors.newsletter.message}</FormMessage>
-            )}
+            {errors.newsletter && <FormMessage>{errors.newsletter.message}</FormMessage>}
           </div>
 
           <Button type="submit">Submit Selection</Button>
@@ -272,14 +257,8 @@ export const CheckboxGroup = {
 
 export const IndeterminateParentChild = {
   render: () => {
-    const [parentChecked, setParentChecked] = useState<
-      boolean | "indeterminate"
-    >("indeterminate");
-    const [childrenChecked, setChildrenChecked] = useState([
-      false,
-      true,
-      false,
-    ]);
+    const [parentChecked, setParentChecked] = useState<boolean | "indeterminate">("indeterminate");
+    const [childrenChecked, setChildrenChecked] = useState([false, true, false]);
 
     const handleParentChange = () => {
       if (parentChecked === true) {
@@ -327,9 +306,7 @@ export const IndeterminateParentChild = {
               key={feature}
               label={feature}
               checked={childrenChecked[index]}
-              onCheckedChange={(checked) =>
-                handleChildChange(index, checked === true)
-              }
+              onCheckedChange={(checked) => handleChildChange(index, checked === true)}
             />
           ))}
         </div>

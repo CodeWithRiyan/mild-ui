@@ -90,11 +90,7 @@ export default function App() {
   return (
     <ThemeProvider>
       <Card padding="lg">
-        <Button
-          colorScheme="primary"
-          size="lg"
-          onPress={() => console.log("Pressed!")}
-        >
+        <Button colorScheme="primary" size="lg" onPress={() => console.log("Pressed!")}>
           Get Started
         </Button>
         <Input placeholder="Enter your name" variant="outline" />
@@ -236,11 +232,7 @@ import { useTheme } from "@mild-ui/react";
 function ColorModeToggle() {
   const { colorMode, toggleColorMode } = useTheme();
 
-  return (
-    <Button onClick={toggleColorMode}>
-      {colorMode === "light" ? "🌙" : "☀️"}
-    </Button>
-  );
+  return <Button onClick={toggleColorMode}>{colorMode === "light" ? "🌙" : "☀️"}</Button>;
 }
 ```
 

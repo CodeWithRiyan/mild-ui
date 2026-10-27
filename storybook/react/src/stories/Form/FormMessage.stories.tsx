@@ -19,8 +19,7 @@ const meta: Meta<typeof FormMessage> = {
     layout: "centered",
     docs: {
       description: {
-        component:
-          "A form message component for displaying validation errors and other messages.",
+        component: "A form message component for displaying validation errors and other messages.",
       },
     },
   },
@@ -75,9 +74,7 @@ const FormMessageWrapper = ({
               <Input placeholder="Sample input" />
             </FormControl>
             {showDescription && (
-              <FormDescription>
-                This is a sample field for testing messages
-              </FormDescription>
+              <FormDescription>This is a sample field for testing messages</FormDescription>
             )}
             {children || <FormMessage />}
           </FormItem>
@@ -95,8 +92,7 @@ export const ErrorMessage: Story = {
   ),
   parameters: {
     docs: {
-      storyDescription:
-        "An error message displayed when field validation fails.",
+      storyDescription: "An error message displayed when field validation fails.",
     },
   },
 };
@@ -109,8 +105,7 @@ export const CustomErrorMessage: Story = {
   ),
   parameters: {
     docs: {
-      storyDescription:
-        "A specific validation error message for password requirements.",
+      storyDescription: "A specific validation error message for password requirements.",
     },
   },
 };
@@ -123,8 +118,7 @@ export const LongErrorMessage: Story = {
   ),
   parameters: {
     docs: {
-      storyDescription:
-        "A long error message to test text wrapping and display behavior.",
+      storyDescription: "A long error message to test text wrapping and display behavior.",
     },
   },
 };
@@ -132,9 +126,7 @@ export const LongErrorMessage: Story = {
 export const CustomMessage: Story = {
   render: (args) => (
     <FormMessageWrapper>
-      <FormMessage {...args}>
-        This is a custom message not from validation
-      </FormMessage>
+      <FormMessage {...args}>This is a custom message not from validation</FormMessage>
     </FormMessageWrapper>
   ),
   parameters: {
@@ -152,8 +144,7 @@ export const NoMessage: Story = {
   ),
   parameters: {
     docs: {
-      storyDescription:
-        "FormMessage with no error - component returns null and renders nothing.",
+      storyDescription: "FormMessage with no error - component returns null and renders nothing.",
     },
   },
 };
@@ -231,11 +222,7 @@ export const ValidationMessages: Story = {
               <FormItem>
                 <FormLabel>Email Address</FormLabel>
                 <FormControl>
-                  <Input
-                    {...field}
-                    type="email"
-                    placeholder="john@example.com"
-                  />
+                  <Input {...field} type="email" placeholder="john@example.com" />
                 </FormControl>
                 <FormDescription>Enter a valid email address</FormDescription>
                 <FormMessage />
@@ -250,11 +237,7 @@ export const ValidationMessages: Story = {
               <FormItem>
                 <FormLabel>Password</FormLabel>
                 <FormControl>
-                  <Input
-                    {...field}
-                    type="password"
-                    placeholder="Enter password"
-                  />
+                  <Input {...field} type="password" placeholder="Enter password" />
                 </FormControl>
                 <FormDescription>Must be at least 8 characters</FormDescription>
                 <FormMessage />
@@ -269,11 +252,7 @@ export const ValidationMessages: Story = {
               <FormItem>
                 <FormLabel>Confirm Password</FormLabel>
                 <FormControl>
-                  <Input
-                    {...field}
-                    type="password"
-                    placeholder="Confirm password"
-                  />
+                  <Input {...field} type="password" placeholder="Confirm password" />
                 </FormControl>
                 <FormDescription>Re-enter your password</FormDescription>
                 <FormMessage />
@@ -388,8 +367,7 @@ export const DifferentErrorTypes: Story = {
   },
   parameters: {
     docs: {
-      storyDescription:
-        "Different types of validation errors displayed with FormMessage.",
+      storyDescription: "Different types of validation errors displayed with FormMessage.",
     },
   },
 };
@@ -418,8 +396,7 @@ export const InteractiveValidation: Story = {
         } else if (!/^[a-zA-Z0-9_]+$/.test(username)) {
           form.setError("username", {
             type: "pattern",
-            message:
-              "Username can only contain letters, numbers, and underscores",
+            message: "Username can only contain letters, numbers, and underscores",
           });
         } else {
           form.clearErrors("username");
@@ -465,8 +442,7 @@ export const InteractiveValidation: Story = {
   },
   parameters: {
     docs: {
-      storyDescription:
-        "Interactive validation that updates messages as the user types.",
+      storyDescription: "Interactive validation that updates messages as the user types.",
     },
   },
 };

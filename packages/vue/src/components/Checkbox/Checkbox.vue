@@ -13,11 +13,7 @@
       v-bind="$attrs"
     />
     <slot v-if="$slots.default" />
-    <label
-      v-else-if="label"
-      :for="$attrs.id as string | undefined"
-      :class="labelClasses"
-    >
+    <label v-else-if="label" :for="$attrs.id as string | undefined" :class="labelClasses">
       {{ label }}
     </label>
   </div>
@@ -25,15 +21,8 @@
 
 <script setup lang="ts">
 import { computed } from "vue";
-import {
-  type CheckboxCoreProps,
-  type CheckboxStyleProps,
-} from "../../types";
-import {
-  cn,
-  checkboxStyles,
-  checkboxLabelStyles,
-} from "../../utils";
+import { type CheckboxCoreProps, type CheckboxStyleProps } from "../../types";
+import { cn, checkboxStyles, checkboxLabelStyles } from "../../utils";
 
 interface Props extends CheckboxCoreProps, CheckboxStyleProps {
   modelValue?: boolean;

@@ -119,10 +119,7 @@ export const SettingsPanel = {
       marketing: false,
     });
 
-    const handleSettingChange = (
-      key: keyof typeof settings,
-      value: boolean,
-    ) => {
+    const handleSettingChange = (key: keyof typeof settings, value: boolean) => {
       setSettings((prev) => ({ ...prev, [key]: value }));
     };
 
@@ -134,50 +131,38 @@ export const SettingsPanel = {
           <Switch
             label="Push notifications"
             checked={settings.notifications}
-            onCheckedChange={(val) =>
-              handleSettingChange("notifications", val === true)
-            }
+            onCheckedChange={(val) => handleSettingChange("notifications", val === true)}
           />
 
           <Switch
             label="Dark mode"
             checked={settings.darkMode}
-            onCheckedChange={(val) =>
-              handleSettingChange("darkMode", val === true)
-            }
+            onCheckedChange={(val) => handleSettingChange("darkMode", val === true)}
           />
 
           <Switch
             label="Auto-save documents"
             checked={settings.autoSave}
-            onCheckedChange={(val) =>
-              handleSettingChange("autoSave", val === true)
-            }
+            onCheckedChange={(val) => handleSettingChange("autoSave", val === true)}
           />
 
           <Switch
             label="Usage analytics"
             checked={settings.analytics}
-            onCheckedChange={(val) =>
-              handleSettingChange("analytics", val === true)
-            }
+            onCheckedChange={(val) => handleSettingChange("analytics", val === true)}
           />
 
           <Switch
             label="Marketing emails"
             checked={settings.marketing}
-            onCheckedChange={(val) =>
-              handleSettingChange("marketing", val === true)
-            }
+            onCheckedChange={(val) => handleSettingChange("marketing", val === true)}
             disabled
           />
         </div>
 
         <div className="mt-6 p-3 bg-gray-50 rounded text-sm">
           <strong>Current Settings:</strong>
-          <pre className="mt-1 text-xs">
-            {JSON.stringify(settings, null, 2)}
-          </pre>
+          <pre className="mt-1 text-xs">{JSON.stringify(settings, null, 2)}</pre>
         </div>
       </div>
     );
@@ -187,10 +172,7 @@ export const SettingsPanel = {
 export const ReactHookFormWithYup = {
   render: () => {
     const schema = yup.object({
-      terms: yup
-        .boolean()
-        .required()
-        .oneOf([true], "You must accept the terms and conditions"),
+      terms: yup.boolean().required().oneOf([true], "You must accept the terms and conditions"),
       newsletter: yup.boolean().required(),
       notifications: yup.boolean().required(),
       marketing: yup.boolean().required(),
@@ -269,18 +251,14 @@ export const AccessibilityDemo = {
           <Switch
             label="High contrast mode"
             checked={switches.highContrast}
-            onCheckedChange={(val) =>
-              handleChange("highContrast", val === true)
-            }
+            onCheckedChange={(val) => handleChange("highContrast", val === true)}
             size="lg"
           />
 
           <Switch
             label="Reduce motion"
             checked={switches.reduceMotion}
-            onCheckedChange={(val) =>
-              handleChange("reduceMotion", val === true)
-            }
+            onCheckedChange={(val) => handleChange("reduceMotion", val === true)}
             size="lg"
           />
 
@@ -294,17 +272,14 @@ export const AccessibilityDemo = {
           <Switch
             label="Screen reader optimizations"
             checked={switches.screenReader}
-            onCheckedChange={(val) =>
-              handleChange("screenReader", val === true)
-            }
+            onCheckedChange={(val) => handleChange("screenReader", val === true)}
             size="lg"
             disabled
           />
         </div>
 
         <p className="text-xs text-gray-600 mt-4">
-          These settings help improve accessibility for users with different
-          needs.
+          These settings help improve accessibility for users with different needs.
         </p>
       </div>
     );
@@ -321,10 +296,7 @@ export const SwitchGroup = {
       contacts: false,
     });
 
-    const handlePermissionChange = (
-      permission: keyof typeof permissions,
-      value: boolean,
-    ) => {
+    const handlePermissionChange = (permission: keyof typeof permissions, value: boolean) => {
       setPermissions((prev) => ({ ...prev, [permission]: value }));
     };
 
@@ -355,41 +327,31 @@ export const SwitchGroup = {
           <Switch
             label="Camera access"
             checked={permissions.camera}
-            onCheckedChange={(val) =>
-              handlePermissionChange("camera", val === true)
-            }
+            onCheckedChange={(val) => handlePermissionChange("camera", val === true)}
           />
 
           <Switch
             label="Microphone access"
             checked={permissions.microphone}
-            onCheckedChange={(val) =>
-              handlePermissionChange("microphone", val === true)
-            }
+            onCheckedChange={(val) => handlePermissionChange("microphone", val === true)}
           />
 
           <Switch
             label="Location access"
             checked={permissions.location}
-            onCheckedChange={(val) =>
-              handlePermissionChange("location", val === true)
-            }
+            onCheckedChange={(val) => handlePermissionChange("location", val === true)}
           />
 
           <Switch
             label="Push notifications"
             checked={permissions.notifications}
-            onCheckedChange={(val) =>
-              handlePermissionChange("notifications", val === true)
-            }
+            onCheckedChange={(val) => handlePermissionChange("notifications", val === true)}
           />
 
           <Switch
             label="Contacts access"
             checked={permissions.contacts}
-            onCheckedChange={(val) =>
-              handlePermissionChange("contacts", val === true)
-            }
+            onCheckedChange={(val) => handlePermissionChange("contacts", val === true)}
           />
         </div>
 

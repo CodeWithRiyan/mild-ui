@@ -4,7 +4,10 @@ import type { InputCoreProps } from "../../types";
 import { inputVariants } from "../../utils/input";
 
 export interface InputProps
-  extends Omit<InputCoreProps, "onChange" | "onBlur" | "onFocus" | "value" | "defaultValue" | "autoComplete" | "type">,
+  extends Omit<
+      InputCoreProps,
+      "onChange" | "onBlur" | "onFocus" | "value" | "defaultValue" | "autoComplete" | "type"
+    >,
     Omit<React.InputHTMLAttributes<HTMLInputElement>, "size"> {
   /** Input blur handler */
   onBlur?: (event: React.FocusEvent<HTMLInputElement>) => void;

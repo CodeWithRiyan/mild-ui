@@ -62,11 +62,7 @@ function Dashboard() {
 
       <Input placeholder="Enter your name" variant="outline" size="lg" />
 
-      <Button
-        colorScheme="primary"
-        size="lg"
-        onClick={() => console.log("Clicked!")}
-      >
+      <Button colorScheme="primary" size="lg" onClick={() => console.log("Clicked!")}>
         Get Started
       </Button>
     </Card>
@@ -135,11 +131,7 @@ import { ChevronRight, Download } from "lucide-react";
 function ButtonExamples() {
   return (
     <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
-      <Button
-        variant="solid"
-        colorScheme="primary"
-        leftIcon={<Download size={16} />}
-      >
+      <Button variant="solid" colorScheme="primary" leftIcon={<Download size={16} />}>
         Download
       </Button>
 
@@ -158,13 +150,7 @@ function ButtonExamples() {
 ### Form with Validation
 
 ```tsx
-import {
-  FormControl,
-  FormLabel,
-  Input,
-  FormErrorMessage,
-  Button,
-} from "@mild-ui/react";
+import { FormControl, FormLabel, Input, FormErrorMessage, Button } from "@mild-ui/react";
 import { useState } from "react";
 
 function ContactForm() {
@@ -314,21 +300,13 @@ function ColorModeToggle() {
 Full TypeScript support with comprehensive type definitions:
 
 ```tsx
-import type {
-  ButtonProps,
-  InputProps,
-  ThemeConfig,
-  ColorMode,
-} from "@mild-ui/react";
+import type { ButtonProps, InputProps, ThemeConfig, ColorMode } from "@mild-ui/react";
 
 interface CustomButtonProps extends ButtonProps {
   customProp?: string;
 }
 
-const CustomButton: React.FC<CustomButtonProps> = ({
-  customProp,
-  ...buttonProps
-}) => {
+const CustomButton: React.FC<CustomButtonProps> = ({ customProp, ...buttonProps }) => {
   return <Button {...buttonProps} />;
 };
 ```
@@ -341,11 +319,7 @@ mild-ui/react works seamlessly with Next.js, Remix, and other React frameworks:
 // next.js app/layout.tsx
 import { ThemeProvider } from "@mild-ui/react";
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <body>

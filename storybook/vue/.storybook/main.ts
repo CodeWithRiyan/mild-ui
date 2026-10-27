@@ -4,10 +4,7 @@ import { resolve } from "path";
 import vue from "@vitejs/plugin-vue";
 
 const config: StorybookConfig = {
-  stories: [
-    "../src/stories/Introduction.mdx",
-    "../src/stories/**/*.stories.@(js|ts|vue|mdx)",
-  ],
+  stories: ["../src/stories/Introduction.mdx", "../src/stories/**/*.stories.@(js|ts|vue|mdx)"],
   addons: [
     "@storybook/addon-links",
     "@storybook/addon-essentials", // This includes controls, viewport, docs, etc.

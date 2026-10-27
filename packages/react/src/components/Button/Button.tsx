@@ -1,10 +1,6 @@
 // packages/react/src/components/Button/Button.tsx
 import React, { forwardRef } from "react";
-import {
-  getButtonProps,
-  getButtonState,
-  getButtonA11yProps,
-} from "../../utils/button";
+import { getButtonProps, getButtonState, getButtonA11yProps } from "../../utils/button";
 import { ButtonProps } from "./Button.types";
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
@@ -54,7 +50,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
 
     // Extract type from rest if it exists
     const restWithoutType = rest;
-    
+
     return (
       <button
         ref={ref}

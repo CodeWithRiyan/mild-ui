@@ -154,15 +154,15 @@ async function generateTokensJSON() {
 async function generateMobilePlatforms() {
   try {
     console.log("📱 Generating mobile platform themes...");
-    
+
     // Generate Flutter theme
-    const { generateFlutterTheme } = require('./generate-flutter.js');
+    const { generateFlutterTheme } = require("./generate-flutter.js");
     await generateFlutterTheme();
-    
+
     // Generate React Native theme
-    const { generateReactNativeStyles } = require('./generate-react-native.js');
+    const { generateReactNativeStyles } = require("./generate-react-native.js");
     await generateReactNativeStyles();
-    
+
     console.log("✅ Mobile platform themes generated successfully!");
   } catch (error) {
     console.error("❌ Mobile platform generation failed:", error);

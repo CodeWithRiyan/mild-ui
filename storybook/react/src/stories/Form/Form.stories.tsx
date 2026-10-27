@@ -1,12 +1,5 @@
 import { yupResolver } from "@hookform/resolvers/yup";
-import {
-  Button,
-  Checkbox,
-  Field,
-  Form,
-  Input,
-  InputPassword,
-} from "@mild-ui/react";
+import { Button, Checkbox, Field, Form, Input, InputPassword } from "@mild-ui/react";
 import type { Meta, StoryObj } from "@storybook/react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import * as yup from "yup";
@@ -21,8 +14,7 @@ const meta = {
     layout: "centered",
     docs: {
       description: {
-        component:
-          "A form component that uses React Hook Form and Yup for validation.",
+        component: "A form component that uses React Hook Form and Yup for validation.",
       },
     },
   },
@@ -41,10 +33,7 @@ export const RegistrationForm: Story = {
         .required("Name is required")
         .min(2, "Name must be at least 2 characters")
         .max(50, "Name must be less than 50 characters"),
-      email: yup
-        .string()
-        .email("Enter a valid email")
-        .required("Email is required"),
+      email: yup.string().email("Enter a valid email").required("Email is required"),
       password: yup
         .string()
         .required("Password is required")
@@ -121,10 +110,7 @@ export const RegistrationForm: Story = {
 
     return (
       <Form {...form}>
-        <form
-          onSubmit={form.handleSubmit(onSubmit, onError)}
-          className="space-y-4"
-        >
+        <form onSubmit={form.handleSubmit(onSubmit, onError)} className="space-y-4">
           {/* Name Field */}
           <Field
             name="name"
@@ -146,21 +132,12 @@ export const RegistrationForm: Story = {
             description="We'll never share your email with anyone else"
             required
           >
-            <Input
-              type="email"
-              placeholder="Enter your email address"
-              autoComplete="email"
-            />
+            <Input type="email" placeholder="Enter your email address" autoComplete="email" />
           </Field>
 
           {/* Age Field */}
           <Field name="age" label="Age" required>
-            <Input
-              type="number"
-              placeholder="Enter your age"
-              min="13"
-              max="120"
-            />
+            <Input type="number" placeholder="Enter your age" min="13" max="120" />
           </Field>
 
           {/* Password Field */}
@@ -170,18 +147,12 @@ export const RegistrationForm: Story = {
             description="Must be at least 8 characters with uppercase, lowercase, and numbers"
             required
           >
-            <InputPassword
-              placeholder="Create a strong password"
-              autoComplete="new-password"
-            />
+            <InputPassword placeholder="Create a strong password" autoComplete="new-password" />
           </Field>
 
           {/* Confirm Password Field */}
           <Field name="confirmPassword" label="Confirm Password" required>
-            <InputPassword
-              placeholder="Confirm your password"
-              autoComplete="new-password"
-            />
+            <InputPassword placeholder="Confirm your password" autoComplete="new-password" />
           </Field>
 
           {/* Terms and Conditions */}
@@ -191,24 +162,13 @@ export const RegistrationForm: Story = {
 
           {/* Submit Button */}
           <div className="pt-4">
-            <Button
-              type="submit"
-              disabled={form.formState.isSubmitting}
-              className="w-full"
-            >
-              {form.formState.isSubmitting
-                ? "Creating Account..."
-                : "Create Account"}
+            <Button type="submit" disabled={form.formState.isSubmitting} className="w-full">
+              {form.formState.isSubmitting ? "Creating Account..." : "Create Account"}
             </Button>
           </div>
 
           {/* Reset Button */}
-          <Button
-            type="button"
-            variant="outline"
-            onClick={() => form.reset()}
-            className="w-full"
-          >
+          <Button type="button" variant="outline" onClick={() => form.reset()} className="w-full">
             Reset Form
           </Button>
         </form>

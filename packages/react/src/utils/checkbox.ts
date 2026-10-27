@@ -12,9 +12,9 @@ export function checkboxVariants(props: CheckboxVariantProps) {
   return cn(
     // Base classes
     "mild-checkbox",
-    
+
     // Size classes
-    `mild-checkbox--${size}`
+    `mild-checkbox--${size}`,
   );
 }
 
@@ -24,8 +24,8 @@ export function checkboxLabelVariants(props: CheckboxVariantProps) {
   return cn(
     // Base classes
     "mild-checkbox-label",
-    
+
     // Size classes
-    `mild-checkbox-label--${size}`
+    `mild-checkbox-label--${size}`,
   );
 }

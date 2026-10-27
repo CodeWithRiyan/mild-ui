@@ -1,11 +1,11 @@
 // Text component types
-import type { 
-  FontSize, 
-  FontWeight, 
-  TextAlign, 
-  TextTransform, 
-  TextDecoration, 
-  ColorValue 
+import type {
+  FontSize,
+  FontWeight,
+  TextAlign,
+  TextTransform,
+  TextDecoration,
+  ColorValue,
 } from "./common";
 
 export interface TextCoreProps {

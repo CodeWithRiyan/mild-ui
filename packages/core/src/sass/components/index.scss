@@ -267,8 +267,7 @@
   position: relative;
   display: flex;
   align-items: center;
-  padding: var(--mild-space-2) var(--mild-space-8) var(--mild-space-2)
-    var(--mild-space-2);
+  padding: var(--mild-space-2) var(--mild-space-8) var(--mild-space-2) var(--mild-space-2);
   font-size: var(--mild-font-size-sm);
   cursor: pointer;
   user-select: none;
@@ -283,14 +282,12 @@
   }
 
   &--sm {
-    padding: var(--mild-space-1) var(--mild-space-6) var(--mild-space-1)
-      var(--mild-space-1);
+    padding: var(--mild-space-1) var(--mild-space-6) var(--mild-space-1) var(--mild-space-1);
     font-size: var(--mild-font-size-xs);
   }
 
   &--lg {
-    padding: var(--mild-space-3) var(--mild-space-10) var(--mild-space-3)
-      var(--mild-space-3);
+    padding: var(--mild-space-3) var(--mild-space-10) var(--mild-space-3) var(--mild-space-3);
     font-size: var(--mild-font-size-base);
   }
 

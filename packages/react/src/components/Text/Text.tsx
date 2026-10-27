@@ -10,18 +10,7 @@ type HTMLTextComponent =
   | HTMLDivElement;
 
 export interface TextProps extends TextCoreProps {
-  as?:
-    | "span"
-    | "p"
-    | "div"
-    | "h1"
-    | "h2"
-    | "h3"
-    | "h4"
-    | "h5"
-    | "h6"
-    | "label"
-    | "caption";
+  as?: "span" | "p" | "div" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "label" | "caption";
   /** Text content */
   children: React.ReactNode;
   /** Additional CSS class */
@@ -76,10 +65,7 @@ export const Text = forwardRef<HTMLTextComponent, TextProps>(
         lineHeight: typeof lineHeight === "number" ? lineHeight : lineHeight,
       }),
       ...(letterSpacing && {
-        letterSpacing:
-          typeof letterSpacing === "number"
-            ? `${letterSpacing}em`
-            : letterSpacing,
+        letterSpacing: typeof letterSpacing === "number" ? `${letterSpacing}em` : letterSpacing,
       }),
     };
 

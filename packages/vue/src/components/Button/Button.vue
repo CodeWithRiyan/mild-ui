@@ -1,11 +1,6 @@
 <!-- packages/vue/src/components/Button/Button.vue -->
 <template>
-  <button
-    :class="buttonProps.className"
-    :disabled="disabled"
-    @click="onClick"
-    v-bind="$attrs"
-  >
+  <button :class="buttonProps.className" :disabled="disabled" @click="onClick" v-bind="$attrs">
     <span v-if="$slots['leading-icon']" class="mr-2">
       <slot name="leading-icon"></slot>
     </span>

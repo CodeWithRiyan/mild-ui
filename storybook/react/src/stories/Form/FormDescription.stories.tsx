@@ -71,15 +71,13 @@ export const BasicDescription: Story = {
   render: (args) => (
     <FormDescriptionWrapper>
       <FormDescription {...args}>
-        Enter your username. It must be unique and contain only letters and
-        numbers.
+        Enter your username. It must be unique and contain only letters and numbers.
       </FormDescription>
     </FormDescriptionWrapper>
   ),
   parameters: {
     docs: {
-      storyDescription:
-        "A basic form description providing helpful information to users.",
+      storyDescription: "A basic form description providing helpful information to users.",
     },
   },
 };
@@ -101,10 +99,9 @@ export const LongDescription: Story = {
   render: (args) => (
     <FormDescriptionWrapper>
       <FormDescription {...args}>
-        This is a longer description that provides detailed instructions about
-        what the user should enter in this field. It can span multiple lines and
-        provide comprehensive guidance to help users understand the requirements
-        and expectations.
+        This is a longer description that provides detailed instructions about what the user should
+        enter in this field. It can span multiple lines and provide comprehensive guidance to help
+        users understand the requirements and expectations.
       </FormDescription>
     </FormDescriptionWrapper>
   ),
@@ -119,15 +116,14 @@ export const DescriptionWithMarkup: Story = {
   render: (args) => (
     <FormDescriptionWrapper>
       <FormDescription {...args}>
-        Password must contain at least <strong>8 characters</strong>, including
-        one <em>uppercase letter</em> and one <em>number</em>.
+        Password must contain at least <strong>8 characters</strong>, including one{" "}
+        <em>uppercase letter</em> and one <em>number</em>.
       </FormDescription>
     </FormDescriptionWrapper>
   ),
   parameters: {
     docs: {
-      storyDescription:
-        "A form description containing HTML markup for emphasis.",
+      storyDescription: "A form description containing HTML markup for emphasis.",
     },
   },
 };
@@ -151,8 +147,8 @@ export const DescriptionWithInstructions: Story = {
   render: (args) => (
     <FormDescriptionWrapper labelText="API Key">
       <FormDescription {...args}>
-        You can find your API key in your account settings. Keep it secure and
-        don't share it publicly.
+        You can find your API key in your account settings. Keep it secure and don't share it
+        publicly.
       </FormDescription>
     </FormDescriptionWrapper>
   ),
@@ -168,15 +164,13 @@ export const WarningDescription: Story = {
   render: (args) => (
     <FormDescriptionWrapper labelText="Delete Account">
       <FormDescription {...args} className="text-orange-600 font-medium">
-        ⚠️ This action cannot be undone. All your data will be permanently
-        deleted.
+        ⚠️ This action cannot be undone. All your data will be permanently deleted.
       </FormDescription>
     </FormDescriptionWrapper>
   ),
   parameters: {
     docs: {
-      storyDescription:
-        "A form description styled as a warning with custom colors and an icon.",
+      storyDescription: "A form description styled as a warning with custom colors and an icon.",
     },
   },
 };
@@ -220,8 +214,8 @@ export const MultipleDescriptions: Story = {
                   <Input type="email" placeholder="Enter email" />
                 </FormControl>
                 <FormDescription>
-                  We'll use this email to send you important updates about your
-                  account. Make sure it's an email you check regularly.
+                  We'll use this email to send you important updates about your account. Make sure
+                  it's an email you check regularly.
                 </FormDescription>
               </FormItem>
             )}
@@ -237,9 +231,8 @@ export const MultipleDescriptions: Story = {
                   <Input type="password" placeholder="Enter password" />
                 </FormControl>
                 <FormDescription className="text-orange-600">
-                  <strong>Security tip:</strong> Use a combination of uppercase
-                  letters, lowercase letters, numbers, and symbols for a strong
-                  password.
+                  <strong>Security tip:</strong> Use a combination of uppercase letters, lowercase
+                  letters, numbers, and symbols for a strong password.
                 </FormDescription>
               </FormItem>
             )}
@@ -250,8 +243,7 @@ export const MultipleDescriptions: Story = {
   },
   parameters: {
     docs: {
-      storyDescription:
-        "Multiple form descriptions showing different styles and content lengths.",
+      storyDescription: "Multiple form descriptions showing different styles and content lengths.",
     },
   },
 };

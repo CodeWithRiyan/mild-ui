@@ -1,12 +1,5 @@
 import { yupResolver } from "@hookform/resolvers/yup";
-import {
-  Button,
-  Checkbox,
-  Field,
-  Form,
-  Input,
-  InputPassword,
-} from "@mild-ui/react";
+import { Button, Checkbox, Field, Form, Input, InputPassword } from "@mild-ui/react";
 import type { Meta, StoryObj } from "@storybook/react";
 import { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
@@ -97,11 +90,7 @@ export const ControlledInput = {
   render: () => {
     const [value, setValue] = useState("");
     return (
-      <Input
-        placeholder="Type here..."
-        value={value}
-        onChange={(e) => setValue(e.target.value)}
-      />
+      <Input placeholder="Type here..." value={value} onChange={(e) => setValue(e.target.value)} />
     );
   },
 } satisfies Story;
@@ -124,10 +113,7 @@ export const ReactHookFormWithYup = {
         .required("Name is required")
         .min(2, "Name must be at least 2 characters")
         .max(50, "Name must be less than 50 characters"),
-      email: yup
-        .string()
-        .email("Enter a valid email")
-        .required("Email is required"),
+      email: yup.string().email("Enter a valid email").required("Email is required"),
       password: yup
         .string()
         .required("Password is required")
@@ -204,10 +190,7 @@ export const ReactHookFormWithYup = {
 
     return (
       <Form {...form}>
-        <form
-          onSubmit={form.handleSubmit(onSubmit, onError)}
-          className="space-y-4"
-        >
+        <form onSubmit={form.handleSubmit(onSubmit, onError)} className="space-y-4">
           {/* Name Field */}
           <Field
             name="name"
@@ -229,21 +212,12 @@ export const ReactHookFormWithYup = {
             description="We'll never share your email with anyone else"
             required
           >
-            <Input
-              type="email"
-              placeholder="Enter your email address"
-              autoComplete="email"
-            />
+            <Input type="email" placeholder="Enter your email address" autoComplete="email" />
           </Field>
 
           {/* Age Field */}
           <Field name="age" label="Age" required>
-            <Input
-              type="number"
-              placeholder="Enter your age"
-              min="13"
-              max="120"
-            />
+            <Input type="number" placeholder="Enter your age" min="13" max="120" />
           </Field>
 
           {/* Password Field */}
@@ -253,18 +227,12 @@ export const ReactHookFormWithYup = {
             description="Must be at least 8 characters with uppercase, lowercase, and numbers"
             required
           >
-            <InputPassword
-              placeholder="Create a strong password"
-              autoComplete="new-password"
-            />
+            <InputPassword placeholder="Create a strong password" autoComplete="new-password" />
           </Field>
 
           {/* Confirm Password Field */}
           <Field name="confirmPassword" label="Confirm Password" required>
-            <InputPassword
-              placeholder="Confirm your password"
-              autoComplete="new-password"
-            />
+            <InputPassword placeholder="Confirm your password" autoComplete="new-password" />
           </Field>
 
           {/* Terms and Conditions */}
@@ -274,24 +242,13 @@ export const ReactHookFormWithYup = {
 
           {/* Submit Button */}
           <div className="pt-4">
-            <Button
-              type="submit"
-              disabled={form.formState.isSubmitting}
-              className="w-full"
-            >
-              {form.formState.isSubmitting
-                ? "Creating Account..."
-                : "Create Account"}
+            <Button type="submit" disabled={form.formState.isSubmitting} className="w-full">
+              {form.formState.isSubmitting ? "Creating Account..." : "Create Account"}
             </Button>
           </div>
 
           {/* Reset Button */}
-          <Button
-            type="button"
-            variant="outline"
-            onClick={() => form.reset()}
-            className="w-full"
-          >
+          <Button type="button" variant="outline" onClick={() => form.reset()} className="w-full">
             Reset Form
           </Button>
         </form>

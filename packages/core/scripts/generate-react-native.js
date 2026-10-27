@@ -17,7 +17,7 @@ async function generateReactNativeStyles() {
     const reactNativeTheme = generateReactNativeTheme(tokens);
     const reactNativeUtils = generateReactNativeUtils(tokens);
     const reactNativeTypes = generateReactNativeTypes(tokens);
-    
+
     // Ensure dist directory exists
     await fs.mkdir("dist/react-native", { recursive: true });
 
@@ -34,7 +34,7 @@ async function generateReactNativeStyles() {
     // Generate TypeScript versions
     const reactNativeThemeTS = generateReactNativeThemeTS(tokens);
     const reactNativeUtilsTS = generateReactNativeUtilsTS(tokens);
-    
+
     await fs.writeFile("dist/react-native/MildTheme.ts", reactNativeThemeTS);
     console.log("✅ Generated React Native theme (TS): dist/react-native/MildTheme.ts");
 

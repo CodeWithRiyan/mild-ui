@@ -51,8 +51,7 @@ const meta: Meta<typeof Field> = {
     },
     isBoolean: {
       control: "boolean",
-      description:
-        "Mark the field as a boolean field. ex: Checkbox (single not group), Switch.",
+      description: "Mark the field as a boolean field. ex: Checkbox (single not group), Switch.",
     },
     isRadio: {
       control: "boolean",
@@ -93,10 +92,7 @@ export const TextInput: Story = {
 
     return (
       <Form {...form}>
-        <form
-          className="space-y-4 min-w-[300px]"
-          onSubmit={form.handleSubmit(handleSubmit)}
-        >
+        <form className="space-y-4 min-w-[300px]" onSubmit={form.handleSubmit(handleSubmit)}>
           <Field {...args}>
             <Input placeholder="Enter your name" />
           </Field>
@@ -120,10 +116,7 @@ export const TextInput: Story = {
 export const Required: Story = {
   render: () => {
     const schema = yup.object({
-      email: yup
-        .string()
-        .email("Enter a valid email")
-        .required("Email is required"),
+      email: yup.string().email("Enter a valid email").required("Email is required"),
     });
     const form = useForm({
       resolver: yupResolver(schema),
@@ -208,17 +201,8 @@ export const RadioGroupField: Story = {
     return (
       <Form {...form}>
         <form className="space-y-4 min-w-[300px]">
-          <Field
-            name="gender"
-            label="Gender"
-            description="Select your gender"
-            required
-            isRadio
-          >
-            <Radio
-              items={options}
-              onValueChange={(value) => console.log(`Gender: ${value}`)}
-            />
+          <Field name="gender" label="Gender" description="Select your gender" required isRadio>
+            <Radio items={options} onValueChange={(value) => console.log(`Gender: ${value}`)} />
           </Field>
         </form>
       </Form>
@@ -230,9 +214,7 @@ export const RadioGroupField: Story = {
 export const CheckboxField: Story = {
   render: () => {
     const schema = yup.object({
-      acceptTerms: yup
-        .boolean()
-        .required("You must accept the terms and conditions"),
+      acceptTerms: yup.boolean().required("You must accept the terms and conditions"),
     });
     const form = useForm({
       resolver: yupResolver(schema),
@@ -260,9 +242,7 @@ export const CheckboxField: Story = {
 export const SwitchField: Story = {
   render: () => {
     const schema = yup.object({
-      acceptTerms: yup
-        .boolean()
-        .required("You must accept the terms and conditions"),
+      acceptTerms: yup.boolean().required("You must accept the terms and conditions"),
     });
     const form = useForm({
       resolver: yupResolver(schema),
@@ -315,10 +295,7 @@ export const NoLabel: Story = {
 export const HiddenError: Story = {
   render: () => {
     const schema = yup.object({
-      email: yup
-        .string()
-        .email("Enter a valid email")
-        .required("Email is required"),
+      email: yup.string().email("Enter a valid email").required("Email is required"),
     });
     const form = useForm({
       resolver: yupResolver(schema),
@@ -443,12 +420,7 @@ export const MultipleFields: Story = {
             <Input placeholder="Doe" />
           </Field>
 
-          <Field
-            name="email"
-            label="Email"
-            description="We'll use this to contact you"
-            required
-          >
+          <Field name="email" label="Email" description="We'll use this to contact you" required>
             <Input type="email" placeholder="john@example.com" />
           </Field>
 
@@ -471,9 +443,7 @@ export const MultipleFields: Story = {
                 </Field>
               ))}
             </div>
-            {errors.newsletter && (
-              <FormMessage>{errors.newsletter.message}</FormMessage>
-            )}
+            {errors.newsletter && <FormMessage>{errors.newsletter.message}</FormMessage>}
           </div>
 
           <Button type="submit">Submit</Button>
@@ -537,10 +507,7 @@ export const CompleteFormWithYup: Story = {
     const schema = yup.object({
       firstName: yup.string().required("First name is required"),
       lastName: yup.string().required("Last name is required"),
-      email: yup
-        .string()
-        .email("Invalid email format")
-        .required("Email is required"),
+      email: yup.string().email("Invalid email format").required("Email is required"),
       age: yup
         .string()
         .required("Age is required")
@@ -551,9 +518,7 @@ export const CompleteFormWithYup: Story = {
           (value) => !!(value && parseInt(value) >= 18),
         ),
       country: yup.string().required("Please select a country"),
-      acceptTerms: yup
-        .boolean()
-        .oneOf([true], "You must accept the terms and conditions"),
+      acceptTerms: yup.boolean().oneOf([true], "You must accept the terms and conditions"),
     });
 
     const form = useForm({
@@ -602,12 +567,7 @@ export const CompleteFormWithYup: Story = {
             <Input type="email" placeholder="john@example.com" />
           </Field>
 
-          <Field
-            name="age"
-            label="Age"
-            description="Must be 18 or older"
-            required
-          >
+          <Field name="age" label="Age" description="Must be 18 or older" required>
             <Input type="number" placeholder="25" />
           </Field>
 

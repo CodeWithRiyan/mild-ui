@@ -47,15 +47,13 @@ export function inputStyles({
 
   const widthClasses = fullWidth ? ["w-full"] : [];
 
-  const errorClasses = error
-    ? ["border-red-500", "focus-visible:ring-red-500"]
-    : [];
+  const errorClasses = error ? ["border-red-500", "focus-visible:ring-red-500"] : [];
 
   return cn(
     ...baseClasses,
     ...variantClasses[variant],
     ...sizeClasses[size],
     ...widthClasses,
-    ...errorClasses
+    ...errorClasses,
   );
 }

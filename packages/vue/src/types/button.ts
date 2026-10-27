@@ -1,11 +1,5 @@
 // Button types for Vue package
-export type ButtonVariant = 
-  | "primary"
-  | "secondary"
-  | "outline"
-  | "ghost"
-  | "link"
-  | "destructive";
+export type ButtonVariant = "primary" | "secondary" | "outline" | "ghost" | "link" | "destructive";
 
 export type ButtonSize = "sm" | "md" | "lg" | "icon";
 

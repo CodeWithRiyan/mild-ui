@@ -2,20 +2,12 @@
 import * as React from "react";
 import * as RadioGroupPrimitive from "@radix-ui/react-radio-group";
 import { Circle } from "lucide-react";
-import type {
-  RadioCoreProps,
-  RadioStyleProps,
-  RadioSize,
-} from "../../types";
-import {
-  radioVariants,
-  radioLabelVariants,
-} from "../../utils/radio";
+import type { RadioCoreProps, RadioStyleProps, RadioSize } from "../../types";
+import { radioVariants, radioLabelVariants } from "../../utils/radio";
 import { cn } from "../../utils";
 
 // Props untuk RadioGroup
-interface RadioGroupProps
-  extends React.ComponentPropsWithoutRef<typeof RadioGroupPrimitive.Root> {
+interface RadioGroupProps extends React.ComponentPropsWithoutRef<typeof RadioGroupPrimitive.Root> {
   children?: React.ReactNode;
   className?: string;
   ui?: {
@@ -54,47 +46,40 @@ RadioGroup.displayName = "RadioGroup";
 const RadioGroupItem = React.forwardRef<
   React.ElementRef<typeof RadioGroupPrimitive.Item>,
   RadioGroupItemProps
->(
-  (
-    { className, size = "md", label, value, disabled, required, id, ...props },
-    ref,
-  ) => {
-    const radioId = id || `radio-${value}`;
+>(({ className, size = "md", label, value, disabled, required, id, ...props }, ref) => {
+  const radioId = id || `radio-${value}`;
 
-    return (
-      <div className="--mild-flex --mild-items-center --mild-space-x-2">
-        <RadioGroupPrimitive.Item
-          ref={ref}
-          className={cn(radioVariants({ size }), className)}
-          value={value}
-          disabled={disabled}
-          required={required}
-          id={radioId}
-          {...props}
+  return (
+    <div className="--mild-flex --mild-items-center --mild-space-x-2">
+      <RadioGroupPrimitive.Item
+        ref={ref}
+        className={cn(radioVariants({ size }), className)}
+        value={value}
+        disabled={disabled}
+        required={required}
+        id={radioId}
+        {...props}
+      >
+        <RadioGroupPrimitive.Indicator className="--mild-flex --mild-items-center --mild-justify-center">
+          <Circle
+            className={cn("--mild-h-2.5 --mild-w-2.5 --mild-fill-current --mild-text-current")}
+          />
+        </RadioGroupPrimitive.Indicator>
+      </RadioGroupPrimitive.Item>
+      {label && (
+        <label
+          htmlFor={radioId}
+          className={cn(
+            radioLabelVariants({ size }),
+            disabled && "--mild-opacity-50 --mild-cursor-not-allowed",
+          )}
         >
-          <RadioGroupPrimitive.Indicator className="--mild-flex --mild-items-center --mild-justify-center">
-            <Circle
-              className={cn(
-                "--mild-h-2.5 --mild-w-2.5 --mild-fill-current --mild-text-current",
-              )}
-            />
-          </RadioGroupPrimitive.Indicator>
-        </RadioGroupPrimitive.Item>
-        {label && (
-          <label
-            htmlFor={radioId}
-            className={cn(
-              radioLabelVariants({ size }),
-              disabled && "--mild-opacity-50 --mild-cursor-not-allowed",
-            )}
-          >
-            {label}
-          </label>
-        )}
-      </div>
-    );
-  },
-);
+          {label}
+        </label>
+      )}
+    </div>
+  );
+});
 RadioGroupItem.displayName = "RadioGroupItem";
 
 // Komponen Radio yang lebih fleksibel
@@ -106,25 +91,24 @@ interface RadioProps extends RadioGroupProps {
   onValueChange?: (value: string) => void;
 }
 
-const Radio = React.forwardRef<
-  React.ElementRef<typeof RadioGroupPrimitive.Root>,
-  RadioProps
->(({ items, size = "md", children, className, ui, ...props }, ref) => {
-  return (
-    <RadioGroup ref={ref} className={cn(className, ui?.contaier)} {...props}>
-      {items
-        ? items.map((item) => (
-            <RadioGroupItem
-              {...item}
-              key={item.value}
-              size={size}
-              className={cn(item.className, ui?.items)}
-            />
-          ))
-        : children}
-    </RadioGroup>
-  );
-});
+const Radio = React.forwardRef<React.ElementRef<typeof RadioGroupPrimitive.Root>, RadioProps>(
+  ({ items, size = "md", children, className, ui, ...props }, ref) => {
+    return (
+      <RadioGroup ref={ref} className={cn(className, ui?.contaier)} {...props}>
+        {items
+          ? items.map((item) => (
+              <RadioGroupItem
+                {...item}
+                key={item.value}
+                size={size}
+                className={cn(item.className, ui?.items)}
+              />
+            ))
+          : children}
+      </RadioGroup>
+    );
+  },
+);
 Radio.displayName = "Radio";
 
 export { RadioGroup, RadioGroupItem, Radio };
