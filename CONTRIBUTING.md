@@ -22,9 +22,7 @@ pnpm build
 | ----------------- | -------------------------------------------- |
 | `packages/core`   | SCSS design system, compiled CSS, and tokens |
 | `packages/react`  | `@mild-ui/react` components                  |
-| `packages/vue`    | `@mild-ui/vue` components                    |
 | `storybook/react` | React Storybook (`pnpm storybook:react`)     |
-| `storybook/vue`   | Vue Storybook (`pnpm storybook:vue`)         |
 | `scripts`         | Repository checks used by CI                 |
 
 ## Checks
@@ -34,14 +32,14 @@ CI runs these on Node 20, 22, and 24. Run them locally before opening a PR:
 ```bash
 pnpm format:check   # Prettier (pnpm format to fix)
 pnpm lint           # ESLint
-pnpm typecheck      # TypeScript / vue-tsc
+pnpm typecheck      # TypeScript
 pnpm test           # Vitest
 pnpm build          # packages and Storybooks
 ```
 
 CI also runs `pnpm verify:readme` (every import shown in a README must exist in the built packages), `pnpm check:packages` (publint, attw, tarball contents), and `pnpm audit --prod`.
 
-The pre-commit hook formats staged files with Prettier and runs `eslint --fix` on staged `.ts`, `.tsx`, and `.vue` files; a commit with remaining lint errors is rejected.
+The pre-commit hook formats staged files with Prettier and runs `eslint --fix` on staged `.ts` and `.tsx` files; a commit with remaining lint errors is rejected.
 
 ## Pull requests
 
@@ -59,7 +57,7 @@ The pre-commit hook formats staged files with Prettier and runs `eslint --fix` o
 
 ## Releases
 
-Releases are automated with [Changesets](https://github.com/changesets/changesets). Merged changesets accumulate in a "Version Packages" PR; merging that PR publishes `@mild-ui/core`, `@mild-ui/react`, and `@mild-ui/vue` with the same version, npm provenance, changelogs, and a GitHub Release.
+Releases are automated with [Changesets](https://github.com/changesets/changesets). Merged changesets accumulate in a "Version Packages" PR; merging that PR publishes `@mild-ui/core` and `@mild-ui/react` with the same version, npm provenance, changelogs, and a GitHub Release.
 
 ## Code of Conduct
 

@@ -10,7 +10,7 @@ Pure CSS/SCSS design system with Tailwind-like utilities - framework agnostic, n
 
 - **Tailwind-like utilities** with `mild-` prefix (no conflicts!)
 - **Design tokens** as CSS custom properties
-- **Component styles** for React/Vue packages
+- **Component styles** for the React package
 - **Dark/Light themes** with automatic switching
 - **Responsive design** with mobile-first approach
 - **No runtime dependencies** - pure CSS/SCSS only
@@ -118,7 +118,6 @@ Automatic dark mode support:
 This core package is used by:
 
 - [`@mild-ui/react`](../react) - React components
-- [`@mild-ui/vue`](../vue) - Vue components
 
 ## License
 

@@ -5,7 +5,7 @@
 [![npm](https://img.shields.io/npm/v/@mild-ui/react)](https://www.npmjs.com/package/@mild-ui/react)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE)
 
-mild-ui is a UI component library for **React** and **Vue**, styled by a shared SCSS design system (`@mild-ui/core`). The project is pre-1.0: APIs can still change between minor versions, and every change is recorded in each package's `CHANGELOG.md`.
+mild-ui is a UI component library for **React**, styled by an SCSS design system (`@mild-ui/core`). The project is pre-1.0: APIs can still change between minor versions, and every change is recorded in each package's `CHANGELOG.md`.
 
 ## Available
 
@@ -13,35 +13,18 @@ mild-ui is a UI component library for **React** and **Vue**, styled by a shared 
 | ---------------- | --------------------------------------------------------------- | ----------------------------------------------------------- |
 | `@mild-ui/core`  | Framework-agnostic CSS, SCSS sources, light/dark themes, tokens | [Utilities](https://codewithriyan.github.io/mild-ui/core/)  |
 | `@mild-ui/react` | React 18/19 components                                          | [Storybook](https://codewithriyan.github.io/mild-ui/react/) |
-| `@mild-ui/vue`   | Vue 3 components                                                | [Storybook](https://codewithriyan.github.io/mild-ui/vue/)   |
 
-Components shipped today:
-
-| Component                         | React | Vue |
-| --------------------------------- | :---: | :-: |
-| Button                            |  ✅   | ✅  |
-| Checkbox                          |  ✅   | ✅  |
-| Input                             |  ✅   | ✅  |
-| Radio / RadioGroup                |  ✅   | ✅  |
-| Select                            |  ✅   | ✅  |
-| ThemeProvider                     |  ✅   | ✅  |
-| InputPassword                     |  ✅   |  —  |
-| Switch                            |  ✅   |  —  |
-| Label                             |  ✅   |  —  |
-| Text                              |  ✅   |  —  |
-| Box                               |  ✅   |  —  |
-| Form (built on `react-hook-form`) |  ✅   |  —  |
+Components shipped today: Button, Checkbox, Input, InputPassword, Label, Radio / RadioGroup, Select, Switch, Text, Box, Form (built on `react-hook-form`), and ThemeProvider.
 
 ## Planned
 
 Not available yet; nothing below can be installed today.
 
-- Vue versions of InputPassword, Switch, Label, Text, Box, and Form.
-- Design tokens package and headless primitives shared by React and Vue.
+- A design tokens package and headless primitives under the React components.
 - More components (for example Card, Alert, Modal, Tabs).
-- Other platforms such as React Native or Flutter are not on the current roadmap.
+- Vue, React Native, and Flutter are not on the current roadmap. `@mild-ui/vue` 0.5.1 stays on npm but is no longer developed.
 
-## Quick Start (React)
+## Quick Start
 
 ```bash
 npm create vite@latest my-app -- --template react-ts
@@ -69,35 +52,6 @@ export default function App() {
 
 Then run `npm run dev`.
 
-## Quick Start (Vue)
-
-```bash
-npm create vite@latest my-app -- --template vue-ts
-cd my-app
-npm install @mild-ui/vue @mild-ui/core
-```
-
-Replace `src/App.vue` with:
-
-```vue
-<script setup lang="ts">
-import { ref } from "vue";
-import "@mild-ui/core/mild-ui.css";
-import { ThemeProvider, Button, Input } from "@mild-ui/vue";
-
-const name = ref("");
-</script>
-
-<template>
-  <ThemeProvider>
-    <Input v-model="name" placeholder="Enter your name" />
-    <Button variant="primary" size="lg">Get Started</Button>
-  </ThemeProvider>
-</template>
-```
-
-Then run `npm run dev`.
-
 ## Theming
 
 Every color, spacing, and radius value is a CSS custom property, so a theme can be changed without SCSS:
@@ -109,7 +63,7 @@ Every color, spacing, and radius value is a CSS custom property, so a theme can 
 }
 ```
 
-In React, `ThemeProvider` also accepts a `theme` object and a `colorMode` (`"light"`, `"dark"`, or `"system"`), and `useTheme()` reads or changes the active mode.
+`ThemeProvider` also accepts a `theme` object and a `colorMode` (`"light"`, `"dark"`, or `"system"`), and `useTheme()` reads or changes the active mode.
 
 ## Development
 

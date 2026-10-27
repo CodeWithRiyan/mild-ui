@@ -6,20 +6,16 @@
     "build": "pnpm -r build",
     "build:core": "cd packages/core && pnpm build",
     "build:react": "cd packages/react && pnpm build",
-    "build:vue": "cd packages/vue && pnpm build",
     "dev": "pnpm -r dev",
     "test": "pnpm --filter \"./packages/*\" test",
     "lint": "eslint .",
     "format": "prettier --write .",
     "prepare": "husky",
     "storybook:react": "cd storybook/react && pnpm dev",
-    "storybook:vue": "cd storybook/vue && pnpm dev",
     "storybook:build:react": "cd storybook/react && pnpm build",
-    "storybook:build:vue": "cd storybook/vue && pnpm build",
-    "storybook:build:all": "pnpm storybook:build:react && pnpm storybook:build:vue",
+    "storybook:build:all": "pnpm storybook:build:react",
     "storybook:preview:react": "cd storybook/react && pnpm preview",
-    "storybook:preview:vue": "cd storybook/vue && pnpm preview",
-    "packages:build": "pnpm --filter @mild-ui/core build && pnpm --filter @mild-ui/react build && pnpm --filter @mild-ui/vue build",
+    "packages:build": "pnpm --filter @mild-ui/core build && pnpm --filter @mild-ui/react build",
     "validate:workflows": "node scripts/validate-workflows.cjs",
     "typecheck": "pnpm --filter \"./packages/*\" typecheck",
     "format:check": "prettier --check .",
@@ -40,7 +36,6 @@
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-jsx-a11y": "^6.10.2",
     "eslint-plugin-react-hooks": "^5.2.0",
-    "eslint-plugin-vue": "^9.33.0",
     "globals": "^15.15.0",
     "husky": "^9.1.7",
     "lint-staged": "^15.5.2",
@@ -61,6 +56,6 @@
   },
   "lint-staged": {
     "*": "prettier --write --ignore-unknown",
-    "*.{ts,tsx,vue}": "eslint --fix"
+    "*.{ts,tsx}": "eslint --fix"
   }
 }

@@ -1,6 +1,5 @@
 import js from "@eslint/js";
 import tseslint from "typescript-eslint";
-import pluginVue from "eslint-plugin-vue";
 import reactHooks from "eslint-plugin-react-hooks";
 import jsxA11y from "eslint-plugin-jsx-a11y";
 import prettier from "eslint-config-prettier";
@@ -18,7 +17,6 @@ export default tseslint.config(
   },
   js.configs.recommended,
   ...tseslint.configs.recommended,
-  ...pluginVue.configs["flat/recommended"],
   {
     languageOptions: {
       globals: { ...globals.browser, ...globals.node },
@@ -29,14 +27,6 @@ export default tseslint.config(
         "error",
         { ignoreRestSiblings: true, argsIgnorePattern: "^_", caughtErrors: "none" },
       ],
-      // Component names such as Button and Select are part of the public API.
-      "vue/multi-word-component-names": "off",
-    },
-  },
-  {
-    files: ["**/*.vue"],
-    languageOptions: {
-      parserOptions: { parser: tseslint.parser },
     },
   },
   {

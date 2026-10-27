@@ -8,11 +8,10 @@ import { fileURLToPath } from "node:url";
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 
-// attw options per package: core ships CSS only, react is dual ESM/CJS, vue is ESM only.
+// attw options per package: core ships CSS only, react is dual ESM/CJS.
 const packages = {
   core: ["--profile", "node16"],
   react: ["--exclude-entrypoints", "styles", "styles.css"],
-  vue: ["--profile", "esm-only"],
 };
 
 const requiredEntries = ["package/LICENSE", "package/README.md", "package/package.json"];

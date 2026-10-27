@@ -28,10 +28,6 @@
       ]
     },
     {
-      "groupName": "Vue",
-      "matchPackageNames": ["vue", "vue-tsc", "@vue/**", "@vitejs/plugin-vue", "@vueuse/**"]
-    },
-    {
       "groupName": "Storybook",
       "matchPackageNames": ["storybook", "@storybook/**", "storybook-dark-mode", "chromatic"]
     },
@@ -79,8 +75,8 @@
       "enabled": false
     },
     {
-      "description": "Removed from react and vue in T-R1B-09 (0.6.0)",
-      "matchPackageNames": ["tailwind-merge", "lucide-react", "lucide-vue-next"],
+      "description": "Removed from react in T-R1B-09 (0.6.0)",
+      "matchPackageNames": ["tailwind-merge", "lucide-react"],
       "enabled": false
     },
     {

@@ -2,7 +2,7 @@
 
 ## Supported versions
 
-Security fixes are released for the latest published minor version of `@mild-ui/core`, `@mild-ui/react`, and `@mild-ui/vue`. The three packages always share one version number.
+Security fixes are released for the latest published minor version of `@mild-ui/core` and `@mild-ui/react`. The two packages always share one version number. `@mild-ui/vue` is no longer developed and receives no fixes.
 
 ## Reporting a vulnerability
 

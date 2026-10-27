@@ -1,13 +1,11 @@
-name: Build and Deploy Multi-Framework Storybooks + Core Docs
+name: Build and Deploy Storybook + Core Docs
 on:
   push:
     branches: [main]
     paths:
       - "packages/core/**"
       - "packages/react/**"
-      - "packages/vue/**"
       - "storybook/react/**"
-      - "storybook/vue/**"
       - ".github/workflows/storybook.yml"
   workflow_dispatch:
 
@@ -41,9 +39,6 @@ jobs:
       - name: Build React package
         run: pnpm --filter @mild-ui/react build
 
-      - name: Build Vue package
-        run: pnpm --filter @mild-ui/vue build
-
       # Generate Core Documentation using our docs generator
       - name: Generate Core Documentation
         run: |
@@ -61,26 +56,14 @@ jobs:
           NODE_ENV: production
           CI: true
 
-      - name: Build Vue Storybook
-        run: |
-          cd storybook/vue
-          STORYBOOK_BASE_URL="/mild-ui/vue/" pnpm build
-        env:
-          NODE_ENV: production
-          CI: true
-
       - name: Create deployment directory
         run: |
           mkdir -p deploy
           mkdir -p deploy/react
-          mkdir -p deploy/vue
           mkdir -p deploy/core
 
       - name: Copy React Storybook
         run: cp -r storybook/react/storybook-static/* deploy/react/
-
-      - name: Copy Vue Storybook
-        run: cp -r storybook/vue/storybook-static/* deploy/vue/
 
       # Copy Core Documentation
       - name: Copy Core Documentation
@@ -223,31 +206,25 @@ jobs:
           <body>
               <div class="container">
                   <h1>mild-ui Component Library 
-                      <span class="badge">Multi-Framework</span>
+                      <span class="badge">React</span>
                       <span class="badge auto-badge">Auto-Generated</span>
                   </h1>
                   
                   <p class="description">
-                      Welcome to mild-ui, a cross-framework UI component library with SASS-powered styling. 
-                      Consistent components across React, Vue, and mobile platforms with comprehensive documentation.
+                      Welcome to mild-ui, a React UI component library with SASS-powered styling. 
+                      React components styled by a shared SCSS design system, with comprehensive documentation.
                   </p>
 
                   <div class="sections">
                       <div class="section">
                           <h2 class="section-header">🧩 Interactive Component Documentation</h2>
                           <div class="section-content">
-                              <p>Live, interactive examples of components across different frameworks:</p>
+                              <p>Live, interactive examples of every React component:</p>
                               <div class="frameworks">
                                   <div class="framework-card">
                                       <h3>⚛️ React Components</h3>
                                       <p>Interactive React components with hooks and modern patterns</p>
                                       <a href="./react/">Explore React Storybook</a>
-                                  </div>
-                                  
-                                  <div class="framework-card">
-                                      <h3>💚 Vue Components</h3>
-                                      <p>Vue 3 components with Composition API and reactive patterns</p>
-                                      <a href="./vue/">Explore Vue Storybook</a>
                                   </div>
                               </div>
                           </div>
@@ -275,12 +252,6 @@ jobs:
                                       <h3>⚛️ React API</h3>
                                       <p>React component props and TypeScript types</p>
                                       <a href="./react/">React Components</a>
-                                  </div>
-                                  
-                                  <div class="doc-card">
-                                      <h3>💚 Vue API</h3>
-                                      <p>Vue component props and TypeScript types</p>
-                                      <a href="./vue/">Vue Components</a>
                                   </div>
                               </div>
                           </div>
