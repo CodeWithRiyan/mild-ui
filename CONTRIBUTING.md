@@ -4,7 +4,7 @@ Thanks for helping out! This guide covers local setup, the checks every PR must 
 
 ## Local setup
 
-Requirements: Node.js 18 or newer (Corepack ships with Node.js) and Git.
+Requirements: Node.js 20, 22, or 24 (Corepack ships with Node.js) and Git.
 
 ```bash
 git clone https://github.com/CodeWithRiyan/mild-ui.git
@@ -29,7 +29,7 @@ pnpm build
 
 ## Checks
 
-CI runs these on Node 18, 20, and 22. Run them locally before opening a PR:
+CI runs these on Node 20, 22, and 24. Run them locally before opening a PR:
 
 ```bash
 pnpm format:check   # Prettier (pnpm format to fix)

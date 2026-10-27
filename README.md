@@ -112,7 +112,7 @@ In React, `ThemeProvider` also accepts a `theme` object and a `colorMode` (`"lig
 
 ## Development
 
-Requirements: Node.js 18 or newer and Corepack (bundled with Node.js).
+Requirements: Node.js 20, 22, or 24 and Corepack (bundled with Node.js).
 
 ```bash
 git clone https://github.com/CodeWithRiyan/mild-ui.git
