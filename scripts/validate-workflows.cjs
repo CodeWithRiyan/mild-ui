@@ -18,11 +18,6 @@ const tests = [
     description: "Tests if React package builds with local types",
   },
   {
-    name: "Vue Package Build",
-    command: "pnpm --filter @mild-ui/vue build",
-    description: "Tests if Vue package builds with local types",
-  },
-  {
     name: "All Packages Build",
     command: "pnpm build",
     description: "Tests if all packages build together (workflow simulation)",
@@ -76,14 +71,6 @@ const packageChecks = [
   {
     name: "React Package Dependencies",
     path: "./packages/react/package.json",
-    check: (pkg) =>
-      !pkg.dependencies["@mild-ui/core"] &&
-      pkg.dependencies["clsx"] &&
-      pkg.dependencies["tailwind-merge"],
-  },
-  {
-    name: "Vue Package Dependencies",
-    path: "./packages/vue/package.json",
     check: (pkg) =>
       !pkg.dependencies["@mild-ui/core"] &&
       pkg.dependencies["clsx"] &&

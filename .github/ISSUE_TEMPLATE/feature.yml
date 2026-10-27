@@ -9,7 +9,6 @@ body:
       multiple: true
       options:
         - React
-        - Vue
         - CSS only (@mild-ui/core)
     validations:
       required: true
