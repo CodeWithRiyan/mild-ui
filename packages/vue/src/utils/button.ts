@@ -81,12 +81,7 @@ export function getButtonProps(config: ButtonPropsConfig) {
     icon: ["mild-p-2", "mild-radius-md"],
   };
 
-  const classes = cn(
-    ...baseClasses,
-    ...variantClasses[variant],
-    ...sizeClasses[size],
-    className
-  );
+  const classes = cn(...baseClasses, ...variantClasses[variant], ...sizeClasses[size], className);
 
   return {
     className: classes,

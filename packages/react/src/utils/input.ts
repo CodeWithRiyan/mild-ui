@@ -22,21 +22,21 @@ export function inputVariants(props: InputVariantProps) {
   return cn(
     // Base classes
     "mild-input",
-    
+
     // Variant classes
     `mild-input--${variant}`,
-    
+
     // Size classes
     `mild-input--${size}`,
-    
+
     // State classes
     fullWidth && "mild-input--full-width",
     error && "mild-input--error",
     disabled && "mild-input--disabled",
     readonly && "mild-input--readonly",
     required && "mild-input--required",
-    
+
     // Custom className
-    className
+    className,
   );
 }

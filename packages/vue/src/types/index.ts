@@ -1,7 +1,7 @@
 // Button types
 export * from "./button";
 
-// Input types  
+// Input types
 export * from "./input";
 
 // Select types

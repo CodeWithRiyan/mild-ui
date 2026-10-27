@@ -1,32 +1,32 @@
 // Box component types
-import type { 
-  SpacingValue, 
-  ColorValue, 
-  DisplayValue, 
-  FlexDirection, 
-  FlexWrap, 
-  AlignItems, 
+import type {
+  SpacingValue,
+  ColorValue,
+  DisplayValue,
+  FlexDirection,
+  FlexWrap,
+  AlignItems,
   JustifyContent,
   PositionValue,
-  OverflowValue
+  OverflowValue,
 } from "./common";
 
 export interface BoxCoreProps {
   // Display
   display?: DisplayValue;
-  
+
   // Flexbox props
   flexDirection?: FlexDirection;
   flexWrap?: FlexWrap;
   alignItems?: AlignItems;
   justifyContent?: JustifyContent;
   gap?: SpacingValue;
-  
+
   // Grid props
   gridTemplateColumns?: string;
   gridTemplateRows?: string;
   gridGap?: SpacingValue;
-  
+
   // Spacing props
   padding?: SpacingValue;
   paddingX?: SpacingValue;
@@ -42,7 +42,7 @@ export interface BoxCoreProps {
   marginRight?: SpacingValue;
   marginBottom?: SpacingValue;
   marginLeft?: SpacingValue;
-  
+
   // Sizing props
   width?: string | number;
   height?: string | number;
@@ -50,14 +50,14 @@ export interface BoxCoreProps {
   minHeight?: string | number;
   maxWidth?: string | number;
   maxHeight?: string | number;
-  
+
   // Border and background
   borderRadius?: SpacingValue;
   borderWidth?: SpacingValue;
   borderColor?: ColorValue;
   backgroundColor?: ColorValue;
   color?: ColorValue;
-  
+
   // Position props
   position?: PositionValue;
   top?: string | number;
@@ -65,7 +65,7 @@ export interface BoxCoreProps {
   bottom?: string | number;
   left?: string | number;
   zIndex?: number;
-  
+
   // Overflow props
   overflow?: OverflowValue;
   overflowX?: OverflowValue;

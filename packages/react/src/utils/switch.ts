@@ -12,9 +12,9 @@ export function switchVariants(props: SwitchVariantProps) {
   return cn(
     // Base classes
     "mild-switch",
-    
+
     // Size classes
-    `mild-switch--${size}`
+    `mild-switch--${size}`,
   );
 }
 
@@ -24,9 +24,9 @@ export function switchThumbVariants(props: SwitchVariantProps) {
   return cn(
     // Base classes
     "mild-switch-thumb",
-    
+
     // Size classes
-    `mild-switch-thumb--${size}`
+    `mild-switch-thumb--${size}`,
   );
 }
 
@@ -36,8 +36,8 @@ export function switchLabelVariants(props: SwitchVariantProps) {
   return cn(
     // Base classes
     "mild-switch-label",
-    
+
     // Size classes
-    `mild-switch-label--${size}`
+    `mild-switch-label--${size}`,
   );
 }

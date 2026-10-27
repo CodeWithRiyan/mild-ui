@@ -3,10 +3,7 @@ import type { StorybookConfig } from "@storybook/react-vite";
 import { resolve } from "path";
 
 const config: StorybookConfig = {
-  stories: [
-    "../src/stories/Introduction.mdx",
-    "../src/stories/**/*.stories.@(js|jsx|ts|tsx|mdx)",
-  ],
+  stories: ["../src/stories/Introduction.mdx", "../src/stories/**/*.stories.@(js|jsx|ts|tsx|mdx)"],
   addons: [
     "@storybook/addon-links",
     "@storybook/addon-essentials",
@@ -27,8 +24,7 @@ const config: StorybookConfig = {
     reactDocgen: "react-docgen-typescript",
     reactDocgenTypescriptOptions: {
       shouldExtractLiteralValuesFromEnum: true,
-      propFilter: (prop) =>
-        prop.parent ? !/node_modules/.test(prop.parent.fileName) : true,
+      propFilter: (prop) => (prop.parent ? !/node_modules/.test(prop.parent.fileName) : true),
     },
   },
   viteFinal: async (config, { configType }) => {

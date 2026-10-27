@@ -1,6 +1,5 @@
 // packages/core/scripts/generate-token-docs.js
 const fs = require("fs").promises;
-const path = require("path");
 
 /**
  * Simple design token documentation generator
@@ -22,10 +21,7 @@ async function generateTokenDocs() {
     await fs.writeFile("docs/generated/design-tokens.md", markdown);
 
     // Write JSON file
-    await fs.writeFile(
-      "docs/generated/design-tokens.json",
-      JSON.stringify(tokens, null, 2),
-    );
+    await fs.writeFile("docs/generated/design-tokens.json", JSON.stringify(tokens, null, 2));
 
     console.log("✅ Design token documentation generated");
   } catch (error) {
@@ -109,7 +105,7 @@ async function extractFromSASS(tokens) {
       const colorsContent = await fs.readFile(colorsPath, "utf-8");
 
       // Simple regex to extract color values (basic implementation)
-      const colorRegex = /(\d+):\s*([^,\)]+)/g;
+      const colorRegex = /(\d+):\s*([^,)]+)/g;
       let match;
 
       while ((match = colorRegex.exec(colorsContent)) !== null) {
@@ -129,7 +125,7 @@ async function extractFromSASS(tokens) {
       const spacingContent = await fs.readFile(spacingPath, "utf-8");
 
       // Extract spacing values
-      const spacingRegex = /'([^']+)':\s*([^,\)]+)/g;
+      const spacingRegex = /'([^']+)':\s*([^,)]+)/g;
       let match;
 
       while ((match = spacingRegex.exec(spacingContent)) !== null) {

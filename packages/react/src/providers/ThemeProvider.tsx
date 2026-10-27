@@ -1,11 +1,5 @@
 // packages/react/src/providers/ThemeProvider.tsx
-import React, {
-  createContext,
-  useContext,
-  useState,
-  useEffect,
-  ReactNode,
-} from "react";
+import React, { createContext, useContext, useState, useEffect, ReactNode } from "react";
 import type { ColorMode, ThemeConfig } from "../types";
 import {
   applyCSSProperties,
@@ -63,14 +57,10 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({
   });
 
   // Resolve system color mode
-  const [systemColorMode, setSystemColorMode] = useState<"light" | "dark">(
-    () => {
-      if (typeof window === "undefined") return "light";
-      return window.matchMedia("(prefers-color-scheme: dark)").matches
-        ? "dark"
-        : "light";
-    },
-  );
+  const [systemColorMode, setSystemColorMode] = useState<"light" | "dark">(() => {
+    if (typeof window === "undefined") return "light";
+    return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+  });
 
   // Listen for system color mode changes
   useEffect(() => {
@@ -86,8 +76,7 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({
   }, []);
 
   // Resolved color mode (system resolved to light/dark)
-  const resolvedColorMode =
-    colorMode === "system" ? systemColorMode : colorMode;
+  const resolvedColorMode = colorMode === "system" ? systemColorMode : colorMode;
 
   // Helper booleans
   const isDark = resolvedColorMode === "dark";

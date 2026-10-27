@@ -1,17 +1,32 @@
 // packages/react/vite.config.ts
+import { readFileSync, rmSync, writeFileSync } from "fs";
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import dts from "vite-plugin-dts";
 import { resolve } from "path";
+import pkg from "./package.json";
+
+const externalPackages = [
+  ...Object.keys(pkg.dependencies ?? {}),
+  ...Object.keys(pkg.peerDependencies ?? {}),
+];
 
 export default defineConfig({
   plugins: [
     react(),
     dts({
-      insertTypesEntry: true,
-      copyDtsFiles: true,
+      rollupTypes: true,
+      insertTypesEntry: false,
       outDir: "dist",
       exclude: ["**/*.test.ts", "**/*.test.tsx", "**/*.stories.tsx"],
+      // The rolled-up file is named after the last lib output (index.cjs). Publish one
+      // declaration file per module format so ESM and CJS consumers both resolve types.
+      afterBuild: () => {
+        const types = readFileSync("dist/index.d.cts.d.ts");
+        writeFileSync("dist/index.d.mts", types);
+        writeFileSync("dist/index.d.cts", types);
+        rmSync("dist/index.d.cts.d.ts");
+      },
     }),
   ],
   build: {
@@ -19,10 +34,10 @@ export default defineConfig({
       entry: resolve(__dirname, "src/index.ts"),
       name: "MildUIReact",
       formats: ["es", "cjs"],
-      fileName: (format) => `index.${format === "es" ? "esm" : format}.js`,
+      fileName: (format) => (format === "es" ? "index.mjs" : "index.cjs"),
     },
     rollupOptions: {
-      external: ["react", "react-dom"],
+      external: (id) => externalPackages.some((name) => id === name || id.startsWith(`${name}/`)),
       output: {
         globals: {
           react: "React",

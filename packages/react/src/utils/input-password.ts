@@ -28,22 +28,22 @@ export function inputPasswordVariants(props: InputPasswordVariantProps) {
   return cn(
     // Base classes
     "mild-input-password",
-    
+
     // Variant classes
     `mild-input-password--${variant}`,
-    
+
     // Size classes
     `mild-input-password--${size}`,
-    
+
     // State classes
     fullWidth && "mild-input-password--full-width",
     error && "mild-input-password--error",
     disabled && "mild-input-password--disabled",
     readonly && "mild-input-password--readonly",
     required && "mild-input-password--required",
-    
+
     // Custom className
-    className
+    className,
   );
 }
 
@@ -57,8 +57,8 @@ export function inputPasswordToggleVariants(props: InputPasswordToggleVariantPro
   return cn(
     // Base classes
     "mild-input-password-toggle",
-    
+
     // Size classes
-    `mild-input-password-toggle--${size}`
+    `mild-input-password-toggle--${size}`,
   );
 }

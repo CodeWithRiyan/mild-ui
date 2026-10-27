@@ -6,15 +6,8 @@ import { useTheme } from "../providers/ThemeProvider";
  * @returns Color mode utilities
  */
 export const useColorMode = () => {
-  const {
-    colorMode,
-    setColorMode,
-    toggleColorMode,
-    resolvedColorMode,
-    isDark,
-    isLight,
-    isSystem,
-  } = useTheme();
+  const { colorMode, setColorMode, toggleColorMode, resolvedColorMode, isDark, isLight, isSystem } =
+    useTheme();
 
   return {
     colorMode,

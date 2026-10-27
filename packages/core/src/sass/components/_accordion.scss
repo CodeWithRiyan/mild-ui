@@ -219,13 +219,11 @@
   background-color: var(--mild-background);
 
   &[data-state="closed"] {
-    animation: mild-accordion-slide-up var(--mild-duration-200)
-      var(--mild-easing-out);
+    animation: mild-accordion-slide-up var(--mild-duration-200) var(--mild-easing-out);
   }
 
   &[data-state="open"] {
-    animation: mild-accordion-slide-down var(--mild-duration-200)
-      var(--mild-easing-out);
+    animation: mild-accordion-slide-down var(--mild-duration-200) var(--mild-easing-out);
   }
 
   // Variant specific styles

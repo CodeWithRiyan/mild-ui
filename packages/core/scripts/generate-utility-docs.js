@@ -23,27 +23,30 @@ async function generateUtilityDocs() {
 
     // Parse the generated CSS to extract class names and their properties
     const utilityClasses = parseCSSForUtilities(utilitiesResult.css);
-    
+
     // Organize utilities by category based on our SASS structure
     const organizedUtilities = organizeUtilitiesByCategory(utilityClasses, tokens);
-    
+
     // Generate HTML documentation
     const docsHtml = generateUtilityDocsHTML(organizedUtilities, tokens);
-    
+
     // Ensure docs directory exists
     await fs.mkdir(path.join(__dirname, "../docs"), { recursive: true });
-    
+
     // Write the utility documentation as the main index
     await fs.writeFile(path.join(__dirname, "../docs/index.html"), docsHtml);
     console.log("✅ Generated index.html (utilities as main page)");
-    
+
     // Also create utilities.html for backward compatibility
     await fs.writeFile(path.join(__dirname, "../docs/utilities.html"), docsHtml);
     console.log("✅ Generated utilities.html (backup)");
 
     // Generate JSON API for programmatic access
     const utilityAPI = generateUtilityAPI(organizedUtilities, tokens);
-    await fs.writeFile(path.join(__dirname, "../docs/utilities.json"), JSON.stringify(utilityAPI, null, 2));
+    await fs.writeFile(
+      path.join(__dirname, "../docs/utilities.json"),
+      JSON.stringify(utilityAPI, null, 2),
+    );
     console.log("✅ Generated utilities.json API");
 
     // Generate markdown documentation
@@ -52,10 +55,12 @@ async function generateUtilityDocs() {
     console.log("✅ Generated UTILITIES.md");
 
     console.log("🎉 Utility documentation generation completed!");
-    
-    const totalDocumented = Object.values(organizedUtilities).reduce((sum, category) => sum + category.utilities.length, 0);
+
+    const totalDocumented = Object.values(organizedUtilities).reduce(
+      (sum, category) => sum + category.utilities.length,
+      0,
+    );
     console.log(`📊 Documented ${totalDocumented} utility classes`);
-    
   } catch (error) {
     console.error("❌ Utility documentation generation failed:", error);
     process.exit(1);
@@ -67,40 +72,40 @@ async function generateUtilityDocs() {
  */
 function parseCSSForUtilities(css) {
   const utilities = {};
-  
+
   // Remove comments and normalize CSS
-  const cleanCSS = css.replace(/\/\*[\s\S]*?\*\//g, '');
-  
+  const cleanCSS = css.replace(/\/\*[\s\S]*?\*\//g, "");
+
   // Match CSS rules: .class-name { properties }
   // Use a more robust regex that handles multi-line CSS
   const ruleRegex = /\.(mild-[a-zA-Z0-9_-]+)\s*\{([^}]+)\}/g;
   let match;
-  
+
   while ((match = ruleRegex.exec(cleanCSS)) !== null) {
     const className = match[1];
     const properties = match[2].trim();
-    
+
     // Parse individual properties
     const props = {};
     const propRegex = /([a-zA-Z-]+)\s*:\s*([^;]+);?/g;
     let propMatch;
-    
+
     while ((propMatch = propRegex.exec(properties)) !== null) {
       const property = propMatch[1].trim();
       const value = propMatch[2].trim();
       props[property] = value;
     }
-    
+
     // Only include utilities with actual CSS properties
     if (Object.keys(props).length > 0) {
       utilities[className] = {
         className,
         properties: props,
-        cssRule: properties
+        cssRule: properties,
       };
     }
   }
-  
+
   console.log(`🔍 Found ${Object.keys(utilities).length} utility classes`);
   return utilities;
 }
@@ -108,59 +113,67 @@ function parseCSSForUtilities(css) {
 /**
  * Organize utilities by category based on their names and properties
  */
-function organizeUtilitiesByCategory(utilities, tokens) {
+function organizeUtilitiesByCategory(utilities, _tokens) {
   const categories = {
     layout: {
       name: "Layout",
       description: "Display, position, and layout utilities",
-      utilities: []
+      utilities: [],
     },
     spacing: {
-      name: "Spacing", 
+      name: "Spacing",
       description: "Margin, padding, and gap utilities",
-      utilities: []
+      utilities: [],
     },
     typography: {
       name: "Typography",
-      description: "Font size, weight, and text utilities", 
-      utilities: []
+      description: "Font size, weight, and text utilities",
+      utilities: [],
     },
     colors: {
       name: "Colors",
       description: "Text, background, and border color utilities",
-      utilities: []
+      utilities: [],
     },
     borders: {
       name: "Borders & Radius",
       description: "Border and border radius utilities",
-      utilities: []
+      utilities: [],
     },
     effects: {
       name: "Effects",
       description: "Shadow, opacity, and visual effect utilities",
-      utilities: []
+      utilities: [],
     },
     interactivity: {
-      name: "Interactivity", 
+      name: "Interactivity",
       description: "Cursor, pointer events, and interaction utilities",
-      utilities: []
+      utilities: [],
     },
     transforms: {
       name: "Transforms & Transitions",
       description: "Transform, scale, rotate, and transition utilities",
-      utilities: []
-    }
+      utilities: [],
+    },
   };
 
   // Categorize each utility class
-  Object.values(utilities).forEach(utility => {
+  Object.values(utilities).forEach((utility) => {
     const className = utility.className;
-    
-    if (className.match(/mild-(block|inline|flex|grid|hidden|relative|absolute|fixed|static|sticky|visible|invisible)/)) {
+
+    if (
+      className.match(
+        /mild-(block|inline|flex|grid|hidden|relative|absolute|fixed|static|sticky|visible|invisible)/,
+      )
+    ) {
       categories.layout.utilities.push(utility);
     } else if (className.match(/mild-(m|p|gap|space)-/)) {
       categories.spacing.utilities.push(utility);
-    } else if (className.match(/mild-(text|font|leading|tracking|uppercase|lowercase|capitalize|underline|line-through)/)) {
+    } else if (
+      className.match(
+        /mild-(text|font|leading|tracking|uppercase|lowercase|capitalize|underline|line-through)/,
+      )
+    ) {
       categories.typography.utilities.push(utility);
     } else if (className.match(/mild-(text|bg|border)-[a-z]/)) {
       categories.colors.utilities.push(utility);
@@ -185,8 +198,11 @@ function organizeUtilitiesByCategory(utilities, tokens) {
  * Generate HTML documentation for utilities
  */
 function generateUtilityDocsHTML(organizedUtilities, tokens) {
-  const totalUtilities = Object.values(organizedUtilities).reduce((sum, cat) => sum + cat.utilities.length, 0);
-  
+  const totalUtilities = Object.values(organizedUtilities).reduce(
+    (sum, cat) => sum + cat.utilities.length,
+    0,
+  );
+
   return `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -386,9 +402,12 @@ function generateUtilityDocsHTML(organizedUtilities, tokens) {
         <div class="nav">
             <h3>Quick Navigation</h3>
             <div class="nav-grid">
-                ${Object.entries(organizedUtilities).map(([key, category]) => 
-                    `<a href="#${key}" class="nav-link">${category.name} (${category.utilities.length})</a>`
-                ).join('')}
+                ${Object.entries(organizedUtilities)
+                  .map(
+                    ([key, category]) =>
+                      `<a href="#${key}" class="nav-link">${category.name} (${category.utilities.length})</a>`,
+                  )
+                  .join("")}
             </div>
         </div>
 
@@ -396,29 +415,40 @@ function generateUtilityDocsHTML(organizedUtilities, tokens) {
             <input type="text" id="searchBox" class="search-box" placeholder="Search utilities (e.g., 'padding', 'text-blue', 'flex')...">
             <div class="filter-buttons">
                 <button class="filter-btn active" data-category="all">All Utilities</button>
-                ${Object.entries(organizedUtilities).map(([key, category]) => 
-                    `<button class="filter-btn" data-category="${key}">${category.name}</button>`
-                ).join('')}
+                ${Object.entries(organizedUtilities)
+                  .map(
+                    ([key, category]) =>
+                      `<button class="filter-btn" data-category="${key}">${category.name}</button>`,
+                  )
+                  .join("")}
             </div>
         </div>
 
         <div id="utilitiesContainer">
-            ${Object.entries(organizedUtilities).map(([categoryKey, category]) => `
+            ${Object.entries(organizedUtilities)
+              .map(
+                ([categoryKey, category]) => `
                 <div class="category" id="${categoryKey}" data-category="${categoryKey}">
                     <div class="category-header">
                         <h2 class="category-title">${category.name}</h2>
                         <p class="category-description">${category.description} (${category.utilities.length} utilities)</p>
                     </div>
                     <div class="utility-grid">
-                        ${category.utilities.map(utility => `
+                        ${category.utilities
+                          .map(
+                            (utility) => `
                             <div class="utility-item" data-class="${utility.className}">
                                 <div class="utility-name">.${utility.className}</div>
                                 <div class="utility-props">${formatCSSProperties(utility.properties)}</div>
                             </div>
-                        `).join('')}
+                        `,
+                          )
+                          .join("")}
                     </div>
                 </div>
-            `).join('')}
+            `,
+              )
+              .join("")}
         </div>
     </div>
 
@@ -487,7 +517,7 @@ function generateUtilityDocsHTML(organizedUtilities, tokens) {
 function formatCSSProperties(properties) {
   return Object.entries(properties)
     .map(([prop, value]) => `${prop}: ${value}`)
-    .join('\n');
+    .join("\n");
 }
 
 /**
@@ -495,11 +525,14 @@ function formatCSSProperties(properties) {
  */
 function generateUtilityAPI(organizedUtilities, tokens) {
   return {
-    version: require('../package.json').version,
+    version: require("../package.json").version,
     generatedAt: new Date().toISOString(),
-    totalUtilities: Object.values(organizedUtilities).reduce((sum, cat) => sum + cat.utilities.length, 0),
+    totalUtilities: Object.values(organizedUtilities).reduce(
+      (sum, cat) => sum + cat.utilities.length,
+      0,
+    ),
     categories: organizedUtilities,
-    tokens: tokens
+    tokens: tokens,
   };
 }
 
@@ -507,8 +540,11 @@ function generateUtilityAPI(organizedUtilities, tokens) {
  * Generate Markdown documentation
  */
 function generateMarkdownDocs(organizedUtilities, tokens) {
-  const totalUtilities = Object.values(organizedUtilities).reduce((sum, cat) => sum + cat.utilities.length, 0);
-  
+  const totalUtilities = Object.values(organizedUtilities).reduce(
+    (sum, cat) => sum + cat.utilities.length,
+    0,
+  );
+
   let markdown = `# Mild UI Utilities Reference
 
 Complete reference for all ${totalUtilities} utility classes in the mild-ui design system.
@@ -528,16 +564,19 @@ Mild UI provides a comprehensive set of utility classes with the \`mild-\` prefi
 
 ## Categories
 
-${Object.entries(organizedUtilities).map(([key, category]) => 
-  `- [${category.name}](#${key.toLowerCase()}) (${category.utilities.length} utilities)`
-).join('\n')}
+${Object.entries(organizedUtilities)
+  .map(
+    ([key, category]) =>
+      `- [${category.name}](#${key.toLowerCase()}) (${category.utilities.length} utilities)`,
+  )
+  .join("\n")}
 
 ---
 
 `;
 
   // Add each category
-  Object.entries(organizedUtilities).forEach(([categoryKey, category]) => {
+  Object.entries(organizedUtilities).forEach(([, category]) => {
     markdown += `## ${category.name}
 
 ${category.description}
@@ -545,33 +584,39 @@ ${category.description}
 | Class | CSS Properties |
 |-------|----------------|
 `;
-    
-    category.utilities.forEach(utility => {
+
+    category.utilities.forEach((utility) => {
       const props = Object.entries(utility.properties)
         .map(([prop, value]) => `${prop}: ${value}`)
-        .join('; ');
+        .join("; ");
       markdown += `| \`.${utility.className}\` | \`${props}\` |\n`;
     });
-    
-    markdown += '\n';
+
+    markdown += "\n";
   });
 
   // Add design tokens section
   markdown += `## Design Tokens
 
 ### Color Palettes
-${Object.entries(tokens.colors).map(([name, palette]) => {
-  if (typeof palette === 'object') {
-    return `- **${name}**: ${Object.keys(palette).join(', ')}`;
-  }
-  return `- **${name}**: ${palette}`;
-}).join('\n')}
+${Object.entries(tokens.colors)
+  .map(([name, palette]) => {
+    if (typeof palette === "object") {
+      return `- **${name}**: ${Object.keys(palette).join(", ")}`;
+    }
+    return `- **${name}**: ${palette}`;
+  })
+  .join("\n")}
 
 ### Spacing Scale
-${Object.entries(tokens.spacing).map(([key, value]) => `- **${key}**: ${value}`).join('\n')}
+${Object.entries(tokens.spacing)
+  .map(([key, value]) => `- **${key}**: ${value}`)
+  .join("\n")}
 
 ### Typography Scale  
-${Object.entries(tokens.fontSize).map(([key, value]) => `- **${key}**: ${value}`).join('\n')}
+${Object.entries(tokens.fontSize)
+  .map(([key, value]) => `- **${key}**: ${value}`)
+  .join("\n")}
 
 ---
 

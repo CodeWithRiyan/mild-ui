@@ -1,6 +1,6 @@
 # @mild-ui/core
 
-Pure CSS/SCSS design system with Tailwind-like utilities - framework agnostic with zero dependencies
+Pure CSS/SCSS design system with Tailwind-like utilities - framework agnostic, no runtime dependencies
 
 ## Overview
 
@@ -13,7 +13,7 @@ Pure CSS/SCSS design system with Tailwind-like utilities - framework agnostic wi
 - **Component styles** for React/Vue packages
 - **Dark/Light themes** with automatic switching
 - **Responsive design** with mobile-first approach
-- **Zero dependencies** - pure CSS/SCSS only
+- **No runtime dependencies** - pure CSS/SCSS only
 
 ## Installation
 
@@ -24,24 +24,28 @@ npm install @mild-ui/core
 ## Usage
 
 ### Import CSS utilities only:
+
 ```css
-@import '@mild-ui/core/css/utilities';
+@import "@mild-ui/core/css/utilities";
 ```
 
 ### Import full design system (utilities + components):
+
 ```css
-@import '@mild-ui/core/css';
+@import "@mild-ui/core/css";
 ```
 
 ### Import SCSS for customization:
+
 ```scss
-@use '@mild-ui/core/scss';
+@use "@mild-ui/core/scss";
 ```
 
 ### Minified versions:
+
 ```css
-@import '@mild-ui/core/css/min';
-@import '@mild-ui/core/css/utilities/min';
+@import "@mild-ui/core/css/min";
+@import "@mild-ui/core/css/utilities/min";
 ```
 
 ## Available Utility Classes
@@ -51,18 +55,18 @@ All utilities use the `mild-` prefix to avoid conflicts with Tailwind CSS:
 ```html
 <!-- Layout -->
 <div class="mild-flex mild-items-center mild-justify-between">
-
-<!-- Spacing -->
-<div class="mild-p-4 mild-m-2 mild-gap-4">
-
-<!-- Colors -->
-<div class="mild-bg-primary-500 mild-text-white">
-
-<!-- Typography -->
-<h1 class="mild-text-xl mild-font-bold">
-
-<!-- Borders -->
-<div class="mild-border mild-border-gray-200 mild-radius-md">
+  <!-- Spacing -->
+  <div class="mild-p-4 mild-m-2 mild-gap-4">
+    <!-- Colors -->
+    <div class="mild-bg-primary-500 mild-text-white">
+      <!-- Typography -->
+      <h1 class="mild-text-xl mild-font-bold">
+        <!-- Borders -->
+        <div class="mild-border mild-border-gray-200 mild-radius-md"></div>
+      </h1>
+    </div>
+  </div>
+</div>
 ```
 
 ## Use with Tailwind CSS
@@ -70,8 +74,10 @@ All utilities use the `mild-` prefix to avoid conflicts with Tailwind CSS:
 Since all utilities use the `mild-` prefix, you can use both libraries together:
 
 ```html
-<div class="flex items-center"> <!-- Tailwind -->
-  <div class="mild-p-4 mild-bg-primary-100"> <!-- Mild UI -->
+<div class="flex items-center">
+  <!-- Tailwind -->
+  <div class="mild-p-4 mild-bg-primary-100">
+    <!-- Mild UI -->
     No conflicts!
   </div>
 </div>
@@ -92,6 +98,7 @@ Automatic dark mode support:
 ## Package Exports
 
 - `@mild-ui/core/css` - Full CSS (utilities + components)
+- `@mild-ui/core/mild-ui.css` - Same file as `@mild-ui/core/css`, with a `.css` extension for TypeScript projects that check side-effect imports
 - `@mild-ui/core/css/min` - Minified full CSS
 - `@mild-ui/core/css/utilities` - Utilities only
 - `@mild-ui/core/css/utilities/min` - Minified utilities
@@ -106,52 +113,12 @@ Automatic dark mode support:
 - [Utilities Guide](./UTILITIES.md) - Complete list of utility classes
 - [Storybook](https://codewithriyan.github.io/mild-ui/) - Interactive examples
 
-## Mobile Platform Support
-
-Convert mild-ui design tokens to mobile platforms:
-
-### 🐦 Flutter
-```dart
-import 'package:flutter/material.dart';
-import 'themes/mild_theme.dart';
-
-// Use in MaterialApp
-MaterialApp(
-  theme: MildTheme.lightTheme,
-  darkTheme: MildTheme.darkTheme,
-)
-
-// Use utility extensions
-Text('Hello').textXl().fontBold().p4()
-```
-
-### 📱 React Native
-```javascript
-import { MildTheme, MildUtils } from '@mild-ui/core/react-native/theme';
-
-// Use in StyleSheet
-const styles = StyleSheet.create({
-  container: {
-    ...MildUtils.spacing.p4,
-    backgroundColor: MildTheme.colors.primary[500],
-  }
-});
-```
-
-### Generate Mobile Themes
-```bash
-npm run mobile:flutter      # Generate Flutter theme
-npm run mobile:react-native # Generate React Native theme  
-npm run mobile:all          # Generate both platforms
-```
-
 ## Framework Packages
 
 This core package is used by:
+
 - [`@mild-ui/react`](../react) - React components
 - [`@mild-ui/vue`](../vue) - Vue components
-- **Flutter** - Auto-generated Dart theme files
-- **React Native** - Auto-generated StyleSheet utilities
 
 ## License
 

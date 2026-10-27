@@ -51,17 +51,17 @@ export function getSpacingValue(value: SpacingValue): string {
   if (typeof value === "number") {
     return `${value}px`;
   }
-  
+
   if (typeof value === "string") {
     // Check if it's a predefined spacing key
     if (spacingMap[value]) {
       return spacingMap[value];
     }
-    
+
     // Return as-is for custom CSS values
     return value;
   }
-  
+
   return "0";
 }
 
@@ -74,11 +74,11 @@ export function getColorValue(value: ColorValue): string {
     if (colorMap[value]) {
       return colorMap[value];
     }
-    
+
     // Return as-is for custom CSS values (hex, rgb, etc.)
     return value;
   }
-  
+
   return value;
 }
 
@@ -112,11 +112,11 @@ export function cva(
   options?: {
     variants?: Record<string, Record<string, string>>;
     defaultVariants?: Record<string, any>;
-  }
+  },
 ) {
   return (props?: Record<string, any>) => {
     const classes = [base];
-    
+
     if (options?.variants && props) {
       Object.entries(options.variants).forEach(([key, variants]) => {
         const value = props[key] ?? options.defaultVariants?.[key];
@@ -125,7 +125,7 @@ export function cva(
         }
       });
     }
-    
+
     return classes.filter(Boolean).join(" ");
   };
 }

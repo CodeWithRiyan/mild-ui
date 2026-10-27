@@ -145,8 +145,7 @@
   position: relative;
   display: flex;
   align-items: center;
-  padding: var(--mild-space-2) var(--mild-space-8) var(--mild-space-2)
-    var(--mild-space-2);
+  padding: var(--mild-space-2) var(--mild-space-8) var(--mild-space-2) var(--mild-space-2);
   font-size: var(--mild-font-size-sm);
   line-height: var(--mild-line-height-normal);
   cursor: pointer;
@@ -180,8 +179,7 @@
   }
 
   &--sm {
-    padding: var(--mild-space-1) var(--mild-space-6) var(--mild-space-1)
-      var(--mild-space-1);
+    padding: var(--mild-space-1) var(--mild-space-6) var(--mild-space-1) var(--mild-space-1);
     font-size: var(--mild-font-size-xs);
 
     &[data-selected]::after {
@@ -191,8 +189,7 @@
   }
 
   &--lg {
-    padding: var(--mild-space-3) var(--mild-space-10) var(--mild-space-3)
-      var(--mild-space-3);
+    padding: var(--mild-space-3) var(--mild-space-10) var(--mild-space-3) var(--mild-space-3);
     font-size: var(--mild-font-size-base);
 
     &[data-selected]::after {
@@ -212,8 +209,7 @@
   font-size: var(--mild-font-size-xs);
   font-weight: var(--mild-font-weight-medium);
   color: var(--mild-muted-foreground);
-  padding: var(--mild-space-1-5) var(--mild-space-2) var(--mild-space-1)
-    var(--mild-space-2);
+  padding: var(--mild-space-1-5) var(--mild-space-2) var(--mild-space-1) var(--mild-space-2);
 }
 
 .mild-select-separator {

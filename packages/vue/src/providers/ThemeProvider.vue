@@ -1,11 +1,6 @@
 <template>
   <div>
-    <slot
-      :theme="theme"
-      :setTheme="setTheme"
-      :config="config"
-      :setConfig="setConfig"
-    />
+    <slot :theme="theme" :set-theme="setTheme" :config="config" :set-config="setConfig" />
   </div>
 </template>
 
@@ -13,7 +8,7 @@
 import { ref, provide, onMounted, watch, computed } from "vue";
 import {
   ThemeConfig,
-  defaultTheme,
+  defaultTheme as defaultThemeConfig,
   darkTheme,
   applyTheme,
 } from "../types/theme";
@@ -28,7 +23,7 @@ interface Props {
 
 const props = withDefaults(defineProps<Props>(), {
   defaultTheme: "system",
-  config: () => defaultTheme,
+  config: () => defaultThemeConfig,
   storageKey: "mild-ui-theme",
 });
 
@@ -60,9 +55,7 @@ const setConfig = (newConfig: ThemeConfig) => {
 const effectiveTheme = computed(() => {
   if (theme.value === "system") {
     if (typeof window !== "undefined") {
-      return window.matchMedia("(prefers-color-scheme: dark)").matches
-        ? "dark"
-        : "light";
+      return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
     }
     return "light";
   }
@@ -76,8 +69,7 @@ const applyCurrentTheme = () => {
   root.classList.remove("light", "dark");
   root.classList.add(effectiveTheme.value);
 
-  const activeConfig =
-    effectiveTheme.value === "dark" ? darkTheme : config.value;
+  const activeConfig = effectiveTheme.value === "dark" ? darkTheme : config.value;
   applyTheme(activeConfig);
 };
 

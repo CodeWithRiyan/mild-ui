@@ -11,9 +11,7 @@
       @keydown="onKeyDown"
     >
       <span v-if="selectedOption">{{ selectedOption.label }}</span>
-      <span v-else-if="placeholder" class="text-muted-foreground">{{
-        placeholder
-      }}</span>
+      <span v-else-if="placeholder" class="text-muted-foreground">{{ placeholder }}</span>
       <div class="ml-auto h-4 w-4">
         <ChevronDown class="h-4 w-4" />
       </div>
@@ -40,21 +38,15 @@
           :key="option.value"
           :class="[
             selectItemClasses,
-            option.value === props.value
-              ? 'bg-accent text-accent-foreground'
-              : '',
-            option.disabled
-              ? 'opacity-50 cursor-not-allowed'
-              : 'cursor-pointer',
+            option.value === props.value ? 'bg-accent text-accent-foreground' : '',
+            option.disabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer',
           ]"
           role="option"
           :aria-selected="option.value === props.value"
           :aria-disabled="option.disabled"
           @click="selectOption(option)"
         >
-          <span
-            class="absolute left-2 flex h-3.5 w-3.5 items-center justify-center"
-          >
+          <span class="absolute left-2 flex h-3.5 w-3.5 items-center justify-center">
             <Check v-if="option.value === props.value" class="h-4 w-4" />
           </span>
           <span>{{ option.label }}</span>
@@ -67,17 +59,8 @@
 <script setup lang="ts">
 import { ref, computed, onUnmounted, onMounted } from "vue";
 import { Check, ChevronDown } from "lucide-vue-next";
-import {
-  type SelectCoreProps,
-  type SelectStyleProps,
-  type SelectOption,
-  Keys,
-} from "../../types";
-import { 
-  cn,
-  selectTriggerStyles,
-  selectItemStyles,
-} from "../../utils";
+import { type SelectCoreProps, type SelectStyleProps, type SelectOption, Keys } from "../../types";
+import { cn, selectTriggerStyles, selectItemStyles } from "../../utils";
 
 interface Props extends SelectCoreProps, SelectStyleProps {}
 
@@ -146,7 +129,6 @@ const onKeyDown = (event: KeyboardEvent) => {
 
 // Close when clicking outside
 const handleClickOutside = (event: MouseEvent) => {
-  const target = event.target as Node;
   if (!event.composedPath().includes(event.currentTarget as HTMLElement)) {
     close();
   }

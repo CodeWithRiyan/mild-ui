@@ -5,7 +5,7 @@ const { spawn } = require("child_process");
 console.log("👀 Watching for documentation changes...");
 
 const watcher = chokidar.watch(["src/**/*.ts", "src/**/*.scss", "README.md"], {
-  ignored: /(^|[\/\\])\../,
+  ignored: /(^|[/\\])\../,
   persistent: true,
 });
 
@@ -30,10 +30,7 @@ function rebuildDocs() {
   }, 300);
 }
 
-watcher
-  .on("add", rebuildDocs)
-  .on("change", rebuildDocs)
-  .on("unlink", rebuildDocs);
+watcher.on("add", rebuildDocs).on("change", rebuildDocs).on("unlink", rebuildDocs);
 
 console.log("📝 Auto-generating docs at http://localhost:8080");
 spawn("pnpm", ["docs:serve"], { stdio: "inherit" });

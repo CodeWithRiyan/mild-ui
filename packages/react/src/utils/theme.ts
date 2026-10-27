@@ -131,19 +131,23 @@ export const defaultTheme: ThemeConfig = {
  */
 export function mergeThemes(...themes: Array<Partial<ThemeConfig>>): ThemeConfig {
   const result = { ...defaultTheme };
-  
-  themes.forEach(theme => {
+
+  themes.forEach((theme) => {
     if (theme) {
-      Object.keys(theme).forEach(key => {
+      Object.keys(theme).forEach((key) => {
         const themeKey = key as keyof ThemeConfig;
         const themeValue = theme[themeKey];
         const currentValue = result[themeKey];
-        
-        if (typeof themeValue === 'object' && themeValue !== null && 
-            typeof currentValue === 'object' && currentValue !== null) {
-          result[themeKey] = { 
-            ...currentValue, 
-            ...themeValue 
+
+        if (
+          typeof themeValue === "object" &&
+          themeValue !== null &&
+          typeof currentValue === "object" &&
+          currentValue !== null
+        ) {
+          result[themeKey] = {
+            ...currentValue,
+            ...themeValue,
           } as any;
         } else if (themeValue !== undefined) {
           result[themeKey] = themeValue as any;
@@ -151,7 +155,7 @@ export function mergeThemes(...themes: Array<Partial<ThemeConfig>>): ThemeConfig
       });
     }
   });
-  
+
   return result;
 }
 
@@ -160,14 +164,14 @@ export function mergeThemes(...themes: Array<Partial<ThemeConfig>>): ThemeConfig
  */
 export function generateCSSProperties(
   theme: ThemeConfig,
-  prefix: string = "mild"
+  prefix: string = "mild",
 ): Record<string, string> {
   const properties: Record<string, string> = {};
-  
+
   // Generate color properties
   if (theme.colors) {
     Object.entries(theme.colors).forEach(([colorName, colorValue]) => {
-      if (typeof colorValue === 'object') {
+      if (typeof colorValue === "object") {
         Object.entries(colorValue).forEach(([shade, value]) => {
           properties[`--${prefix}-colors-${colorName}-${shade}`] = String(value);
         });
@@ -176,32 +180,39 @@ export function generateCSSProperties(
       }
     });
   }
-  
+
   // Generate spacing properties
   if (theme.space) {
     Object.entries(theme.space).forEach(([key, value]) => {
       properties[`--${prefix}-space-${key}`] = value;
     });
   }
-  
+
   // Generate size properties
   if (theme.sizes) {
     Object.entries(theme.sizes).forEach(([key, value]) => {
       properties[`--${prefix}-sizes-${key}`] = value;
     });
   }
-  
+
   // Generate other theme properties
-  const otherProperties: Array<keyof ThemeConfig> = ['radii', 'fontSizes', 'fontWeights', 'lineHeights', 'letterSpacings', 'shadows'];
-  otherProperties.forEach(prop => {
+  const otherProperties: Array<keyof ThemeConfig> = [
+    "radii",
+    "fontSizes",
+    "fontWeights",
+    "lineHeights",
+    "letterSpacings",
+    "shadows",
+  ];
+  otherProperties.forEach((prop) => {
     const propValue = theme[prop];
-    if (propValue && typeof propValue === 'object') {
+    if (propValue && typeof propValue === "object") {
       Object.entries(propValue).forEach(([key, value]) => {
         properties[`--${prefix}-${prop}-${key}`] = String(value);
       });
     }
   });
-  
+
   return properties;
 }
 
@@ -209,8 +220,8 @@ export function generateCSSProperties(
  * Apply CSS custom properties to document
  */
 export function applyCSSProperties(properties: Record<string, string>): void {
-  if (typeof document === 'undefined') return;
-  
+  if (typeof document === "undefined") return;
+
   Object.entries(properties).forEach(([property, value]) => {
     document.documentElement.style.setProperty(property, value);
   });
@@ -220,16 +231,16 @@ export function applyCSSProperties(properties: Record<string, string>): void {
  * Get theme color value
  */
 export function getThemeColor(theme: ThemeConfig, colorPath: string): string {
-  const parts = colorPath.split('.');
+  const parts = colorPath.split(".");
   let current: any = theme.colors;
-  
+
   for (const part of parts) {
-    if (current && typeof current === 'object' && part in current) {
+    if (current && typeof current === "object" && part in current) {
       current = current[part];
     } else {
       return colorPath; // Return original if not found
     }
   }
-  
-  return typeof current === 'string' ? current : String(current || colorPath);
+
+  return typeof current === "string" ? current : String(current || colorPath);
 }

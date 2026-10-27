@@ -77,24 +77,9 @@ export const WithDisabledOptions = {
 export const SizesExample = {
   render: () => (
     <div className="space-y-4 w-64">
-      <Select
-        placeholder="Small"
-        size="sm"
-        options={options}
-        defaultValue="us"
-      />
-      <Select
-        placeholder="Medium"
-        size="md"
-        options={options}
-        defaultValue="ca"
-      />
-      <Select
-        placeholder="Large"
-        size="lg"
-        options={options}
-        defaultValue="mx"
-      />
+      <Select placeholder="Small" size="sm" options={options} defaultValue="us" />
+      <Select placeholder="Medium" size="md" options={options} defaultValue="ca" />
+      <Select placeholder="Large" size="lg" options={options} defaultValue="mx" />
     </div>
   ),
 } satisfies Story;

@@ -1,10 +1,5 @@
 import { yupResolver } from "@hookform/resolvers/yup";
-import {
-  Button,
-  Input,
-  InputPassword,
-  InputPasswordProps,
-} from "@mild-ui/react";
+import { Button, Input, InputPassword, InputPasswordProps } from "@mild-ui/react";
 import type { Meta, StoryObj } from "@storybook/react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -163,10 +158,7 @@ export const UncontrolledInputPassword = {
 export const ReactHookFormWithYup = {
   render: () => {
     const schema = yup.object({
-      email: yup
-        .string()
-        .email("Enter a valid email")
-        .required("Email is required"),
+      email: yup.string().email("Enter a valid email").required("Email is required"),
       password: yup.string().required("Password is required"),
     });
 
@@ -191,9 +183,7 @@ export const ReactHookFormWithYup = {
             {...register("email")}
             error={Boolean(errors.email)}
           />
-          {errors.email && (
-            <p className="text-sm text-red-600">{errors.email.message}</p>
-          )}
+          {errors.email && <p className="text-sm text-red-600">{errors.email.message}</p>}
         </div>
         <div>
           <InputPassword
@@ -201,9 +191,7 @@ export const ReactHookFormWithYup = {
             {...register("password")}
             error={Boolean(errors.password)}
           />
-          {errors.password && (
-            <p className="text-sm text-red-600">{errors.password.message}</p>
-          )}
+          {errors.password && <p className="text-sm text-red-600">{errors.password.message}</p>}
         </div>
         <Button type="submit">Submit</Button>
       </form>

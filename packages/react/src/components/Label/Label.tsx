@@ -4,24 +4,10 @@ import type { LabelCoreProps } from "../../types/label";
 import { labelVariants } from "../../utils/label";
 import { cn } from "../../utils";
 
-export interface LabelProps
-  extends LabelCoreProps,
-    React.LabelHTMLAttributes<HTMLLabelElement> {}
+export interface LabelProps extends LabelCoreProps, React.LabelHTMLAttributes<HTMLLabelElement> {}
 
 export const Label = forwardRef<HTMLLabelElement, LabelProps>(
-  (
-    {
-      required = false,
-      error = false,
-      ui,
-      children,
-      htmlFor,
-      className,
-      onClick,
-      ...rest
-    },
-    ref,
-  ) => {
+  ({ required = false, error = false, ui, children, htmlFor, className, ...rest }, ref) => {
     const classes = labelVariants({
       required,
       error,
@@ -29,20 +15,10 @@ export const Label = forwardRef<HTMLLabelElement, LabelProps>(
     });
 
     return (
-      <label
-        ref={ref}
-        className={classes}
-        htmlFor={htmlFor}
-        onClick={onClick}
-        {...rest}
-      >
+      <label ref={ref} className={classes} htmlFor={htmlFor} {...rest}>
         {children}
         {required && (
-          <span
-            className={cn("--mild-pl-1 --mild-color-red-500", ui?.asterisk)}
-          >
-            *
-          </span>
+          <span className={cn("--mild-pl-1 --mild-color-red-500", ui?.asterisk)}>*</span>
         )}
       </label>
     );

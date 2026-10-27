@@ -1,3 +1,3 @@
 export * from "./components";
 export * from "./utils";
-export * from "./providers/ThemeProvider.vue";
+export { default as ThemeProvider } from "./providers/ThemeProvider.vue";

@@ -1,24 +1,12 @@
 <!-- packages/vue/src/components/Input/Input.vue -->
 <template>
-  <input
-    :class="inputClasses"
-    :type="type"
-    :value="modelValue"
-    @input="onInput"
-    v-bind="$attrs"
-  />
+  <input :class="inputClasses" :type="type" :value="modelValue" @input="onInput" v-bind="$attrs" />
 </template>
 
 <script setup lang="ts">
 import { computed } from "vue";
-import {
-  type InputCoreProps,
-  type InputStyleProps,
-} from "../../types";
-import {
-  cn,
-  inputStyles,
-} from "../../utils";
+import { type InputCoreProps, type InputStyleProps } from "../../types";
+import { cn, inputStyles } from "../../utils";
 
 interface Props extends InputCoreProps, InputStyleProps {
   modelValue?: string;

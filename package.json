@@ -8,10 +8,10 @@
     "build:react": "cd packages/react && pnpm build",
     "build:vue": "cd packages/vue && pnpm build",
     "dev": "pnpm -r dev",
-    "test": "pnpm -r test",
+    "test": "pnpm --filter \"./packages/*\" test",
     "lint": "eslint .",
     "format": "prettier --write .",
-    "prepare": "husky install",
+    "prepare": "husky",
     "storybook:react": "cd storybook/react && pnpm dev",
     "storybook:vue": "cd storybook/vue && pnpm dev",
     "storybook:build:react": "cd storybook/react && pnpm build",
@@ -20,17 +20,40 @@
     "storybook:preview:react": "cd storybook/react && pnpm preview",
     "storybook:preview:vue": "cd storybook/vue && pnpm preview",
     "packages:build": "pnpm --filter @mild-ui/core build && pnpm --filter @mild-ui/react build && pnpm --filter @mild-ui/vue build",
-    "validate:workflows": "node scripts/validate-workflows.cjs"
+    "validate:workflows": "node scripts/validate-workflows.cjs",
+    "typecheck": "pnpm --filter \"./packages/*\" typecheck",
+    "format:check": "prettier --check .",
+    "verify:readme": "tsx scripts/verify-readme.ts",
+    "check:packages": "node scripts/check-packages.mjs",
+    "changeset": "changeset",
+    "version-packages": "changeset version && pnpm install --lockfile-only",
+    "release": "pnpm --filter \"./packages/*\" build && changeset publish"
   },
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^6.0.0",
-    "@typescript-eslint/parser": "^6.0.0",
-    "eslint": "^8.45.0",
-    "eslint-config-prettier": "^9.0.0",
-    "husky": "^8.0.3",
-    "lint-staged": "^15.0.0",
-    "prettier": "^3.0.0",
-    "typescript": "^5.1.6"
+    "@arethetypeswrong/cli": "^0.18.5",
+    "@changesets/cli": "^2.31.1",
+    "@eslint/js": "^9.39.5",
+    "eslint": "^9.39.5",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-jsx-a11y": "^6.10.2",
+    "eslint-plugin-react-hooks": "^5.2.0",
+    "eslint-plugin-vue": "^9.33.0",
+    "globals": "^15.15.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^15",
+    "prettier": "^3",
+    "publint": "^0.3.25",
+    "tsx": "^4.23.15",
+    "typescript": "^5.1.6",
+    "typescript-eslint": "^8.72.1"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "packageManager": "pnpm@10.34.9",
+  "engines": {
+    "node": ">=18"
+  },
+  "lint-staged": {
+    "*": "prettier --write --ignore-unknown",
+    "*.{ts,tsx,vue}": "eslint --fix"
+  }
 }

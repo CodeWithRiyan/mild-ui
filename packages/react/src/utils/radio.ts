@@ -12,9 +12,9 @@ export function radioVariants(props: RadioVariantProps) {
   return cn(
     // Base classes
     "mild-radio",
-    
+
     // Size classes
-    `mild-radio--${size}`
+    `mild-radio--${size}`,
   );
 }
 
@@ -24,8 +24,8 @@ export function radioLabelVariants(props: RadioVariantProps) {
   return cn(
     // Base classes
     "mild-radio-label",
-    
+
     // Size classes
-    `mild-radio-label--${size}`
+    `mild-radio-label--${size}`,
   );
 }

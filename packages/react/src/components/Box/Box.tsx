@@ -17,11 +17,10 @@ export interface BoxProps extends BoxCoreProps {
 export const Box = forwardRef<HTMLDivElement, BoxProps>(
   (
     {
-      as = "div",
+      as: _as = "div",
       display = "block",
       children,
       className,
-      onClick,
       // Flexbox props
       flexDirection,
       flexWrap,
@@ -75,8 +74,6 @@ export const Box = forwardRef<HTMLDivElement, BoxProps>(
     },
     ref,
   ) => {
-    const Component = as;
-
     // Build classes
     const classes = cn(
       "mild-box",
@@ -172,7 +169,6 @@ export const Box = forwardRef<HTMLDivElement, BoxProps>(
         ref={ref}
         className={classes}
         style={Object.keys(style).length > 0 ? style : undefined}
-        onClick={onClick}
         {...rest}
       >
         {children}

@@ -1,13 +1,12 @@
 // packages/core/scripts/watch-sass.js
 const chokidar = require("chokidar");
 const { spawn } = require("child_process");
-const path = require("path");
 
 console.log("🔍 Starting SASS watcher...");
 
 // Watch for changes in SASS files
 const watcher = chokidar.watch("src/sass/**/*.scss", {
-  ignored: /(^|[\/\\])\../, // ignore dotfiles
+  ignored: /(^|[/\\])\../, // ignore dotfiles
   persistent: true,
 });
 

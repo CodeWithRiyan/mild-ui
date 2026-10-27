@@ -11,7 +11,7 @@ async function generateDocs() {
 
   // Generate utility class documentation
   console.log("📚 Generating utility class documentation...");
-  const { generateUtilityDocs } = require('./generate-utility-docs.js');
+  const { generateUtilityDocs } = require("./generate-utility-docs.js");
   await generateUtilityDocs();
 
   // Read package.json for version and info
@@ -25,10 +25,7 @@ async function generateDocs() {
 
   try {
     const componentDirs = await fs.readdir(componentsDir);
-    console.log(
-      `🔍 Found ${componentDirs.length} items in components directory:`,
-      componentDirs,
-    );
+    console.log(`🔍 Found ${componentDirs.length} items in components directory:`, componentDirs);
 
     for (const dir of componentDirs) {
       const componentPath = path.join(componentsDir, dir);
@@ -376,7 +373,7 @@ function generateHTML(packageJson, components, sassInfo) {
         <div class="grid">
             <div class="card">
                 <h3><a href="index.html">🎨 Utility Classes (Main)</a></h3>
-                <p>Interactive reference for all ${Object.keys(sassInfo).length > 0 ? '1600+' : 'available'} utility classes with search and filtering</p>
+                <p>Interactive reference for all ${Object.keys(sassInfo).length > 0 ? "1600+" : "available"} utility classes with search and filtering</p>
             </div>
             <div class="card">
                 <h3><a href="utilities.json">📊 Utilities API</a></h3>
