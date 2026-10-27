@@ -1,8 +1,28 @@
 {
   "name": "@mild-ui/core",
-  "version": "0.3.1",
-  "description": "Universal design system built with SASS/SCSS - framework agnostic CSS-only core with zero dependencies",
+  "version": "0.4.0",
+  "description": "SCSS design system for mild-ui: framework-agnostic CSS, themes and design tokens",
+  "keywords": [
+    "css",
+    "scss",
+    "sass",
+    "design-system",
+    "design-tokens",
+    "ui",
+    "mild-ui"
+  ],
+  "homepage": "https://codewithriyan.github.io/mild-ui/core/",
+  "bugs": {
+    "url": "https://github.com/CodeWithRiyan/mild-ui/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CodeWithRiyan/mild-ui.git",
+    "directory": "packages/core"
+  },
   "license": "MIT",
+  "author": "Muhamad Riyan (https://github.com/CodeWithRiyan)",
+  "type": "commonjs",
   "sideEffects": [
     "*.css",
     "*.scss"
@@ -11,6 +31,19 @@
     "dist/",
     "src/sass/"
   ],
+  "exports": {
+    "./css": "./dist/mild-ui.css",
+    "./mild-ui.css": "./dist/mild-ui.css",
+    "./css/min": "./dist/mild-ui.min.css",
+    "./css/utilities": "./dist/mild-utilities.css",
+    "./css/utilities/min": "./dist/mild-utilities.min.css",
+    "./themes/light": "./dist/themes/light.css",
+    "./themes/dark": "./dist/themes/dark.css",
+    "./tokens": "./dist/tokens.json",
+    "./scss": "./src/sass/index.scss",
+    "./scss/utilities": "./src/sass/mild-utilities.scss",
+    "./package.json": "./package.json"
+  },
   "scripts": {
     "build": "pnpm run build:sass",
     "build:sass": "node scripts/build-sass.js",
@@ -33,30 +66,13 @@
     "concurrently": "^8.2.2",
     "cssnano": "^6.0.1",
     "nodemon": "^3.0.2",
-    "postcss": "^8.4.32",
+    "postcss": "^8.5.32",
     "rimraf": "^5.0.0",
     "sass": "^1.69.5",
     "serve": "^14.2.1"
   },
-  "exports": {
-    "./css": "./dist/mild-ui.css",
-    "./css/min": "./dist/mild-ui.min.css",
-    "./css/utilities": "./dist/mild-utilities.css",
-    "./css/utilities/min": "./dist/mild-utilities.min.css",
-    "./themes/light": "./dist/themes/light.css",
-    "./themes/dark": "./dist/themes/dark.css",
-    "./tokens": "./dist/tokens.json",
-    "./scss": "./src/sass/index.scss",
-    "./scss/utilities": "./src/sass/mild-utilities.scss",
-    "./flutter": "./dist/flutter",
-    "./flutter/theme": "./dist/flutter/mild_theme.dart",
-    "./flutter/utils": "./dist/flutter/mild_utilities.dart",
-    "./react-native": "./dist/react-native",
-    "./react-native/theme": "./dist/react-native/MildTheme.js",
-    "./react-native/theme/ts": "./dist/react-native/MildTheme.ts",
-    "./react-native/utils": "./dist/react-native/MildUtils.js",
-    "./react-native/utils/ts": "./dist/react-native/MildUtils.ts",
-    "./package.json": "./package.json"
+  "engines": {
+    "node": ">=18"
   },
   "publishConfig": {
     "access": "public"

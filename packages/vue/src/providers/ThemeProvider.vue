@@ -1,12 +1,17 @@
 <template>
   <div>
-    <slot :theme="theme" :setTheme="setTheme" :config="config" :setConfig="setConfig" />
+    <slot :theme="theme" :set-theme="setTheme" :config="config" :set-config="setConfig" />
   </div>
 </template>
 
 <script setup lang="ts">
 import { ref, provide, onMounted, watch, computed } from "vue";
-import { ThemeConfig, defaultTheme, darkTheme, applyTheme } from "../types/theme";
+import {
+  ThemeConfig,
+  defaultTheme as defaultThemeConfig,
+  darkTheme,
+  applyTheme,
+} from "../types/theme";
 
 type ThemeMode = "light" | "dark" | "system";
 
@@ -18,7 +23,7 @@ interface Props {
 
 const props = withDefaults(defineProps<Props>(), {
   defaultTheme: "system",
-  config: () => defaultTheme,
+  config: () => defaultThemeConfig,
   storageKey: "mild-ui-theme",
 });
 

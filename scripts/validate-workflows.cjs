@@ -2,7 +2,6 @@
 
 const { execSync } = require("child_process");
 const fs = require("fs");
-const path = require("path");
 
 console.log("🔍 Validating Workflow Compatibility...\n");
 
@@ -43,7 +42,7 @@ for (const test of tests) {
     console.log(`▶️  ${test.name}`);
     console.log(`   ${test.description}`);
 
-    const output = execSync(test.command, {
+    execSync(test.command, {
       stdio: "pipe",
       encoding: "utf8",
       cwd: process.cwd(),
@@ -125,8 +124,10 @@ for (const check of packageChecks) {
 console.log("\n🔧 Checking Workflow Files...\n");
 
 const workflowFiles = [
-  ".github/workflows/test.yml",
-  ".github/workflows/publish.yml",
+  ".github/workflows/ci.yml",
+  ".github/workflows/release.yml",
+  ".github/workflows/links.yml",
+  ".github/workflows/scorecard.yml",
   ".github/workflows/storybook.yml",
 ];
 

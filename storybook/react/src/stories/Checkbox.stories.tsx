@@ -238,7 +238,7 @@ export const CheckboxGroup = {
                     value={option.value}
                     checked={newsletter.includes(option.value)}
                     onCheckedChange={(checked) => {
-                      checked && form.clearErrors("newsletter");
+                      if (checked) form.clearErrors("newsletter");
                       handleCheckboxChange(option.value, checked === true);
                     }}
                   />

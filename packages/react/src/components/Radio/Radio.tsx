@@ -2,7 +2,7 @@
 import * as React from "react";
 import * as RadioGroupPrimitive from "@radix-ui/react-radio-group";
 import { Circle } from "lucide-react";
-import type { RadioCoreProps, RadioStyleProps, RadioSize } from "../../types";
+import type { RadioStyleProps, RadioSize } from "../../types";
 import { radioVariants, radioLabelVariants } from "../../utils/radio";
 import { cn } from "../../utils";
 

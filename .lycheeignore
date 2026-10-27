@@ -1,0 +1,15 @@
+# Reviewed exclusions for the Markdown link checker (links.yml).
+# Keep this list short; every entry needs a reason.
+
+# npmjs.com answers automated requests with 403.
+^https://www\.npmjs\.com/
+
+# The Scorecard badge and viewer only exist after the first Scorecard run on main.
+^https://api\.securityscorecards\.dev/projects/github\.com/CodeWithRiyan/mild-ui
+^https://scorecard\.dev/viewer/
+
+# The CI badge and workflow page only exist once ci.yml has run on main.
+^https://github\.com/CodeWithRiyan/mild-ui/actions/workflows/ci\.yml
+
+# Security advisories form for private vulnerability reports needs a signed-in user.
+^https://github\.com/CodeWithRiyan/mild-ui/security/advisories/new

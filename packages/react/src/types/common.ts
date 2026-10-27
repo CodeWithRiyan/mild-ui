@@ -7,7 +7,7 @@ export type ColorMode = "light" | "dark" | "system";
 // Theme configuration
 export interface ThemeConfig {
   colorMode?: ColorMode;
-  colors?: Record<string, any>;
+  colors?: Record<string, string | Record<string, string>>;
   fonts?: Record<string, string>;
   fontSizes?: Record<string, string>;
   fontWeights?: Record<string, string | number>;

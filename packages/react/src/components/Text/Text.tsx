@@ -69,16 +69,16 @@ export const Text = forwardRef<HTMLTextComponent, TextProps>(
       }),
     };
 
-    return (
-      <Component
-        ref={ref as React.Ref<any>}
-        className={classes}
-        style={Object.keys(style).length > 0 ? style : undefined}
-        onClick={onClick}
-        {...rest}
-      >
-        {children}
-      </Component>
+    return React.createElement(
+      Component,
+      {
+        ref,
+        className: classes,
+        style: Object.keys(style).length > 0 ? style : undefined,
+        onClick,
+        ...rest,
+      },
+      children,
     );
   },
 );

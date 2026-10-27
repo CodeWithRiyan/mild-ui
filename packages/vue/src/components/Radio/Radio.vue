@@ -9,11 +9,11 @@
       :required="required"
       :name="name"
       :value="value"
-      @change="onChange"
       v-bind="$attrs"
+      @change="onChange"
     />
     <slot v-if="$slots.default" />
-    <label v-else-if="label" :for="$attrs.id as string | undefined" :class="labelClasses">
+    <label v-else-if="label" :for="$attrs.id as string" :class="labelClasses">
       {{ label }}
     </label>
   </div>

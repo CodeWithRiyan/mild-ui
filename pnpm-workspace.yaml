@@ -1,4 +1,10 @@
 packages:
   - "packages/*"
   - "storybook/*"
-  - "docs"
+
+onlyBuiltDependencies:
+  - esbuild
+
+ignoredBuiltDependencies:
+  - "@parcel/watcher"
+  - "@swc/core"

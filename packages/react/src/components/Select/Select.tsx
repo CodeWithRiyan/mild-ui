@@ -42,7 +42,7 @@ const SelectTrigger = React.forwardRef<HTMLButtonElement, SelectTriggerProps>((p
 });
 
 // Use type assertion for displayName
-(SelectTrigger as any).displayName = "SelectTrigger";
+SelectTrigger.displayName = "SelectTrigger";
 
 // Simple props for content
 export interface SelectContentProps {
@@ -69,7 +69,7 @@ const SelectContent = React.forwardRef<HTMLDivElement, SelectContentProps>((prop
 });
 
 // Use type assertion for displayName
-(SelectContent as any).displayName = "SelectContent";
+SelectContent.displayName = "SelectContent";
 
 // Simple props for item
 export interface SelectItemProps {
@@ -100,7 +100,7 @@ const SelectItem = React.forwardRef<HTMLDivElement, SelectItemProps>((props, ref
 });
 
 // Use type assertion for displayName
-(SelectItem as any).displayName = "SelectItem";
+SelectItem.displayName = "SelectItem";
 
 // Define a composite component that uses all the pieces
 export interface SelectProps extends SelectCoreProps, SelectStyleProps {

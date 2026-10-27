@@ -1,0 +1,57 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:recommended",
+    "helpers:pinGitHubActionDigests",
+    ":semanticCommitTypeAll(chore)"
+  ],
+  "rangeStrategy": "bump",
+  "lockFileMaintenance": { "enabled": true, "schedule": ["before 6am on monday"] },
+  "schedule": ["before 6am on monday"],
+  "packageRules": [
+    { "groupName": "GitHub Actions", "matchManagers": ["github-actions"] },
+    {
+      "groupName": "React",
+      "matchPackageNames": [
+        "react",
+        "react-dom",
+        "@types/react",
+        "@types/react-dom",
+        "@vitejs/plugin-react",
+        "@testing-library/**"
+      ]
+    },
+    {
+      "groupName": "Vue",
+      "matchPackageNames": ["vue", "vue-tsc", "@vue/**", "@vitejs/plugin-vue", "@vueuse/**"]
+    },
+    {
+      "groupName": "Storybook",
+      "matchPackageNames": ["storybook", "@storybook/**", "storybook-dark-mode", "chromatic"]
+    },
+    {
+      "groupName": "Vite & Vitest",
+      "matchPackageNames": ["vite", "vitest", "vite-plugin-dts", "vite-plugin-vue-jsx"]
+    },
+    {
+      "groupName": "Lint & format",
+      "matchPackageNames": [
+        "eslint",
+        "@eslint/**",
+        "typescript-eslint",
+        "eslint-*",
+        "prettier",
+        "globals",
+        "husky",
+        "lint-staged"
+      ]
+    },
+    { "groupName": "Radix UI", "matchPackageNames": ["@radix-ui/**"] },
+    {
+      "description": "Patch updates of dev dependencies merge automatically once CI is green",
+      "matchDepTypes": ["devDependencies"],
+      "matchUpdateTypes": ["patch"],
+      "automerge": true
+    }
+  ]
+}

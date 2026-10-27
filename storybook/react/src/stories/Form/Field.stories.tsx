@@ -436,7 +436,7 @@ export const MultipleFields: Story = {
                     value={option.value}
                     checked={newsletter.includes(option.value)}
                     onCheckedChange={(checked) => {
-                      checked && form.clearErrors("newsletter");
+                      if (checked) form.clearErrors("newsletter");
                       handleCheckboxGroupChange(option.value, checked === true);
                     }}
                   />

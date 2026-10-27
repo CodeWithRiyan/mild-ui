@@ -1,0 +1,51 @@
+name: Bug report
+description: Something in mild-ui does not work as documented.
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting! Security problems go through [SECURITY.md](https://github.com/CodeWithRiyan/mild-ui/blob/main/SECURITY.md), not this form.
+  - type: dropdown
+    id: framework
+    attributes:
+      label: Framework
+      options:
+        - React
+        - Vue
+        - CSS only (@mild-ui/core)
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: mild-ui version
+      description: Output of `npm ls @mild-ui/react @mild-ui/vue @mild-ui/core`
+      placeholder: "@mild-ui/react@0.5.0"
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: Environment
+      description: Framework version, bundler, and browser
+      placeholder: "React 19.0.0, Vite 5.4, Chrome 130"
+  - type: textarea
+    id: description
+    attributes:
+      label: What happened?
+      description: What you expected and what happened instead.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Reproduction
+      description: A link to a minimal repository or StackBlitz, or the exact steps and code to reproduce.
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Console output or logs
+      render: shell

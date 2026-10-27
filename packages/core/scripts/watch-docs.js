@@ -5,7 +5,7 @@ const { spawn } = require("child_process");
 console.log("👀 Watching for documentation changes...");
 
 const watcher = chokidar.watch(["src/**/*.ts", "src/**/*.scss", "README.md"], {
-  ignored: /(^|[\/\\])\../,
+  ignored: /(^|[/\\])\../,
   persistent: true,
 });
 

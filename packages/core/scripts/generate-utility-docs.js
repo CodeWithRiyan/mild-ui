@@ -113,7 +113,7 @@ function parseCSSForUtilities(css) {
 /**
  * Organize utilities by category based on their names and properties
  */
-function organizeUtilitiesByCategory(utilities, tokens) {
+function organizeUtilitiesByCategory(utilities, _tokens) {
   const categories = {
     layout: {
       name: "Layout",
@@ -576,7 +576,7 @@ ${Object.entries(organizedUtilities)
 `;
 
   // Add each category
-  Object.entries(organizedUtilities).forEach(([categoryKey, category]) => {
+  Object.entries(organizedUtilities).forEach(([, category]) => {
     markdown += `## ${category.name}
 
 ${category.description}
