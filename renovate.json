@@ -69,8 +69,8 @@
       "rangeStrategy": "in-range-only"
     },
     {
-      "description": "Supported Node versions (20, 22, 24) are chosen by hand in ci.yml and engines",
-      "matchPackageNames": ["node"],
+      "description": "Supported Node versions (20, 22, 24) are chosen by hand in ci.yml, workflows (node-version), and engines",
+      "matchPackageNames": ["node", "actions/node-versions"],
       "enabled": false
     },
     {
