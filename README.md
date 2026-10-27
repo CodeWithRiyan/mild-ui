@@ -2,6 +2,7 @@
 
 [![CI](https://github.com/CodeWithRiyan/mild-ui/actions/workflows/ci.yml/badge.svg)](https://github.com/CodeWithRiyan/mild-ui/actions/workflows/ci.yml)
 [![OpenSSF Scorecard](https://api.securityscorecards.dev/projects/github.com/CodeWithRiyan/mild-ui/badge)](https://scorecard.dev/viewer/?uri=github.com/CodeWithRiyan/mild-ui)
+[![npm](https://img.shields.io/npm/v/@mild-ui/react)](https://www.npmjs.com/package/@mild-ui/react)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE)
 
 mild-ui is a UI component library for **React** and **Vue**, styled by a shared SCSS design system (`@mild-ui/core`). The project is pre-1.0: APIs can still change between minor versions, and every change is recorded in each package's `CHANGELOG.md`.
