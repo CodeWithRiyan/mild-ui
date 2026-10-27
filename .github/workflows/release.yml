@@ -28,6 +28,9 @@ jobs:
       id-token: write
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with:
+          # Let changesets/action push with the token below instead of the checkout token.
+          persist-credentials: false
       - uses: pnpm/action-setup@fc06bc1257f339d1d5d8b3a19a8cae5388b55320 # v4.4.0
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
         with:
@@ -46,7 +49,12 @@ jobs:
           commit: "chore: version packages"
           createGithubReleases: true
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # A PR opened with the default GITHUB_TOKEN does not trigger ci.yml, so required checks
+          # never report on "Version Packages". CHANGESETS_TOKEN (fine-grained PAT: contents and
+          # pull requests read/write on this repo) avoids that; GITHUB_TOKEN is the fallback.
+          GITHUB_TOKEN: ${{ secrets.CHANGESETS_TOKEN || secrets.GITHUB_TOKEN }}
+          # The version commit is generated; skip the pre-commit hook in CI.
+          HUSKY: "0"
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
           NPM_CONFIG_PROVENANCE: true
