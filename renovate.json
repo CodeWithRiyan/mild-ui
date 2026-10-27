@@ -82,6 +82,12 @@
       "description": "Removed from react and vue in T-R1B-09 (0.6.0)",
       "matchPackageNames": ["tailwind-merge", "lucide-react", "lucide-vue-next"],
       "enabled": false
+    },
+    {
+      "description": "changesets/action v2 needs Changesets CLI v3, renamed inputs, and token/npm auth changes; migrate deliberately together with @changesets/cli v3",
+      "matchPackageNames": ["changesets/action", "@changesets/cli"],
+      "matchUpdateTypes": ["major"],
+      "enabled": false
     }
   ]
 }
