@@ -6,10 +6,16 @@
     ":semanticCommitTypeAll(chore)"
   ],
   "rangeStrategy": "bump",
-  "lockFileMaintenance": { "enabled": true, "schedule": ["before 6am on monday"] },
+  "lockFileMaintenance": {
+    "enabled": true,
+    "schedule": ["before 6am on monday"]
+  },
   "schedule": ["before 6am on monday"],
   "packageRules": [
-    { "groupName": "GitHub Actions", "matchManagers": ["github-actions"] },
+    {
+      "groupName": "GitHub Actions",
+      "matchManagers": ["github-actions"]
+    },
     {
       "groupName": "React",
       "matchPackageNames": [
@@ -31,7 +37,7 @@
     },
     {
       "groupName": "Vite & Vitest",
-      "matchPackageNames": ["vite", "vitest", "vite-plugin-dts", "vite-plugin-vue-jsx"]
+      "matchPackageNames": ["vite", "vitest", "vite-plugin-dts"]
     },
     {
       "groupName": "Lint & format",
@@ -46,12 +52,42 @@
         "lint-staged"
       ]
     },
-    { "groupName": "Radix UI", "matchPackageNames": ["@radix-ui/**"] },
+    {
+      "groupName": "Radix UI",
+      "matchPackageNames": ["@radix-ui/**"]
+    },
     {
       "description": "Patch updates of dev dependencies merge automatically once CI is green",
       "matchDepTypes": ["devDependencies"],
       "matchUpdateTypes": ["patch"],
       "automerge": true
+    },
+    {
+      "description": "Runtime and peer dependencies of the published packages: lockfile updates only, so the ranges users must satisfy are never raised by a bot",
+      "matchFileNames": ["packages/*/package.json"],
+      "matchDepTypes": ["dependencies", "peerDependencies"],
+      "rangeStrategy": "in-range-only"
+    },
+    {
+      "description": "Supported Node versions (20, 22, 24) are chosen by hand in ci.yml and engines",
+      "matchPackageNames": ["node"],
+      "enabled": false
+    },
+    {
+      "description": "Security overrides in pnpm-workspace.yaml for transitive dev dependencies; remove the override instead of bumping it",
+      "matchPackageNames": ["uuid", "compression"],
+      "enabled": false
+    },
+    {
+      "description": "Removed from react and vue in T-R1B-09 (0.6.0)",
+      "matchPackageNames": ["tailwind-merge", "lucide-react", "lucide-vue-next"],
+      "enabled": false
+    },
+    {
+      "description": "changesets/action v2 needs Changesets CLI v3, renamed inputs, and token/npm auth changes; migrate deliberately together with @changesets/cli v3",
+      "matchPackageNames": ["changesets/action", "@changesets/cli"],
+      "matchUpdateTypes": ["major"],
+      "enabled": false
     }
   ]
 }
