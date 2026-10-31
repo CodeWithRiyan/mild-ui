@@ -4,7 +4,12 @@ import type { AspectRatioValue } from "../../types/aspect-ratio";
 
 /** `16 / 9` -> `"1.7777777777777777"`, `"16/9"` -> `"16 / 9"` (both valid `aspect-ratio` values). */
 export function toCssAspectRatio(ratio: AspectRatioValue): string {
-  return typeof ratio === "number" ? String(ratio) : ratio.trim().replace(/\s*\/\s*/, " / ");
+  return typeof ratio === "number"
+    ? String(ratio)
+    : ratio
+        .split("/")
+        .map((part) => part.trim())
+        .join(" / ");
 }
 </script>
 

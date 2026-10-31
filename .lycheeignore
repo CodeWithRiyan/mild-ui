@@ -11,5 +11,8 @@
 # The CI badge and workflow page only exist once ci.yml has run on main.
 ^https://github\.com/CodeWithRiyan/mild-ui/actions/workflows/ci\.yml
 
+# The Vue Storybook is deployed by storybook.yml on main; drop this once it is live.
+^https://codewithriyan\.github\.io/mild-ui/vue/
+
 # Security advisories form for private vulnerability reports needs a signed-in user.
 ^https://github\.com/CodeWithRiyan/mild-ui/security/advisories/new
