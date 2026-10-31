@@ -36,6 +36,10 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
+      # The Storybooks bundle the React and Vue sources, which import the built primitives.
+      - name: Build primitives package
+        run: pnpm --filter @mild-ui/primitives build
+
       - name: Build core package (CSS only)
         run: pnpm --filter @mild-ui/core build
 
