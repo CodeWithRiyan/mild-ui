@@ -1,0 +1,53 @@
+// packages/core/src/sass/components/_map.scss
+/// Map component styling: an embedded map (iframe) in a fixed-ratio frame, with a link to the
+/// full map underneath.
+/// @group components
+
+.mild-map {
+  --mild-map-ratio: 16 / 9;
+
+  display: block;
+  margin: 0;
+  overflow: hidden;
+  border: var(--mild-border-width) solid var(--mild-border);
+  border-radius: var(--mild-radius-lg);
+  background-color: var(--mild-muted);
+}
+
+.mild-map__frame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: var(--mild-map-ratio);
+}
+
+.mild-map__iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.mild-map__fallback {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--mild-space-4);
+  color: var(--mild-muted-foreground);
+  font-size: var(--mild-font-size-sm);
+  text-align: center;
+}
+
+.mild-map__caption {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--mild-space-2);
+  padding: var(--mild-space-2) var(--mild-space-3);
+  font-size: var(--mild-font-size-xs);
+  color: var(--mild-muted-foreground);
+  background-color: var(--mild-background);
+  border-top: var(--mild-border-width) solid var(--mild-border);
+}

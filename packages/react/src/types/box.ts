@@ -1,7 +1,7 @@
-// Box component types
+// Box component types. Every style prop takes a design-token key (see ./tokens.ts),
+// never a raw CSS value, so layouts stay on the scale and follow the theme.
+import type { SpaceToken, DimensionToken, RadiusToken, ColorToken, ZIndexToken } from "./tokens";
 import type {
-  SpacingValue,
-  ColorValue,
   DisplayValue,
   FlexDirection,
   FlexWrap,
@@ -20,51 +20,51 @@ export interface BoxCoreProps {
   flexWrap?: FlexWrap;
   alignItems?: AlignItems;
   justifyContent?: JustifyContent;
-  gap?: SpacingValue;
+  gap?: SpaceToken;
 
   // Grid props
   gridTemplateColumns?: string;
   gridTemplateRows?: string;
-  gridGap?: SpacingValue;
+  gridGap?: SpaceToken;
 
   // Spacing props
-  padding?: SpacingValue;
-  paddingX?: SpacingValue;
-  paddingY?: SpacingValue;
-  paddingTop?: SpacingValue;
-  paddingRight?: SpacingValue;
-  paddingBottom?: SpacingValue;
-  paddingLeft?: SpacingValue;
-  margin?: SpacingValue;
-  marginX?: SpacingValue;
-  marginY?: SpacingValue;
-  marginTop?: SpacingValue;
-  marginRight?: SpacingValue;
-  marginBottom?: SpacingValue;
-  marginLeft?: SpacingValue;
+  padding?: SpaceToken;
+  paddingX?: SpaceToken;
+  paddingY?: SpaceToken;
+  paddingTop?: SpaceToken;
+  paddingRight?: SpaceToken;
+  paddingBottom?: SpaceToken;
+  paddingLeft?: SpaceToken;
+  margin?: SpaceToken;
+  marginX?: SpaceToken;
+  marginY?: SpaceToken;
+  marginTop?: SpaceToken;
+  marginRight?: SpaceToken;
+  marginBottom?: SpaceToken;
+  marginLeft?: SpaceToken;
 
   // Sizing props
-  width?: string | number;
-  height?: string | number;
-  minWidth?: string | number;
-  minHeight?: string | number;
-  maxWidth?: string | number;
-  maxHeight?: string | number;
+  width?: DimensionToken;
+  height?: DimensionToken;
+  minWidth?: DimensionToken;
+  minHeight?: DimensionToken;
+  maxWidth?: DimensionToken;
+  maxHeight?: DimensionToken;
 
   // Border and background
-  borderRadius?: SpacingValue;
-  borderWidth?: SpacingValue;
-  borderColor?: ColorValue;
-  backgroundColor?: ColorValue;
-  color?: ColorValue;
+  borderRadius?: RadiusToken;
+  borderWidth?: SpaceToken;
+  borderColor?: ColorToken;
+  backgroundColor?: ColorToken;
+  color?: ColorToken;
 
   // Position props
   position?: PositionValue;
-  top?: string | number;
-  right?: string | number;
-  bottom?: string | number;
-  left?: string | number;
-  zIndex?: number;
+  top?: SpaceToken;
+  right?: SpaceToken;
+  bottom?: SpaceToken;
+  left?: SpaceToken;
+  zIndex?: ZIndexToken;
 
   // Overflow props
   overflow?: OverflowValue;

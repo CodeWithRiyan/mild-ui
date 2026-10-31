@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { useForm, FormProvider } from "react-hook-form";
-import { FormLabel, FormField, FormItem, FormControl, Input } from "@mild-ui/react";
+import { FormLabel, FormControl, Input } from "@mild-ui/react";
+import { FormField, FormItem } from "../../examples/react-hook-form";
 import React from "react";
 
 const meta: Meta<typeof FormLabel> = {

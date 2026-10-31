@@ -19,6 +19,15 @@ $mild-breakpoints: (
   @return map.get($mild-breakpoints, $size);
 }
 
+// Generate breakpoint custom properties (--mild-breakpoint-sm: 640px, ...). They cannot drive
+// @media queries, but components such as the container read them for their max-width so the
+// scale can be re-themed at runtime.
+@mixin generate-breakpoint-properties() {
+  @each $size-name, $size-value in $mild-breakpoints {
+    --mild-breakpoint-#{$size-name}: #{$size-value};
+  }
+}
+
 // Media query mixins
 @mixin mild-screen($size) {
   $breakpoint: mild-breakpoint($size);

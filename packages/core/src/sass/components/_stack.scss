@@ -1,0 +1,18 @@
+// packages/core/src/sass/components/_stack.scss
+/// Stack component styling: a flex container that spaces its children along one axis.
+/// The gap itself comes from the `gap` style prop (inline, spacing token), like Box.
+/// @group components
+
+@use "../mixins/layout" as layout;
+
+.mild-stack {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+.mild-stack--inline {
+  display: inline-flex;
+}
+
+@include layout.flex-modifiers("stack");

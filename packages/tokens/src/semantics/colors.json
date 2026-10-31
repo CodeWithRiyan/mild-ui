@@ -1,0 +1,261 @@
+{
+  "color": {
+    "primary": {
+      "$description": "Alias of color.blue. Source: $mild-semantic-colors.primary.",
+      "$type": "color",
+      "50": {
+        "$value": "{color.blue.50}"
+      },
+      "100": {
+        "$value": "{color.blue.100}"
+      },
+      "200": {
+        "$value": "{color.blue.200}"
+      },
+      "300": {
+        "$value": "{color.blue.300}"
+      },
+      "400": {
+        "$value": "{color.blue.400}"
+      },
+      "500": {
+        "$value": "{color.blue.500}"
+      },
+      "600": {
+        "$value": "{color.blue.600}"
+      },
+      "700": {
+        "$value": "{color.blue.700}"
+      },
+      "800": {
+        "$value": "{color.blue.800}"
+      },
+      "900": {
+        "$value": "{color.blue.900}"
+      },
+      "950": {
+        "$value": "{color.blue.950}"
+      }
+    },
+    "secondary": {
+      "$description": "Alias of color.gray. Source: $mild-semantic-colors.secondary.",
+      "$type": "color",
+      "50": {
+        "$value": "{color.gray.50}"
+      },
+      "100": {
+        "$value": "{color.gray.100}"
+      },
+      "200": {
+        "$value": "{color.gray.200}"
+      },
+      "300": {
+        "$value": "{color.gray.300}"
+      },
+      "400": {
+        "$value": "{color.gray.400}"
+      },
+      "500": {
+        "$value": "{color.gray.500}"
+      },
+      "600": {
+        "$value": "{color.gray.600}"
+      },
+      "700": {
+        "$value": "{color.gray.700}"
+      },
+      "800": {
+        "$value": "{color.gray.800}"
+      },
+      "900": {
+        "$value": "{color.gray.900}"
+      },
+      "950": {
+        "$value": "{color.gray.950}"
+      }
+    },
+    "success": {
+      "$description": "Alias of color.green. Source: $mild-semantic-colors.success.",
+      "$type": "color",
+      "50": {
+        "$value": "{color.green.50}"
+      },
+      "100": {
+        "$value": "{color.green.100}"
+      },
+      "200": {
+        "$value": "{color.green.200}"
+      },
+      "300": {
+        "$value": "{color.green.300}"
+      },
+      "400": {
+        "$value": "{color.green.400}"
+      },
+      "500": {
+        "$value": "{color.green.500}"
+      },
+      "600": {
+        "$value": "{color.green.600}"
+      },
+      "700": {
+        "$value": "{color.green.700}"
+      },
+      "800": {
+        "$value": "{color.green.800}"
+      },
+      "900": {
+        "$value": "{color.green.900}"
+      },
+      "950": {
+        "$value": "{color.green.950}"
+      }
+    },
+    "warning": {
+      "$description": "Alias of color.yellow. Source: $mild-semantic-colors.warning.",
+      "$type": "color",
+      "50": {
+        "$value": "{color.yellow.50}"
+      },
+      "100": {
+        "$value": "{color.yellow.100}"
+      },
+      "200": {
+        "$value": "{color.yellow.200}"
+      },
+      "300": {
+        "$value": "{color.yellow.300}"
+      },
+      "400": {
+        "$value": "{color.yellow.400}"
+      },
+      "500": {
+        "$value": "{color.yellow.500}"
+      },
+      "600": {
+        "$value": "{color.yellow.600}"
+      },
+      "700": {
+        "$value": "{color.yellow.700}"
+      },
+      "800": {
+        "$value": "{color.yellow.800}"
+      },
+      "900": {
+        "$value": "{color.yellow.900}"
+      },
+      "950": {
+        "$value": "{color.yellow.950}"
+      }
+    },
+    "danger": {
+      "$description": "Alias of color.red. Source: $mild-semantic-colors.danger.",
+      "$type": "color",
+      "50": {
+        "$value": "{color.red.50}"
+      },
+      "100": {
+        "$value": "{color.red.100}"
+      },
+      "200": {
+        "$value": "{color.red.200}"
+      },
+      "300": {
+        "$value": "{color.red.300}"
+      },
+      "400": {
+        "$value": "{color.red.400}"
+      },
+      "500": {
+        "$value": "{color.red.500}"
+      },
+      "600": {
+        "$value": "{color.red.600}"
+      },
+      "700": {
+        "$value": "{color.red.700}"
+      },
+      "800": {
+        "$value": "{color.red.800}"
+      },
+      "900": {
+        "$value": "{color.red.900}"
+      },
+      "950": {
+        "$value": "{color.red.950}"
+      }
+    },
+    "error": {
+      "$description": "Alias of color.red. Source: $mild-semantic-colors.error.",
+      "$type": "color",
+      "50": {
+        "$value": "{color.red.50}"
+      },
+      "100": {
+        "$value": "{color.red.100}"
+      },
+      "200": {
+        "$value": "{color.red.200}"
+      },
+      "300": {
+        "$value": "{color.red.300}"
+      },
+      "400": {
+        "$value": "{color.red.400}"
+      },
+      "500": {
+        "$value": "{color.red.500}"
+      },
+      "600": {
+        "$value": "{color.red.600}"
+      },
+      "700": {
+        "$value": "{color.red.700}"
+      },
+      "800": {
+        "$value": "{color.red.800}"
+      },
+      "900": {
+        "$value": "{color.red.900}"
+      },
+      "950": {
+        "$value": "{color.red.950}"
+      }
+    },
+    "accent": {
+      "$type": "color",
+      "$value": "{color.primary.500}",
+      "$description": "The brand color behind primary buttons, checked controls, focus rings and active tabs. Override this (and the shades below) to re-theme. Source: the :root block of packages/core/src/sass/index.scss."
+    },
+    "accent-hover": {
+      "$type": "color",
+      "$value": "{color.primary.600}",
+      "$description": "Accent on hover. Source: the :root block of packages/core/src/sass/index.scss."
+    },
+    "accent-active": {
+      "$type": "color",
+      "$value": "{color.primary.700}",
+      "$description": "Accent while pressed. Source: the :root block of packages/core/src/sass/index.scss."
+    },
+    "accent-foreground": {
+      "$type": "color",
+      "$value": "{color.white}",
+      "$description": "Text and icons on top of the accent. Source: the :root block of packages/core/src/sass/index.scss."
+    },
+    "accent-soft": {
+      "$type": "color",
+      "$value": "{color.primary.300}",
+      "$description": "Accent-tinted borders, e.g. hover on a checkbox. Source: the :root block of packages/core/src/sass/index.scss."
+    },
+    "accent-subtle": {
+      "$type": "color",
+      "$value": "{color.primary.50}",
+      "$description": "Accent-tinted backgrounds, e.g. hover on a ghost button. Source: the :root block of packages/core/src/sass/index.scss."
+    },
+    "accent-muted": {
+      "$type": "color",
+      "$value": "{color.primary.100}",
+      "$description": "Stronger accent-tinted backgrounds, e.g. a pressed ghost button. Source: the :root block of packages/core/src/sass/index.scss."
+    }
+  }
+}

@@ -5,8 +5,6 @@ import * as yup from "yup";
 import {
   Button,
   Checkbox,
-  Form,
-  Field,
   Input,
   Select,
   Radio,
@@ -14,6 +12,7 @@ import {
   FormLabel,
   FormMessage,
 } from "@mild-ui/react";
+import { Form, Field } from "../../examples/react-hook-form";
 import React from "react";
 
 const meta: Meta<typeof Field> = {
@@ -401,7 +400,7 @@ export const MultipleFields: Story = {
       }
     };
 
-    const onSubmit = (data: any) => {
+    const onSubmit = (data: yup.InferType<typeof schema>) => {
       console.log("Form submitted:", data);
       alert("Form submitted successfully! Check console for data.");
     };
@@ -542,7 +541,7 @@ export const CompleteFormWithYup: Story = {
       { value: "au", label: "Australia" },
     ];
 
-    const onSubmit = (data: any) => {
+    const onSubmit = (data: yup.InferType<typeof schema>) => {
       console.log("Form submitted:", data);
       alert("Form submitted successfully! Check console for data.");
     };

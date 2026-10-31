@@ -1,17 +1,18 @@
 // packages/react/src/components/Button/Button.tsx
 import React, { forwardRef } from "react";
 import { getButtonProps, getButtonState, getButtonA11yProps } from "../../utils/button";
+import { useButtonGroup } from "../ButtonGroup/ButtonGroup";
 import { ButtonProps } from "./Button.types";
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   (
     {
-      variant = "primary",
-      size = "md",
-      colorScheme = "primary",
+      variant: variantProp,
+      size: sizeProp,
+      colorScheme,
       fullWidth = false,
       loading = false,
-      disabled = false,
+      disabled: disabledProp,
       children,
       onClick,
       leftIcon,
@@ -22,6 +23,12 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     },
     ref,
   ) => {
+    // An enclosing <ButtonGroup> supplies defaults; the button's own props still win.
+    const group = useButtonGroup();
+    const variant = variantProp ?? group.variant ?? "primary";
+    const size = sizeProp ?? group.size ?? "md";
+    const disabled = disabledProp ?? group.disabled ?? false;
+
     // Get computed props from core
     const buttonProps = getButtonProps({
       variant,

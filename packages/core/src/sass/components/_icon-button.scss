@@ -1,0 +1,60 @@
+// packages/core/src/sass/components/_icon-button.scss
+/// IconButton component styling: a square button holding one glyph. Sizes follow the button.
+/// @group components
+
+@use "sass:map";
+
+$icon-button-sizes: (
+  "xs": (
+    size: var(--mild-space-6),
+    icon: var(--mild-space-3),
+  ),
+  "sm": (
+    size: var(--mild-space-8),
+    icon: var(--mild-space-4),
+  ),
+  "md": (
+    size: var(--mild-space-10),
+    icon: var(--mild-space-5),
+  ),
+  "lg": (
+    size: var(--mild-space-12),
+    icon: var(--mild-space-6),
+  ),
+  "xl": (
+    size: var(--mild-space-14),
+    icon: var(--mild-space-7),
+  ),
+);
+
+.mild-icon-button {
+  padding: 0;
+  flex-shrink: 0;
+
+  .mild-button__content,
+  .mild-icon-button__icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  svg {
+    width: var(--mild-icon-button-icon, var(--mild-space-5));
+    height: var(--mild-icon-button-icon, var(--mild-space-5));
+  }
+}
+
+@each $size-name, $size-props in $icon-button-sizes {
+  .mild-icon-button--#{$size-name} {
+    --mild-icon-button-icon: #{map.get($size-props, "icon")};
+
+    width: map.get($size-props, "size");
+    min-width: map.get($size-props, "size");
+    height: map.get($size-props, "size");
+    padding: 0;
+  }
+}
+
+.mild-icon-button--round {
+  border-radius: var(--mild-radius-full);
+}

@@ -1,0 +1,81 @@
+// packages/core/src/sass/components/_heading.scss
+/// Heading component styling. The level sets the default size; an explicit `size` prop
+/// overrides it, so the size modifiers are declared after the level ones.
+/// @group components
+
+// Level defaults (h1 is the largest)
+$heading-levels: (
+  1: "4xl",
+  2: "3xl",
+  3: "2xl",
+  4: "xl",
+  5: "lg",
+  6: "base",
+);
+
+.mild-heading {
+  margin: 0;
+  color: inherit;
+  font-family: var(--mild-font-family-sans);
+  font-weight: var(--mild-font-weight-semibold);
+  line-height: var(--mild-line-height-tight);
+  letter-spacing: var(--mild-letter-spacing-tight);
+  text-wrap: balance;
+}
+
+@each $level, $size in $heading-levels {
+  .mild-heading--level-#{$level} {
+    font-size: var(--mild-font-size-#{$size});
+  }
+}
+
+// Explicit sizes win over the level default
+@each $size in (xs, sm, md, lg, xl, "2xl", "3xl", "4xl", "5xl", "6xl") {
+  .mild-heading--#{$size} {
+    @if $size == md {
+      font-size: var(--mild-font-size-base);
+    } @else {
+      font-size: var(--mild-font-size-#{$size});
+    }
+  }
+}
+
+// Weights
+@each $weight in ("thin", "light", "normal", "medium", "semibold", "bold", "extrabold", "black") {
+  .mild-heading--#{$weight} {
+    font-weight: var(--mild-font-weight-#{$weight});
+  }
+}
+
+// Alignment
+@each $align in (left, center, right, justify) {
+  .mild-heading--#{$align} {
+    text-align: $align;
+  }
+}
+
+// Semantic colors (same scale as .mild-text--*)
+.mild-heading--primary {
+  color: var(--mild-color-accent);
+}
+.mild-heading--secondary {
+  color: var(--mild-color-gray-500);
+}
+.mild-heading--success {
+  color: var(--mild-color-green-500);
+}
+.mild-heading--warning {
+  color: var(--mild-color-yellow-600);
+}
+.mild-heading--danger {
+  color: var(--mild-color-red-500);
+}
+.mild-heading--muted {
+  color: var(--mild-muted-foreground);
+}
+
+.mild-heading--truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

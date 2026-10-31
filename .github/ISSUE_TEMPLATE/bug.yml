@@ -12,6 +12,7 @@ body:
       label: Framework
       options:
         - React
+        - Vue
         - CSS only (@mild-ui/core)
     validations:
       required: true
@@ -19,7 +20,7 @@ body:
     id: version
     attributes:
       label: mild-ui version
-      description: Output of `npm ls @mild-ui/react @mild-ui/core`
+      description: Output of `npm ls @mild-ui/react @mild-ui/vue @mild-ui/core`
       placeholder: "@mild-ui/react@0.5.0"
     validations:
       required: true

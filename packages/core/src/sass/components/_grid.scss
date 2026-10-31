@@ -1,0 +1,105 @@
+// packages/core/src/sass/components/_grid.scss
+/// Grid component styling: a CSS grid with 1-12 equal columns, optionally per breakpoint
+/// (`.mild-grid--md-cols-3`), plus GridItem column/row spans.
+/// @group components
+
+@use "../tokens/breakpoints" as breakpoints;
+
+$grid-columns: 12;
+$grid-rows: 6;
+$grid-breakpoints: (sm, md, lg, xl, "2xl");
+
+.mild-grid {
+  display: grid;
+  box-sizing: border-box;
+}
+
+.mild-grid--inline {
+  display: inline-grid;
+}
+
+// Column / row counts
+@for $i from 1 through $grid-columns {
+  .mild-grid--cols-#{$i} {
+    grid-template-columns: repeat(#{$i}, minmax(0, 1fr));
+  }
+}
+
+@for $i from 1 through $grid-rows {
+  .mild-grid--rows-#{$i} {
+    grid-template-rows: repeat(#{$i}, minmax(0, 1fr));
+  }
+}
+
+// Auto-placement
+.mild-grid--flow-row {
+  grid-auto-flow: row;
+}
+.mild-grid--flow-column {
+  grid-auto-flow: column;
+}
+.mild-grid--flow-dense {
+  grid-auto-flow: dense;
+}
+.mild-grid--flow-row-dense {
+  grid-auto-flow: row dense;
+}
+.mild-grid--flow-column-dense {
+  grid-auto-flow: column dense;
+}
+
+// Item alignment inside the cells
+@each $name, $value in (start: start, end: end, center: center, stretch: stretch) {
+  .mild-grid--items-#{$name} {
+    align-items: $value;
+  }
+
+  .mild-grid--justify-#{$name} {
+    justify-items: $value;
+  }
+}
+
+// Grid item
+.mild-grid-item {
+  box-sizing: border-box;
+  min-width: 0;
+}
+
+@for $i from 1 through $grid-columns {
+  .mild-grid-item--col-span-#{$i} {
+    grid-column: span #{$i} / span #{$i};
+  }
+}
+
+.mild-grid-item--col-span-full {
+  grid-column: 1 / -1;
+}
+
+@for $i from 1 through $grid-rows {
+  .mild-grid-item--row-span-#{$i} {
+    grid-row: span #{$i} / span #{$i};
+  }
+}
+
+.mild-grid-item--row-span-full {
+  grid-row: 1 / -1;
+}
+
+// Responsive column counts and spans (mobile-first, min-width)
+@each $bp in $grid-breakpoints {
+  @include breakpoints.mild-screen($bp) {
+    @for $i from 1 through $grid-columns {
+      .mild-grid--#{$bp}-cols-#{$i} {
+        grid-template-columns: repeat(#{$i}, minmax(0, 1fr));
+      }
+
+      .mild-grid-item--#{$bp}-col-span-#{$i} {
+        grid-column: span #{$i} / span #{$i};
+      }
+    }
+
+    .mild-grid-item--#{$bp}-col-span-full {
+      grid-column: 1 / -1;
+    }
+  }
+}

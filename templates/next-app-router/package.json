@@ -1,0 +1,24 @@
+{
+  "name": "mild-ui-next-app-router",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Next.js App Router playground for @mild-ui/react: every component rendered by Server Components, hydrated without warnings.",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@mild-ui/react": "^1.2.0",
+    "next": "^15.3.0",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.15.0",
+    "@types/react": "^19.1.0",
+    "@types/react-dom": "^19.1.0",
+    "typescript": "^5.9.3"
+  }
+}

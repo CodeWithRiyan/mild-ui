@@ -1,6 +1,7 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import type { Meta, StoryObj } from "@storybook/react";
-import { Button, Field, Form, Switch } from "@mild-ui/react";
+import { Button, Switch } from "@mild-ui/react";
+import { Field, Form } from "../examples/react-hook-form";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
@@ -14,7 +15,7 @@ const meta = {
     docs: {
       description: {
         component:
-          "A versatile switch component with multiple sizes and states, perfect for toggling settings.",
+          "A versatile switch component with multiple sizes and states, perfect for toggling settings. Space and Enter toggle it, per the [WAI-ARIA APG switch pattern](https://www.w3.org/WAI/ARIA/apg/patterns/switch/). Keyboard tests: `packages/react/src/components/Switch/Switch.test.tsx`.",
       },
     },
   },
@@ -27,7 +28,6 @@ const meta = {
     defaultChecked: { control: "boolean" },
     disabled: { control: "boolean" },
     required: { control: "boolean" },
-    indeterminate: { control: "boolean" },
     label: { control: "text" },
     name: { control: "text" },
     value: { control: "text" },

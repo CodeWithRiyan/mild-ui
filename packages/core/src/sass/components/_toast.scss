@@ -1,0 +1,154 @@
+// packages/core/src/sass/components/_toast.scss
+/// Toast component styling: the notification region (stacked per placement) and the toasts.
+/// @group components
+
+@use "../mixins/component-base" as base;
+
+// The region: fixed, per placement, stacking its toasts
+.mild-toast-region {
+  position: fixed;
+  z-index: 60;
+  display: flex;
+  flex-direction: column;
+  gap: var(--mild-space-2);
+  width: 100%;
+  max-width: 24rem;
+  padding: var(--mild-space-4);
+  pointer-events: none;
+
+  > * {
+    pointer-events: auto;
+  }
+}
+
+.mild-toast-region--top {
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.mild-toast-region--top-left {
+  top: 0;
+  left: 0;
+}
+
+.mild-toast-region--top-right {
+  top: 0;
+  right: 0;
+}
+
+.mild-toast-region--bottom {
+  bottom: 0;
+  left: 50%;
+  flex-direction: column-reverse;
+  transform: translateX(-50%);
+}
+
+.mild-toast-region--bottom-left {
+  bottom: 0;
+  left: 0;
+  flex-direction: column-reverse;
+}
+
+.mild-toast-region--bottom-right {
+  bottom: 0;
+  right: 0;
+  flex-direction: column-reverse;
+}
+
+// One toast
+.mild-toast {
+  @include base.component-base;
+
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: var(--mild-space-3);
+  width: 100%;
+  padding: var(--mild-space-4);
+  padding-right: var(--mild-space-10);
+  font-size: var(--mild-font-size-sm);
+  line-height: var(--mild-line-height-relaxed);
+  color: var(--mild-foreground);
+  background-color: var(--mild-background);
+  border: var(--mild-border-width) solid var(--mild-border);
+  border-radius: var(--mild-radius-lg);
+  box-shadow: var(--mild-shadow-lg);
+  animation: mild-toast-in var(--mild-duration-200) var(--mild-easing-out);
+}
+
+// Status colors (a colored edge + icon)
+.mild-toast--info {
+  border-left: calc(var(--mild-border-width) * 4) solid var(--mild-color-blue-500);
+}
+.mild-toast--success {
+  border-left: calc(var(--mild-border-width) * 4) solid var(--mild-color-green-500);
+}
+.mild-toast--warning {
+  border-left: calc(var(--mild-border-width) * 4) solid var(--mild-color-yellow-500);
+}
+.mild-toast--error {
+  border-left: calc(var(--mild-border-width) * 4) solid var(--mild-color-red-500);
+}
+
+.mild-toast__icon {
+  flex-shrink: 0;
+  width: var(--mild-space-5);
+  height: var(--mild-space-5);
+  margin-top: var(--mild-space-0-5);
+
+  .mild-toast--info & {
+    color: var(--mild-color-blue-500);
+  }
+  .mild-toast--success & {
+    color: var(--mild-color-green-500);
+  }
+  .mild-toast--warning & {
+    color: var(--mild-color-yellow-600);
+  }
+  .mild-toast--error & {
+    color: var(--mild-color-red-500);
+  }
+}
+
+.mild-toast__content {
+  flex: 1;
+  min-width: 0;
+}
+
+.mild-toast__title {
+  margin: 0;
+  font-weight: var(--mild-font-weight-semibold);
+}
+
+.mild-toast__description {
+  margin: 0;
+  color: var(--mild-muted-foreground);
+}
+
+.mild-toast__action {
+  margin-top: var(--mild-space-2);
+}
+
+.mild-toast__close {
+  position: absolute;
+  top: var(--mild-space-2);
+  right: var(--mild-space-2);
+}
+
+@keyframes mild-toast-in {
+  from {
+    opacity: 0;
+    transform: translateY(var(--mild-space-2)) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mild-toast {
+    animation: none;
+  }
+}

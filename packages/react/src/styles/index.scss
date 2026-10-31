@@ -2,11 +2,8 @@
 // Import core SASS styles and React-specific adaptations
 @use "../../../core/src/sass" as mild-core;
 
-// React-specific style adaptations
-.mild-react-root {
-  // Ensure proper CSS custom property inheritance
-  color-scheme: var(--mild-color-scheme, light);
-}
+// Color mode: <ThemeProvider> (and the ColorModeScript) set data-theme and the color-scheme
+// style on <html>; the core themes key on [data-theme], so nothing React-specific is needed here.
 
 // React-specific component adaptations
 .mild-button {

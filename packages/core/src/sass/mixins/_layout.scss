@@ -46,3 +46,45 @@
   white-space: nowrap;
   border: 0;
 }
+
+/// Flex-container modifiers shared by the Stack and Flex components:
+/// `.mild-<block>--row|column|...`, `--wrap|nowrap|wrap-reverse`, `--items-*`, `--justify-*`.
+/// @param {String} $block - Component block name (e.g. "stack")
+@mixin flex-modifiers($block) {
+  @each $direction in (row, row-reverse, column, column-reverse) {
+    .mild-#{$block}--#{$direction} {
+      flex-direction: $direction;
+    }
+  }
+
+  @each $wrap in (wrap, nowrap, wrap-reverse) {
+    .mild-#{$block}--#{$wrap} {
+      flex-wrap: $wrap;
+    }
+  }
+
+  @each $name,
+    $value
+      in (start: flex-start, end: flex-end, center: center, baseline: baseline, stretch: stretch)
+  {
+    .mild-#{$block}--items-#{$name} {
+      align-items: $value;
+    }
+  }
+
+  @each $name,
+    $value
+      in (
+        start: flex-start,
+        end: flex-end,
+        center: center,
+        between: space-between,
+        around: space-around,
+        evenly: space-evenly
+      )
+  {
+    .mild-#{$block}--justify-#{$name} {
+      justify-content: $value;
+    }
+  }
+}

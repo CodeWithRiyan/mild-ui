@@ -1,0 +1,33 @@
+// Build-time theming with Sass. The token modules are exported individually, so the accent can be
+// derived from the palette with the same functions the design system uses internally.
+@use "@mild-ui/core/scss/tokens/colors" as colors;
+@use "@mild-ui/core/scss/tokens/spacing" as spacing;
+@use "@mild-ui/core/scss";
+
+:root {
+  --mild-color-accent: #{colors.mild-color("yellow", 600)};
+  --mild-color-accent-hover: #{colors.mild-color("yellow", 700)};
+  --mild-color-accent-active: #{colors.mild-color("yellow", 800)};
+  --mild-color-accent-soft: #{colors.mild-color("yellow", 300)};
+  --mild-color-accent-subtle: #{colors.mild-color("yellow", 50)};
+  --mild-color-accent-muted: #{colors.mild-color("yellow", 100)};
+  --mild-color-accent-foreground: var(--mild-color-gray-900);
+}
+
+// Layout for the example page only; component styling comes from @mild-ui/core.
+.demo {
+  max-width: 40rem;
+  margin: spacing.mild-space("8") auto;
+  padding: 0 spacing.mild-space("4");
+  display: grid;
+  gap: spacing.mild-space("6");
+  font-family: var(--mild-font-family-sans);
+  color: var(--mild-foreground);
+
+  &__row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: spacing.mild-space("4");
+  }
+}

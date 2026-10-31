@@ -1,0 +1,51 @@
+// packages/core/src/sass/components/_code.scss
+/// Code component styling: inline code by default, `--block` for a code block.
+/// @group components
+
+.mild-code {
+  display: inline;
+  font-family: var(--mild-font-family-mono);
+  font-size: 0.875em;
+  line-height: var(--mild-line-height-normal);
+  white-space: break-spaces;
+  border-radius: var(--mild-radius-sm);
+  padding: var(--mild-space-0-5) var(--mild-space-1-5);
+}
+
+// Variants
+.mild-code--subtle {
+  background-color: var(--mild-muted);
+  color: var(--mild-foreground);
+}
+
+.mild-code--solid {
+  background-color: var(--mild-color-accent);
+  color: var(--mild-color-accent-foreground);
+}
+
+.mild-code--outline {
+  background-color: transparent;
+  color: var(--mild-foreground);
+  border: var(--mild-border-width) solid var(--mild-border);
+}
+
+// Sizes
+.mild-code--sm {
+  font-size: var(--mild-font-size-xs);
+}
+.mild-code--md {
+  font-size: 0.875em;
+}
+.mild-code--lg {
+  font-size: var(--mild-font-size-sm);
+}
+
+// Code block
+.mild-code--block {
+  display: block;
+  padding: var(--mild-space-3) var(--mild-space-4);
+  border-radius: var(--mild-radius-md);
+  white-space: pre;
+  overflow-x: auto;
+  tab-size: 2;
+}

@@ -1,0 +1,77 @@
+{
+  "background": {
+    "$type": "color",
+    "$value": "#0a0a0a",
+    "$description": "Matches $mild-background in packages/core/src/sass/themes/dark.scss. Not a palette shade: core hardcodes this hex rather than referencing color.gray.950 (#030712)."
+  },
+  "foreground": {
+    "$type": "color",
+    "$value": "#fafafa",
+    "$description": "Matches $mild-foreground in packages/core/src/sass/themes/dark.scss. Not a palette shade; see background above."
+  },
+  "muted": {
+    "$type": "color",
+    "$value": "#262626",
+    "$description": "Matches $mild-muted in packages/core/src/sass/themes/dark.scss. Not a palette shade; see background above."
+  },
+  "muted-foreground": {
+    "$type": "color",
+    "$value": "#a3a3a3",
+    "$description": "Matches $mild-muted-foreground in packages/core/src/sass/themes/dark.scss: 7.85:1 on background, 6.00:1 on muted. Not a palette shade; see background above."
+  },
+  "border": {
+    "$type": "color",
+    "$value": "{color.gray.500}",
+    "$description": "core hardcodes #262626 here (same as muted), which is 1.31:1 on background and fails the 3:1 non-text contrast minimum (WCAG 1.4.11). color.gray.500 is 4.10:1; see scripts/check-contrast.ts."
+  },
+  "input": {
+    "$type": "color",
+    "$value": "{color.gray.500}",
+    "$description": "Same value as border, and the same fix; core hardcodes #262626 here too."
+  },
+  "ring": {
+    "$type": "color",
+    "$value": "{color.primary.400}",
+    "$description": "Matches $mild-ring in packages/core/src/sass/themes/dark.scss: 9.24:1 on background, already well above the 3:1 non-text minimum."
+  },
+  "card": {
+    "$type": "color",
+    "$value": "#0a0a0a",
+    "$description": "Matches $mild-card in packages/core/src/sass/themes/dark.scss. Not a palette shade; see background above."
+  },
+  "card-foreground": {
+    "$type": "color",
+    "$value": "#fafafa",
+    "$description": "Matches $mild-card-foreground in packages/core/src/sass/themes/dark.scss. Not a palette shade; see background above."
+  },
+  "popover": {
+    "$type": "color",
+    "$value": "#0a0a0a",
+    "$description": "Matches $mild-popover in packages/core/src/sass/themes/dark.scss. Not a palette shade; see background above."
+  },
+  "popover-foreground": {
+    "$type": "color",
+    "$value": "#fafafa",
+    "$description": "Matches $mild-popover-foreground in packages/core/src/sass/themes/dark.scss. Not a palette shade; see background above."
+  },
+  "accent": {
+    "$type": "color",
+    "$value": "#262626",
+    "$description": "Matches $mild-accent in packages/core/src/sass/themes/dark.scss. Not a palette shade; see background above."
+  },
+  "accent-foreground": {
+    "$type": "color",
+    "$value": "#fafafa",
+    "$description": "Matches $mild-accent-foreground in packages/core/src/sass/themes/dark.scss: 14.50:1 on accent."
+  },
+  "destructive": {
+    "$type": "color",
+    "$value": "{color.red.400}",
+    "$description": "Matches $mild-destructive in packages/core/src/sass/themes/dark.scss."
+  },
+  "destructive-foreground": {
+    "$type": "color",
+    "$value": "{color.gray.900}",
+    "$description": "Matches $mild-destructive-foreground in packages/core/src/sass/themes/dark.scss: 6.41:1 on destructive."
+  }
+}

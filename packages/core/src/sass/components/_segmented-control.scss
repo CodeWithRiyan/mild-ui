@@ -1,0 +1,100 @@
+// packages/core/src/sass/components/_segmented-control.scss
+/// SegmentedControl component styling: a radio group drawn as one bar of segments.
+/// Behaviour (aria-checked, roving tabindex) comes from the radio-group primitive.
+/// @group components
+
+@use "../mixins/component-base" as base;
+@use "sass:map";
+
+$segmented-control-sizes: (
+  "sm": (
+    height: var(--mild-space-7),
+    padding: 0 var(--mild-space-2-5),
+    font-size: var(--mild-font-size-xs),
+  ),
+  "md": (
+    height: var(--mild-space-8),
+    padding: 0 var(--mild-space-3),
+    font-size: var(--mild-font-size-sm),
+  ),
+  "lg": (
+    height: var(--mild-space-10),
+    padding: 0 var(--mild-space-4),
+    font-size: var(--mild-font-size-base),
+  ),
+);
+
+.mild-segmented-control {
+  display: inline-flex;
+  align-items: stretch;
+  gap: var(--mild-space-0-5);
+  padding: var(--mild-space-0-5);
+  background-color: var(--mild-muted);
+  border-radius: var(--mild-radius-md);
+  vertical-align: middle;
+
+  &[aria-disabled="true"] {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+.mild-segmented-control--full-width {
+  display: flex;
+  width: 100%;
+
+  > .mild-segmented-control__item {
+    flex: 1 1 0;
+  }
+}
+
+.mild-segmented-control--vertical {
+  flex-direction: column;
+}
+
+.mild-segmented-control__item {
+  @include base.component-base;
+  @include base.focus-ring;
+  @include base.interactive-transitions;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--mild-space-1-5);
+  height: var(--mild-space-8);
+  padding: 0 var(--mild-space-3);
+  font-size: var(--mild-font-size-sm);
+  font-weight: var(--mild-font-weight-medium);
+  line-height: 1;
+  white-space: nowrap;
+  color: var(--mild-muted-foreground);
+  background-color: transparent;
+  border: 0;
+  border-radius: var(--mild-radius-base);
+  cursor: pointer;
+
+  &:hover:not([disabled]):not([aria-disabled="true"]) {
+    color: var(--mild-foreground);
+  }
+
+  &[aria-checked="true"],
+  &[data-state="checked"] {
+    color: var(--mild-foreground);
+    background-color: var(--mild-background);
+    box-shadow: var(--mild-shadow-sm);
+  }
+
+  &[disabled],
+  &[aria-disabled="true"] {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+@each $size-name, $size-props in $segmented-control-sizes {
+  .mild-segmented-control--#{$size-name} > .mild-segmented-control__item {
+    height: map.get($size-props, "height");
+    padding: map.get($size-props, "padding");
+    font-size: map.get($size-props, "font-size");
+  }
+}

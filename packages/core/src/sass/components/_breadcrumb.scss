@@ -1,0 +1,47 @@
+// packages/core/src/sass/components/_breadcrumb.scss
+/// Breadcrumb component styling: nav > ol, items and separators are list items.
+/// @group components
+
+.mild-breadcrumb {
+  font-size: var(--mild-font-size-sm);
+  line-height: var(--mild-line-height-normal);
+}
+
+.mild-breadcrumb__list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--mild-space-2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.mild-breadcrumb-item {
+  display: inline-flex;
+  align-items: center;
+  min-width: 0;
+}
+
+.mild-breadcrumb-separator {
+  display: inline-flex;
+  align-items: center;
+  color: var(--mild-muted-foreground);
+  user-select: none;
+}
+
+.mild-breadcrumb-link {
+  color: var(--mild-muted-foreground);
+
+  &:hover {
+    color: var(--mild-foreground);
+  }
+}
+
+.mild-breadcrumb-page {
+  color: var(--mild-foreground);
+  font-weight: var(--mild-font-weight-medium);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

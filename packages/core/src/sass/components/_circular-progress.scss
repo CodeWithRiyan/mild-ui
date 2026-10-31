@@ -1,0 +1,87 @@
+// packages/core/src/sass/components/_circular-progress.scss
+/// CircularProgress component styling: an SVG ring (`role="progressbar"`).
+/// @group components
+
+.mild-circular-progress {
+  --mild-circular-progress-size: var(--mild-space-12);
+  --mild-circular-progress-color: var(--mild-color-accent);
+  --mild-circular-progress-track: var(--mild-muted);
+
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--mild-circular-progress-size);
+  height: var(--mild-circular-progress-size);
+  vertical-align: middle;
+}
+
+.mild-circular-progress__svg {
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+
+.mild-circular-progress__track {
+  fill: none;
+  stroke: var(--mild-circular-progress-track);
+}
+
+.mild-circular-progress__bar {
+  fill: none;
+  stroke: var(--mild-circular-progress-color);
+  stroke-linecap: round;
+  transition: stroke-dashoffset var(--mild-duration-300) var(--mild-easing-out);
+}
+
+.mild-circular-progress__label {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--mild-font-size-xs);
+  font-weight: var(--mild-font-weight-medium);
+  color: var(--mild-foreground);
+}
+
+// Sizes
+.mild-circular-progress--sm {
+  --mild-circular-progress-size: var(--mild-space-8);
+}
+.mild-circular-progress--md {
+  --mild-circular-progress-size: var(--mild-space-12);
+}
+.mild-circular-progress--lg {
+  --mild-circular-progress-size: var(--mild-space-16);
+}
+.mild-circular-progress--xl {
+  --mild-circular-progress-size: var(--mild-space-24);
+}
+
+// Color schemes
+.mild-circular-progress--primary {
+  --mild-circular-progress-color: var(--mild-color-accent);
+}
+.mild-circular-progress--success {
+  --mild-circular-progress-color: var(--mild-color-green-500);
+}
+.mild-circular-progress--warning {
+  --mild-circular-progress-color: var(--mild-color-yellow-500);
+}
+.mild-circular-progress--danger {
+  --mild-circular-progress-color: var(--mild-color-red-500);
+}
+.mild-circular-progress--info {
+  --mild-circular-progress-color: var(--mild-color-blue-500);
+}
+
+// Indeterminate: the arc spins
+.mild-circular-progress--indeterminate .mild-circular-progress__svg {
+  animation: mild-spin var(--mild-duration-1000) linear infinite;
+}
+
+.mild-circular-progress--indeterminate .mild-circular-progress__bar {
+  stroke-dasharray: 80 200;
+  stroke-dashoffset: 0;
+}

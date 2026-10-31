@@ -1,0 +1,143 @@
+// packages/core/src/sass/components/_input-group.scss
+/// InputGroup component styling: an input with addons (outside, flush) and elements (inside,
+/// overlaid) on either side.
+/// @group components
+
+@use "sass:map";
+
+$input-group-sizes: (
+  "sm": (
+    height: var(--mild-space-8),
+    inset: var(--mild-space-8),
+    font-size: var(--mild-font-size-xs),
+    padding: 0 var(--mild-space-2-5),
+  ),
+  "md": (
+    height: var(--mild-space-10),
+    inset: var(--mild-space-10),
+    font-size: var(--mild-font-size-sm),
+    padding: 0 var(--mild-space-3),
+  ),
+  "lg": (
+    height: var(--mild-space-12),
+    inset: var(--mild-space-12),
+    font-size: var(--mild-font-size-base),
+    padding: 0 var(--mild-space-4),
+  ),
+);
+
+.mild-input-group {
+  --mild-input-group-height: var(--mild-space-10);
+  --mild-input-group-inset: var(--mild-space-10);
+  --mild-input-group-font-size: var(--mild-font-size-sm);
+  --mild-input-group-padding: 0 var(--mild-space-3);
+
+  position: relative;
+  display: flex;
+  align-items: stretch;
+  width: 100%;
+
+  > .mild-input {
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+}
+
+.mild-input-group--inline {
+  display: inline-flex;
+  width: auto;
+}
+
+@each $size-name, $size-props in $input-group-sizes {
+  .mild-input-group--#{$size-name} {
+    --mild-input-group-height: #{map.get($size-props, "height")};
+    --mild-input-group-inset: #{map.get($size-props, "inset")};
+    --mild-input-group-font-size: #{map.get($size-props, "font-size")};
+    --mild-input-group-padding: #{map.get($size-props, "padding")};
+  }
+}
+
+// Addons: static blocks outside the field, sharing its border
+.mild-input-addon {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+  height: var(--mild-input-group-height);
+  padding: var(--mild-input-group-padding);
+  font-size: var(--mild-input-group-font-size);
+  line-height: var(--mild-line-height-normal);
+  white-space: nowrap;
+  color: var(--mild-muted-foreground);
+  background-color: var(--mild-muted);
+  border: var(--mild-border-width) solid var(--mild-border);
+  border-radius: var(--mild-radius-md);
+}
+
+.mild-input-addon--left {
+  border-right: 0;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.mild-input-addon--right {
+  border-left: 0;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.mild-input-group--has-left-addon > .mild-input {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.mild-input-group--has-right-addon > .mild-input {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+// Elements: icons or buttons overlaid inside the field
+.mild-input-element {
+  position: absolute;
+  top: 0;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--mild-input-group-inset);
+  height: var(--mild-input-group-height);
+  font-size: var(--mild-input-group-font-size);
+  color: var(--mild-muted-foreground);
+  // Decorative elements let clicks through to the field; interactive ones opt back in.
+  pointer-events: none;
+
+  > button,
+  > a,
+  > [role="button"] {
+    pointer-events: auto;
+  }
+
+  svg {
+    width: var(--mild-space-4);
+    height: var(--mild-space-4);
+  }
+}
+
+.mild-input-element--left {
+  left: 0;
+}
+
+.mild-input-element--right {
+  right: 0;
+}
+
+.mild-input-element--interactive {
+  pointer-events: auto;
+}
+
+.mild-input-group--has-left-element > .mild-input {
+  padding-left: var(--mild-input-group-inset);
+}
+
+.mild-input-group--has-right-element > .mild-input {
+  padding-right: var(--mild-input-group-inset);
+}

@@ -1,0 +1,24 @@
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "useDefineForClassFields": true,
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "skipLibCheck": true,
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "preserve",
+    "strict": true,
+    "noFallthroughCasesInSwitch": true,
+    "baseUrl": ".",
+    "paths": {
+      "@mild-ui/vue": ["../../packages/vue/src"],
+      "@mild-ui/primitives/*": ["../../packages/primitives/src/*"]
+    }
+  },
+  "include": ["src/**/*.ts", "src/**/*.vue", ".storybook/**/*.ts"],
+  "exclude": ["node_modules", "storybook-static"]
+}

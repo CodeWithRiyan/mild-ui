@@ -1,0 +1,52 @@
+import { Meta } from "@storybook/blocks";
+
+<Meta title="Introduction" />
+
+# @mild-ui/vue
+
+Vue 3 components for the mild-ui design system: styled by `@mild-ui/core`, driven by the
+framework-agnostic `@mild-ui/primitives`, and mirrored one-to-one by
+[`@mild-ui/react`](https://codewithriyan.github.io/mild-ui/react/).
+
+```bash
+npm install @mild-ui/vue @mild-ui/core
+```
+
+```vue
+<script setup lang="ts">
+import "@mild-ui/core/mild-ui.css";
+import { ThemeProvider, Button } from "@mild-ui/vue";
+</script>
+
+<template>
+  <ThemeProvider>
+    <Button>Get started</Button>
+  </ThemeProvider>
+</template>
+```
+
+## What every component guarantees
+
+- **Behaviour from the primitives.** Roles, `aria-*` attributes and keyboard handling come from
+  `@mild-ui/primitives`, following the WAI-ARIA Authoring Practices patterns; every interactive
+  story links its pattern and the test that enforces it.
+- **Server rendering.** Every component renders with `vue/server-renderer` and hydrates without a
+  warning (Nuxt ready).
+- **Size budget.** Each export is bundled on its own and gzipped; the budget is enforced in CI.
+- **Theming.** Light and dark modes through `<html data-theme>`; switch with the **Theme** toolbar
+  above any story.
+
+## Sections
+
+| Section      | Components                                                                                                                                                                    |
+| ------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Components   | Button, ButtonGroup, IconButton, Checkbox, Radio, Switch, Select, SegmentedControl, Toggle, Input, InputGroup, InputPassword, Textarea, Label, Form, Text, Box, ThemeProvider |
+| Layout       | Stack, Flex, Grid, Container, Divider, AspectRatio, ScrollArea                                                                                                                |
+| Typography   | Heading, Link, Code, Kbd, List                                                                                                                                                |
+| Navigation   | Breadcrumb                                                                                                                                                                    |
+| Feedback     | Alert, Spinner, Progress, Skeleton, Toast                                                                                                                                     |
+| Overlay      | Dialog, Tooltip                                                                                                                                                               |
+| Disclosure   | Tabs, Accordion                                                                                                                                                               |
+| Data Display | Card, Badge, Avatar, Image, Stat, Table                                                                                                                                       |
+
+Source and issues: [github.com/CodeWithRiyan/mild-ui](https://github.com/CodeWithRiyan/mild-ui).

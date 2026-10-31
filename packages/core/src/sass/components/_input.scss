@@ -21,7 +21,7 @@
   width: 100%;
   background-color: var(--mild-background);
   border-radius: var(--mild-radius-md);
-  border: 1px solid var(--mild-border);
+  border: var(--mild-border-width) solid var(--mild-border);
   color: var(--mild-foreground);
   font-size: var(--mild-font-size-sm);
   line-height: var(--mild-line-height-normal);
@@ -39,8 +39,8 @@
   // Focus state
   &:focus {
     outline: none;
-    border-color: var(--mild-color-primary-500);
-    box-shadow: 0 0 0 1px var(--mild-color-primary-500);
+    border-color: var(--mild-color-accent);
+    box-shadow: 0 0 0 var(--mild-border-width) var(--mild-color-accent);
   }
 
   // Invalid/Error state
@@ -50,7 +50,7 @@
 
     &:focus {
       border-color: var(--mild-color-red-500);
-      box-shadow: 0 0 0 1px var(--mild-color-red-500);
+      box-shadow: 0 0 0 var(--mild-border-width) var(--mild-color-red-500);
     }
   }
 
@@ -82,7 +82,9 @@
 
 // Variant styles
 .mild-input--outline {
-  // Default outline style (already defined in base)
+  // The default look; stated explicitly so the modifier is not a no-op
+  background-color: var(--mild-background);
+  border-color: var(--mild-border);
 }
 
 .mild-input--filled {
@@ -95,20 +97,20 @@
 
   &:focus {
     background-color: var(--mild-background);
-    border-color: var(--mild-color-primary-500);
+    border-color: var(--mild-color-accent);
   }
 }
 
 .mild-input--flushed {
   border: none;
-  border-bottom: 1px solid var(--mild-border);
+  border-bottom: var(--mild-border-width) solid var(--mild-border);
   border-radius: 0;
   padding-left: 0;
   padding-right: 0;
 
   &:focus {
-    border-bottom-color: var(--mild-color-primary-500);
-    box-shadow: 0 1px 0 0 var(--mild-color-primary-500);
+    border-bottom-color: var(--mild-color-accent);
+    box-shadow: 0 var(--mild-border-width) 0 0 var(--mild-color-accent);
   }
 }
 
@@ -120,5 +122,72 @@
 
   &:focus {
     box-shadow: none;
+  }
+}
+
+// Input password: the same field plus room for the visibility toggle, which sits inside it
+.mild-input-password-field {
+  position: relative;
+  display: inline-block;
+
+  &--full-width {
+    display: block;
+    width: 100%;
+  }
+}
+
+.mild-input-password {
+  @extend .mild-input;
+  padding-right: var(--mild-space-10);
+
+  @each $size in ("sm", "md", "lg") {
+    &--#{$size} {
+      @extend .mild-input--#{$size};
+    }
+  }
+
+  @each $variant in ("outline", "filled", "flushed", "unstyled") {
+    &--#{$variant} {
+      @extend .mild-input--#{$variant};
+    }
+  }
+}
+
+.mild-input-password-toggle {
+  @include base.component-base;
+  @include base.focus-ring;
+  position: absolute;
+  top: 50%;
+  right: var(--mild-space-2);
+  transform: translateY(-50%);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--mild-space-7);
+  height: var(--mild-space-7);
+  border-radius: var(--mild-radius-sm);
+  color: var(--mild-muted-foreground);
+  transition: var(--mild-transition-colors);
+
+  svg {
+    width: var(--mild-space-4);
+    height: var(--mild-space-4);
+  }
+
+  &:hover {
+    color: var(--mild-foreground);
+    background-color: var(--mild-muted);
+  }
+
+  &--sm {
+    width: var(--mild-space-6);
+    height: var(--mild-space-6);
+    right: var(--mild-space-1);
+  }
+
+  &--lg {
+    width: var(--mild-space-8);
+    height: var(--mild-space-8);
+    right: var(--mild-space-3);
   }
 }

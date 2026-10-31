@@ -1,8 +1,9 @@
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Button, Checkbox, Field, Form, Input, InputPassword } from "@mild-ui/react";
+import { Button, Checkbox, Input, InputPassword } from "@mild-ui/react";
+import { Field, Form } from "../examples/react-hook-form";
 import type { Meta, StoryObj } from "@storybook/react";
 import { useState } from "react";
-import { useForm, SubmitHandler } from "react-hook-form";
+import { useForm, SubmitErrorHandler, SubmitHandler } from "react-hook-form";
 import * as yup from "yup";
 
 const meta = {
@@ -27,7 +28,7 @@ const meta = {
     },
     variant: {
       control: { type: "radio" },
-      options: ["default", "filled", "outline", "ghost"],
+      options: ["outline", "filled", "flushed", "unstyled"],
     },
     fullWidth: { control: "boolean" },
     className: { control: false },
@@ -78,10 +79,10 @@ export const Sizes = {
 export const Variants = {
   render: () => (
     <div className="flex flex-col gap-4 w-64">
-      <Input placeholder="Default" variant="default" />
+      <Input placeholder="Outline (default)" variant="outline" />
       <Input placeholder="Filled" variant="filled" />
-      <Input placeholder="Outline" variant="outline" />
-      <Input placeholder="Ghost" variant="ghost" />
+      <Input placeholder="Flushed" variant="flushed" />
+      <Input placeholder="Unstyled" variant="unstyled" />
     </div>
   ),
 } satisfies Story;
@@ -184,7 +185,7 @@ export const ReactHookFormWithYup = {
       );
     };
 
-    const onError = (errors: any) => {
+    const onError: SubmitErrorHandler<FormData> = (errors) => {
       console.log("Form Errors:", errors);
     };
 

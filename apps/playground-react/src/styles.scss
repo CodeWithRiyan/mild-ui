@@ -1,0 +1,53 @@
+// Compile the design system from source so the playground always matches the repo.
+@use "../../../packages/react/src/styles/index.scss";
+
+body {
+  margin: 0;
+  font-family:
+    system-ui,
+    -apple-system,
+    "Segoe UI",
+    sans-serif;
+  background: var(--mild-background);
+  color: var(--mild-foreground);
+}
+
+.playground {
+  max-width: 48rem;
+  margin: 0 auto;
+  padding: 2rem 1rem 4rem;
+}
+
+.playground__card {
+  background: var(--mild-card);
+  color: var(--mild-card-foreground);
+  border: var(--mild-border-width) solid var(--mild-border);
+  border-radius: var(--mild-radius-xl);
+  padding: var(--mild-space-6);
+  margin-top: var(--mild-space-4);
+}
+
+.playground__submitted {
+  white-space: pre-wrap;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.8rem;
+}
+
+.playground__cell {
+  background: var(--mild-muted);
+  color: var(--mild-muted-foreground);
+  border-radius: var(--mild-radius-md);
+  padding: var(--mild-space-3);
+  font-size: 0.875rem;
+}
+
+.playground__scroll {
+  margin: 0;
+  padding: var(--mild-space-2) var(--mild-space-2) var(--mild-space-2) var(--mild-space-6);
+  border: var(--mild-border-width) solid var(--mild-border);
+  border-radius: var(--mild-radius-md);
+
+  li + li {
+    margin-top: var(--mild-space-2);
+  }
+}

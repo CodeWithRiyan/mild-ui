@@ -1,22 +1,103 @@
 {
   "name": "@mild-ui/primitives",
-  "version": "0.5.1",
-  "private": true,
-  "description": "Framework-agnostic state, keyboard, focus, and ARIA logic for mild-ui",
+  "version": "1.2.0",
+  "description": "Framework-agnostic, accessible UI primitives for mild-ui: checkbox, radio group, switch, listbox, toggle group, tabs, accordion, dialog, tooltip, toast timer and field",
+  "keywords": [
+    "accessibility",
+    "a11y",
+    "aria",
+    "apg",
+    "headless",
+    "primitives",
+    "design-system",
+    "mild-ui"
+  ],
+  "homepage": "https://github.com/CodeWithRiyan/mild-ui/tree/main/packages/primitives#readme",
+  "bugs": {
+    "url": "https://github.com/CodeWithRiyan/mild-ui/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CodeWithRiyan/mild-ui.git",
+    "directory": "packages/primitives"
+  },
   "license": "MIT",
+  "author": "Muhamad Riyan (https://github.com/CodeWithRiyan)",
   "type": "module",
   "sideEffects": false,
+  "files": [
+    "dist/"
+  ],
+  "exports": {
+    "./checkbox": {
+      "types": "./dist/checkbox.d.ts",
+      "default": "./dist/checkbox.js"
+    },
+    "./radio-group": {
+      "types": "./dist/radio-group.d.ts",
+      "default": "./dist/radio-group.js"
+    },
+    "./switch": {
+      "types": "./dist/switch.d.ts",
+      "default": "./dist/switch.js"
+    },
+    "./listbox": {
+      "types": "./dist/listbox.d.ts",
+      "default": "./dist/listbox.js"
+    },
+    "./field": {
+      "types": "./dist/field.d.ts",
+      "default": "./dist/field.js"
+    },
+    "./toggle-group": {
+      "types": "./dist/toggle-group.d.ts",
+      "default": "./dist/toggle-group.js"
+    },
+    "./tabs": {
+      "types": "./dist/tabs.d.ts",
+      "default": "./dist/tabs.js"
+    },
+    "./accordion": {
+      "types": "./dist/accordion.d.ts",
+      "default": "./dist/accordion.js"
+    },
+    "./dialog": {
+      "types": "./dist/dialog.d.ts",
+      "default": "./dist/dialog.js"
+    },
+    "./tooltip": {
+      "types": "./dist/tooltip.d.ts",
+      "default": "./dist/tooltip.js"
+    },
+    "./toast": {
+      "types": "./dist/toast.d.ts",
+      "default": "./dist/toast.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "clean": "rimraf dist",
+    "test": "vitest run --coverage",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "lint": "eslint src",
+    "typecheck": "tsc --noEmit -p tsconfig.json"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.5",
+    "@vitest/coverage-v8": "^4.1.11",
+    "esbuild": "^0.25.0",
+    "jsdom": "^24.1.3",
+    "rimraf": "^5.0.10",
+    "typescript": "^5.9.3",
+    "vite": "^6.4.5",
+    "vitest": "^4.1.11"
+  },
   "engines": {
     "node": "^20.0.0 || ^22.0.0 || >=24.0.0"
   },
-  "devDependencies": {
-    "@zag-js/checkbox": "^1.47.0",
-    "@zag-js/core": "^1.47.0",
-    "@zag-js/listbox": "^1.47.0",
-    "@zag-js/radio-group": "^1.47.0",
-    "@zag-js/switch": "^1.47.0",
-    "jsdom": "^24.1.3",
-    "typescript": "^5.9.3",
-    "vitest": "^4.1.12"
+  "publishConfig": {
+    "access": "public"
   }
 }

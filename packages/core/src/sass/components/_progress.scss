@@ -1,0 +1,116 @@
+// packages/core/src/sass/components/_progress.scss
+/// Progress component styling: a linear progress bar (`role="progressbar"`).
+/// @group components
+
+.mild-progress {
+  --mild-progress-color: var(--mild-color-accent);
+
+  position: relative;
+  width: 100%;
+  height: var(--mild-space-2);
+  overflow: hidden;
+  background-color: var(--mild-muted);
+  border-radius: var(--mild-radius-full);
+}
+
+.mild-progress__bar {
+  height: 100%;
+  width: var(--mild-progress-value, 0%);
+  background-color: var(--mild-progress-color);
+  border-radius: inherit;
+  transition: width var(--mild-duration-300) var(--mild-easing-out);
+}
+
+// Sizes
+.mild-progress--xs {
+  height: var(--mild-space-1);
+}
+.mild-progress--sm {
+  height: var(--mild-space-1-5);
+}
+.mild-progress--md {
+  height: var(--mild-space-2);
+}
+.mild-progress--lg {
+  height: var(--mild-space-3);
+}
+
+// Color schemes
+.mild-progress--primary {
+  --mild-progress-color: var(--mild-color-accent);
+}
+.mild-progress--success {
+  --mild-progress-color: var(--mild-color-green-500);
+}
+.mild-progress--warning {
+  --mild-progress-color: var(--mild-color-yellow-500);
+}
+.mild-progress--danger {
+  --mild-progress-color: var(--mild-color-red-500);
+}
+.mild-progress--info {
+  --mild-progress-color: var(--mild-color-blue-500);
+}
+
+// Striped bar
+.mild-progress--striped .mild-progress__bar {
+  background-image: linear-gradient(
+    45deg,
+    var(--mild-color-white-alpha-20) 25%,
+    transparent 25%,
+    transparent 50%,
+    var(--mild-color-white-alpha-20) 50%,
+    var(--mild-color-white-alpha-20) 75%,
+    transparent 75%,
+    transparent
+  );
+  background-size: var(--mild-space-4) var(--mild-space-4);
+}
+
+.mild-progress--animated .mild-progress__bar {
+  animation: mild-progress-stripes var(--mild-duration-1000) linear infinite;
+}
+
+// Indeterminate: a bar that slides back and forth
+.mild-progress--indeterminate .mild-progress__bar {
+  position: absolute;
+  width: 40%;
+  animation: mild-progress-indeterminate 1.5s ease-in-out infinite;
+}
+
+.mild-progress__label {
+  display: block;
+  margin-top: var(--mild-space-1);
+  font-size: var(--mild-font-size-xs);
+  color: var(--mild-muted-foreground);
+}
+
+@keyframes mild-progress-stripes {
+  from {
+    background-position: var(--mild-space-4) 0;
+  }
+  to {
+    background-position: 0 0;
+  }
+}
+
+@keyframes mild-progress-indeterminate {
+  0% {
+    left: -40%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mild-progress--animated .mild-progress__bar,
+  .mild-progress--indeterminate .mild-progress__bar {
+    animation-duration: 3s;
+  }
+}
+
+.mild-progress-field {
+  display: block;
+  width: 100%;
+}

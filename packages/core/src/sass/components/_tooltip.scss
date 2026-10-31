@@ -1,0 +1,71 @@
+// packages/core/src/sass/components/_tooltip.scss
+/// Tooltip component styling: an anchor wrapper and the positioned bubble.
+/// @group components
+
+.mild-tooltip-anchor {
+  position: relative;
+  display: inline-block;
+  max-width: 100%;
+}
+
+.mild-tooltip {
+  --mild-tooltip-offset: var(--mild-space-2);
+
+  position: absolute;
+  z-index: 70;
+  max-width: 20rem;
+  padding: var(--mild-space-1-5) var(--mild-space-2-5);
+  font-size: var(--mild-font-size-xs);
+  font-weight: var(--mild-font-weight-medium);
+  line-height: var(--mild-line-height-normal);
+  color: var(--mild-background);
+  background-color: var(--mild-foreground);
+  border-radius: var(--mild-radius-md);
+  box-shadow: var(--mild-shadow-md);
+  white-space: nowrap;
+  pointer-events: none;
+  animation: mild-fade-in var(--mild-duration-150) var(--mild-easing-out);
+
+  &[hidden] {
+    display: none;
+  }
+}
+
+.mild-tooltip--multiline {
+  white-space: normal;
+}
+
+.mild-tooltip--interactive {
+  pointer-events: auto;
+}
+
+// Placements
+.mild-tooltip--top {
+  bottom: calc(100% + var(--mild-tooltip-offset));
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.mild-tooltip--bottom {
+  top: calc(100% + var(--mild-tooltip-offset));
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.mild-tooltip--left {
+  top: 50%;
+  right: calc(100% + var(--mild-tooltip-offset));
+  transform: translateY(-50%);
+}
+
+.mild-tooltip--right {
+  top: 50%;
+  left: calc(100% + var(--mild-tooltip-offset));
+  transform: translateY(-50%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mild-tooltip {
+    animation: none;
+  }
+}

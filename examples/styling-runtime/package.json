@@ -1,0 +1,20 @@
+{
+  "name": "@mild-ui/example-styling-runtime",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "mild-ui example: tokens set at runtime from a URL parameter, with a visual snapshot check",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "snapshot": "node scripts/snapshot.mjs"
+  },
+  "dependencies": {
+    "@mild-ui/core": "workspace:*"
+  },
+  "devDependencies": {
+    "playwright": "^1.56.0",
+    "vite": "^6.4.5"
+  }
+}

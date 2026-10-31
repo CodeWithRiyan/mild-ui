@@ -5,6 +5,7 @@
 @use "../tokens/colors" as colors;
 @use "../tokens/spacing" as spacing;
 @use "../tokens/animation" as animation;
+@use "../mixins/layout" as layout;
 
 .mild-spinner {
   display: inline-block;
@@ -49,19 +50,24 @@
   }
 }
 
+// Text read by assistive technology ("Loading...") while the spinner itself is decorative
+.mild-spinner__label {
+  @include layout.visually-hidden;
+}
+
 // Border spinner (default)
 .mild-spinner--border {
-  border: 2px solid var(--mild-color-gray-200);
-  border-top-color: var(--mild-color-primary-500);
+  border: calc(var(--mild-border-width) * 2) solid var(--mild-color-gray-200);
+  border-top-color: var(--mild-color-accent);
   border-radius: 50%;
   animation: mild-spin var(--mild-duration-1000) linear infinite;
 
   &.mild-spinner--xs {
-    border-width: 1px;
+    border-width: var(--mild-border-width);
   }
 
   &.mild-spinner--xl {
-    border-width: 3px;
+    border-width: calc(var(--mild-border-width) * 3);
   }
 }
 
@@ -74,7 +80,7 @@
     content: "";
     position: absolute;
     border-radius: 50%;
-    background-color: var(--mild-color-primary-500);
+    background-color: var(--mild-color-accent);
     animation: mild-dots var(--mild-duration-1000) ease-in-out infinite;
   }
 
@@ -88,7 +94,7 @@
   }
 
   & {
-    background-color: var(--mild-color-primary-500);
+    background-color: var(--mild-color-accent);
     border-radius: 50%;
     animation: mild-dots var(--mild-duration-1000) ease-in-out infinite;
     animation-delay: -0.25s;
@@ -97,7 +103,7 @@
 
 // Pulse spinner
 .mild-spinner--pulse {
-  background-color: var(--mild-color-primary-500);
+  background-color: var(--mild-color-accent);
   border-radius: 50%;
   animation: mild-pulse var(--mild-duration-1000) ease-in-out infinite;
 }
@@ -113,8 +119,8 @@
   &::before,
   &::after {
     content: "";
-    background-color: var(--mild-color-primary-500);
-    border-radius: 2px;
+    background-color: var(--mild-color-accent);
+    border-radius: var(--mild-radius-sm);
     animation: mild-bars var(--mild-duration-1000) ease-in-out infinite;
   }
 
@@ -132,8 +138,8 @@
       left: 40%;
       width: 20%;
       height: 100%;
-      background-color: var(--mild-color-primary-500);
-      border-radius: 2px;
+      background-color: var(--mild-color-accent);
+      border-radius: var(--mild-radius-sm);
       animation: mild-bars var(--mild-duration-1000) ease-in-out infinite;
       animation-delay: -0.2s;
       content: "";

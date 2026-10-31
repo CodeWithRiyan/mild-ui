@@ -25,18 +25,47 @@ const preview: Preview = {
         { name: "dark", value: "#0f172a" },
       ],
     },
-    // Fix for GitHub Pages deployment
     options: {
       storySort: {
-        order: ["Introduction", "Components"],
+        order: [
+          "Introduction",
+          "Components",
+          "Layout",
+          "Typography",
+          "Navigation",
+          "Feedback",
+          "Overlay",
+          "Disclosure",
+          "Data Display",
+        ],
       },
     },
   },
   globalTypes: {
-    darkMode: {
-      defaultValue: false,
+    theme: {
+      description: "Color mode applied as <html data-theme>, what the core stylesheet keys on",
+      toolbar: {
+        title: "Theme",
+        icon: "mirror",
+        items: [
+          { value: "light", title: "Light", icon: "sun" },
+          { value: "dark", title: "Dark", icon: "moon" },
+        ],
+        dynamicTitle: true,
+      },
     },
   },
+  initialGlobals: {
+    theme: "light",
+  },
+  decorators: [
+    (story, context) => {
+      const theme = context.globals.theme === "dark" ? "dark" : "light";
+      document.documentElement.setAttribute("data-theme", theme);
+      document.documentElement.style.colorScheme = theme;
+      return story();
+    },
+  ],
 };
 
 export default preview;

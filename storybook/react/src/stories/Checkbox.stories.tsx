@@ -1,6 +1,7 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import type { Meta, StoryObj } from "@storybook/react";
-import { Button, Checkbox, Field, Form, FormLabel, FormMessage } from "@mild-ui/react";
+import { Button, Checkbox, FormLabel, FormMessage } from "@mild-ui/react";
+import { Field, Form } from "../examples/react-hook-form";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
@@ -13,7 +14,8 @@ const meta = {
     layout: "centered",
     docs: {
       description: {
-        component: "A versatile checkbox component with multiple sizes and states.",
+        component:
+          "A versatile checkbox component with multiple sizes and states. Space toggles it and a mixed (indeterminate) checkbox resolves to checked, per the [WAI-ARIA APG checkbox pattern](https://www.w3.org/WAI/ARIA/apg/patterns/checkbox/). Keyboard tests: `packages/react/src/components/Checkbox/Checkbox.test.tsx`.",
       },
     },
   },
@@ -85,7 +87,7 @@ export const ControlledCheckbox = {
       <Checkbox
         label={`Controlled checkbox (${checked ? "checked" : "unchecked"})`}
         checked={checked}
-        onCheckedChange={(val: any) => setChecked(val === true)}
+        onCheckedChange={(val) => setChecked(val === true)}
       />
     );
   },
@@ -96,7 +98,7 @@ export const UncontrolledCheckbox = {
     <Checkbox
       label="Uncontrolled checkbox"
       defaultChecked={true}
-      onCheckedChange={(val: any) => console.log("checked changed:", val)}
+      onCheckedChange={(val) => console.log("checked changed:", val)}
     />
   ),
 } satisfies Story;

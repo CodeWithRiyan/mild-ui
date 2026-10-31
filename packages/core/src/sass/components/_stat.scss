@@ -1,0 +1,90 @@
+// packages/core/src/sass/components/_stat.scss
+/// Stat component styling: a labelled number with an optional trend.
+/// @group components
+
+@use "../mixins/layout" as layout;
+
+.mild-stat {
+  display: flex;
+  flex-direction: column;
+  gap: var(--mild-space-1);
+  min-width: 0;
+}
+
+.mild-stat__label {
+  font-size: var(--mild-font-size-sm);
+  font-weight: var(--mild-font-weight-medium);
+  color: var(--mild-muted-foreground);
+}
+
+.mild-stat__value {
+  font-size: var(--mild-font-size-2xl);
+  font-weight: var(--mild-font-weight-semibold);
+  line-height: var(--mild-line-height-tight);
+  letter-spacing: var(--mild-letter-spacing-tight);
+  color: var(--mild-foreground);
+  font-variant-numeric: tabular-nums;
+}
+
+.mild-stat__help {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--mild-space-1);
+  font-size: var(--mild-font-size-sm);
+  color: var(--mild-muted-foreground);
+}
+
+// Trend arrow + color
+.mild-stat__trend {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--mild-space-0-5);
+  font-weight: var(--mild-font-weight-medium);
+
+  svg {
+    width: var(--mild-space-3-5);
+    height: var(--mild-space-3-5);
+  }
+}
+
+.mild-stat__trend--increase {
+  color: var(--mild-color-green-600);
+}
+
+.mild-stat__trend--decrease {
+  color: var(--mild-color-red-600);
+}
+
+// Sizes
+.mild-stat--sm .mild-stat__value {
+  font-size: var(--mild-font-size-xl);
+}
+
+.mild-stat--md .mild-stat__value {
+  font-size: var(--mild-font-size-2xl);
+}
+
+.mild-stat--lg .mild-stat__value {
+  font-size: var(--mild-font-size-4xl);
+}
+
+// A row of stats
+.mild-stat-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--mild-space-6);
+
+  > .mild-stat {
+    flex: 1 1 0;
+  }
+}
+
+// Trend direction read by assistive technology ("increased by")
+.mild-stat__sr-only {
+  @include layout.visually-hidden;
+}
+
+.mild-stat__trend-text {
+  display: inline-flex;
+  align-items: center;
+}

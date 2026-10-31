@@ -1,0 +1,48 @@
+// packages/core/src/sass/components/_form.scss
+/// Form field layout
+/// @group components
+///
+/// DOM contract (wired by @mild-ui/primitives/field):
+///   .mild-form
+///     .mild-form-item[data-invalid][data-required]
+///       .mild-label  .mild-input (or any control)  .mild-form-description  .mild-form-message
+
+.mild-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--mild-space-4);
+}
+
+.mild-form-item {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--mild-space-1-5);
+
+  .mild-label {
+    margin-bottom: 0;
+  }
+
+  // Full-width controls stretch; inline controls (checkbox, switch, radio) keep their size.
+  .mild-input,
+  .mild-input-password-field,
+  .mild-select,
+  .mild-select-trigger {
+    align-self: stretch;
+  }
+}
+
+.mild-form-description {
+  margin: 0;
+  font-size: var(--mild-font-size-xs);
+  line-height: var(--mild-line-height-normal);
+  color: var(--mild-muted-foreground);
+}
+
+.mild-form-message {
+  margin: 0;
+  font-size: var(--mild-font-size-xs);
+  font-weight: var(--mild-font-weight-medium);
+  line-height: var(--mild-line-height-normal);
+  color: var(--mild-color-red-500);
+}

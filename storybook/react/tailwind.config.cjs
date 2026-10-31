@@ -3,7 +3,7 @@
 module.exports = {
   darkMode: ["class"],
   content: [
-    "./src/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/**/*.{js,ts,jsx,tsx,vue,mdx}",
     "../../packages/react/src/**/*.{js,ts,jsx,tsx}",
     "../../packages/core/src/**/*.{js,ts}",
   ],

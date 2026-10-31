@@ -2,6 +2,7 @@
 import React, { forwardRef } from "react";
 import type { InputCoreProps } from "../../types";
 import { inputVariants } from "../../utils/input";
+import { useInputGroup } from "../InputGroup/InputGroup";
 
 export interface InputProps
   extends
@@ -22,24 +23,41 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
   (
     {
       variant = "outline",
-      size = "md",
+      size: sizeProp,
       fullWidth = true,
       error = false,
+      isInvalid = false,
       isDisabled: disabled = false,
       isReadOnly: readonly = false,
       isRequired: required = false,
       type = "text",
+      id: idProp,
+      name: nameProp,
+      required: requiredProp,
       className,
+      // Styling-only props: consumed here so they never reach the DOM.
+      colorScheme: _colorScheme,
+      errorBorderColor: _errorBorderColor,
+      focusBorderColor: _focusBorderColor,
       ...rest
     },
     ref,
   ) => {
+    const invalid = error || isInvalid;
+    // An enclosing <InputGroup> sizes its input and addons together; the prop still wins.
+    const group = useInputGroup();
+    const size = sizeProp ?? group.size ?? "md";
+    // A <FormField> around an <InputGroup> wires the group; the input picks the wiring up here.
+    const id = idProp ?? group.id;
+    const name = nameProp ?? group.name;
+    const isRequiredAttr = requiredProp ?? group.required ?? required;
+
     // Generate classes using variant system
     const classes = inputVariants({
       variant,
       size,
       fullWidth,
-      error,
+      error: invalid,
       isDisabled: disabled,
       isReadOnly: readonly,
       isRequired: required,
@@ -50,10 +68,13 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
       <input
         ref={ref}
         type={type}
+        id={id}
+        name={name}
         className={classes}
         disabled={disabled}
-        required={required}
-        aria-invalid={error || undefined}
+        readOnly={readonly}
+        required={isRequiredAttr}
+        aria-invalid={invalid || undefined}
         data-controlled={rest.value !== undefined ? "true" : undefined}
         {...rest}
       />

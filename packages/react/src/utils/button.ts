@@ -8,29 +8,53 @@ export interface ButtonUtilProps extends ButtonCoreProps {
   colorScheme?: string;
 }
 
+/**
+ * The stylesheet paints buttons per *style* x *color* (`.mild-button--solid.mild-button--primary`).
+ * The public `variant` prop mixes both notions, so it is mapped onto that pair here.
+ */
+const VARIANT_STYLE: Record<NonNullable<ButtonCoreProps["variant"]>, string> = {
+  primary: "solid",
+  secondary: "solid",
+  destructive: "solid",
+  outline: "outline",
+  ghost: "ghost",
+  link: "link",
+};
+
+/** Solid variants carry their own color; the others take `colorScheme` (default primary). */
+const VARIANT_COLOR: Partial<Record<NonNullable<ButtonCoreProps["variant"]>, string>> = {
+  primary: "primary",
+  secondary: "secondary",
+  destructive: "danger",
+};
+
 export function getButtonProps(props: ButtonUtilProps) {
   const {
     variant = "primary",
     size = "md",
-    colorScheme = "primary",
+    colorScheme,
     fullWidth = false,
     loading = false,
     disabled = false,
     className,
   } = props;
 
+  const style = VARIANT_STYLE[variant] ?? "solid";
+  const color = colorScheme ?? VARIANT_COLOR[variant] ?? "primary";
+
   const classes = cn(
     // Base classes
     "mild-button",
 
-    // Variant classes
+    // Public variant name (kept for consumers styling on it)
     `mild-button--${variant}`,
+
+    // Style + color pair the stylesheet actually keys on
+    style !== variant && `mild-button--${style}`,
+    color !== variant && `mild-button--${color}`,
 
     // Size classes
     `mild-button--${size}`,
-
-    // Color scheme classes
-    colorScheme && `mild-button--${colorScheme}`,
 
     // State classes
     fullWidth && "mild-button--full-width",
@@ -43,7 +67,8 @@ export function getButtonProps(props: ButtonUtilProps) {
 
   return {
     className: classes,
-    disabled: disabled || loading,
+    // Loading is not `disabled`: the button keeps focus and is announced busy instead.
+    disabled,
     "data-loading": loading ? "" : undefined,
     "data-disabled": disabled ? "" : undefined,
   };
@@ -68,8 +93,9 @@ export function getButtonA11yProps(props: {
 
   return {
     type,
-    "aria-disabled": disabled,
-    "aria-busy": loading,
+    // Only emitted when true, so idle buttons carry no noise.
+    "aria-disabled": disabled || loading || undefined,
+    "aria-busy": loading || undefined,
     tabIndex: disabled ? -1 : undefined,
   };
 }

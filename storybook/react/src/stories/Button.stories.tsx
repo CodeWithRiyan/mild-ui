@@ -175,11 +175,11 @@ export const AllSizes = {
 export const WithLeadingIcon = {
   render: () => (
     <div className="flex flex-wrap gap-4">
-      <Button leadingIcon={<PlusIcon />}>Add Item</Button>
-      <Button variant="secondary" leadingIcon={<DownloadIcon />}>
+      <Button leftIcon={<PlusIcon />}>Add Item</Button>
+      <Button variant="secondary" leftIcon={<DownloadIcon />}>
         Download
       </Button>
-      <Button variant="outline" leadingIcon={<ChevronRightIcon />}>
+      <Button variant="outline" leftIcon={<ChevronRightIcon />}>
         Continue
       </Button>
     </div>
@@ -189,11 +189,11 @@ export const WithLeadingIcon = {
 export const WithTrailingIcon = {
   render: () => (
     <div className="flex flex-wrap gap-4">
-      <Button trailingIcon={<ChevronRightIcon />}>Next</Button>
-      <Button variant="secondary" trailingIcon={<DownloadIcon />}>
+      <Button rightIcon={<ChevronRightIcon />}>Next</Button>
+      <Button variant="secondary" rightIcon={<DownloadIcon />}>
         Export
       </Button>
-      <Button variant="outline" trailingIcon={<ChevronRightIcon />}>
+      <Button variant="outline" rightIcon={<ChevronRightIcon />}>
         Learn More
       </Button>
     </div>
@@ -203,10 +203,10 @@ export const WithTrailingIcon = {
 export const WithBothIcons = {
   render: () => (
     <div className="flex flex-wrap gap-4">
-      <Button leadingIcon={<PlusIcon />} trailingIcon={<ChevronRightIcon />}>
+      <Button leftIcon={<PlusIcon />} rightIcon={<ChevronRightIcon />}>
         Add & Continue
       </Button>
-      <Button variant="outline" leadingIcon={<DownloadIcon />} trailingIcon={<ChevronRightIcon />}>
+      <Button variant="outline" leftIcon={<DownloadIcon />} rightIcon={<ChevronRightIcon />}>
         Download & Next
       </Button>
     </div>
@@ -227,7 +227,7 @@ export const LoadingStates = {
         <Button
           onClick={() => handleClick("primary")}
           disabled={loading === "primary"}
-          leadingIcon={loading === "primary" ? <LoadingIcon /> : undefined}
+          leftIcon={loading === "primary" ? <LoadingIcon /> : undefined}
         >
           {loading === "primary" ? "Processing..." : "Submit"}
         </Button>
@@ -236,7 +236,7 @@ export const LoadingStates = {
           variant="secondary"
           onClick={() => handleClick("secondary")}
           disabled={loading === "secondary"}
-          leadingIcon={loading === "secondary" ? <LoadingIcon /> : <DownloadIcon />}
+          leftIcon={loading === "secondary" ? <LoadingIcon /> : <DownloadIcon />}
         >
           {loading === "secondary" ? "Downloading..." : "Download"}
         </Button>
@@ -245,7 +245,7 @@ export const LoadingStates = {
           variant="outline"
           onClick={() => handleClick("outline")}
           disabled={loading === "outline"}
-          trailingIcon={loading === "outline" ? <LoadingIcon /> : <ChevronRightIcon />}
+          rightIcon={loading === "outline" ? <LoadingIcon /> : <ChevronRightIcon />}
         >
           {loading === "outline" ? "Loading..." : "Continue"}
         </Button>
@@ -288,11 +288,7 @@ export const ClickHandlers = {
           <Button variant="secondary" onClick={() => handleClick("Secondary")}>
             Secondary Action
           </Button>
-          <Button
-            variant="outline"
-            onClick={() => handleClick("Outline")}
-            leadingIcon={<PlusIcon />}
-          >
+          <Button variant="outline" onClick={() => handleClick("Outline")} leftIcon={<PlusIcon />}>
             Add Item
           </Button>
         </div>
@@ -332,10 +328,10 @@ export const ButtonGroup = {
       <div>
         <h3 className="text-sm font-medium mb-2">Toolbar</h3>
         <div className="flex gap-1">
-          <Button variant="ghost" size="sm" leadingIcon={<PlusIcon />}>
+          <Button variant="ghost" size="sm" leftIcon={<PlusIcon />}>
             New
           </Button>
-          <Button variant="ghost" size="sm" leadingIcon={<DownloadIcon />}>
+          <Button variant="ghost" size="sm" leftIcon={<DownloadIcon />}>
             Export
           </Button>
           <Button variant="ghost" size="sm">
@@ -351,7 +347,7 @@ export const ResponsiveButtons = {
   render: () => (
     <div className="space-y-4 w-full max-w-md">
       <Button className="w-full">Full Width Button</Button>
-      <Button variant="outline" className="w-full" leadingIcon={<DownloadIcon />}>
+      <Button variant="outline" className="w-full" leftIcon={<DownloadIcon />}>
         Full Width with Icon
       </Button>
       <div className="flex gap-2">

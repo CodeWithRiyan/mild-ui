@@ -36,6 +36,10 @@
 .mild-box--inline-grid {
   display: inline-grid;
 }
+.mild-box--contents {
+  display: contents;
+}
+
 .mild-box--none {
   display: none;
 }
@@ -128,4 +132,15 @@
 }
 .mild-box--overflow-auto {
   overflow: auto;
+}
+
+// Overflow per axis
+@each $value in (visible, hidden, scroll, auto) {
+  .mild-box--overflow-x-#{$value} {
+    overflow-x: #{$value};
+  }
+
+  .mild-box--overflow-y-#{$value} {
+    overflow-y: #{$value};
+  }
 }

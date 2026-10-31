@@ -35,7 +35,7 @@
   &--underline {
     background-color: transparent;
     padding: 0;
-    border-bottom: 1px solid var(--mild-border);
+    border-bottom: var(--mild-border-width) solid var(--mild-border);
     border-radius: 0;
   }
 
@@ -57,7 +57,7 @@
     }
 
     &.mild-tabs-list--underline {
-      border-right: 1px solid var(--mild-border);
+      border-right: var(--mild-border-width) solid var(--mild-border);
       border-bottom: none;
     }
   }
@@ -95,7 +95,7 @@
   font-weight: var(--mild-font-weight-medium);
   color: var(--mild-muted-foreground);
   background-color: transparent;
-  border: 1px solid transparent;
+  border: var(--mild-border-width) solid transparent;
   border-radius: var(--mild-radius-sm);
   cursor: pointer;
   white-space: nowrap;
@@ -112,25 +112,25 @@
     box-shadow: var(--mild-shadow-sm);
 
     .mild-tabs-list--pills & {
-      background-color: var(--mild-color-primary-500);
-      color: white;
+      background-color: var(--mild-color-accent);
+      color: var(--mild-color-white);
       box-shadow: none;
     }
 
     .mild-tabs-list--underline & {
       background-color: transparent;
       box-shadow: none;
-      color: var(--mild-color-primary-500);
+      color: var(--mild-color-accent);
 
       &::after {
         content: "";
         position: absolute;
-        bottom: -1px;
+        bottom: calc(-1 * var(--mild-border-width));
         left: 0;
         right: 0;
-        height: 2px;
-        background-color: var(--mild-color-primary-500);
-        border-radius: 1px;
+        height: calc(var(--mild-border-width) * 2);
+        background-color: var(--mild-color-accent);
+        border-radius: var(--mild-space-px);
       }
 
       .mild-tabs-list--vertical & {
@@ -138,8 +138,8 @@
           bottom: 0;
           top: 0;
           left: auto;
-          right: -1px;
-          width: 2px;
+          right: calc(-1 * var(--mild-border-width));
+          width: calc(var(--mild-border-width) * 2);
           height: auto;
         }
       }
@@ -230,15 +230,15 @@
 // Keyboard navigation indicator
 .mild-tabs-trigger:focus-visible {
   box-shadow:
-    0 0 0 2px var(--mild-background),
-    0 0 0 4px var(--mild-color-primary-500);
+    0 0 0 var(--mild-ring-offset-width) var(--mild-background),
+    0 0 0 calc(var(--mild-ring-offset-width) + var(--mild-outline-width)) var(--mild-color-accent);
 }
 
 // Animation keyframes
 @keyframes mild-fade-in {
   from {
     opacity: 0;
-    transform: translateY(4px);
+    transform: translateY(var(--mild-space-1));
   }
   to {
     opacity: 1;
@@ -251,7 +251,7 @@
   .mild-tabs-trigger--active {
     .mild-tabs-list--underline & {
       &::after {
-        height: 3px;
+        height: calc(var(--mild-border-width) * 3);
       }
     }
   }

@@ -1,0 +1,65 @@
+// packages/core/src/sass/components/_textarea.scss
+/// Textarea component styling: the input field, grown to several lines.
+/// @group components
+
+// The extended selectors live in the input module, so it has to be loaded here.
+@use "input";
+
+.mild-textarea {
+  @extend .mild-input;
+
+  height: auto;
+  min-height: var(--mild-space-20);
+  padding: var(--mild-space-2) var(--mild-space-3);
+  line-height: var(--mild-line-height-normal);
+  resize: vertical;
+}
+
+// Sizes: the same paddings and fonts as the input, with a min-height instead of a height
+.mild-textarea--sm {
+  @extend .mild-input--sm;
+
+  height: auto;
+  min-height: var(--mild-space-16);
+  padding: var(--mild-space-1-5) var(--mild-space-2-5);
+}
+
+.mild-textarea--md {
+  @extend .mild-input--md;
+
+  height: auto;
+  min-height: var(--mild-space-20);
+  padding: var(--mild-space-2) var(--mild-space-3);
+}
+
+.mild-textarea--lg {
+  @extend .mild-input--lg;
+
+  height: auto;
+  min-height: var(--mild-space-24);
+  padding: var(--mild-space-3) var(--mild-space-4);
+}
+
+// Variants
+@each $variant in ("outline", "filled", "flushed", "unstyled") {
+  .mild-textarea--#{$variant} {
+    @extend .mild-input--#{$variant};
+  }
+}
+
+.mild-textarea--unstyled {
+  min-height: 0;
+}
+
+// Resize handle
+@each $resize in (none, vertical, horizontal, both) {
+  .mild-textarea--resize-#{$resize} {
+    resize: $resize;
+  }
+}
+
+// Auto-resize: the height follows the content, so the handle is pointless
+.mild-textarea--auto-resize {
+  overflow: hidden;
+  resize: none;
+}

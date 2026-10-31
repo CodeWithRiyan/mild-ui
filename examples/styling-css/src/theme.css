@@ -1,0 +1,9 @@
+/* Build-time theming with plain CSS: point the accent at another palette token. No literals. */
+:root {
+  --mild-color-accent: var(--mild-color-green-600);
+  --mild-color-accent-hover: var(--mild-color-green-700);
+  --mild-color-accent-active: var(--mild-color-green-800);
+  --mild-color-accent-soft: var(--mild-color-green-300);
+  --mild-color-accent-subtle: var(--mild-color-green-50);
+  --mild-color-accent-muted: var(--mild-color-green-100);
+}

@@ -1,30 +1,25 @@
 import { describe, it, expect } from "vitest";
 import { cn } from "./cn";
 
-describe("cn utility function", () => {
-  it("should merge class names correctly", () => {
-    const result = cn("base-class", "additional-class");
-    expect(result).toBeTruthy();
-    expect(typeof result).toBe("string");
+describe("cn", () => {
+  it("joins class names", () => {
+    expect(cn("base-class", "additional-class")).toBe("base-class additional-class");
   });
 
-  it("should handle conditional classes", () => {
+  it("drops falsy values", () => {
     const isActive = true;
     const isHidden = false;
-    const result = cn("base-class", isActive && "conditional-class", isHidden && "hidden-class");
-    expect(result).toContain("base-class");
-    expect(result).toContain("conditional-class");
-    expect(result).not.toContain("hidden-class");
+    expect(cn("base-class", isActive && "conditional-class", isHidden && "hidden-class")).toBe(
+      "base-class conditional-class",
+    );
+    expect(cn("base-class", undefined, null, "valid-class")).toBe("base-class valid-class");
   });
 
-  it("should merge Tailwind classes correctly", () => {
-    const result = cn("px-2", "px-4"); // Should favor px-4
-    expect(result).toBeTruthy();
+  it("keeps every class, in order: it does not resolve Tailwind-style conflicts", () => {
+    expect(cn("mild-button--sm", "mild-button--lg")).toBe("mild-button--sm mild-button--lg");
   });
 
-  it("should handle undefined and null values", () => {
-    const result = cn("base-class", undefined, null, "valid-class");
-    expect(result).toContain("base-class");
-    expect(result).toContain("valid-class");
+  it("accepts arrays and objects", () => {
+    expect(cn(["a", "b"], { c: true, d: false })).toBe("a b c");
   });
 });

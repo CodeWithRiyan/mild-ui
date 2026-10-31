@@ -14,17 +14,17 @@
 $button-variants: (
   "solid": (
     "primary": (
-      bg: var(--mild-color-primary-500),
-      color: white,
-      border: var(--mild-color-primary-500),
-      hover-bg: var(--mild-color-primary-600),
-      hover-border: var(--mild-color-primary-600),
-      active-bg: var(--mild-color-primary-700),
-      active-border: var(--mild-color-primary-700),
+      bg: var(--mild-color-accent),
+      color: var(--mild-color-white),
+      border: var(--mild-color-accent),
+      hover-bg: var(--mild-color-accent-hover),
+      hover-border: var(--mild-color-accent-hover),
+      active-bg: var(--mild-color-accent-active),
+      active-border: var(--mild-color-accent-active),
     ),
     "secondary": (
       bg: var(--mild-color-gray-500),
-      color: white,
+      color: var(--mild-color-white),
       border: var(--mild-color-gray-500),
       hover-bg: var(--mild-color-gray-600),
       hover-border: var(--mild-color-gray-600),
@@ -33,7 +33,7 @@ $button-variants: (
     ),
     "success": (
       bg: var(--mild-color-green-500),
-      color: white,
+      color: var(--mild-color-white),
       border: var(--mild-color-green-500),
       hover-bg: var(--mild-color-green-600),
       hover-border: var(--mild-color-green-600),
@@ -51,7 +51,7 @@ $button-variants: (
     ),
     "danger": (
       bg: var(--mild-color-red-500),
-      color: white,
+      color: var(--mild-color-white),
       border: var(--mild-color-red-500),
       hover-bg: var(--mild-color-red-600),
       hover-border: var(--mild-color-red-600),
@@ -60,7 +60,7 @@ $button-variants: (
     ),
     "gray": (
       bg: var(--mild-color-gray-400),
-      color: white,
+      color: var(--mild-color-white),
       border: var(--mild-color-gray-400),
       hover-bg: var(--mild-color-gray-500),
       hover-border: var(--mild-color-gray-500),
@@ -71,12 +71,12 @@ $button-variants: (
   "outline": (
     "primary": (
       bg: transparent,
-      color: var(--mild-color-primary-500),
-      border: var(--mild-color-primary-500),
-      hover-bg: var(--mild-color-primary-50),
-      hover-border: var(--mild-color-primary-500),
-      active-bg: var(--mild-color-primary-100),
-      active-border: var(--mild-color-primary-500),
+      color: var(--mild-color-accent),
+      border: var(--mild-color-accent),
+      hover-bg: var(--mild-color-accent-muted),
+      hover-border: var(--mild-color-accent-hover),
+      active-bg: var(--mild-color-accent-soft),
+      active-border: var(--mild-color-accent-active),
     ),
     "secondary": (
       bg: transparent,
@@ -127,11 +127,11 @@ $button-variants: (
   "ghost": (
     "primary": (
       bg: transparent,
-      color: var(--mild-color-primary-500),
+      color: var(--mild-color-accent),
       border: transparent,
-      hover-bg: var(--mild-color-primary-50),
+      hover-bg: var(--mild-color-accent-muted),
       hover-border: transparent,
-      active-bg: var(--mild-color-primary-100),
+      active-bg: var(--mild-color-accent-soft),
       active-border: transparent,
     ),
     "secondary": (
@@ -183,7 +183,7 @@ $button-variants: (
   "link": (
     "primary": (
       bg: transparent,
-      color: var(--mild-color-primary-500),
+      color: var(--mild-color-accent),
       border: transparent,
       hover-bg: transparent,
       hover-border: transparent,
@@ -306,7 +306,7 @@ $button-sizes: (
   line-height: 1;
   font-weight: var(--mild-font-weight-medium);
   border-radius: var(--mild-radius-md);
-  border: 1px solid transparent;
+  border: var(--mild-border-width) solid transparent;
   text-decoration: none;
 
   // Default size (md)
@@ -318,7 +318,7 @@ $button-sizes: (
   gap: map.get($default-size, "gap");
 
   // Loading state
-  &[data-loading="true"] {
+  &[data-loading] {
     pointer-events: none;
 
     .mild-button__content {
@@ -431,7 +431,7 @@ $button-sizes: (
     content: "";
     width: 1em;
     height: 1em;
-    border: 2px solid transparent;
+    border: calc(var(--mild-border-width) * 2) solid transparent;
     border-top-color: currentColor;
     border-radius: 50%;
     animation: mild-spin 0.8s linear infinite;

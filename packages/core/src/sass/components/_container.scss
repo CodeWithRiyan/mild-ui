@@ -1,0 +1,30 @@
+// packages/core/src/sass/components/_container.scss
+/// Container component styling: a horizontally centered, max-width wrapper.
+/// Sizes map onto the breakpoint tokens (--mild-breakpoint-*).
+/// @group components
+
+.mild-container {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: var(--mild-breakpoint-lg);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--mild-space-4);
+  padding-right: var(--mild-space-4);
+}
+
+@each $size in (sm, md, lg, xl, "2xl") {
+  .mild-container--#{$size} {
+    max-width: var(--mild-breakpoint-#{$size});
+  }
+}
+
+.mild-container--full {
+  max-width: none;
+}
+
+.mild-container--center-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

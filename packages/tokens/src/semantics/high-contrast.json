@@ -1,0 +1,77 @@
+{
+  "background": {
+    "$type": "color",
+    "$value": "#ffffff",
+    "$description": "New theme, not present in @mild-ui/core. Pure white/black maximize contrast (21:1) instead of referencing the gray scale."
+  },
+  "foreground": {
+    "$type": "color",
+    "$value": "#000000",
+    "$description": "New theme, not present in @mild-ui/core. 21:1 on background."
+  },
+  "muted": {
+    "$type": "color",
+    "$value": "{color.gray.200}",
+    "$description": "New theme, not present in @mild-ui/core. Text stays pure black rather than gray, so muted surfaces don't need a dimmer foreground to read as 'muted'."
+  },
+  "muted-foreground": {
+    "$type": "color",
+    "$value": "#000000",
+    "$description": "New theme, not present in @mild-ui/core. 16.96:1 on muted; see muted above."
+  },
+  "border": {
+    "$type": "color",
+    "$value": "#000000",
+    "$description": "New theme, not present in @mild-ui/core. 21:1 on background, far above the 3:1 non-text minimum (WCAG 1.4.11)."
+  },
+  "input": {
+    "$type": "color",
+    "$value": "#000000",
+    "$description": "Same value as border."
+  },
+  "ring": {
+    "$type": "color",
+    "$value": "{color.primary.900}",
+    "$description": "New theme, not present in @mild-ui/core. 9.46:1 on background; a distinct hue from the black border/text so focus is still visible as a separate signal."
+  },
+  "card": {
+    "$type": "color",
+    "$value": "#ffffff",
+    "$description": "Same value as background."
+  },
+  "card-foreground": {
+    "$type": "color",
+    "$value": "#000000",
+    "$description": "Same value as foreground."
+  },
+  "popover": {
+    "$type": "color",
+    "$value": "#ffffff",
+    "$description": "Same value as background."
+  },
+  "popover-foreground": {
+    "$type": "color",
+    "$value": "#000000",
+    "$description": "Same value as foreground."
+  },
+  "accent": {
+    "$type": "color",
+    "$value": "{color.gray.900}",
+    "$description": "New theme, not present in @mild-ui/core. A solid near-black block instead of a subtle tint, so the accented state stays unambiguous."
+  },
+  "accent-foreground": {
+    "$type": "color",
+    "$value": "#ffffff",
+    "$description": "New theme, not present in @mild-ui/core. 17.74:1 on accent."
+  },
+  "destructive": {
+    "$type": "color",
+    "$value": "{color.red.700}",
+    "$description": "New theme, not present in @mild-ui/core. Darker than light.json's destructive for extra margin."
+  },
+  "destructive-foreground": {
+    "$type": "color",
+    "$value": "#ffffff",
+    "$description": "New theme, not present in @mild-ui/core. 6.47:1 on destructive."
+  }
+}
