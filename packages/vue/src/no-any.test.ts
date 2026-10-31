@@ -27,11 +27,20 @@ function walk(directory: string): string[] {
   });
 }
 
+/** Removes HTML comments, repeating until none is left (a removal can expose another). */
+function stripHtmlComments(source: string): string {
+  let previous: string;
+  let result = source;
+  do {
+    previous = result;
+    result = previous.replace(/<!--[\s\S]*?-->/g, "");
+  } while (result !== previous);
+  return result;
+}
+
 /** Strips comments and string literals, so only code is inspected. */
 function codeOnly(source: string): string {
-  return source
-    .replace(/\/\*[\s\S]*?\*\//g, "")
-    .replace(/<!--[\s\S]*?-->/g, "")
+  return stripHtmlComments(source.replace(/\/\*[\s\S]*?\*\//g, ""))
     .replace(/(^|[^:\\])\/\/.*$/gm, "$1")
     .replace(/"(?:[^"\\\n]|\\.)*"|'(?:[^'\\\n]|\\.)*'|`(?:[^`\\]|\\.)*`/g, '""');
 }
