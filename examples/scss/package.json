@@ -1,0 +1,19 @@
+{
+  "name": "@mild-ui/example-scss",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "mild-ui example: compiled from the Sass source with Sass token functions",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@mild-ui/core": "workspace:*"
+  },
+  "devDependencies": {
+    "sass": "^1.106.1",
+    "vite": "^6.4.5"
+  }
+}

@@ -1,0 +1,110 @@
+// packages/core/src/sass/components/_badge.scss
+/// Badge component styling: a small inline status label.
+/// @group components
+
+@use "sass:map";
+
+$badge-colors: (
+  "gray": (
+    solid-bg: var(--mild-color-gray-600),
+    subtle-bg: var(--mild-color-gray-100),
+    fg: var(--mild-color-gray-700),
+    border: var(--mild-color-gray-300),
+  ),
+  "primary": (
+    solid-bg: var(--mild-color-accent),
+    subtle-bg: var(--mild-color-accent-subtle),
+    fg: var(--mild-color-accent),
+    border: var(--mild-color-accent),
+  ),
+  "success": (
+    solid-bg: var(--mild-color-green-600),
+    subtle-bg: var(--mild-color-green-50),
+    fg: var(--mild-color-green-700),
+    border: var(--mild-color-green-500),
+  ),
+  "warning": (
+    solid-bg: var(--mild-color-yellow-500),
+    subtle-bg: var(--mild-color-yellow-50),
+    fg: var(--mild-color-yellow-800),
+    border: var(--mild-color-yellow-500),
+  ),
+  "danger": (
+    solid-bg: var(--mild-color-red-600),
+    subtle-bg: var(--mild-color-red-50),
+    fg: var(--mild-color-red-700),
+    border: var(--mild-color-red-500),
+  ),
+  "info": (
+    solid-bg: var(--mild-color-blue-600),
+    subtle-bg: var(--mild-color-blue-50),
+    fg: var(--mild-color-blue-700),
+    border: var(--mild-color-blue-500),
+  ),
+);
+
+.mild-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--mild-space-1);
+  padding: var(--mild-space-0-5) var(--mild-space-2);
+  font-size: var(--mild-font-size-xs);
+  font-weight: var(--mild-font-weight-semibold);
+  line-height: var(--mild-line-height-normal);
+  letter-spacing: var(--mild-letter-spacing-wide);
+  text-transform: uppercase;
+  white-space: nowrap;
+  vertical-align: middle;
+  border: var(--mild-border-width) solid transparent;
+  border-radius: var(--mild-radius-sm);
+}
+
+// Sizes
+.mild-badge--sm {
+  padding: 0 var(--mild-space-1-5);
+  font-size: var(--mild-font-size-xs);
+}
+
+.mild-badge--md {
+  padding: var(--mild-space-0-5) var(--mild-space-2);
+}
+
+.mild-badge--lg {
+  padding: var(--mild-space-1) var(--mild-space-2-5);
+  font-size: var(--mild-font-size-sm);
+}
+
+.mild-badge--pill {
+  border-radius: var(--mild-radius-full);
+}
+
+// Variant x color
+@each $color, $props in $badge-colors {
+  .mild-badge--solid.mild-badge--#{$color} {
+    color: var(--mild-color-white);
+    background-color: map.get($props, solid-bg);
+  }
+
+  .mild-badge--subtle.mild-badge--#{$color} {
+    color: map.get($props, fg);
+    background-color: map.get($props, subtle-bg);
+  }
+
+  .mild-badge--outline.mild-badge--#{$color} {
+    color: map.get($props, fg);
+    background-color: transparent;
+    border-color: map.get($props, border);
+  }
+}
+
+.mild-badge--solid.mild-badge--warning {
+  color: var(--mild-color-yellow-900);
+}
+
+// A leading status dot
+.mild-badge__dot {
+  width: var(--mild-space-1-5);
+  height: var(--mild-space-1-5);
+  border-radius: var(--mild-radius-full);
+  background-color: currentColor;
+}

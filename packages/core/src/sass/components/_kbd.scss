@@ -1,0 +1,37 @@
+// packages/core/src/sass/components/_kbd.scss
+/// Kbd component styling: a keyboard key.
+/// @group components
+
+.mild-kbd {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: var(--mild-space-5);
+  padding: var(--mild-space-0-5) var(--mild-space-1-5);
+  font-family: var(--mild-font-family-mono);
+  font-size: var(--mild-font-size-xs);
+  font-weight: var(--mild-font-weight-medium);
+  line-height: var(--mild-line-height-none);
+  color: var(--mild-foreground);
+  background-color: var(--mild-muted);
+  border: var(--mild-border-width) solid var(--mild-border);
+  border-bottom-width: calc(var(--mild-border-width) * 2);
+  border-radius: var(--mild-radius-base);
+  white-space: nowrap;
+}
+
+.mild-kbd--sm {
+  min-width: var(--mild-space-4);
+  padding: 0 var(--mild-space-1);
+  font-size: var(--mild-font-size-xs);
+}
+
+.mild-kbd--md {
+  font-size: var(--mild-font-size-xs);
+}
+
+.mild-kbd--lg {
+  min-width: var(--mild-space-6);
+  padding: var(--mild-space-1) var(--mild-space-2);
+  font-size: var(--mild-font-size-sm);
+}

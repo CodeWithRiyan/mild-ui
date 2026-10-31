@@ -1,0 +1,11 @@
+// packages/core/src/sass/components/_close-button.scss
+/// CloseButton component styling: a ghost icon button with an X, for dismissing things.
+/// @group components
+
+.mild-close-button {
+  color: var(--mild-muted-foreground);
+
+  &:hover:not(:disabled):not([aria-disabled="true"]) {
+    color: var(--mild-foreground);
+  }
+}

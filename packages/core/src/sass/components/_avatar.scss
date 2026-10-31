@@ -1,0 +1,145 @@
+// packages/core/src/sass/components/_avatar.scss
+/// Avatar component styling: a picture, or initials, in a circle; and a stacked group.
+/// @group components
+
+@use "sass:map";
+
+$avatar-sizes: (
+  "xs": (
+    size: var(--mild-space-6),
+    font: var(--mild-font-size-xs),
+  ),
+  "sm": (
+    size: var(--mild-space-8),
+    font: var(--mild-font-size-xs),
+  ),
+  "md": (
+    size: var(--mild-space-10),
+    font: var(--mild-font-size-sm),
+  ),
+  "lg": (
+    size: var(--mild-space-12),
+    font: var(--mild-font-size-base),
+  ),
+  "xl": (
+    size: var(--mild-space-16),
+    font: var(--mild-font-size-xl),
+  ),
+  "2xl": (
+    size: var(--mild-space-24),
+    font: var(--mild-font-size-3xl),
+  ),
+);
+
+.mild-avatar {
+  --mild-avatar-size: var(--mild-space-10);
+  --mild-avatar-font-size: var(--mild-font-size-sm);
+
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: var(--mild-avatar-size);
+  height: var(--mild-avatar-size);
+  overflow: hidden;
+  font-size: var(--mild-avatar-font-size);
+  font-weight: var(--mild-font-weight-semibold);
+  line-height: 1;
+  color: var(--mild-color-accent-foreground);
+  background-color: var(--mild-color-accent);
+  border-radius: var(--mild-radius-full);
+  vertical-align: middle;
+  user-select: none;
+}
+
+@each $size-name, $props in $avatar-sizes {
+  .mild-avatar--#{$size-name} {
+    --mild-avatar-size: #{map.get($props, size)};
+    --mild-avatar-font-size: #{map.get($props, font)};
+  }
+}
+
+.mild-avatar--square {
+  border-radius: var(--mild-radius-md);
+}
+
+.mild-avatar--circle {
+  border-radius: var(--mild-radius-full);
+}
+
+.mild-avatar__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.mild-avatar__fallback {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+
+  svg {
+    width: 60%;
+    height: 60%;
+  }
+}
+
+// Bordered avatars (used by the group to separate overlapping pictures)
+.mild-avatar--bordered {
+  box-shadow: 0 0 0 calc(var(--mild-border-width) * 2) var(--mild-background);
+}
+
+// Status dot in the corner
+.mild-avatar__badge {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 25%;
+  height: 25%;
+  min-width: var(--mild-space-2);
+  min-height: var(--mild-space-2);
+  border: calc(var(--mild-border-width) * 2) solid var(--mild-background);
+  border-radius: var(--mild-radius-full);
+  background-color: var(--mild-color-gray-400);
+
+  &--online {
+    background-color: var(--mild-color-green-500);
+  }
+
+  &--offline {
+    background-color: var(--mild-color-gray-400);
+  }
+
+  &--busy {
+    background-color: var(--mild-color-red-500);
+  }
+
+  &--away {
+    background-color: var(--mild-color-yellow-500);
+  }
+}
+
+// Group: overlapping avatars, the overflow count last
+.mild-avatar-group {
+  --mild-avatar-group-overlap: var(--mild-space-3);
+
+  display: inline-flex;
+  align-items: center;
+  flex-direction: row;
+
+  > .mild-avatar {
+    box-shadow: 0 0 0 calc(var(--mild-border-width) * 2) var(--mild-background);
+
+    &:not(:first-child) {
+      margin-left: calc(-1 * var(--mild-avatar-group-overlap));
+    }
+  }
+}
+
+.mild-avatar-group__overflow {
+  color: var(--mild-muted-foreground);
+  background-color: var(--mild-muted);
+}

@@ -1,0 +1,87 @@
+// packages/core/src/sass/components/_scroll-area.scss
+/// ScrollArea component styling: a scroll container with themed, slim scrollbars.
+/// @group components
+
+.mild-scroll-area {
+  --mild-scrollbar-size: var(--mild-space-2);
+  --mild-scrollbar-thumb: var(--mild-color-gray-300);
+  --mild-scrollbar-track: transparent;
+
+  position: relative;
+  box-sizing: border-box;
+  overflow: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  scrollbar-color: var(--mild-scrollbar-thumb) var(--mild-scrollbar-track);
+
+  &:focus-visible {
+    outline: var(--mild-outline-width) solid var(--mild-ring);
+    outline-offset: calc(var(--mild-ring-offset-width) * -1);
+  }
+
+  &::-webkit-scrollbar {
+    width: var(--mild-scrollbar-size);
+    height: var(--mild-scrollbar-size);
+  }
+
+  &::-webkit-scrollbar-track {
+    background: var(--mild-scrollbar-track);
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: var(--mild-scrollbar-thumb);
+    border-radius: var(--mild-radius-full);
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: var(--mild-color-gray-400);
+  }
+}
+
+// Scroll axis
+.mild-scroll-area--vertical {
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.mild-scroll-area--horizontal {
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.mild-scroll-area--both {
+  overflow: auto;
+}
+
+// Scrollbar visibility ("auto", the default, is the browser behaviour and has no modifier)
+.mild-scroll-area--always {
+  &.mild-scroll-area--vertical {
+    overflow-y: scroll;
+  }
+
+  &.mild-scroll-area--horizontal {
+    overflow-x: scroll;
+  }
+
+  &.mild-scroll-area--both {
+    overflow: scroll;
+  }
+}
+
+.mild-scroll-area--hover {
+  --mild-scrollbar-thumb: transparent;
+
+  &:hover,
+  &:focus-visible {
+    --mild-scrollbar-thumb: var(--mild-color-gray-300);
+  }
+}
+
+.mild-scroll-area--hidden {
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}

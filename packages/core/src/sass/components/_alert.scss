@@ -22,21 +22,21 @@
 
   // Base variant styles
   &--subtle {
-    border: 1px solid var(--mild-border);
+    border: var(--mild-border-width) solid var(--mild-border);
   }
 
   &--solid {
-    color: white;
+    color: var(--mild-color-white);
   }
 
   &--left-accent {
-    border: 1px solid var(--mild-border);
-    border-left-width: 4px;
+    border: var(--mild-border-width) solid var(--mild-border);
+    border-left-width: calc(var(--mild-border-width) * 4);
   }
 
   &--top-accent {
-    border: 1px solid var(--mild-border);
-    border-top-width: 4px;
+    border: var(--mild-border-width) solid var(--mild-border);
+    border-top-width: calc(var(--mild-border-width) * 4);
   }
 
   // Status colors for subtle variant
@@ -163,7 +163,7 @@
   flex-shrink: 0;
   width: var(--mild-space-4);
   height: var(--mild-space-4);
-  margin-top: 2px; // Align with text
+  margin-top: var(--mild-space-0-5); // Align with text
 }
 
 .mild-alert__content {
@@ -211,12 +211,12 @@
 
   &:hover {
     opacity: 1;
-    background-color: rgba(0, 0, 0, 0.1);
+    background-color: var(--mild-color-black-alpha-10);
   }
 
   .mild-alert--solid & {
     &:hover {
-      background-color: rgba(255, 255, 255, 0.2);
+      background-color: var(--mild-color-white-alpha-20);
     }
   }
 
@@ -243,10 +243,10 @@
 
 .mild-alert-enter-from {
   opacity: 0;
-  transform: translateY(-8px) scale(0.95);
+  transform: translateY(calc(-1 * var(--mild-space-2))) scale(0.95);
 }
 
 .mild-alert-leave-to {
   opacity: 0;
-  transform: translateY(-8px) scale(0.95);
+  transform: translateY(calc(-1 * var(--mild-space-2))) scale(0.95);
 }

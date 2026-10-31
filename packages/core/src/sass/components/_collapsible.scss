@@ -1,0 +1,76 @@
+// packages/core/src/sass/components/_collapsible.scss
+/// Collapsible component styling: a disclosure button and the section it shows or hides.
+/// @group components
+
+@use "../mixins/component-base" as base;
+
+.mild-collapsible {
+  display: block;
+}
+
+.mild-collapsible-trigger {
+  @include base.component-base;
+  @include base.focus-ring;
+  @include base.interactive-transitions;
+
+  display: inline-flex;
+  align-items: center;
+  gap: var(--mild-space-2);
+  padding: var(--mild-space-2) var(--mild-space-3);
+  font-size: var(--mild-font-size-sm);
+  font-weight: var(--mild-font-weight-medium);
+  color: var(--mild-foreground);
+  background-color: transparent;
+  border: var(--mild-border-width) solid transparent;
+  border-radius: var(--mild-radius-md);
+  cursor: pointer;
+
+  &:hover:not([disabled]) {
+    background-color: var(--mild-muted);
+  }
+
+  &[disabled] {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+.mild-collapsible-trigger__icon {
+  display: inline-flex;
+  width: var(--mild-space-4);
+  height: var(--mild-space-4);
+  color: var(--mild-muted-foreground);
+  transition: var(--mild-transition-transform);
+
+  .mild-collapsible-trigger[aria-expanded="true"] & {
+    transform: rotate(180deg);
+  }
+
+  svg {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.mild-collapsible-content {
+  overflow: hidden;
+
+  &[hidden] {
+    display: none;
+  }
+
+  &[data-state="open"] {
+    animation: mild-collapsible-down var(--mild-duration-200) var(--mild-easing-out);
+  }
+}
+
+@keyframes mild-collapsible-down {
+  from {
+    opacity: 0;
+    transform: translateY(calc(-1 * var(--mild-space-1)));
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

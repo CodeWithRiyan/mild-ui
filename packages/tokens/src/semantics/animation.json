@@ -1,0 +1,12 @@
+{
+  "transition": {
+    "$description": "Transition shorthands built from duration and easing primitives. Source: $mild-transitions.",
+    "none": { "$value": "none" },
+    "all": { "$value": "all {duration.150} {easing.in-out}" },
+    "default": { "$value": "all {duration.150} {easing.in-out}" },
+    "colors": { "$value": "color {duration.150} {easing.in-out}" },
+    "opacity": { "$value": "opacity {duration.150} {easing.in-out}" },
+    "shadow": { "$value": "box-shadow {duration.150} {easing.in-out}" },
+    "transform": { "$value": "transform {duration.150} {easing.in-out}" }
+  }
+}

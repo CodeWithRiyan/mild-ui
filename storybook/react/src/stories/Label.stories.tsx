@@ -57,8 +57,8 @@ export const CustomClassName = {
 export const CustomUI = {
   args: {
     children: "Email address",
+    className: "text-blue-600 font-semibold",
     ui: {
-      label: "text-blue-600 font-semibold",
       asterisk: "text-blue-500",
     },
     required: true,

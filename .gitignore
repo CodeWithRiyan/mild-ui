@@ -10,6 +10,9 @@ storybook-static
 docs
 sassdoc
 
+# Test output
+coverage
+
 # Environment variables and credentials (never commit these)
 .env
 .env.*
@@ -39,3 +42,4 @@ pnpm-debug.log*
 *.njsproj
 *.sln
 *.sw?
+site/assets/mild-ui.min.css

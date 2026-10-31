@@ -8,13 +8,14 @@
 @use "../tokens/radius" as radius;
 @use "../tokens/elevation" as elevation;
 @use "../tokens/animation" as animation;
+@use "../tokens/breakpoints" as breakpoints;
 @use "../mixins/component-base" as base;
 
 .mild-modal-overlay {
   position: fixed;
   inset: 0;
   z-index: 50;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: var(--mild-color-black-alpha-50);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -24,15 +25,15 @@
   animation: mild-fade-in var(--mild-duration-200) var(--mild-easing-out);
 
   &--blur {
-    backdrop-filter: blur(4px);
+    backdrop-filter: blur(var(--mild-space-1));
   }
 
   &--dark {
-    background-color: rgba(0, 0, 0, 0.7);
+    background-color: var(--mild-color-black-alpha-70);
   }
 
   &--light {
-    background-color: rgba(255, 255, 255, 0.8);
+    background-color: var(--mild-color-white-alpha-80);
   }
 }
 
@@ -82,7 +83,7 @@
   }
 
   // Responsive behavior
-  @media (max-width: 640px) {
+  @media (max-width: #{breakpoints.mild-breakpoint(sm)}) {
     &:not(.mild-modal-content--full) {
       max-width: calc(100vw - 2rem);
       margin: 1rem;
@@ -95,7 +96,7 @@
   align-items: center;
   justify-content: space-between;
   padding: var(--mild-space-6) var(--mild-space-6) var(--mild-space-4) var(--mild-space-6);
-  border-bottom: 1px solid var(--mild-border);
+  border-bottom: var(--mild-border-width) solid var(--mild-border);
   flex-shrink: 0;
 
   &--no-border {
@@ -140,7 +141,7 @@
   border-radius: var(--mild-radius-sm);
   color: var(--mild-muted-foreground);
   background-color: transparent;
-  border: 1px solid transparent;
+  border: var(--mild-border-width) solid transparent;
   cursor: pointer;
   margin-left: var(--mild-space-2);
 
@@ -183,7 +184,7 @@
   justify-content: flex-end;
   gap: var(--mild-space-3);
   padding: var(--mild-space-4) var(--mild-space-6) var(--mild-space-6) var(--mild-space-6);
-  border-top: 1px solid var(--mild-border);
+  border-top: var(--mild-border-width) solid var(--mild-border);
   flex-shrink: 0;
 
   &--no-border {
@@ -228,7 +229,7 @@
 @keyframes mild-slide-in-from-bottom {
   from {
     opacity: 0;
-    transform: translateY(32px) scale(0.95);
+    transform: translateY(var(--mild-space-8)) scale(0.95);
   }
   to {
     opacity: 1;
@@ -241,6 +242,11 @@
   &:focus {
     outline: none;
   }
+}
+
+// Alert dialogs share the look; the role is the difference
+.mild-modal-content--alert {
+  border-top: calc(var(--mild-border-width) * 4) solid var(--mild-color-accent);
 }
 
 // Scroll lock body class

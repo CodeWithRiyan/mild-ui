@@ -1,0 +1,17 @@
+/* Layout for the example page only; component styling comes from @mild-ui/core. */
+.demo {
+  max-width: 40rem;
+  margin: var(--mild-space-8) auto;
+  padding: 0 var(--mild-space-4);
+  display: grid;
+  gap: var(--mild-space-6);
+  font-family: var(--mild-font-family-sans);
+  color: var(--mild-foreground);
+}
+
+.demo__row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--mild-space-4);
+}

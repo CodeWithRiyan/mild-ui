@@ -1,0 +1,81 @@
+// packages/core/src/sass/components/_image.scss
+/// Image component styling: an image with a fallback while loading or after an error.
+/// @group components
+
+.mild-image {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  vertical-align: middle;
+}
+
+.mild-image--cover {
+  object-fit: cover;
+}
+.mild-image--contain {
+  object-fit: contain;
+}
+.mild-image--fill {
+  object-fit: fill;
+}
+.mild-image--none {
+  object-fit: none;
+}
+.mild-image--scale-down {
+  object-fit: scale-down;
+}
+
+// Wrapper used when a ratio or fallback needs a box of its own
+.mild-image-frame {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  background-color: var(--mild-muted);
+
+  > .mild-image {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.mild-image-frame--ratio {
+  aspect-ratio: var(--mild-image-ratio, auto);
+  width: 100%;
+
+  > .mild-image {
+    position: absolute;
+    inset: 0;
+  }
+}
+
+// Placeholder shown while loading or after an error
+.mild-image__fallback {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  min-height: var(--mild-space-16);
+  color: var(--mild-muted-foreground);
+  background-color: var(--mild-muted);
+  font-size: var(--mild-font-size-sm);
+
+  svg {
+    width: var(--mild-space-8);
+    height: var(--mild-space-8);
+  }
+}
+
+.mild-image-frame--ratio > .mild-image__fallback {
+  position: absolute;
+  inset: 0;
+  min-height: 0;
+}
+
+// Radius
+@each $radius in (none, sm, md, lg, xl, full) {
+  .mild-image--radius-#{$radius},
+  .mild-image-frame--radius-#{$radius} {
+    border-radius: var(--mild-radius-#{$radius});
+  }
+}

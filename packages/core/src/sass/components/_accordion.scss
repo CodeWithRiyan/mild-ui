@@ -15,7 +15,7 @@
   width: 100%;
 
   &--default {
-    border: 1px solid var(--mild-border);
+    border: var(--mild-border-width) solid var(--mild-border);
     border-radius: var(--mild-radius-md);
   }
 
@@ -24,7 +24,7 @@
   }
 
   &--bordered {
-    border: 1px solid var(--mild-border);
+    border: var(--mild-border-width) solid var(--mild-border);
     border-radius: var(--mild-radius-md);
     background-color: var(--mild-background);
   }
@@ -39,7 +39,7 @@
 }
 
 .mild-accordion-item {
-  border-bottom: 1px solid var(--mild-border);
+  border-bottom: var(--mild-border-width) solid var(--mild-border);
 
   &:last-child {
     border-bottom: none;
@@ -66,7 +66,7 @@
 
   // Variant specific styles
   .mild-accordion--ghost & {
-    border-bottom: 1px solid var(--mild-border);
+    border-bottom: var(--mild-border-width) solid var(--mild-border);
     border-radius: 0;
 
     &:last-child {
@@ -83,7 +83,7 @@
     background-color: var(--mild-background);
 
     &:not(:last-child) {
-      border-bottom: 1px solid var(--mild-border);
+      border-bottom: var(--mild-border-width) solid var(--mild-border);
     }
   }
 
@@ -117,6 +117,14 @@
   }
 }
 
+// The heading wrapping each trigger (the APG pattern puts the button inside a heading)
+.mild-accordion-header {
+  display: flex;
+  margin: 0;
+  font-size: inherit;
+  font-weight: inherit;
+}
+
 .mild-accordion-trigger {
   @include base.component-base;
   @include base.focus-ring;
@@ -141,7 +149,7 @@
   }
 
   &[data-state="open"] {
-    border-bottom: 1px solid var(--mild-border);
+    border-bottom: var(--mild-border-width) solid var(--mild-border);
   }
 
   &--disabled {
@@ -215,8 +223,12 @@
 
 .mild-accordion-content {
   overflow: hidden;
-  border-top: 1px solid var(--mild-border);
+  border-top: var(--mild-border-width) solid var(--mild-border);
   background-color: var(--mild-background);
+
+  &[hidden] {
+    display: none;
+  }
 
   &[data-state="closed"] {
     animation: mild-accordion-slide-up var(--mild-duration-200) var(--mild-easing-out);
@@ -286,8 +298,8 @@
       padding: 0 var(--mild-space-1);
       font-size: var(--mild-font-size-xs);
       font-weight: var(--mild-font-weight-medium);
-      color: white;
-      background-color: var(--mild-color-primary-500);
+      color: var(--mild-color-white);
+      background-color: var(--mild-color-accent);
       border-radius: var(--mild-radius-full);
       margin-left: auto;
       margin-right: var(--mild-space-2);
@@ -344,7 +356,7 @@
 // Multiple accordion variant (all items can be open)
 .mild-accordion--multiple {
   .mild-accordion-trigger[data-state="open"] {
-    border-bottom: 1px solid var(--mild-border);
+    border-bottom: var(--mild-border-width) solid var(--mild-border);
   }
 }
 
@@ -352,7 +364,7 @@
 .mild-accordion--single {
   .mild-accordion-item[data-state="open"] {
     .mild-accordion-trigger {
-      border-bottom: 1px solid var(--mild-border);
+      border-bottom: var(--mild-border-width) solid var(--mild-border);
     }
   }
 }

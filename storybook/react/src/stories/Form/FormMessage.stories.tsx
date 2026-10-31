@@ -4,12 +4,11 @@ import {
   FormMessage,
   FormLabel,
   FormDescription,
-  FormField,
-  FormItem,
   FormControl,
   Input,
   Button,
 } from "@mild-ui/react";
+import { FormField, FormItem } from "../../examples/react-hook-form";
 import React from "react";
 
 const meta: Meta<typeof FormMessage> = {
@@ -409,7 +408,7 @@ export const InteractiveValidation: Story = {
       }
     }, [username, form]);
 
-    const onSubmit = (data: any) => {
+    const onSubmit = (data: { username: string }) => {
       alert(`Username: ${data.username}`);
     };
 

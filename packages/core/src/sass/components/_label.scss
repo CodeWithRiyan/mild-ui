@@ -21,10 +21,10 @@
     color: var(--mild-color-red-500);
   }
 
-  &--required::after {
-    content: "*";
-    color: var(--mild-color-red-500);
+  // The required marker is an aria-hidden element (not ::after), so it is never read aloud.
+  &__marker {
     margin-left: var(--mild-space-1);
+    color: var(--mild-color-red-500);
   }
 
   &--disabled {

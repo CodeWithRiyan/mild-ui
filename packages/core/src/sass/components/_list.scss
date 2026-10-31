@@ -1,0 +1,62 @@
+// packages/core/src/sass/components/_list.scss
+/// List component styling: ul/ol with token-driven spacing between items.
+/// @group components
+
+.mild-list {
+  --mild-list-spacing: 0;
+
+  margin: 0;
+  padding-left: var(--mild-space-6);
+  color: inherit;
+  font-family: inherit;
+
+  > li + li {
+    margin-top: var(--mild-list-spacing);
+  }
+}
+
+// Markers
+@each $marker
+  in (
+    disc,
+    circle,
+    square,
+    decimal,
+    decimal-leading-zero,
+    lower-alpha,
+    upper-alpha,
+    lower-roman,
+    upper-roman
+  )
+{
+  .mild-list--marker-#{$marker} {
+    list-style-type: $marker;
+  }
+}
+
+.mild-list--marker-none {
+  list-style-type: none;
+}
+
+// No marker and no indentation
+.mild-list--unstyled {
+  padding-left: 0;
+  list-style-type: none;
+}
+
+.mild-list-item {
+  // An item with an icon lines the icon up with the text instead of a marker.
+  &:has(> .mild-list-item__icon) {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--mild-space-2);
+    list-style-type: none;
+  }
+}
+
+.mild-list-item__icon {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+  color: var(--mild-muted-foreground);
+}

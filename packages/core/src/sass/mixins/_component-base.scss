@@ -22,13 +22,13 @@
 }
 
 /// Focus ring styling
-@mixin focus-ring($color: var(--mild-color-primary-500)) {
-  outline: 2px solid transparent;
-  outline-offset: 2px;
+@mixin focus-ring($color: var(--mild-ring)) {
+  outline: var(--mild-outline-width) solid transparent;
+  outline-offset: var(--mild-ring-offset-width);
 
   &:focus-visible {
-    outline: 2px solid #{$color};
-    outline-offset: 2px;
+    outline: var(--mild-outline-width) solid #{$color};
+    outline-offset: var(--mild-ring-offset-width);
   }
 }
 

@@ -1,82 +1,77 @@
 // packages/react/src/components/Text/Text.tsx
-import React, { forwardRef } from "react";
-import type { TextCoreProps } from "../../types";
+import * as React from "react";
+import type { TextCoreProps, PolymorphicComponent, PolymorphicProps } from "../../types";
 
-type HTMLTextComponent =
-  HTMLSpanElement | HTMLParagraphElement | HTMLHeadingElement | HTMLLabelElement | HTMLDivElement;
-
-export interface TextProps extends TextCoreProps {
-  as?: "span" | "p" | "div" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "label" | "caption";
+export interface TextOwnProps extends TextCoreProps {
   /** Text content */
-  children: React.ReactNode;
+  children?: React.ReactNode;
   /** Additional CSS class */
   className?: string;
-  /** Click handler */
-  onClick?: (event: React.MouseEvent<HTMLTextComponent>) => void;
-  /** Ref forwarding */
-  ref?: React.Ref<HTMLTextComponent>;
 }
 
-export const Text = forwardRef<HTMLTextComponent, TextProps>(
-  (
-    {
-      as = "span",
-      fontSize = "md",
-      fontWeight = "normal",
-      textAlign = "left",
-      textTransform = "none",
-      textDecoration = "none",
-      color,
-      lineHeight,
-      letterSpacing,
-      truncate = false,
-      noOfLines,
-      children,
-      className,
-      onClick,
-      ...rest
-    },
-    ref,
-  ) => {
-    const Component = as;
+/** Props of `<Text as={T}>`: the typography props plus everything `T` accepts. */
+export type TextProps<T extends React.ElementType = "span"> = PolymorphicProps<T, TextOwnProps>;
 
-    // Build classes
-    const classes = [
-      "mild-text",
-      `mild-text--${fontSize}`,
-      `mild-text--${fontWeight}`,
-      `mild-text--${textAlign}`,
-      textTransform !== "none" && `mild-text--${textTransform}`,
-      textDecoration !== "none" && `mild-text--${textDecoration}`,
-      truncate && "mild-text--truncate",
-      noOfLines && `mild-text--clamp-${noOfLines}`,
-      color && `mild-text--${color}`,
-      className,
-    ]
-      .filter(Boolean)
-      .join(" ");
+function TextInner<T extends React.ElementType = "span">(
+  {
+    as,
+    fontSize = "md",
+    fontWeight = "normal",
+    textAlign = "left",
+    textTransform = "none",
+    textDecoration = "none",
+    color,
+    lineHeight,
+    letterSpacing,
+    truncate = false,
+    noOfLines,
+    children,
+    className,
+    ...rest
+  }: TextProps<T>,
+  // Typed loosely here; the public signature (PolymorphicComponent) narrows it per `as`.
+  ref: React.ForwardedRef<Element>,
+) {
+  const Component: React.ElementType = as ?? "span";
 
-    const style: React.CSSProperties = {
-      ...(lineHeight && {
-        lineHeight: typeof lineHeight === "number" ? lineHeight : lineHeight,
-      }),
-      ...(letterSpacing && {
-        letterSpacing: typeof letterSpacing === "number" ? `${letterSpacing}em` : letterSpacing,
-      }),
-    };
+  // Build classes
+  const classes = [
+    "mild-text",
+    `mild-text--${fontSize}`,
+    `mild-text--${fontWeight}`,
+    `mild-text--${textAlign}`,
+    textTransform !== "none" && `mild-text--${textTransform}`,
+    textDecoration !== "none" && `mild-text--${textDecoration}`,
+    truncate && "mild-text--truncate",
+    noOfLines && `mild-text--clamp-${noOfLines}`,
+    color && `mild-text--${color}`,
+    className,
+  ]
+    .filter(Boolean)
+    .join(" ");
 
-    return React.createElement(
-      Component,
-      {
-        ref,
-        className: classes,
-        style: Object.keys(style).length > 0 ? style : undefined,
-        onClick,
-        ...rest,
-      },
-      children,
-    );
-  },
-);
+  const style: React.CSSProperties = {
+    ...(lineHeight && { lineHeight }),
+    ...(letterSpacing && {
+      letterSpacing: typeof letterSpacing === "number" ? `${letterSpacing}em` : letterSpacing,
+    }),
+  };
 
+  return (
+    <Component
+      ref={ref}
+      className={classes}
+      style={Object.keys(style).length > 0 ? style : undefined}
+      {...rest}
+    >
+      {children}
+    </Component>
+  );
+}
+
+/**
+ * Typography primitive. Renders a `span` by default, or the element given with `as`
+ * (`p`, `h1`..`h6`, `label`, ...), keeping that element's props and ref types.
+ */
+export const Text = React.forwardRef(TextInner) as PolymorphicComponent<"span", TextOwnProps>;
 Text.displayName = "Text";

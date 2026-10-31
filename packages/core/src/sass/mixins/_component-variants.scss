@@ -128,12 +128,6 @@
       box-shadow: none;
     }
   }
-
-  .mild-#{$component}--required::after {
-    content: "*";
-    color: var(--mild-color-red-500);
-    margin-left: 0.25rem;
-  }
 }
 
 /// Generate complete component variant system

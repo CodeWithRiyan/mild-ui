@@ -1,5 +1,6 @@
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Button, Field, Form, Radio, RadioGroup, RadioGroupItem } from "@mild-ui/react";
+import { Button, Radio, RadioGroup, RadioGroupItem } from "@mild-ui/react";
+import { Field, Form } from "../examples/react-hook-form";
 import type { Meta, StoryObj } from "@storybook/react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -9,6 +10,14 @@ const meta = {
   title: "Components/Radio",
   tags: ["autodocs"],
   component: Radio,
+  parameters: {
+    docs: {
+      description: {
+        component:
+          "Radio group with roving tabindex: one tab stop, Arrow keys move and check (wrapping), Space checks the focused radio, per the [WAI-ARIA APG radio group pattern](https://www.w3.org/WAI/ARIA/apg/patterns/radio/). Keyboard tests: `packages/react/src/components/Radio/Radio.test.tsx`.",
+      },
+    },
+  },
   argTypes: {
     defaultValue: { control: "text" },
     value: { control: "text" },
@@ -19,7 +28,7 @@ const meta = {
       defaultValue: "md",
     },
     onValueChange: { action: "value changed" },
-    items: { control: "array" },
+    items: { control: "object" },
     className: { control: "text" },
   },
 } satisfies Meta<typeof Radio>;

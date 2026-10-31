@@ -3,7 +3,8 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { Button, Field, Form, Select } from "@mild-ui/react";
+import { Button, Select } from "@mild-ui/react";
+import { Field, Form } from "../examples/react-hook-form";
 
 const options = [
   { value: "us", label: "United States" },
@@ -15,6 +16,14 @@ const meta = {
   title: "Components/Select",
   tags: ["autodocs"],
   component: Select,
+  parameters: {
+    docs: {
+      description: {
+        component:
+          "Select-only combobox with a listbox popup: Arrow/Enter/Space open it, Arrow/Home/End move, typing jumps to an option, Enter/Space select, Escape and Tab close, per the [WAI-ARIA APG select-only combobox pattern](https://www.w3.org/WAI/ARIA/apg/patterns/combobox/examples/combobox-select-only/). Keyboard tests: `packages/react/src/components/Select/Select.test.tsx`.",
+      },
+    },
+  },
   argTypes: {
     value: { control: "text" },
     defaultValue: { control: "text" },

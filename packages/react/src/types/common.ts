@@ -3,6 +3,8 @@ export type Size = "xs" | "sm" | "md" | "lg" | "xl";
 export type ColorScheme = "primary" | "secondary" | "success" | "warning" | "error" | "info";
 export type Variant = "solid" | "outline" | "ghost" | "link";
 export type ColorMode = "light" | "dark" | "system";
+/** A color mode with `"system"` resolved against the OS preference. */
+export type ResolvedColorMode = "light" | "dark";
 
 // Theme configuration
 export interface ThemeConfig {
@@ -21,49 +23,11 @@ export interface ThemeConfig {
   breakpoints?: Record<string, string>;
 }
 
-// Spacing values
-export type SpacingValue =
-  | string
-  | number
-  | "0"
-  | "1"
-  | "2"
-  | "3"
-  | "4"
-  | "5"
-  | "6"
-  | "8"
-  | "10"
-  | "12"
-  | "16"
-  | "20"
-  | "24"
-  | "32"
-  | "40"
-  | "48"
-  | "56"
-  | "64";
-
-// Color values
-export type ColorValue =
-  | string
-  | "transparent"
-  | "current"
-  | "inherit"
-  | "primary"
-  | "secondary"
-  | "success"
-  | "warning"
-  | "error"
-  | "info"
-  | "gray"
-  | "red"
-  | "orange"
-  | "yellow"
-  | "green"
-  | "blue"
-  | "purple"
-  | "pink";
+// Style-prop values are design-token keys only; see ./tokens.ts.
+/** @deprecated Use `SpaceToken`. */
+export type SpacingValue = import("./tokens").SpaceToken;
+/** @deprecated Use `ColorToken`. */
+export type ColorValue = import("./tokens").ColorToken;
 
 // CSS Display values
 export type DisplayValue =

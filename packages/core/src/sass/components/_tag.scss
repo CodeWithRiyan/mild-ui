@@ -1,0 +1,161 @@
+// packages/core/src/sass/components/_tag.scss
+/// Tag component styling: a removable label (a badge with a close button).
+/// @group components
+
+@use "sass:map";
+
+@use "../mixins/component-base" as base;
+
+$tag-colors: (
+  "gray": (
+    solid-bg: var(--mild-color-gray-600),
+    subtle-bg: var(--mild-color-gray-100),
+    fg: var(--mild-color-gray-800),
+    border: var(--mild-color-gray-300),
+  ),
+  "primary": (
+    solid-bg: var(--mild-color-accent),
+    subtle-bg: var(--mild-color-accent-subtle),
+    fg: var(--mild-color-accent),
+    border: var(--mild-color-accent),
+  ),
+  "success": (
+    solid-bg: var(--mild-color-green-600),
+    subtle-bg: var(--mild-color-green-50),
+    fg: var(--mild-color-green-800),
+    border: var(--mild-color-green-500),
+  ),
+  "warning": (
+    solid-bg: var(--mild-color-yellow-500),
+    subtle-bg: var(--mild-color-yellow-50),
+    fg: var(--mild-color-yellow-800),
+    border: var(--mild-color-yellow-500),
+  ),
+  "danger": (
+    solid-bg: var(--mild-color-red-600),
+    subtle-bg: var(--mild-color-red-50),
+    fg: var(--mild-color-red-800),
+    border: var(--mild-color-red-500),
+  ),
+  "info": (
+    solid-bg: var(--mild-color-blue-600),
+    subtle-bg: var(--mild-color-blue-50),
+    fg: var(--mild-color-blue-800),
+    border: var(--mild-color-blue-500),
+  ),
+);
+
+.mild-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--mild-space-1-5);
+  max-width: 100%;
+  height: var(--mild-space-6);
+  padding: 0 var(--mild-space-2);
+  font-size: var(--mild-font-size-sm);
+  font-weight: var(--mild-font-weight-medium);
+  line-height: 1;
+  white-space: nowrap;
+  vertical-align: middle;
+  border: var(--mild-border-width) solid transparent;
+  border-radius: var(--mild-radius-md);
+}
+
+// Sizes
+.mild-tag--sm {
+  height: var(--mild-space-5);
+  padding: 0 var(--mild-space-1-5);
+  font-size: var(--mild-font-size-xs);
+}
+
+.mild-tag--md {
+  height: var(--mild-space-6);
+}
+
+.mild-tag--lg {
+  height: var(--mild-space-8);
+  padding: 0 var(--mild-space-3);
+  font-size: var(--mild-font-size-base);
+}
+
+.mild-tag--pill {
+  border-radius: var(--mild-radius-full);
+}
+
+// Variant x color
+@each $color, $props in $tag-colors {
+  .mild-tag--solid.mild-tag--#{$color} {
+    color: var(--mild-color-white);
+    background-color: map.get($props, solid-bg);
+  }
+
+  .mild-tag--subtle.mild-tag--#{$color} {
+    color: map.get($props, fg);
+    background-color: map.get($props, subtle-bg);
+  }
+
+  .mild-tag--outline.mild-tag--#{$color} {
+    color: map.get($props, fg);
+    background-color: transparent;
+    border-color: map.get($props, border);
+  }
+}
+
+.mild-tag--solid.mild-tag--warning {
+  color: var(--mild-color-yellow-900);
+}
+
+.mild-tag__icon {
+  display: inline-flex;
+  flex-shrink: 0;
+
+  svg {
+    width: 1em;
+    height: 1em;
+  }
+}
+
+.mild-tag__label {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+// The close button: a small square inside the tag, in the tab order
+.mild-tag__close {
+  @include base.component-base;
+  @include base.focus-ring;
+  @include base.interactive-transitions;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 1.25em;
+  height: 1.25em;
+  margin-right: calc(-1 * var(--mild-space-1));
+  color: inherit;
+  background: transparent;
+  border: 0;
+  border-radius: var(--mild-radius-sm);
+  opacity: 0.7;
+  cursor: pointer;
+
+  &:hover {
+    opacity: 1;
+    background-color: var(--mild-color-black-alpha-10);
+  }
+
+  &[disabled] {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+
+  svg {
+    width: 1em;
+    height: 1em;
+  }
+}
+
+.mild-tag--disabled {
+  opacity: 0.5;
+}

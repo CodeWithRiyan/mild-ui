@@ -84,9 +84,11 @@ $mild-dimensions: (
   @return map.get($mild-dimensions, $size);
 }
 
-// Generate dimensions custom properties
+// Generate dimensions custom properties.
+// Own prefix: the fraction names (1-5, 2-5, 3-5, ...) collide with the spacing scale's
+// 1-5 / 2-5 / 3-5 (0.375rem, ...), which would otherwise be overwritten with percentages.
 @mixin generate-dimensions-properties() {
   @each $size-name, $size-value in $mild-dimensions {
-    --mild-space-#{$size-name}: #{$size-value};
+    --mild-dimension-#{$size-name}: #{$size-value};
   }
 }

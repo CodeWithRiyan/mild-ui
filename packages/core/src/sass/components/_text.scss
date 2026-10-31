@@ -122,6 +122,10 @@
 .mild-text--line-through {
   text-decoration: line-through;
 }
+.mild-text--overline {
+  text-decoration: overline;
+}
+
 .mild-text--no-underline {
   text-decoration: none;
 }
@@ -168,7 +172,7 @@
 
 // Color schemes
 .mild-text--primary {
-  color: var(--mild-color-primary-500);
+  color: var(--mild-color-accent);
 }
 .mild-text--secondary {
   color: var(--mild-color-gray-500);

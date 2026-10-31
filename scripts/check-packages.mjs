@@ -1,17 +1,18 @@
 // Lints the published shape of every public package: publint, attw, and the tarball contents.
 // Run after building the packages: `pnpm --filter "./packages/*" build && pnpm check:packages`.
 import { execFileSync } from "node:child_process";
-import { mkdtempSync, readdirSync, rmSync } from "node:fs";
+import { mkdtempSync, readFileSync, readdirSync, rmSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 
-// attw options per package: core ships CSS only, react is dual ESM/CJS.
+// attw options per package: core ships CSS only, react is dual ESM/CJS, vue is ESM only.
 const packages = {
   core: ["--profile", "node16"],
   react: ["--exclude-entrypoints", "styles", "styles.css"],
+  vue: ["--profile", "esm-only"],
 };
 
 const requiredEntries = ["package/LICENSE", "package/README.md", "package/package.json"];
@@ -43,6 +44,15 @@ for (const [name, attwArgs] of Object.entries(packages)) {
   } catch (error) {
     console.error(error.stdout);
     fail("attw reported problems");
+  }
+
+  if (name === "react") {
+    // One bundle = one React Server Components boundary; see vite.config.ts.
+    for (const entry of ["dist/index.mjs", "dist/index.cjs"]) {
+      const head = readFileSync(join(dir, entry), "utf8").slice(0, 64);
+      if (head.startsWith('"use client"')) console.log(`  ✔ ${entry} starts with "use client"`);
+      else fail(`${entry} must start with "use client" (App Router boundary)`);
+    }
   }
 
   const destination = mkdtempSync(join(tmpdir(), `mild-ui-${name}-`));

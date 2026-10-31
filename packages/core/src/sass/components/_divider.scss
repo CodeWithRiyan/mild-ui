@@ -1,0 +1,95 @@
+// packages/core/src/sass/components/_divider.scss
+/// Divider component styling: a horizontal or vertical separator, optionally with a label.
+/// The line color is --mild-divider-color (the `color` prop writes it inline).
+/// @group components
+
+.mild-divider {
+  --mild-divider-color: var(--mild-border);
+  --mild-divider-size: var(--mild-border-width);
+  --mild-divider-style: solid;
+
+  box-sizing: border-box;
+  flex-shrink: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  color: var(--mild-muted-foreground);
+}
+
+// Orientation
+.mild-divider--horizontal {
+  width: 100%;
+  height: 0;
+  border-top: var(--mild-divider-size) var(--mild-divider-style) var(--mild-divider-color);
+}
+
+.mild-divider--vertical {
+  align-self: stretch;
+  width: 0;
+  height: auto;
+  min-height: var(--mild-space-4);
+  border-left: var(--mild-divider-size) var(--mild-divider-style) var(--mild-divider-color);
+}
+
+// Line style
+.mild-divider--solid {
+  --mild-divider-style: solid;
+}
+.mild-divider--dashed {
+  --mild-divider-style: dashed;
+}
+.mild-divider--dotted {
+  --mild-divider-style: dotted;
+}
+
+// Thickness
+.mild-divider--sm {
+  --mild-divider-size: var(--mild-border-width);
+}
+.mild-divider--md {
+  --mild-divider-size: calc(var(--mild-border-width) * 2);
+}
+.mild-divider--lg {
+  --mild-divider-size: calc(var(--mild-border-width) * 4);
+}
+
+// With a label: the line is drawn by ::before / ::after around the label text
+.mild-divider--with-label {
+  display: flex;
+  align-items: center;
+  gap: var(--mild-space-3);
+  height: auto;
+  border: 0;
+
+  &::before,
+  &::after {
+    content: "";
+    flex: 1 1 0;
+    border-top: var(--mild-divider-size) var(--mild-divider-style) var(--mild-divider-color);
+  }
+
+  &.mild-divider--vertical {
+    flex-direction: column;
+    width: auto;
+    min-height: 0;
+
+    &::before,
+    &::after {
+      border-top: 0;
+      border-left: var(--mild-divider-size) var(--mild-divider-style) var(--mild-divider-color);
+    }
+  }
+}
+
+.mild-divider--label-start::before,
+.mild-divider--label-end::after {
+  flex: 0 0 var(--mild-space-6);
+}
+
+.mild-divider__label {
+  flex: 0 0 auto;
+  font-family: var(--mild-font-family-sans);
+  font-size: var(--mild-font-size-sm);
+  line-height: var(--mild-line-height-normal);
+  white-space: nowrap;
+}

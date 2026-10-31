@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Styling with SCSS</title>
+  </head>
+  <body>
+    <main class="demo">
+      <h1 class="mild-text mild-text--2xl mild-text--bold">Styling with SCSS</h1>
+      <p class="mild-text mild-text--muted">
+        Compiled from the Sass source, with the accent derived through Sass token functions.
+      </p>
+
+      <section class="demo__row">
+        <button class="mild-button mild-button--solid mild-button--primary" data-probe="primary">
+          Primary action
+        </button>
+        <button class="mild-button mild-button--outline mild-button--primary">Outline</button>
+        <button class="mild-button mild-button--solid mild-button--secondary">Secondary</button>
+      </section>
+
+      <section class="demo__row">
+        <label class="mild-checkbox mild-checkbox--md">
+          <input type="checkbox" checked />
+          <span class="mild-checkbox-label">Checked checkbox</span>
+        </label>
+        <label class="mild-switch mild-switch--md">
+          <input type="checkbox" checked />
+          <span class="mild-switch-label">Switch on</span>
+        </label>
+      </section>
+
+      <section class="mild-tabs-list mild-tabs-list--pills" role="tablist">
+        <button class="mild-tabs-trigger mild-tabs-trigger--active" role="tab">Active tab</button>
+        <button class="mild-tabs-trigger" role="tab">Tab</button>
+      </section>
+
+      <section class="mild-card">
+        <div class="mild-card-content">
+          <p class="mild-text">
+            Everything on this page that is blue by default follows
+            <code>--mild-color-accent</code>.
+          </p>
+        </div>
+      </section>
+    </main>
+
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

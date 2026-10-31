@@ -23,7 +23,7 @@ const meta: Meta<typeof InputPassword> = {
     },
     variant: {
       control: { type: "radio" },
-      options: ["default", "filled", "outline", "ghost"],
+      options: ["outline", "filled", "flushed", "unstyled"],
     },
     fullWidth: { control: "boolean" },
     className: { control: false },
@@ -71,10 +71,10 @@ export const Variants = {
   render: () => {
     return (
       <div className="flex flex-col gap-4 w-64">
-        <InputPassword placeholder="Default" variant="default" />
+        <InputPassword placeholder="Outline (default)" variant="outline" />
         <InputPassword placeholder="Filled" variant="filled" />
-        <InputPassword placeholder="Outline" variant="outline" />
-        <InputPassword placeholder="Ghost" variant="ghost" />
+        <InputPassword placeholder="Flushed" variant="flushed" />
+        <InputPassword placeholder="Unstyled" variant="unstyled" />
       </div>
     );
   },

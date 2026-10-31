@@ -1,0 +1,200 @@
+// packages/core/src/sass/components/_table.scss
+/// Table and DataTable component styling
+/// @group components
+///
+/// DOM contract:
+///   .mild-table-container[data-sticky-header]   scroll wrapper
+///     table.mild-table                           --simple|--striped|--outline, --sm|--md|--lg,
+///                                                --hoverable, --sticky-header
+///       caption.mild-table__caption              --bottom
+///       thead.mild-table__header
+///         tr.mild-table__row                     [aria-selected="true"], data-selected
+///           th.mild-table__head                  [aria-sort], --numeric, --left|--center|--right
+///             button.mild-table__sort            sortable header (a real button)
+///               .mild-table__sort-icon           [data-direction="ascending|descending|none"]
+///       tbody.mild-table__body
+///         td.mild-table__cell                    --numeric, --left|--center|--right
+///         td.mild-table__selection               the row checkbox cell
+///       tfoot.mild-table__footer
+///   .mild-data-table                             DataTable root; [aria-busy] while loading
+///     .mild-data-table__empty                    the empty-state row's cell
+
+@use "../mixins/component-base" as base;
+
+.mild-table-container {
+  width: 100%;
+  overflow-x: auto;
+  border-radius: var(--mild-radius-md);
+
+  &[data-sticky-header] {
+    overflow-y: auto;
+  }
+}
+
+.mild-table {
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+  font-size: var(--mild-font-size-sm);
+  line-height: var(--mild-line-height-normal);
+  color: var(--mild-foreground);
+  text-align: left;
+
+  &--outline {
+    border: var(--mild-border-width) solid var(--mild-border);
+    border-radius: var(--mild-radius-md);
+  }
+
+  &--striped .mild-table__body .mild-table__row:nth-child(even) {
+    background-color: var(--mild-muted);
+  }
+
+  &--hoverable .mild-table__body .mild-table__row:hover {
+    background-color: var(--mild-color-accent-subtle);
+  }
+
+  &--sticky-header .mild-table__header .mild-table__head {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    background-color: var(--mild-background);
+  }
+
+  // Sizes: cell padding
+  &--sm .mild-table__head,
+  &--sm .mild-table__cell {
+    padding: var(--mild-space-1-5) var(--mild-space-2);
+    font-size: var(--mild-font-size-xs);
+  }
+
+  &--lg .mild-table__head,
+  &--lg .mild-table__cell {
+    padding: var(--mild-space-4) var(--mild-space-5);
+    font-size: var(--mild-font-size-base);
+  }
+}
+
+.mild-table__caption {
+  padding: var(--mild-space-2) var(--mild-space-3);
+  font-size: var(--mild-font-size-sm);
+  color: var(--mild-muted-foreground);
+  text-align: left;
+  caption-side: top;
+
+  &--bottom {
+    caption-side: bottom;
+  }
+}
+
+.mild-table__head,
+.mild-table__cell {
+  padding: var(--mild-space-3) var(--mild-space-4);
+  vertical-align: middle;
+  border-bottom: var(--mild-border-width) solid var(--mild-border);
+
+  &--center {
+    text-align: center;
+  }
+
+  &--right,
+  &--numeric {
+    text-align: right;
+  }
+
+  &--numeric {
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+.mild-table__head {
+  font-weight: var(--mild-font-weight-semibold);
+  color: var(--mild-muted-foreground);
+  white-space: nowrap;
+  background-color: var(--mild-muted);
+
+  &[aria-sort="ascending"],
+  &[aria-sort="descending"] {
+    color: var(--mild-foreground);
+  }
+}
+
+.mild-table__footer .mild-table__cell {
+  font-weight: var(--mild-font-weight-semibold);
+  background-color: var(--mild-muted);
+  border-bottom: 0;
+}
+
+.mild-table__row {
+  transition: var(--mild-transition-colors);
+
+  &[aria-selected="true"],
+  &[data-selected] {
+    background-color: var(--mild-color-accent-subtle);
+  }
+
+  .mild-table__body &:last-child .mild-table__cell {
+    border-bottom: 0;
+  }
+}
+
+// Sortable header: the whole header text is a button that announces the sort direction
+// through the th's aria-sort.
+.mild-table__sort {
+  @include base.component-base;
+  @include base.focus-ring;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--mild-space-1);
+  padding: 0;
+  font: inherit;
+  color: inherit;
+  text-align: inherit;
+  cursor: pointer;
+  background: none;
+  border: 0;
+  border-radius: var(--mild-radius-sm);
+
+  &:hover {
+    color: var(--mild-foreground);
+  }
+}
+
+.mild-table__sort-icon {
+  display: inline-flex;
+  flex-shrink: 0;
+  opacity: 0.4;
+  transition: var(--mild-transition-transform);
+
+  svg {
+    width: var(--mild-space-3-5);
+    height: var(--mild-space-3-5);
+  }
+
+  &[data-direction="ascending"],
+  &[data-direction="descending"] {
+    opacity: 1;
+  }
+
+  &[data-direction="descending"] {
+    transform: rotate(180deg);
+  }
+}
+
+.mild-table__selection {
+  width: var(--mild-space-10);
+  padding-right: 0;
+}
+
+.mild-data-table {
+  position: relative;
+
+  &[aria-busy="true"] .mild-table__body {
+    opacity: 0.6;
+  }
+}
+
+.mild-data-table__empty {
+  padding: var(--mild-space-8) var(--mild-space-4);
+  color: var(--mild-muted-foreground);
+  text-align: center;
+}

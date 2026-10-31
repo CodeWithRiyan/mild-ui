@@ -76,6 +76,28 @@ function extractImports(markdown: string): ReadmeImport[] {
   return imports;
 }
 
+/** Looks up a subpath in an exports map, including `./dir/*` patterns (resolved like Node does). */
+function exportTarget(
+  exports: Record<string, ExportTarget>,
+  subpath: string,
+): ExportTarget | undefined {
+  if (exports[subpath]) return exports[subpath];
+  for (const [key, target] of Object.entries(exports)) {
+    const star = key.indexOf("*");
+    if (star === -1) continue;
+    const prefix = key.slice(0, star);
+    const suffix = key.slice(star + 1);
+    if (!subpath.startsWith(prefix) || !subpath.endsWith(suffix)) continue;
+    const match = subpath.slice(prefix.length, subpath.length - suffix.length);
+    const substitute = (value: ExportTarget): ExportTarget =>
+      typeof value === "string"
+        ? value.replaceAll("*", match)
+        : Object.fromEntries(Object.entries(value).map(([k, v]) => [k, substitute(v)]));
+    return substitute(target);
+  }
+  return undefined;
+}
+
 function splitSpecifier(specifier: string): { name: string; subpath: string } {
   const [scope, pkg, ...rest] = specifier.split("/");
   return { name: `${scope}/${pkg}`, subpath: rest.length ? `./${rest.join("/")}` : "." };
@@ -121,7 +143,7 @@ async function main() {
         continue;
       }
       if (installOnly) continue;
-      const target = pkg.exports[subpath];
+      const target = exportTarget(pkg.exports, subpath);
       if (!target) {
         errors.push(`${where}: "${specifier}" is not in the exports of ${name}`);
         continue;

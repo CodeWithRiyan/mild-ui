@@ -1,7 +1,8 @@
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Button, Checkbox, Field, Form, Input, InputPassword } from "@mild-ui/react";
+import { Button, Checkbox, Input, InputPassword } from "@mild-ui/react";
+import { Field, Form } from "../../examples/react-hook-form";
 import type { Meta, StoryObj } from "@storybook/react";
-import { SubmitHandler, useForm } from "react-hook-form";
+import { SubmitErrorHandler, SubmitHandler, useForm } from "react-hook-form";
 import * as yup from "yup";
 
 // Create a wrapper component that doesn't require props
@@ -104,7 +105,7 @@ export const RegistrationForm: Story = {
       );
     };
 
-    const onError = (errors: any) => {
+    const onError: SubmitErrorHandler<FormData> = (errors) => {
       console.log("Form Errors:", errors);
     };
 

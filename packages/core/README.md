@@ -10,7 +10,7 @@ Pure CSS/SCSS design system with Tailwind-like utilities - framework agnostic, n
 
 - **Tailwind-like utilities** with `mild-` prefix (no conflicts!)
 - **Design tokens** as CSS custom properties
-- **Component styles** for the React package
+- **Component styles** for React/Vue packages
 - **Dark/Light themes** with automatic switching
 - **Responsive design** with mobile-first approach
 - **No runtime dependencies** - pure CSS/SCSS only
@@ -85,6 +85,30 @@ Since all utilities use the `mild-` prefix, you can use both libraries together:
 
 ## Theming
 
+### Accent
+
+Primary buttons, checked checkboxes/radios/switches, focus rings and active tabs all read one token, `--mild-color-accent` (default: `--mild-color-primary-500`), with `-hover`, `-active`, `-foreground`, `-soft`, `-subtle` and `-muted` shades. Re-theme the interactive color in one place, at build time or at runtime:
+
+```css
+:root {
+  --mild-color-accent: var(--mild-color-green-600);
+  --mild-color-accent-hover: var(--mild-color-green-700);
+  --mild-color-accent-active: var(--mild-color-green-800);
+}
+```
+
+```js
+document.documentElement.style.setProperty("--mild-color-accent", "#e11d48");
+```
+
+`--mild-color-accent` is the brand color; the older `--mild-accent` is the subtle surface tint (gray-100) used for hover rows and the like.
+
+### Translucent colors
+
+Overlays, scrims and gradients use `--mild-color-black-alpha-{0..90}` and `--mild-color-white-alpha-{0..90}` (10 = 10% opaque), plus `--mild-color-white`/`--mild-color-black`, instead of `rgba()` literals.
+
+### Dark mode
+
 Automatic dark mode support:
 
 ```css
@@ -104,9 +128,14 @@ Automatic dark mode support:
 - `@mild-ui/core/css/utilities/min` - Minified utilities
 - `@mild-ui/core/scss` - Main SCSS entry point
 - `@mild-ui/core/scss/utilities` - Utilities SCSS only
+- `@mild-ui/core/scss/tokens/*` - Individual Sass token modules (`colors`, `spacing`, `typography`, `radius`, `elevation`, `breakpoints`, `animation`, `dimensions`) with their functions, e.g. `@use "@mild-ui/core/scss/tokens/colors" as colors;` then `colors.mild-color("yellow", 600)`
 - `@mild-ui/core/themes/light` - Light theme CSS
 - `@mild-ui/core/themes/dark` - Dark theme CSS
 - `@mild-ui/core/tokens` - Design tokens JSON
+
+## Component styles are written in tokens
+
+`src/sass/components/**/*.scss` is linted with [Stylelint](https://stylelint.io/) (`stylelint.config.mjs`, run by the root `pnpm lint`): no hex, `rgb()`/`rgba()`/`hsl()`, named colors or `px` literals — only `var(--mild-*)` tokens and Sass token functions. Literals live in `src/sass/tokens/` and the `:root` block of `index.scss`. The two agreed exceptions (px in `@media` features, and the accordion's `max-height` transition ceiling) are written in the config with their reasons.
 
 ## Documentation
 
@@ -118,6 +147,7 @@ Automatic dark mode support:
 This core package is used by:
 
 - [`@mild-ui/react`](../react) - React components
+- [`@mild-ui/vue`](../vue) - Vue components
 
 ## License
 

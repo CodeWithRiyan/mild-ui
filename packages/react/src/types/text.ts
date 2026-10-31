@@ -1,12 +1,6 @@
 // Text component types
-import type {
-  FontSize,
-  FontWeight,
-  TextAlign,
-  TextTransform,
-  TextDecoration,
-  ColorValue,
-} from "./common";
+import type { FontSize, FontWeight, TextAlign, TextTransform, TextDecoration } from "./common";
+import type { TextColor } from "./tokens";
 
 export interface TextCoreProps {
   fontSize?: FontSize;
@@ -14,7 +8,8 @@ export interface TextCoreProps {
   textAlign?: TextAlign;
   textTransform?: TextTransform;
   textDecoration?: TextDecoration;
-  color?: ColorValue;
+  /** Semantic color painted by `.mild-text--<color>`. */
+  color?: TextColor;
   lineHeight?: string | number;
   letterSpacing?: string | number;
   truncate?: boolean;

@@ -9,6 +9,7 @@
 @use "tokens/dimensions" as dimensions;
 @use "tokens/elevation" as elevation;
 @use "tokens/radius" as radius;
+@use "tokens/breakpoints" as breakpoints;
 @use "tokens/animation" as animation;
 
 // Import base styles (required for CSS custom properties)
@@ -26,6 +27,7 @@
   @include dimensions.generate-dimensions-properties();
   @include elevation.generate-shadow-properties();
   @include radius.generate-radius-properties();
+  @include breakpoints.generate-breakpoint-properties();
   @include animation.generate-animation-properties();
 
   // Additional system properties for utilities

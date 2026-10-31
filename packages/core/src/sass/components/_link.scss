@@ -1,0 +1,71 @@
+// packages/core/src/sass/components/_link.scss
+/// Link component styling.
+/// @group components
+
+.mild-link {
+  color: var(--mild-color-accent);
+  font-family: inherit;
+  text-decoration: none;
+  text-underline-offset: var(--mild-space-0-5);
+  border-radius: var(--mild-radius-sm);
+  cursor: pointer;
+  transition: var(--mild-transition-colors);
+
+  &:hover {
+    color: var(--mild-color-accent-hover);
+  }
+
+  &:active {
+    color: var(--mild-color-accent-active);
+  }
+
+  &:focus-visible {
+    outline: var(--mild-outline-width) solid var(--mild-ring);
+    outline-offset: var(--mild-ring-offset-width);
+  }
+}
+
+// Underline behaviour
+.mild-link--underline-none {
+  text-decoration: none;
+}
+
+.mild-link--underline-always {
+  text-decoration: underline;
+}
+
+.mild-link--underline-hover {
+  text-decoration: none;
+
+  &:hover,
+  &:focus-visible {
+    text-decoration: underline;
+  }
+}
+
+// Inherit the surrounding text color (links inside body copy)
+.mild-link--plain {
+  color: inherit;
+
+  &:hover,
+  &:active {
+    color: inherit;
+  }
+}
+
+.mild-link--disabled {
+  color: var(--mild-muted-foreground);
+  text-decoration: none;
+  cursor: not-allowed;
+
+  &:hover {
+    color: var(--mild-muted-foreground);
+    text-decoration: none;
+  }
+}
+
+.mild-link__external-icon {
+  display: inline-block;
+  margin-left: var(--mild-space-1);
+  vertical-align: baseline;
+}

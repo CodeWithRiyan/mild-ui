@@ -1,11 +1,14 @@
-name: Build and Deploy Storybook + Core Docs
+name: Build and Deploy Multi-Framework Storybooks + Core Docs
 on:
   push:
     branches: [main]
     paths:
       - "packages/core/**"
       - "packages/react/**"
+      - "packages/vue/**"
       - "storybook/react/**"
+      - "storybook/vue/**"
+      - "site/**"
       - ".github/workflows/storybook.yml"
   workflow_dispatch:
 
@@ -39,6 +42,9 @@ jobs:
       - name: Build React package
         run: pnpm --filter @mild-ui/react build
 
+      - name: Build Vue package
+        run: pnpm --filter @mild-ui/vue build
+
       # Generate Core Documentation using our docs generator
       - name: Generate Core Documentation
         run: |
@@ -56,14 +62,26 @@ jobs:
           NODE_ENV: production
           CI: true
 
+      - name: Build Vue Storybook
+        run: |
+          cd storybook/vue
+          STORYBOOK_BASE_URL="/mild-ui/vue/" pnpm build
+        env:
+          NODE_ENV: production
+          CI: true
+
       - name: Create deployment directory
         run: |
           mkdir -p deploy
           mkdir -p deploy/react
+          mkdir -p deploy/vue
           mkdir -p deploy/core
 
       - name: Copy React Storybook
         run: cp -r storybook/react/storybook-static/* deploy/react/
+
+      - name: Copy Vue Storybook
+        run: cp -r storybook/vue/storybook-static/* deploy/vue/
 
       # Copy Core Documentation
       - name: Copy Core Documentation
@@ -74,200 +92,14 @@ jobs:
             echo "Core docs not found, skipping..."
           fi
 
-      - name: Create enhanced main index page
+      # The landing page lives in site/ (plain HTML on top of the core stylesheet) so it can be
+      # previewed and linted like any other file; the build date is stamped at deploy time.
+      - name: Copy landing page
         run: |
-          cat > deploy/index.html << 'EOF'
-          <!DOCTYPE html>
-          <html lang="en">
-          <head>
-              <meta charset="UTF-8">
-              <meta name="viewport" content="width=device-width, initial-scale=1.0">
-              <title>mild-ui Component Library</title>
-              <style>
-                  body {
-                      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
-                      max-width: 1200px;
-                      margin: 0 auto;
-                      padding: 2rem;
-                      background: #fafafa;
-                      line-height: 1.6;
-                  }
-                  .container {
-                      background: white;
-                      padding: 3rem;
-                      border-radius: 12px;
-                      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-                  }
-                  h1 {
-                      color: #1f2937;
-                      border-bottom: 3px solid #3b82f6;
-                      padding-bottom: 1rem;
-                      margin-bottom: 2rem;
-                  }
-                  .description {
-                      color: #6b7280;
-                      font-size: 1.1rem;
-                      margin-bottom: 3rem;
-                  }
-                  .sections {
-                      display: grid;
-                      gap: 2rem;
-                  }
-                  .section {
-                      border: 1px solid #e5e7eb;
-                      border-radius: 8px;
-                      overflow: hidden;
-                  }
-                  .section-header {
-                      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-                      color: white;
-                      padding: 1.5rem;
-                      margin: 0;
-                      font-size: 1.25rem;
-                      font-weight: 600;
-                  }
-                  .section-content {
-                      padding: 1.5rem;
-                  }
-                  .frameworks {
-                      display: grid;
-                      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-                      gap: 1.5rem;
-                      margin-top: 1rem;
-                  }
-                  .docs-grid {
-                      display: grid;
-                      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-                      gap: 1rem;
-                      margin-top: 1rem;
-                  }
-                  .framework-card, .doc-card {
-                      border: 1px solid #e5e7eb;
-                      border-radius: 8px;
-                      padding: 1.5rem;
-                      text-align: center;
-                      transition: all 0.2s ease;
-                      background: white;
-                  }
-                  .framework-card:hover, .doc-card:hover {
-                      transform: translateY(-2px);
-                      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-                      border-color: #3b82f6;
-                  }
-                  .framework-card h3, .doc-card h3 {
-                      margin: 0 0 1rem 0;
-                      color: #374151;
-                      font-size: 1.1rem;
-                  }
-                  .framework-card p, .doc-card p {
-                      color: #6b7280;
-                      margin-bottom: 1.5rem;
-                      font-size: 0.95rem;
-                  }
-                  .framework-card a, .doc-card a {
-                      display: inline-block;
-                      background: #3b82f6;
-                      color: white;
-                      padding: 0.75rem 1.5rem;
-                      text-decoration: none;
-                      border-radius: 6px;
-                      font-weight: 500;
-                      font-size: 0.9rem;
-                      transition: background 0.2s;
-                  }
-                  .framework-card a:hover, .doc-card a:hover {
-                      background: #2563eb;
-                  }
-                  .badge {
-                      display: inline-block;
-                      background: #10b981;
-                      color: white;
-                      padding: 0.25rem 0.75rem;
-                      border-radius: 9999px;
-                      font-size: 0.875rem;
-                      font-weight: 500;
-                      margin-left: 0.5rem;
-                  }
-                  .auto-badge {
-                      background: #8b5cf6;
-                  }
-                  .footer {
-                      margin-top: 3rem;
-                      text-align: center;
-                      color: #6b7280;
-                      font-size: 0.9rem;
-                  }
-                  .footer a {
-                      color: #3b82f6;
-                      text-decoration: none;
-                  }
-              </style>
-          </head>
-          <body>
-              <div class="container">
-                  <h1>mild-ui Component Library 
-                      <span class="badge">React</span>
-                      <span class="badge auto-badge">Auto-Generated</span>
-                  </h1>
-                  
-                  <p class="description">
-                      Welcome to mild-ui, a React UI component library with SASS-powered styling. 
-                      React components styled by a shared SCSS design system, with comprehensive documentation.
-                  </p>
-
-                  <div class="sections">
-                      <div class="section">
-                          <h2 class="section-header">🧩 Interactive Component Documentation</h2>
-                          <div class="section-content">
-                              <p>Live, interactive examples of every React component:</p>
-                              <div class="frameworks">
-                                  <div class="framework-card">
-                                      <h3>⚛️ React Components</h3>
-                                      <p>Interactive React components with hooks and modern patterns</p>
-                                      <a href="./react/">Explore React Storybook</a>
-                                  </div>
-                              </div>
-                          </div>
-                      </div>
-
-                      <div class="section">
-                          <h2 class="section-header">📚 Core Documentation & API</h2>
-                          <div class="section-content">
-                              <p>Auto-generated documentation from source code, design tokens, and APIs:</p>
-                              <div class="docs-grid">
-                                  <div class="doc-card">
-                                      <h3>🎨 Utility Classes Reference</h3>
-                                      <p>Interactive reference for all 1600+ utility classes</p>
-                                      <a href="./core/">Browse Utilities</a>
-                                  </div>
-                                  
-                                  
-                                  <div class="doc-card">
-                                      <h3>📊 Package Overview</h3>
-                                      <p>Package info, installation, and architecture</p>
-                                      <a href="./core/overview.html">View Package Info</a>
-                                  </div>
-                                  
-                                  <div class="doc-card">
-                                      <h3>⚛️ React API</h3>
-                                      <p>React component props and TypeScript types</p>
-                                      <a href="./react/">React Components</a>
-                                  </div>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-                  
-                  <div class="footer">
-                      <p>
-                          📝 Documentation auto-generated on $(date) | 
-                          <a href="https://github.com/CodeWithRiyan/mild-ui">View Source Code</a>
-                      </p>
-                  </div>
-              </div>
-          </body>
-          </html>
-          EOF
+          cp -r site/. deploy/
+          rm -f deploy/README.md
+          cp packages/core/dist/mild-ui.min.css deploy/assets/mild-ui.min.css
+          sed -i "s|<html lang=\"en\">|<html lang=\"en\" data-build-date=\"$(date -u +%Y-%m-%d)\" data-commit=\"${GITHUB_SHA::7}\">|" deploy/index.html
 
       - name: Add .nojekyll file
         run: touch deploy/.nojekyll

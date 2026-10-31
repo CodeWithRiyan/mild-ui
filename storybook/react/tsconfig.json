@@ -17,7 +17,9 @@
     "noFallthroughCasesInSwitch": true,
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "@mild-ui/react": ["../../packages/react/src"],
+      "@mild-ui/primitives/*": ["../../packages/primitives/src/*"]
     }
   },
   "include": ["src/**/*.ts", "src/**/*.tsx", ".storybook/**/*.ts", ".storybook/**/*.tsx"],

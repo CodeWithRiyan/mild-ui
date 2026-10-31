@@ -4,6 +4,7 @@
 
 // Import required SASS modules
 @use "sass:map";
+@use "sass:math";
 
 // Base color palette with QUOTED keys to fix interpolation warnings
 $mild-base-colors: (
@@ -88,6 +89,12 @@ $mild-semantic-colors: (
 // Complete color system
 $mild-colors: map.merge($mild-base-colors, $mild-semantic-colors) !default;
 
+// Pure white and black, and translucent steps of each (10 = 10% opaque). Components use these for
+// overlays, scrims and gradients instead of rgba() literals, so every color is a token.
+$mild-color-white: #ffffff !default;
+$mild-color-black: #000000 !default;
+$mild-alpha-steps: (0, 10, 20, 30, 40, 50, 60, 70, 80, 90) !default;
+
 // Color generation function
 @function mild-color($color, $shade: 500) {
   $color-map: map.get($mild-colors, $color);
@@ -104,5 +111,13 @@ $mild-colors: map.merge($mild-base-colors, $mild-semantic-colors) !default;
     @each $shade, $value in $color-map {
       --mild-color-#{$color-name}-#{$shade}: #{$value};
     }
+  }
+
+  --mild-color-white: #{$mild-color-white};
+  --mild-color-black: #{$mild-color-black};
+
+  @each $step in $mild-alpha-steps {
+    --mild-color-black-alpha-#{$step}: #{rgba($mild-color-black, math.div($step, 100))};
+    --mild-color-white-alpha-#{$step}: #{rgba($mild-color-white, math.div($step, 100))};
   }
 }

@@ -1,0 +1,97 @@
+// packages/core/src/sass/components/_skeleton.scss
+/// Skeleton component styling: a placeholder shape shown while content loads.
+/// @group components
+
+.mild-skeleton {
+  display: block;
+  width: 100%;
+  height: var(--mild-space-4);
+  background-color: var(--mild-muted);
+  border-radius: var(--mild-radius-md);
+  // Hide any children used for sizing; the placeholder is purely visual.
+  color: transparent;
+  user-select: none;
+  pointer-events: none;
+
+  > * {
+    visibility: hidden;
+  }
+}
+
+// Shapes
+.mild-skeleton--text {
+  height: 1em;
+  border-radius: var(--mild-radius-sm);
+}
+
+.mild-skeleton--circle {
+  width: var(--mild-space-10);
+  height: var(--mild-space-10);
+  border-radius: var(--mild-radius-full);
+}
+
+.mild-skeleton--rect {
+  border-radius: var(--mild-radius-md);
+}
+
+// Animations
+.mild-skeleton--pulse {
+  animation: mild-skeleton-pulse 1.5s ease-in-out infinite;
+}
+
+.mild-skeleton--wave {
+  position: relative;
+  overflow: hidden;
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    transform: translateX(-100%);
+    background-image: linear-gradient(
+      90deg,
+      transparent,
+      var(--mild-color-white-alpha-40),
+      transparent
+    );
+    animation: mild-skeleton-wave 1.5s linear infinite;
+  }
+}
+
+.mild-skeleton--none {
+  animation: none;
+}
+
+// A stack of text lines: the last one is shorter
+.mild-skeleton-text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--mild-space-2);
+
+  > .mild-skeleton:last-child:not(:first-child) {
+    width: 80%;
+  }
+}
+
+@keyframes mild-skeleton-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+@keyframes mild-skeleton-wave {
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mild-skeleton--pulse,
+  .mild-skeleton--wave::after {
+    animation: none;
+  }
+}

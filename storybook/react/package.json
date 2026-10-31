@@ -10,7 +10,8 @@
     "preview": "pnpm build:local && npx serve storybook-static",
     "test": "test-storybook",
     "chromatic": "chromatic",
-    "clean": "rm -rf storybook-static"
+    "clean": "rm -rf storybook-static",
+    "typecheck": "tsc --noEmit -p tsconfig.json"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.9.2",

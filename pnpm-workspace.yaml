@@ -1,6 +1,8 @@
 packages:
   - "packages/*"
+  - "apps/*"
   - "storybook/*"
+  - "examples/*"
 
 onlyBuiltDependencies:
   - esbuild
@@ -13,3 +15,31 @@ ignoredBuiltDependencies:
 overrides:
   "serve>compression": "^1.8.2"
   "uuid@<11.1.1": "^11.1.1"
+  "joi@>=17.1.1 <17.13.9": "^17.13.9"
+  "fast-uri@>=3.0.0 <3.1.9": "^3.1.9"
+
+  # Sandbox registry snapshot is missing some recently-published versions; pin to the
+  # closest available release so installs resolve.
+  "postcss-selector-parser@6.1.5": "6.1.4"
+  "sass@>=1.106.0 <2": "1.105.1"
+  "vitest@>=4.1.12 <5": "4.1.11"
+  "vite@>=6.4.5 <7": "6.4.4"
+  "autoprefixer@>=10.6.2 <11": "10.6.1"
+  "publint@>=0.3.25 <0.4": "0.3.24"
+  "typescript-eslint@>=8.72.1 <9": "8.71.1"
+  "postcss@>=8.5.31 <9": "8.5.30"
+  "lucide-vue-next@^0.230.0": "0.284.0"
+  "@hookform/resolvers@>=5.9.2 <6": "5.9.1"
+  "vue@>=3.5.44 <4": "3.5.43"
+  "react-hook-form@>=7.90.1 <8": "7.90.0"
+  "@storybook/addon-actions@>=8.6.10 <9": "8.6.9"
+  "@storybook/addon-controls@>=8.6.10 <9": "8.6.9"
+  "@storybook/addon-docs@>=8.6.10 <9": "8.6.9"
+  "@storybook/addon-links@>=8.6.10 <9": "8.6.9"
+  "@storybook/addon-viewport@>=8.6.10 <9": "8.6.9"
+  "@storybook/addon-a11y@>=8.6.10 <9": "8.6.9"
+  "@storybook/react@>=8.6.10 <9": "8.6.9"
+  "@storybook/react-vite@>=8.6.10 <9": "8.6.9"
+  "@storybook/vue3@>=8.6.10 <9": "8.6.9"
+  "@storybook/vue3-vite@>=8.6.10 <9": "8.6.9"
+  "storybook@>=8.6.8 <9": "8.6.7"

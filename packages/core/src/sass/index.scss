@@ -31,12 +31,23 @@
   @include dimensions.generate-dimensions-properties();
   @include elevation.generate-shadow-properties();
   @include radius.generate-radius-properties();
+  @include breakpoints.generate-breakpoint-properties();
   @include animation.generate-animation-properties();
 
   // Additional system properties
   --mild-border-width: 1px;
   --mild-outline-width: 2px;
   --mild-ring-offset-width: 2px;
+
+  // Accent: the brand color behind primary buttons, checked controls, focus rings and active
+  // tabs. Override --mild-color-accent (and its hover/active shades) to re-theme at runtime.
+  --mild-color-accent: var(--mild-color-primary-500);
+  --mild-color-accent-hover: var(--mild-color-primary-600);
+  --mild-color-accent-active: var(--mild-color-primary-700);
+  --mild-color-accent-foreground: var(--mild-color-white);
+  --mild-color-accent-soft: var(--mild-color-primary-300);
+  --mild-color-accent-subtle: var(--mild-color-primary-50);
+  --mild-color-accent-muted: var(--mild-color-primary-100);
 
   // Semantic color mappings for components
   --mild-background: var(--mild-color-gray-50);
@@ -45,7 +56,7 @@
   --mild-muted-foreground: var(--mild-color-gray-500);
   --mild-border: var(--mild-color-gray-200);
   --mild-input: var(--mild-color-gray-200);
-  --mild-ring: var(--mild-color-primary-500);
+  --mild-ring: var(--mild-color-accent);
 
   // Component-specific semantic colors
   --mild-card: var(--mild-color-gray-50);

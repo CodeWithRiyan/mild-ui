@@ -1,0 +1,16 @@
+// packages/core/src/sass/components/_flex.scss
+/// Flex component styling: a general-purpose flex container (row by default).
+/// @group components
+
+@use "../mixins/layout" as layout;
+
+.mild-flex {
+  display: flex;
+  box-sizing: border-box;
+}
+
+.mild-flex--inline {
+  display: inline-flex;
+}
+
+@include layout.flex-modifiers("flex");
