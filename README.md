@@ -23,7 +23,7 @@ Components shipped today (React and Vue; Vue's set is listed below the table):
 | ----------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Forms                   | Button, IconButton, CloseButton, ButtonGroup, Input, InputGroup, InputPassword, Textarea, Checkbox, Radio, Switch, Select, SegmentedControl, Toggle, ToggleGroup, Label, Form |
 | Layout                  | Box, Stack, Flex, Grid, Container, Divider, AspectRatio, ScrollArea                                                                                                           |
-| Typography & navigation | Text, Heading, Link, Breadcrumb, Code, Kbd, List                                                                                                                              |
+| Typography & navigation | Text, Heading, Link, Breadcrumb, Nav, Code, Kbd, List                                                                                                                         |
 | Feedback                | Alert, Spinner, Progress, CircularProgress, Skeleton, Toast                                                                                                                   |
 | Overlay & disclosure    | Dialog, AlertDialog, Tooltip, Tabs, Accordion, Collapsible                                                                                                                    |
 | Data display            | Card, Badge, Tag, Avatar, AvatarGroup, Image, Stat, Table, DataTable, Map                                                                                                     |

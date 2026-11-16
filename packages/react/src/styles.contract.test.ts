@@ -113,6 +113,10 @@ describe("core stylesheet vs React markup", () => {
     ".mild-link--underline-hover:hover",
     ".mild-breadcrumb__list",
     ".mild-breadcrumb-page",
+    ".mild-nav__list",
+    ".mild-nav-link--active",
+    ".mild-nav-link--disabled",
+    ".mild-nav--pills .mild-nav-link--active",
     ".mild-list > li + li",
     ".mild-list-item__icon",
     // Layout: divider label line, aspect-ratio child fill, scroll area focus ring / scrollbars
