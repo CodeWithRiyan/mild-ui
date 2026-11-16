@@ -7,6 +7,7 @@ export * from "./Avatar";
 export * from "./Badge";
 export * from "./Box";
 export * from "./Breadcrumb";
+export * from "./Nav";
 export * from "./Button";
 export * from "./ButtonGroup";
 export * from "./Card";

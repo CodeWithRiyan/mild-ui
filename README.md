@@ -33,7 +33,7 @@ Vue ships Button, Checkbox, Radio (+ RadioGroup, RadioGroupItem), Select (+ part
 InputPassword, Switch, Label, Text, Box, Form (+ FormField, FormLabel, FormControl,
 FormDescription, FormMessage), ThemeProvider (+ `useTheme`, `useColorMode`), the layout set
 (Stack, Flex, Grid + GridItem, Container, Divider, AspectRatio, ScrollArea), typography and
-navigation (Heading, Link, Breadcrumb, Code, Kbd, List), the basic inputs (Textarea,
+navigation (Heading, Link, Breadcrumb, Nav, Code, Kbd, List), the basic inputs (Textarea,
 IconButton, ButtonGroup, CloseButton, InputGroup, SegmentedControl, Toggle, ToggleGroup),
 feedback (Alert, Spinner, Progress, CircularProgress, Skeleton, Toast), overlay and disclosure
 (Dialog, AlertDialog, Tooltip, Tabs, Accordion, Collapsible) and data display (Card, Badge, Tag,

@@ -16,6 +16,7 @@ export { buttonGroupCases } from "./cases/button-group.cases";
 export { cardCases } from "./cases/card.cases";
 export { boxCases } from "./cases/box.cases";
 export { breadcrumbCases } from "./cases/breadcrumb.cases";
+export { navCases } from "./cases/nav.cases";
 export { checkboxCases } from "./cases/checkbox.cases";
 export { circularProgressCases } from "./cases/circular-progress.cases";
 export { closeButtonCases } from "./cases/close-button.cases";

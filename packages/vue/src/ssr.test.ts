@@ -20,6 +20,9 @@ import {
   Badge,
   Box,
   Breadcrumb,
+  Nav,
+  NavItem,
+  NavLink,
   Card,
   CardBody,
   CardDescription,
@@ -241,6 +244,14 @@ describe("server rendering", () => {
       "Breadcrumb",
       () => render(Breadcrumb, { items: [{ label: "Home", href: "/" }, { label: "Here" }] }),
       ['aria-label="Breadcrumb"', "mild-breadcrumb-separator", 'aria-current="page"'],
+    ],
+    [
+      "Nav",
+      () =>
+        render(Nav, { "aria-label": "Primary", variant: "pills" }, () =>
+          h(NavItem, null, () => h(NavLink, { href: "/", active: true }, () => "Home")),
+        ),
+      ['aria-label="Primary"', "mild-nav--pills", 'aria-current="page"'],
     ],
     [
       "Code",

@@ -119,6 +119,15 @@ const cases: Record<string, Case> = {
     create: () => h("ol", [h(M.BreadcrumbSeparator, CUSTOM)]),
     expected: "li.mild-breadcrumb-separator",
   },
+  Nav: { create: () => h(M.Nav, CUSTOM), expected: "nav.mild-nav" },
+  NavItem: {
+    create: () => h("ul", [h(M.NavItem, CUSTOM, () => "x")]),
+    expected: "li.mild-nav-item",
+  },
+  NavLink: {
+    create: () => h(M.NavLink, { ...CUSTOM, href: "/" }, () => "x"),
+    expected: "a.mild-nav-link",
+  },
   Code: { create: () => h(M.Code, CUSTOM, () => "c"), expected: "code.mild-code" },
   Kbd: { create: () => h(M.Kbd, CUSTOM, () => "k"), expected: "kbd.mild-kbd" },
   List: { create: () => h(M.List, CUSTOM), expected: "ul.mild-list" },

@@ -59,6 +59,7 @@ const name = ref("");
 | Heading          | `Heading`                                                                                                                                      |                                    |
 | Link             | `Link`                                                                                                                                         |                                    |
 | Breadcrumb       | `Breadcrumb`, `BreadcrumbItem`, `BreadcrumbLink`, `BreadcrumbSeparator`                                                                        |                                    |
+| Nav              | `Nav`, `NavItem`, `NavLink`                                                                                                                    |                                    |
 | Code             | `Code`                                                                                                                                         |                                    |
 | Kbd              | `Kbd`                                                                                                                                          |                                    |
 | List             | `List`, `ListItem`                                                                                                                             |                                    |
@@ -241,6 +242,7 @@ The interactive components follow the WAI-ARIA Authoring Practices patterns of t
 - `Heading`: `level` picks the element (`h1`..`h6`) and the default size; `size` restyles it independently, `as="div"` drops it from the outline.
 - `Link`: `underline` (`none`/`hover`/`always`), `external` (adds `target="_blank"` + `rel="noopener noreferrer"`), `plain`, `disabled` (inert, still a link). Pass a router component with `as` (`<Link :as="RouterLink" to="/docs">`).
 - `Breadcrumb`: `nav[aria-label] > ol` with `aria-hidden` separators inserted automatically and `aria-current="page"` on the last step; use `items` or compose `BreadcrumbItem`/`BreadcrumbLink`. The `separator` slot takes rich content.
+- `Nav`: `nav[aria-label] > ul > li > a` with `variant` (`pills`/`underline`/`plain`) and `orientation`; `NavLink` takes `active` (the only link with `aria-current="page"`), `disabled` (renders text with `aria-disabled="true"`, not focusable) and `as` for a router link (`<NavLink :as="RouterLink" to="/docs">`). Links stay in the normal Tab order; a horizontal nav scrolls sideways on narrow screens.
 - `Code` (inline or `block`), `Kbd`, `List`/`ListItem` (`ordered`, `marker`, `unstyled`, token `spacing`, per-item `icon` slot).
 - `Textarea`: the `Input` variants, sizes and states, plus `resize` and `autoResize`; `v-model`.
 - `ButtonGroup` hands `size`, `variant` and `disabled` to the `Button`s and `IconButton`s inside it (their own props win); `attached` joins them into one bar. `IconButton` needs a `label` (its accessible name) and shows the default slot as an `aria-hidden` glyph; `CloseButton` is a ghost IconButton with an X.

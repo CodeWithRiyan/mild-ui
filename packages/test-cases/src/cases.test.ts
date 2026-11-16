@@ -46,6 +46,7 @@ const EXPECTED_COMPONENTS = [
   "Link",
   "List",
   "Map",
+  "Nav",
   "Progress",
   "Radio",
   "ScrollArea",
