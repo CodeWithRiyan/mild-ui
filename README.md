@@ -23,7 +23,7 @@ Components shipped today (React and Vue; Vue's set is listed below the table):
 | ----------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Forms                   | Button, IconButton, CloseButton, ButtonGroup, Input, InputGroup, InputPassword, Textarea, Checkbox, Radio, Switch, Select, SegmentedControl, Toggle, ToggleGroup, Label, Form |
 | Layout                  | Box, Stack, Flex, Grid, Container, Divider, AspectRatio, ScrollArea                                                                                                           |
-| Typography & navigation | Text, Heading, Link, Breadcrumb, Code, Kbd, List                                                                                                                              |
+| Typography & navigation | Text, Heading, Link, Breadcrumb, Nav, Code, Kbd, List                                                                                                                         |
 | Feedback                | Alert, Spinner, Progress, CircularProgress, Skeleton, Toast                                                                                                                   |
 | Overlay & disclosure    | Dialog, AlertDialog, Tooltip, Tabs, Accordion, Collapsible                                                                                                                    |
 | Data display            | Card, Badge, Tag, Avatar, AvatarGroup, Image, Stat, Table, DataTable, Map                                                                                                     |
@@ -33,7 +33,7 @@ Vue ships Button, Checkbox, Radio (+ RadioGroup, RadioGroupItem), Select (+ part
 InputPassword, Switch, Label, Text, Box, Form (+ FormField, FormLabel, FormControl,
 FormDescription, FormMessage), ThemeProvider (+ `useTheme`, `useColorMode`), the layout set
 (Stack, Flex, Grid + GridItem, Container, Divider, AspectRatio, ScrollArea), typography and
-navigation (Heading, Link, Breadcrumb, Code, Kbd, List), the basic inputs (Textarea,
+navigation (Heading, Link, Breadcrumb, Nav, Code, Kbd, List), the basic inputs (Textarea,
 IconButton, ButtonGroup, CloseButton, InputGroup, SegmentedControl, Toggle, ToggleGroup),
 feedback (Alert, Spinner, Progress, CircularProgress, Skeleton, Toast), overlay and disclosure
 (Dialog, AlertDialog, Tooltip, Tabs, Accordion, Collapsible) and data display (Card, Badge, Tag,

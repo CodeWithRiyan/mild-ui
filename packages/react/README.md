@@ -83,6 +83,7 @@ export default function App() {
 | Heading          | `Heading`                                                                                                                                      |
 | Link             | `Link`                                                                                                                                         |
 | Breadcrumb       | `Breadcrumb`, `BreadcrumbItem`, `BreadcrumbLink`, `BreadcrumbSeparator`                                                                        |
+| Nav              | `Nav`, `NavItem`, `NavLink`                                                                                                                    |
 | Code             | `Code`                                                                                                                                         |
 | Kbd              | `Kbd`                                                                                                                                          |
 | List             | `List`, `ListItem`                                                                                                                             |
@@ -188,6 +189,7 @@ import { Breadcrumb, Code, Heading, Kbd, Link, List, ListItem } from "@mild-ui/r
 | `Heading`    | `level` (1-6, picks the element **and** the default size; default `2`), `size`, `weight`, `align`, `color`, `truncate` |
 | `Link`       | `href`, `underline` (`none`/`hover`/`always`, default `hover`), `external`, `plain`, `disabled`                        |
 | `Breadcrumb` | `items` (`{ label, href?, current? }[]`) or composed children, `separator`, `ui`                                       |
+| `Nav`        | `variant` (`pills`/`underline`/`plain`), `orientation`; `NavLink` takes `active`, `disabled`, `asChild`                |
 | `Code`       | `variant` (`subtle`/`solid`/`outline`), `size`, `block`                                                                |
 | `Kbd`        | `size`                                                                                                                 |
 | `List`       | `ordered`, `marker`, `unstyled`, `spacing`; `ListItem` takes an `icon`                                                 |
@@ -201,6 +203,11 @@ it out of the tab order and swallowing clicks.
 `Breadcrumb` renders `nav[aria-label="Breadcrumb"] > ol`, inserts the separators itself (as
 `aria-hidden` list items, so the trail is not read out between every step) and renders the last
 step as `aria-current="page"` text instead of a link when it has no `href`.
+
+`Nav` renders `nav[aria-label] > ul > li > a`. Only the `active` link gets `aria-current="page"`;
+a `disabled` link is rendered as plain text with `aria-disabled="true"` (no `href`, not focusable);
+`asChild` hands the link props to a router link. Links stay in the normal Tab order (it is not a
+tablist), and a horizontal nav scrolls sideways on narrow screens instead of wrapping.
 
 ### Basic input
 

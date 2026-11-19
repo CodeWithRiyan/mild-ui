@@ -78,6 +78,9 @@
     "List": 1000,
     "ListItem": 1000,
     "Map": 1700,
+    "Nav": 1050,
+    "NavItem": 1050,
+    "NavLink": 1050,
     "Progress": 950,
     "Radio": 2500,
     "RadioGroup": 2500,
@@ -123,5 +126,5 @@
     "Tooltip": 1750
   },
   "full": 33792,
-  "css": 34816
+  "css": 35840
 }

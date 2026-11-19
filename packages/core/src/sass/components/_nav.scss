@@ -1,0 +1,144 @@
+// packages/core/src/sass/components/_nav.scss
+/// Nav component styling: nav > ul > li > a, with pills / underline / plain variants.
+/// @group components
+
+.mild-nav {
+  font-size: var(--mild-font-size-sm);
+  line-height: var(--mild-line-height-normal);
+  max-width: 100%;
+
+  &--horizontal {
+    // Scrolls sideways on narrow screens instead of wrapping. The scrollbar is hidden so it
+    // cannot add height (layout shift) when the list starts to overflow.
+    overflow-x: auto;
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
+  &--underline.mild-nav--horizontal {
+    border-bottom: var(--mild-border-width) solid var(--mild-border);
+  }
+
+  &--underline.mild-nav--vertical {
+    border-left: var(--mild-border-width) solid var(--mild-border);
+  }
+}
+
+.mild-nav__list {
+  display: flex;
+  align-items: stretch;
+  gap: var(--mild-space-1);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  .mild-nav--horizontal & {
+    flex-direction: row;
+    flex-wrap: nowrap;
+    width: max-content;
+    min-width: 100%;
+  }
+
+  .mild-nav--vertical & {
+    flex-direction: column;
+  }
+}
+
+.mild-nav-item {
+  display: flex;
+  flex-shrink: 0;
+}
+
+.mild-nav-link {
+  display: inline-flex;
+  align-items: center;
+  flex: 1;
+  padding: var(--mild-space-2) var(--mild-space-3);
+  color: var(--mild-muted-foreground);
+  font-weight: var(--mild-font-weight-medium);
+  white-space: nowrap;
+  text-decoration: none;
+  border: var(--mild-border-width) solid transparent;
+  border-radius: var(--mild-radius-md);
+  transition: var(--mild-transition-colors);
+
+  &:hover {
+    color: var(--mild-foreground);
+  }
+
+  &:focus-visible {
+    outline: var(--mild-outline-width) solid var(--mild-ring);
+    outline-offset: var(--mild-ring-offset-width);
+  }
+
+  &--active,
+  &--active:hover {
+    color: var(--mild-foreground);
+  }
+
+  &--disabled,
+  &--disabled:hover {
+    color: var(--mild-muted-foreground);
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+.mild-nav--pills {
+  .mild-nav-link:hover:not(.mild-nav-link--disabled) {
+    background-color: var(--mild-accent);
+    color: var(--mild-accent-foreground);
+  }
+
+  .mild-nav-link--active,
+  .mild-nav-link--active:hover {
+    // primary-700 (not the accent): white on the accent shade is below 4.5:1.
+    background-color: var(--mild-color-primary-700);
+    color: var(--mild-color-white);
+  }
+}
+
+.mild-nav--underline {
+  .mild-nav-link {
+    border-radius: 0;
+  }
+
+  &.mild-nav--horizontal .mild-nav-link {
+    // Overlaps the nav's bottom border so the active bar replaces it without shifting layout.
+    margin-bottom: calc(-1 * var(--mild-border-width));
+    border-bottom: calc(var(--mild-border-width) * 2) solid transparent;
+  }
+
+  &.mild-nav--vertical .mild-nav-link {
+    margin-left: calc(-1 * var(--mild-border-width));
+    border-left: calc(var(--mild-border-width) * 2) solid transparent;
+  }
+
+  .mild-nav-link--active {
+    border-color: var(--mild-color-accent);
+    border-top-color: transparent;
+    border-right-color: transparent;
+  }
+
+  &.mild-nav--horizontal .mild-nav-link--active {
+    border-left-color: transparent;
+  }
+
+  &.mild-nav--vertical .mild-nav-link--active {
+    border-bottom-color: transparent;
+  }
+}
+
+@media (prefers-contrast: high) {
+  .mild-nav-link--active {
+    text-decoration: underline;
+    text-underline-offset: var(--mild-space-1);
+  }
+
+  .mild-nav--pills .mild-nav-link--active {
+    border-color: currentcolor;
+  }
+}

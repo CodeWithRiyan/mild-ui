@@ -47,6 +47,18 @@ const catalogue: Record<string, React.ReactElement> = {
     </UI.Link>
   ),
   Breadcrumb: <UI.Breadcrumb items={[{ label: "Home", href: "/" }, { label: "Here" }]} />,
+  Nav: (
+    <UI.Nav aria-label="Primary" variant="pills">
+      <UI.NavItem>
+        <UI.NavLink href="/" active>
+          Home
+        </UI.NavLink>
+      </UI.NavItem>
+      <UI.NavItem>
+        <UI.NavLink disabled>Soon</UI.NavLink>
+      </UI.NavItem>
+    </UI.Nav>
+  ),
   Code: <UI.Code>code</UI.Code>,
   Kbd: <UI.Kbd>K</UI.Kbd>,
   List: (
@@ -215,7 +227,7 @@ const componentNames = Object.keys(UI).filter(
     !name.startsWith("Theme") &&
     !name.startsWith("ColorMode") &&
     // Compound parts are exercised through their root.
-    !/^(Dialog|AlertDialog|Tabs|Accordion|Collapsible|Card|Form|Select|Radio|Input|Toggle|Breadcrumb|List|Grid|Skeleton|Stat|Tag|Toast|Avatar|Table)[A-Z]/.test(
+    !/^(Dialog|AlertDialog|Tabs|Accordion|Collapsible|Card|Form|Select|Radio|Input|Toggle|Breadcrumb|Nav|List|Grid|Skeleton|Stat|Tag|Toast|Avatar|Table)[A-Z]/.test(
       name,
     ) &&
     ![

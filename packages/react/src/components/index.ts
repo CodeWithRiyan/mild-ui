@@ -46,6 +46,7 @@ export * from "./ScrollArea";
 export * from "./Heading";
 export * from "./Link";
 export * from "./Breadcrumb";
+export * from "./Nav";
 export * from "./Code";
 export * from "./Kbd";
 export * from "./List";

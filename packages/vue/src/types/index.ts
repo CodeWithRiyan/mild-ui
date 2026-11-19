@@ -23,6 +23,7 @@ export * from "./scroll-area";
 export * from "./heading";
 export * from "./link";
 export * from "./breadcrumb";
+export * from "./nav";
 export * from "./code";
 export * from "./kbd";
 export * from "./list";

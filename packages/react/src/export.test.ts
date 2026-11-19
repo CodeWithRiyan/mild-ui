@@ -16,6 +16,7 @@ const COMPONENT_EXPORTS = [
   "Badge",
   "Box",
   "Breadcrumb",
+  "Nav",
   "Button",
   "ButtonGroup",
   "Card",
@@ -91,6 +92,9 @@ const COMPOUND_EXPORTS = [
   "SelectItem",
   // Grid
   "GridItem",
+  // Nav
+  "NavItem",
+  "NavLink",
   // Breadcrumb
   "BreadcrumbItem",
   "BreadcrumbLink",
