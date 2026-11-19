@@ -1,0 +1,1 @@
+import{c as $}from"./cn-CTdd_bgG.js";function s(i,r="mild-input"){const{variant:l="outline",size:e="md",fullWidth:t=!0,error:d=!1,disabled:n=!1,readonly:o=!1,required:u=!1,className:a}=i;return $(r,`${r}--${l}`,`${r}--${e}`,t&&`${r}--full-width`,d&&`${r}--error`,n&&`${r}--disabled`,o&&`${r}--readonly`,u&&`${r}--required`,a)}export{s as i};

@@ -1,0 +1,1 @@
+function f(r){if(typeof r=="string")return r;if(typeof r=="number")return r?String(r):"";if(!r||r===!0)return"";if(Array.isArray(r))return o(...r);const t=r;return Object.keys(t).filter(n=>t[n]).join(" ")}function o(...r){let t="";for(const n of r){const i=f(n);i&&(t+=t?` ${i}`:i)}return t}export{o as c};
